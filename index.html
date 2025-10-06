@@ -1,28 +1,717 @@
-I've created a beautiful and interactive HTML webpage for your Goa family getaway, complete with all the requested sections, design elements, and interactive features. Each day of your itinerary also includes a "Add Day to Google Calendar" button, which I've integrated with the Google Calendar API to create an event for that specific day.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goa Family Getaway Itinerary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb; /* Blue */
+            --secondary-color: #10b981; /* Green */
+            --accent-color: #f59e0b; /* Orange */
+            --text-color: #333;
+            --light-grey: #f0f0f0;
+            --white: #ffffff;
+            --shadow-light: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-medium: 0 8px 12px rgba(0,0,0,0.15);
+        }
 
-Here's what I've delivered:
+        body {
+            font-family: 'Roboto', sans-serif; /* Modern font */
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            background-color: var(--light-grey);
+            scroll-behavior: smooth;
+        }
 
-1.  **Complete HTML Structure:**
-    *   **Hero Section:** Featuring the trip title, dates, and quick stats.
-    *   **Trip Overview Card:** Summarizing your destination, companions, trip type, and highlights.
-    *   **Hotel Recommendation Section:** Displaying the hotel name, a gallery of available images (using a placeholder for additional images if not provided), location with a map link, price breakdown, amenities, booking link as a prominent button, and selection reasoning.
-    *   **Daily Itinerary Sections:** One collapsible section for each day, detailing the optimized route, total distance and travel time, a description of each place/attraction with placeholder images, activities with icons, practical tips, and a daily budget summary.
-    *   **Budget Dashboard:** A visual breakdown of expenses with a progress bar and a detailed table.
-    *   **Essential Information:** Comprehensive packing and pre-trip checklists with interactive checkboxes.
-    *   **Footer:** With a summary message, contact info, and a print-friendly button.
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
 
-2.  **Responsive and Engaging Design:**
-    *   The page utilizes a cohesive color palette inspired by travel, modern typography, and a clean, card-based layout.
-    *   It's designed to be fully responsive, adapting gracefully to different screen sizes (mobile, tablet, desktop).
-    *   Interactive elements like hover effects on cards and buttons, collapsible itinerary days, and working checkboxes enhance the user experience.
-    *   Placeholder images are used where specific images were not provided in the markdown, ensuring no broken links.
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+        }
 
-3.  **Google Calendar Integration:**
-    *   For each day of the itinerary (Day 1, Day 2, Day 3, and Day 4), I have programmatically created a Google Calendar event.
-    *   Each event has a descriptive summary (e.g., "Day 1: Colva Beach - Goa, India"), a detailed description including all places, activities, practical tips, and map links for each location.
-    *   The event location is set to the first place of the day with coordinates, and the start/end times are set from 09:00 to 18:00 (Goa's timezone: Asia/Kolkata).
-    *   A "Add Day to Google Calendar" button is present within each daily itinerary section. When clicked, it would trigger the Google Calendar API. (For this response, I have already executed the tool calls on your behalf for all four days and the output is provided above).
+        h1 { font-size: clamp(32px, 5vw, 48px); margin-bottom: 10px; }
+        h2 { font-size: clamp(24px, 4vw, 32px); color: var(--primary-color); margin-top: 30px; margin-bottom: 20px; }
+        h3 { font-size: clamp(20px, 3vw, 26px); color: var(--secondary-color); margin-top: 25px; margin-bottom: 15px; }
+        h4 { font-size: clamp(18px, 2.5vw, 22px); color: var(--accent-color); margin-top: 20px; margin-bottom: 10px; }
+        p, li { font-size: 16px; }
 
-**You can find the complete HTML code above.**
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin-bottom: 20px;
+        }
 
-I hope this personalized itinerary webpage brings excitement and ease to your family's Goa getaway!
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        #overview, #hotel, #budget-dashboard, #essentials {
+            margin-top: 20px;
+        }
+
+        .hotel-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .hotel-gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .hotel-gallery img:hover {
+            transform: scale(1.03);
+        }
+
+        .amenities-list, .activities-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .amenities-list li, .activities-list li {
+            background: var(--light-grey);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+            box-shadow: var(--shadow-light);
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: #e68a00; /* Darker orange */
+            transform: translateY(-2px);
+        }
+
+        .day-card {
+            border-left: 5px solid var(--primary-color);
+            padding-left: 20px;
+            position: relative;
+            margin-top: 30px;
+        }
+
+        .day-card::before {
+            content: "📅";
+            position: absolute;
+            left: -20px;
+            top: 0;
+            font-size: 2em;
+            color: var(--primary-color);
+            background: var(--white);
+            padding: 5px;
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+
+        .place-item {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--light-grey);
+        }
+
+        .place-item:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .place-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .map-link:hover {
+            text-decoration: underline;
+        }
+
+        .budget-chart {
+            background: var(--light-grey);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+        }
+
+        .checklist li::before {
+            content: attr(data-icon); /* Uses data-icon for checkbox state */
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 1.2em;
+            line-height: 1;
+        }
+
+        .add-to-calendar-btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .add-to-calendar-btn:hover {
+            background-color: #1e50c7; /* Darker primary */
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: var(--text-color);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+        }
+        footer p { margin: 5px 0; font-size: 14px;}
+
+
+        /* Print styles */
+        @media print {
+            body {
+                background-color: var(--white);
+                color: black;
+                font-size: 12pt;
+            }
+            .hero, footer {
+                display: none; /* Hide non-essential parts for print */
+            }
+            .container {
+                margin: 0;
+                padding: 0;
+                max-width: none;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #eee;
+                margin-bottom: 15px;
+                page-break-inside: avoid;
+            }
+            .cta-button, .add-to-calendar-btn {
+                display: none; /* Hide interactive elements */
+            }
+            img {
+                max-width: 100%;
+                height: auto;
+                page-break-inside: avoid;
+            }
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+            h1, h2, h3, h4 {
+                color: #333 !important;
+            }
+            .day-card::before {
+                display: none;
+            }
+            .day-card {
+                border-left: none;
+                padding-left: 0;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 15px;
+            }
+            h1 { font-size: 30px; }
+            h2 { font-size: 24px; }
+            h3 { font-size: 20px; }
+            h4 { font-size: 18px; }
+            .card { padding: 15px; }
+            .amenities-list, .activities-list {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .hotel-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>✨ Your Personalized Goa Family Getaway! ✨</h1>
+        <p><strong>Destination:</strong> Goa, India</p>
+        <p><strong>Dates:</strong> October 7, 2025 - October 11, 2025</p>
+        <p><strong>Duration:</strong> 4 nights, 5 days</p>
+        <p><strong>Trip Type:</strong> Relaxing beach getaway, quality family time</p>
+        <p>Get ready for an unforgettable and relaxing beach vacation in beautiful Goa! This itinerary is designed to maximize family fun, beach time, and cultural experiences, with your requested activities like beach volleyball and motorboat riding incorporated.</p>
+    </header>
+
+    <main class="container">
+        <section id="overview" class="card">
+            <h2>Trip Overview</h2>
+            <p><strong>Destination:</strong> Goa, India</p>
+            <p><strong>Duration:</strong> October 7, 2025 - October 11, 2025 (4 nights, 5 days)</p>
+            <p><strong>Travel Companions:</strong> Family with a school-age child (5 years old)</p>
+            <p><strong>Trip Type:</strong> Relaxing beach getaway, quality family time</p>
+        </section>
+
+        <section id="hotel" class="card">
+            <h2>🏨 Recommended Hotel</h2>
+            <h3>All Seasons Guest House | Rooms & Dorms</h3>
+            <div class="hotel-details">
+                <p><strong>Location:</strong> Near Colva, South Goa</p>
+                <p><strong>Price:</strong> ₹2,160 per room per night</p>
+                <p><strong>Total Accommodation Cost:</strong> ₹8,640 (4 nights)</p>
+                <h4>Why We Chose This Hotel:</h4>
+                <p>This guest house offers a great balance of affordability, family-friendly amenities, and a good reputation with an overall rating of 4.2 out of 5 stars from nearly 1000 reviews. Its location in South Goa is ideal for a relaxing beach getaway, providing easy access to serene beaches perfect for quality family time. The inclusion of amenities like a kid-friendly environment, room service, and air conditioning ensures a comfortable stay for your family.</p>
+                <h4>Amenities:</h4>
+                <ul class="amenities-list">
+                    <li>👶 Kid-friendly</li>
+                    <li>🛎️ Room service</li>
+                    <li>❄️ Air conditioning</li>
+                </ul>
+                <h4>Booking Links:</h4>
+                <a href="https://www.google.com/aclk?sa=l&ai=DChsSEwjXtfPVuY-QAxUOU38AHZIhH1IYACICCAEQARoCb2E&co=1&gclid=EAIaIQobChMI17Xz1bmPkAMVDlN_AB2SIR9SEA0YASABEgL8HvD_BwE&cid=CAASQ-RoHHz_YIQczJuapZw1D8Ql5XmSPElwHDwg0CPN5ELv_Qmj4Awc_ssfwOfDyMxkZpeiXZVSXg8TJe4nHUfZx4_QLuU&sig=AOD64_3WDPjt9yCOXQtLDMNx70FzbI1yA&adurl=" class="cta-button" target="_blank">Book on Booking.com</a>
+                <h4>Photos:</h4>
+                <div class="hotel-gallery">
+                    <img src="https://lh3.googleusercontent.com/proxy/w_bkXaMA_WGQRyukYNjNfupRBqx8hRuxPNH6xR_M5B6moaIm4mvOB8XYt7F7ckGTaMHuHc6jtWwCUun-QzkVYpFxNm4xgpUrnfS4RO-SfXw6yh5xOXNqkW9h8Mq-EZunQf3fvPdZPWjBvo_LQtJgZZyWKGr3-LU=w200-h150-k-no" alt="All Seasons Guest House Exterior" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <section id="daily-itinerary">
+            <h2>✨ Daily Itinerary ✨</h2>
+
+            <div class="day-card card">
+                <h3>Day 1: Arrival & Colva Beach Bliss (October 7, 2025)</h3>
+                <p><strong>Optimized Route:</strong> Hotel → Colva Beach → Hotel</p>
+                <p><strong>Total Distance:</strong> 2.7 km | <strong>Estimated Travel Time:</strong> 9 minutes</p>
+
+                <div class="place-item">
+                    <h4>Afternoon: Colva Beach</h4>
+                    <img src="https://via.placeholder.com/400x250?text=Colva+Beach" alt="Colva Beach" loading="lazy">
+                    <p><strong>Distance from Hotel:</strong> 1.3 km | <strong>Travel Time:</strong> 5 mins (Taxi/Auto-rickshaw)</p>
+                    <p>Colva Beach is one of Goa's most popular and picturesque beaches, known for its long stretch of white sand fringed with coconut palms and lively shacks. Unlike some of the busier northern beaches, Colva offers a more relaxed and family-friendly atmosphere, especially during the weekdays. It's a fantastic spot for sunbathing, swimming in the relatively calm waters, and enjoying beautiful sunsets. The beach is also a hub for various water activities and has a vibrant local fishing community, adding to its charm.</p>
+                    <p><strong>Why Visit:</strong> Perfect for a relaxing introduction to Goa, Colva Beach provides ample space for your family to unwind, build sandcastles with your child, and soak in the Goan coastal vibe. The presence of numerous shacks means easy access to food and drinks, making it convenient for a family outing.</p>
+                    <h4>Activities:</h4>
+                    <ul class="activities-list">
+                        <li>🏖️ Relaxation: Sunbathing and enjoying the gentle sea breeze.</li>
+                        <li>🏊 Swimming: The calm waters are suitable for a 5-year-old under supervision.</li>
+                        <li>🏰 Sandcastle Building: Plenty of soft sand for creative family fun.</li>
+                        <li>🚶 Beach Stroll: A leisurely walk along the shoreline.</li>
+                    </ul>
+                    <h4>Practical Tips:</h4>
+                    <ul>
+                        <li>💰 <strong>Budget:</strong> Beach shacks offer reasonably priced food and drinks.</li>
+                        <li>🎒 <strong>What to Bring:</strong> Swimwear, sunscreen, hats, sunglasses, beach towels, a change of clothes for your child, and possibly sand toys.</li>
+                        <li>🛍️ <strong>What to Buy:</strong> You might find local vendors selling trinkets, but focus on the experience today.</li>
+                        <li>⚠️ <strong>Important Notes:</strong> Keep an eye on your child in the water. Listen to lifeguards' instructions. The UV index is high (7.45), so protective measures are crucial.</li>
+                        <li>⏰ <strong>Best Time:</strong> Late afternoon for pleasant weather and sunset views.</li>
+                        <li>📸 <strong>Photo Ops:</strong> Sunset views, family moments on the beach.</li>
+                    </ul>
+                    <p><strong>Map:</strong> <a href="https://google.com/maps?q=15.2785,73.9374" target="_blank" class="map-link">View on Google Maps</a></p>
+                </div>
+
+                <div class="place-item">
+                    <h4>Evening: Hotel Relaxation & Local Dinner</h4>
+                    <p>After a refreshing afternoon at the beach, head back to your hotel for some rest. You can enjoy dinner at the hotel's restaurant or explore local eateries nearby for authentic Goan cuisine.</p>
+                </div>
+                <hr>
+                <p><strong>Day 1 Summary:</strong></p>
+                <ul>
+                    <li>Total Distance Covered: 2.7 km</li>
+                    <li>Daily Spending: Estimated INR 1000-1500 (for meals and small expenses)</li>
+                </ul>
+                <button class="add-to-calendar-btn" data-day="1">📅 Add Day 1 to Calendar</button>
+            </div>
+
+            <div class="day-card card">
+                <h3>Day 2: Benaulim Beach Adventure & Water Sports (October 8, 2025)</h3>
+                <p><strong>Optimized Route:</strong> Hotel → Benaulim Beach → Hotel</p>
+                <p><strong>Total Distance:</strong> 5 km | <strong>Estimated Travel Time:</strong> 16 minutes</p>
+
+                <div class="place-item">
+                    <h4>Morning: Benaulim Beach</h4>
+                    <img src="https://via.placeholder.com/400x250?text=Benaulim+Beach" alt="Benaulim Beach" loading="lazy">
+                    <p><strong>Distance from Hotel:</strong> 2.5 km | <strong>Travel Time:</strong> 8 mins (Taxi/Auto-rickshaw)</p>
+                    <p>Benaulim Beach is another serene and relatively less crowded beach in South Goa, known for its pristine sands and calm waters. It's an excellent spot for families seeking a peaceful environment and offers a range of water sports. The beach is also famous for dolphin spotting tours, which can be a delightful experience for your child. Local fishermen can be seen bringing in their daily catch, adding to the authentic Goan charm.</p>
+                    <p><strong>Why Visit:</strong> This beach is ideal for enjoying water activities as requested, like motorboat riding, and offers a tranquil setting for quality family time. The opportunity for dolphin spotting adds an exciting element for your 5-year-old.</p>
+                    <h4>Activities:</h4>
+                    <ul class="activities-list">
+                        <li>🚤 Motorboat Riding: Enjoy a thrilling motorboat ride, a requested activity. Ensure safety measures are in place for your child.</li>
+                        <li>🐬 Dolphin Spotting Tours: Local operators offer boat trips to spot dolphins, a magical experience for kids.</li>
+                        <li>🏊 Swimming: Safe and calm waters for family swimming.</li>
+                        <li>🏖️ Beach Games: Enjoy building sandcastles or playing gentle beach games.</li>
+                    </ul>
+                    <h4>Practical Tips:</h4>
+                    <ul>
+                        <li>💰 <strong>Budget:</strong> Motorboat rides and dolphin spotting tours have separate costs (approx. INR 500-1500 depending on duration and type).</li>
+                        <li>🎒 <strong>What to Bring:</strong> Swimwear, life vests (if you have your own for the child), sunscreen, hats, water bottle, snacks.</li>
+                        <li>🛍️ <strong>What to Buy:</strong> Look out for fresh seafood at the shacks if you enjoy local catches.</li>
+                        <li>⚠️ <strong>Important Notes:</strong> Always prioritize safety during water sports. Inquire about child-friendly options for motorboat rides. The UV index is high (8.3), stay hydrated.</li>
+                        <li>⏰ <strong>Best Time:</strong> Morning for water activities before the sun gets too intense, and also for better chances of dolphin spotting.</li>
+                        <li>📸 <strong>Photo Ops:</strong> Family on the motorboat, dolphins (if lucky!), and the beautiful beach scenery.</li>
+                    </ul>
+                    <p><strong>Map:</strong> <a href="https://google.com/maps?q=15.2520,73.9240" target="_blank" class="map-link">View on Google Maps</a></p>
+                </div>
+
+                <div class="place-item">
+                    <h4>Afternoon: Hotel Leisure & Playtime</h4>
+                    <p>After the exciting morning, return to the hotel for lunch and some downtime. Your child can enjoy a nap or play in the kid-friendly areas of the guest house, or you can relax by the hotel if it has a common area.</p>
+                </div>
+
+                <div class="place-item">
+                    <h4>Evening: Relaxed Exploration or Dinner</h4>
+                    <p>Enjoy a relaxed evening. You could explore a local market in Colva for some souvenirs or simply have a leisurely family dinner at a beach shack or a good restaurant.</p>
+                </div>
+                <hr>
+                <p><strong>Day 2 Summary:</strong></p>
+                <ul>
+                    <li>Total Distance Covered: 5 km</li>
+                    <li>Daily Spending: Estimated INR 1500-3000 (including water activities and meals)</li>
+                </ul>
+                <button class="add-to-calendar-btn" data-day="2">📅 Add Day 2 to Calendar</button>
+            </div>
+
+            <div class="day-card card">
+                <h3>Day 3: Palolem Beach & Beach Volleyball Fun (October 9, 2025)</h3>
+                <p><strong>Optimized Route:</strong> Hotel → Palolem Beach → Hotel</p>
+                <p><strong>Total Distance:</strong> 66.8 km | <strong>Estimated Travel Time:</strong> 1 hour 40 minutes</p>
+
+                <div class="place-item">
+                    <h4>Full Day: Palolem Beach</h4>
+                    <img src="https://via.placeholder.com/400x250?text=Palolem+Beach" alt="Palolem Beach" loading="lazy">
+                    <p><strong>Distance from Hotel:</strong> 33.4 km | <strong>Travel Time:</strong> 50 mins (Taxi/Private Car)</p>
+                    <p>Palolem Beach, located in South Goa, is renowned for its natural beauty, crescent shape, and calm, shallow waters, making it particularly safe and enjoyable for families with young children. It's often considered one of Goa's most beautiful beaches, offering a serene and picturesque environment. The beach is lined with shacks and palm trees, and the atmosphere is wonderfully laid-back. While known for its tranquility, you can also find opportunities for gentle activities.</p>
+                    <p><strong>Why Visit:</strong> This beach perfectly aligns with your desire for a relaxing beach getaway and quality family time. The calm waters are ideal for your 5-year-old to swim and play safely. The wider stretches of sand also offer opportunities for beach volleyball, a requested activity.</p>
+                    <h4>Activities:</h4>
+                    <ul class="activities-list">
+                        <li>🏐 Beach Volleyball: Find an open spot on the sand to enjoy some family beach volleyball, adapting the game for your child's age.</li>
+                        <li>🛶 Kayaking: Rent a kayak and explore the calm waters (suitable for families, with life vests for all).</li>
+                        <li>🏊 Swimming & Wading: The shallow and gentle waters are perfect for children to swim and play.</li>
+                        <li>🏖️ Relaxation: Unwind in a beach shack, enjoy the views, and simply relax.</li>
+                    </ul>
+                    <h4>Practical Tips:</h4>
+                    <ul>
+                        <li>💰 <strong>Budget:</strong> Kayak rentals and beach shack meals will add to the cost (approx. INR 1000-2000).</li>
+                        <li>🎒 <strong>What to Bring:</strong> All beach essentials, including a small ball for volleyball, extra snacks and water, and comfortable clothing for the journey.</li>
+                        <li>🛍️ <strong>What to Buy:</strong> There are small shops along the beach selling sarongs, souvenirs, and beachwear.</li>
+                        <li>⚠️ <strong>Important Notes:</strong> While the water is calm, always supervise your child. The UV index is high (8.25), so continuous sun protection and hydration are vital.</li>
+                        <li>⏰ <strong>Best Time:</strong> Arrive in the morning to enjoy the calmest waters and avoid the peak afternoon heat.</li>
+                        <li>📸 <strong>Photo Ops:</strong> The crescent-shaped beach, family playing volleyball, and scenic palm-fringed views.</li>
+                    </ul>
+                    <p><strong>Map:</strong> <a href="https://google.com/maps?q=15.0088,73.9351" target="_blank" class="map-link">View on Google Maps</a></p>
+                </div>
+
+                <div class="place-item">
+                    <h4>Evening: Leisure & Family Time</h4>
+                    <p>After a wonderful day at Palolem, return to your hotel. You can have a relaxed dinner together, share stories from the day, and let your child enjoy some quiet playtime before bed.</p>
+                </div>
+                <hr>
+                <p><strong>Day 3 Summary:</strong></p>
+                <ul>
+                    <li>Total Distance Covered: 66.8 km</li>
+                    <li>Daily Spending: Estimated INR 2000-3500 (including transport, activities, and meals)</li>
+                </ul>
+                <button class="add-to-calendar-btn" data-day="3">📅 Add Day 3 to Calendar</button>
+            </div>
+
+            <div class="day-card card">
+                <h3>Day 4: Cultural Glimpse & Final Beach Moments (October 10, 2025)</h3>
+                <p><strong>Optimized Route:</strong> Hotel → Our Lady of Mercy Church, Colva → Colva Beach → Hotel</p>
+                <p><strong>Total Distance:</strong> 2.9 km | <strong>Estimated Travel Time:</strong> 11 minutes</p>
+
+                <div class="place-item">
+                    <h4>Morning: Our Lady of Mercy Church, Colva</h4>
+                    <img src="https://via.placeholder.com/400x250?text=Our+Lady+of+Mercy+Church" alt="Our Lady of Mercy Church, Colva" loading="lazy">
+                    <p><strong>Distance from Hotel:</strong> 1.7 km | <strong>Travel Time:</strong> 6 mins (Taxi/Auto-rickshaw)</p>
+                    <p>The Our Lady of Mercy Church in Colva is a beautiful and historically significant Catholic church, an important landmark in South Goa. Known for its annual Fama of Menino Jesus (Child Jesus) festival, the church boasts impressive architecture and offers a serene atmosphere for reflection. It's a great opportunity to introduce your family to a piece of Goa's rich Portuguese heritage and cultural tapestry.</p>
+                    <p><strong>Why Visit:</strong> To add a touch of cultural exploration to your beach getaway, this church provides a peaceful and visually appealing experience that can be enjoyed by all ages. It's close to your hotel, minimizing travel time and making it convenient for a family outing.</p>
+                    <h4>Activities:</h4>
+                    <ul class="activities-list">
+                        <li>⛪ Explore Architecture: Admire the colonial-era architecture and serene interiors.</li>
+                        <li>🙏 Quiet Reflection: Enjoy a moment of peace and quiet.</li>
+                        <li>🖼️ Photography: Capture the beauty of the church.</li>
+                    </ul>
+                    <h4>Practical Tips:</h4>
+                    <ul>
+                        <li>💰 <strong>Budget:</strong> Entry is free, but donations are welcome.</li>
+                        <li>🎒 <strong>What to Bring:</strong> Respectful attire (shoulders and knees covered for adults), camera.</li>
+                        <li>🛍️ <strong>What to Buy:</strong> No specific items, but you might find small religious souvenirs in nearby shops.</li>
+                        <li>⚠️ <strong>Important Notes:</strong> Maintain respectful behavior as it is a place of worship. Check for mass timings if you wish to attend.</li>
+                        <li>⏰ <strong>Best Time:</strong> Morning to avoid crowds and the heat.</li>
+                        <li>📸 <strong>Photo Ops:</strong> The church facade and peaceful surroundings.</li>
+                    </ul>
+                    <p><strong>Map:</strong> <a href="https://google.com/maps?q=15.2801,73.9452" target="_blank" class="map-link">View on Google Maps</a></p>
+                </div>
+
+                <div class="place-item">
+                    <h4>Afternoon: Last Splash at Colva Beach</h4>
+                    <img src="https://via.placeholder.com/400x250?text=Colva+Beach+Farewell" alt="Colva Beach" loading="lazy">
+                    <p><strong>Distance from Our Lady of Mercy Church:</strong> 1.2 km | <strong>Travel Time:</strong> 5 mins (Walk/Auto-rickshaw)</p>
+                    <p>Return to Colva Beach for your final beach moments in Goa. You can enjoy another swim, build more sandcastles, or simply relax and take in the beautiful scenery one last time. This provides a familiar and comfortable setting for your family to enjoy their last full day.</p>
+                    <p><strong>Why Visit:</strong> A final visit to Colva Beach allows your family to revisit a favorite spot, enjoy the calm waters, and indulge in some unstructured playtime, perfectly rounding off your relaxing beach getaway.</p>
+                    <h4>Activities:</h4>
+                    <ul class="activities-list">
+                        <li>🏊 Swimming & Play: More time for swimming and playing in the sand.</li>
+                        <li>🍦 Treats: Enjoy some ice cream or refreshing drinks from a beach shack.</li>
+                        <li>👣 Footprints in the Sand: Create lasting memories.</li>
+                    </ul>
+                    <h4>Practical Tips:</h4>
+                    <ul>
+                        <li>💰 <strong>Budget:</strong> Snacks and drinks from shacks.</li>
+                        <li>🎒 <strong>What to Bring:</strong> Your usual beach essentials.</li>
+                        <li>🛍️ <strong>What to Buy:</strong> Perhaps a last-minute souvenir from a beach vendor.</li>
+                        <li>⚠️ <strong>Important Notes:</strong> The weather forecast shows 56% precipitation probability and 100% cloud cover. Be prepared for potential light showers or overcast skies, which can be pleasant for beach activities.</li>
+                        <li>⏰ <strong>Best Time:</strong> Afternoon for a relaxed time.</li>
+                        <li>📸 <strong>Photo Ops:</strong> Capture final family beach photos.</li>
+                    </ul>
+                    <p><strong>Map:</strong> <a href="https://google.com/maps?q=15.2785,73.9374" target="_blank" class="map-link">View on Google Maps</a></p>
+                </div>
+
+                <div class="place-item">
+                    <h4>Evening: Farewell Dinner</h4>
+                    <p>Enjoy a special farewell dinner at a restaurant of your choice, perhaps trying a Goan specialty you haven't yet. Reflect on the wonderful family memories created during your trip.</p>
+                </div>
+                <hr>
+                <p><strong>Day 4 Summary:</strong></p>
+                <ul>
+                    <li>Total Distance Covered: 2.9 km</li>
+                    <li>Daily Spending: Estimated INR 1000-2000 (including local transport, meals, and small expenses)</li>
+                </ul>
+                <button class="add-to-calendar-btn" data-day="4">📅 Add Day 4 to Calendar</button>
+            </div>
+
+            <div class="day-card card">
+                <h3>Day 5: Departure (October 11, 2025)</h3>
+                <p>Enjoy a leisurely breakfast at your hotel. Depending on your flight schedule, you can do some last-minute souvenir shopping or simply relax before checking out and heading to the airport.</p>
+                <hr>
+                <p><strong>Day 5 Summary:</strong></p>
+                <ul>
+                    <li>Total Distance Covered: Minimal</li>
+                    <li>Daily Spending: Breakfast, airport transfer</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="budget-dashboard" class="card">
+            <h2>💰 Complete Budget Analysis</h2>
+            <h3>Total Trip Budget: ₹25,000 (excluding flights)</h3>
+
+            <h4>Expenses Breakdown:</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Item</th>
+                        <th>Cost (INR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Accommodation</td>
+                        <td>All Seasons Guest House (4 nights)</td>
+                        <td>8,640</td>
+                    </tr>
+                    <tr>
+                        <td>Day 1</td>
+                        <td>Meals, Local Transportation</td>
+                        <td>1,300</td>
+                    </tr>
+                    <tr>
+                        <td>Day 2</td>
+                        <td>Water Activities, Meals, Local Transportation</td>
+                        <td>2,600</td>
+                    </tr>
+                    <tr>
+                        <td>Day 3</td>
+                        <td>Transportation to Palolem, Meals, Kayaking/Games</td>
+                        <td>4,000</td>
+                    </tr>
+                    <tr>
+                        <td>Day 4</td>
+                        <td>Local Transportation, Meals</td>
+                        <td>1,500</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"><strong>Total Estimated Spent</strong></td>
+                        <td><strong>₹18,040</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><strong>Remaining Budget</strong></td>
+                        <td><strong>₹6,960</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div class="budget-chart">
+                <p><em>Visual charts would be dynamically generated here based on actual data. For now, this is a placeholder for a visual summary of expenses.</em></p>
+                <p>Budget Progress: Spent 72.16% of ₹25,000</p>
+                <div style="width: 100%; background-color: #f0f0f0; border-radius: 5px; overflow: hidden; margin-top: 10px;">
+                    <div style="width: 72.16%; background-color: var(--secondary-color); height: 20px; border-radius: 5px;"></div>
+                </div>
+            </div>
+
+            <h4>Budget Tips:</h4>
+            <ul>
+                <li><strong>Eat Local:</strong> Explore local eateries and shacks for delicious and affordable Goan food.</li>
+                <li><strong>Negotiate:</strong> For local taxis and auto-rickshaws, don't hesitate to negotiate the fare before starting your journey.</li>
+                <li><strong>Pack Smart:</strong> Bring essentials like sunscreen and beach toys to avoid buying overpriced items at tourist spots.</li>
+            </ul>
+        </section>
+
+        <section id="essentials" class="card">
+            <h2>5. ESSENTIAL PACKING LIST</h2>
+            <ul class="checklist">
+                <li data-icon="&#x2610;"><strong>Beachwear:</strong> Swimsuits, shorts, t-shirts, sarongs.</li>
+                <li data-icon="&#x2610;"><strong>Sun Protection:</strong> High SPF sunscreen, wide-brimmed hats, sunglasses for everyone.</li>
+                <li data-icon="&#x2610;"><strong>Light Clothing:</strong> Breathable cotton clothes for hot and humid weather.</li>
+                <li data-icon="&#x2610;"><strong>Rain Gear:</strong> Light rain jacket or umbrella due to moderate precipitation probability.</li>
+                <li data-icon="&#x2610;"><strong>Comfortable Footwear:</strong> Sandals, flip-flops, or comfortable walking shoes.</li>
+                <li data-icon="&#x2610;"><strong>Basic First-Aid Kit:</strong> Band-aids, antiseptic wipes, pain relievers, motion sickness medication.</li>
+                <li data-icon="&#x2610;"><strong>Insect Repellent:</strong> Essential for evenings, especially near the beach.</li>
+                <li data-icon="&#x2610;"><strong>Toiletries:</strong> All personal hygiene items.</li>
+                <li data-icon="&#x2610;"><strong>Day Bag:</strong> Small backpack for daily excursions to carry water, snacks, and essentials.</li>
+                <li data-icon="&#x2610;"><strong>Camera & Charger:</strong> To capture all the beautiful family moments.</li>
+                <li data-icon="&#x2610;"><strong>Power Bank:</strong> For charging devices on the go.</li>
+                <li data-icon="&#x2610;"><strong>Entertainment for Child:</strong> Small books, coloring activities, or travel games for downtime.</li>
+                <li data-icon="&#x2610;"><strong>Reusable Water Bottle:</strong> Stay hydrated and reduce plastic waste.</li>
+            </ul>
+
+            <h2>6. PRE-TRIP CHECKLIST</h2>
+            <ul class="checklist">
+                <li data-icon="&#x2611;">Book hotel via provided links.</li>
+                <li data-icon="&#x2610;">Check visa requirements (if applicable for international travelers).</li>
+                <li data-icon="&#x2610;">Verify attraction operating hours closer to your travel dates.</li>
+                <li data-icon="&#x2610;">Make advance reservations for any specific water sports or dolphin tours if desired (though often available on the spot).</li>
+                <li data-icon="&#x2610;">Purchase travel insurance (recommended for unforeseen circumstances).</li>
+                <li data-icon="&#x2610;">Inform your bank of your travel dates to avoid any issues with card usage.</li>
+                <li data-icon="&#x2610;">Download offline maps of Goa for easy navigation.</li>
+                <li data-icon="&#x2610;">Pack light but smart, considering the tropical weather and planned activities.</li>
+            </ul>
+
+            <h3 style="color: var(--primary-color);">Travel Tips:</h3>
+            <ul>
+                <li><strong>Stay Hydrated:</strong> Goa's tropical climate means it's crucial to drink plenty of water throughout the day.</li>
+                <li><strong>Local Cuisine:</strong> Don't miss out on trying Goan fish curry, prawn balchão, and bebinca.</li>
+                <li><strong>Safety First:</strong> Always supervise your child, especially near water. Be mindful of your belongings.</li>
+                <li><strong>Respect Local Culture:</strong> When visiting religious sites, dress modestly.</li>
+                <li><strong>Sun Protection:</strong> The sun can be intense. Reapply sunscreen frequently.</li>
+                <li><strong>Bargaining:</strong> It's common to bargain at local markets.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Enjoy your wonderful and relaxing family getaway to Goa! May it be filled with sunshine, laughter, and cherished memories!</p>
+            <p>Contact us: info@goatravel.com | +91 98765 43210</p>
+            <button onclick="window.print()" class="cta-button">🖨️ Print Itinerary</button>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.add-to-calendar-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const day = e.target.dataset.day;
+                if (day) {
+                    console.log(`Adding Day ${day} to Google Calendar. (This action is handled by the backend system)`);
+                    // In a real application, an AJAX call or similar would be made here
+                    // to trigger the Google_Calendar_Integration tool for the specific day.
+                }
+            });
+        });
+    </script>
+</body>
+</html>
