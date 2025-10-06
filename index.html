@@ -1,163 +1,1195 @@
-<button class="add-to-calendar-btn" data-day="5">
-                    📅 Add Day 5 to Calendar
-                </button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moscow Solo Adventure: October 2025</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%232563eb' d='M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 16H9v-2h2v2zm0-4H9v-2h2v2zm0-4H9V8h2v2zm4 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2z'/%3E%3Cpath fill='%23f59e0b' d='M13 14h-2v-2h2v2zm0-4h-2V8h2v2z'/%3E%3Cpath fill='%2310b981' d='M12 20c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm0-14a6 6 0 0 0-6 6 6 6 0 0 0 6 6 6 6 0 0 0 6-6 6 6 0 0 0-6-6z'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-color: #2563eb; /* Blue */
+            --secondary-color: #10b981; /* Green */
+            --accent-color: #f59e0b; /* Orange */
+            --text-color: #333;
+            --light-text-color: #666;
+            --background-light: #f8fafc;
+            --background-dark: #e2e8f0;
+            --card-background: white;
+            --border-color: #e2e8f0;
+            --shadow-light: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-hover: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--background-light);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 3rem); } /* 40-48px */
+        h2 { font-size: clamp(1.8rem, 4vw, 2.2rem); } /* 28-35px */
+        h3 { font-size: clamp(1.4rem, 3vw, 1.8rem); } /* 22-29px */
+        p { font-size: 1rem; margin-bottom: 1rem; } /* 16px */
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            display: inline-block;
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: middle;
+            margin-right: 0.3em;
+            fill: var(--secondary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://source.unsplash.com/1600x900/?moscow,red-square') no-repeat center center/cover;
+            color: white;
+            padding: 6rem 1.5rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(37, 99, 235, 0.2); /* Semi-transparent primary color overlay */
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: clamp(3rem, 8vw, 4rem); /* 48-64px */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            max-width: 800px;
+            margin: 0.5rem auto 1.5rem auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+        .hero .stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .hero .stat-item {
+            background: rgba(255,255,255,0.2);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-light);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Sticky Navigation */
+        .sticky-nav {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-light);
+        }
+        .sticky-nav .nav-list {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .sticky-nav .nav-list a {
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .sticky-nav .nav-list a:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Overview Card */
+        .overview-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            text-align: center;
+        }
+        .overview-card .overview-item {
+            background: var(--background-dark);
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        .overview-card .overview-item strong {
+            display: block;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+        }
+
+        /* Hotel Section */
+        .hotel-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .hotel-gallery img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+        .hotel-gallery img:hover {
+            transform: scale(1.03);
+        }
+        .hotel-details {
+            margin-top: 1rem;
+        }
+        .hotel-details ul {
+            list-style: none;
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .hotel-details ul li {
+            background: var(--background-light);
+            padding: 0.75rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .hotel-details ul li .icon {
+            fill: var(--primary-color);
+        }
+        .booking-cta {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        .booking-cta .button {
+            font-size: 1.1rem;
+            padding: 0.9rem 2rem;
+        }
+        .map-embed {
+            margin-top: 1.5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+        }
+        .map-embed iframe {
+            width: 100%;
+            height: 300px;
+            border: 0;
+        }
+
+        /* Daily Itinerary */
+        .daily-itinerary-section h2 {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .day-card {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+        .day-card::before {
+            content: "🗓️";
+            position: absolute;
+            left: -18px;
+            top: 0;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-light);
+        }
+        .day-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        .day-theme {
+            font-style: italic;
+            color: var(--light-text-color);
+            margin-bottom: 1rem;
+        }
+        .day-summary {
+            background-color: var(--background-dark);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .day-summary p {
+            margin-bottom: 0.5rem;
+        }
+
+        .place-item {
+            background: var(--card-background);
+            border-radius: 10px;
+            padding: 1.2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            margin-bottom: 1rem;
+            position: relative;
+            border-left: 4px solid var(--secondary-color);
+        }
+        .place-item::before {
+            content: "📍";
+            position: absolute;
+            left: -18px; /* Adjust to align with day-card line */
+            top: 1.2rem;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: var(--shadow-light);
+        }
+        .place-item h4 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        .place-item .activities, .place-item .tips {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+        }
+        .place-item .activities li, .place-item .tips li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+        .place-item .activities li .icon, .place-item .tips li .icon {
+            fill: var(--accent-color);
+            margin-right: 0.5em;
+        }
+        .place-item .budget-info, .day-summary .budget-info {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        .add-to-calendar-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 0.95rem;
+        }
+        .add-to-calendar-btn:hover {
+            background-color: #0d9472;
+            transform: translateY(-2px);
+        }
+
+        /* Budget Dashboard */
+        .budget-dashboard h3 {
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .budget-dashboard .chart-placeholder {
+            background: var(--background-dark);
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text-color);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .expense-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+        .expense-table th, .expense-table td {
+            text-align: left;
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .expense-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        .expense-table tr:nth-child(even) {
+            background-color: var(--background-light);
+        }
+        .expense-table .total-row {
+            font-weight: 700;
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        .budget-summary {
+            text-align: right;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            color: var(--primary-color);
+        }
+        .budget-tips li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        .budget-tips li::before {
+            content: "💡";
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Essentials */
+        .essentials-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .checklist-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .checklist-card li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+        .checklist-card input[type="checkbox"] {
+            margin-right: 0.8rem;
+            min-width: 18px;
+            min-height: 18px;
+            accent-color: var(--secondary-color);
+            cursor: pointer;
+            transform: translateY(2px);
+        }
+        .checklist-card label {
+            flex: 1;
+            cursor: pointer;
+        }
+        .travel-tips {
+            list-style: none;
+            padding-left: 0;
+        }
+        .travel-tips li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        .travel-tips li::before {
+            content: "✈️";
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+        }
+        .footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        .footer .contact-info {
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+        .footer .button {
+            background-color: var(--secondary-color);
+            font-size: 0.9rem;
+            padding: 0.6rem 1.2rem;
+        }
+        .footer .button:hover {
+            background-color: var(--accent-color);
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 1rem;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .hero .stats {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .hero .stat-item {
+                width: 100%;
+                padding: 0.6rem 1rem;
+            }
+            .sticky-nav .nav-list {
+                gap: 0.8rem;
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+            .sticky-nav .nav-list::-webkit-scrollbar {
+                height: 5px;
+            }
+            .sticky-nav .nav-list::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+            }
+            .sticky-nav .nav-list::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 10px;
+            }
+
+            .overview-card {
+                grid-template-columns: 1fr;
+            }
+            .hotel-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+            .hotel-details ul {
+                grid-template-columns: 1fr;
+            }
+            .essentials-section {
+                grid-template-columns: 1fr;
+            }
+            .day-card {
+                padding-left: 1rem;
+            }
+            .day-card::before, .place-item::before {
+                left: -15px; /* Adjust for smaller screens */
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+                font-family: serif;
+            }
+            .hero, .sticky-nav, .footer, .add-to-calendar-btn, .booking-cta, .map-embed {
+                display: none;
+            }
+            .container {
+                padding: 0;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+            h1, h2, h3, h4 {
+                color: black !important;
+                -webkit-print-color-adjust: exact;
+            }
+            a {
+                color: #000 !important;
+                text-decoration: underline !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .hotel-gallery {
+                grid-template-columns: repeat(4, 1fr); /* Limit images for print */
+            }
+            .hotel-gallery img {
+                height: 80px;
+            }
+            .expense-table th {
+                background-color: #eee !important;
+                color: black !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .expense-table .total-row {
+                background-color: #ddd !important;
+                color: black !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .checklist-card input[type="checkbox"] {
+                display: inline-block;
+                border: 1px solid #000;
+                width: 14px;
+                height: 14px;
+                background-color: transparent;
+                margin-right: 0.5rem;
+                vertical-align: middle;
+            }
+            .checklist-card input[type="checkbox"]:checked {
+                background-color: #000; /* For checkmark effect in print */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero" id="top">
+        <div class="hero-content">
+            <h1>Moscow Solo Adventure: Culture, History & Nightlife</h1>
+            <p>October 12 - October 16, 2025</p>
+            <div class="stats">
+                <div class="stat-item">🌍 Moscow, Russia</div>
+                <div class="stat-item">🗓️ 4 Nights / 5 Days</div>
+                <div class="stat-item">👤 Solo Traveler</div>
+                <div class="stat-item">✨ Pleasure Trip</div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#hotel">Hotel</a></li>
+                <li><a href="#itinerary">Itinerary</a></li>
+                <li><a href="#budget">Budget</a></li>
+                <li><a href="#essentials">Essentials</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <section id="overview" class="card">
+            <h2>Trip Overview</h2>
+            <div class="overview-card">
+                <div class="overview-item">
+                    <strong>Destination</strong>
+                    <span>Moscow, Russia</span>
+                </div>
+                <div class="overview-item">
+                    <strong>Dates</strong>
+                    <span>Oct 12 - Oct 16, 2025</span>
+                </div>
+                <div class="overview-item">
+                    <strong>Duration</strong>
+                    <span>4 Nights</span>
+                </div>
+                <div class="overview-item">
+                    <strong>Companions</strong>
+                    <span>Solo</span>
+                </div>
+                <div class="overview-item">
+                    <strong>Trip Type</strong>
+                    <span>Culture, History, Nightlife, Cuisine</span>
+                </div>
+                <div class="overview-item">
+                    <strong>Highlights</strong>
+                    <span>Red Square, Kremlin, Bolshoi, Tretyakov, VDNKh, Arbat</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="hotel" class="card">
+            <h2>🏨 Recommended Hotel: SoulRus</h2>
+            <p><strong>Location:</strong> Moscow, Russia (near Moscow Domodedovo Mikhail Lomonosov Airport, Uzbekistan Food Restaurant)</p>
+            <p><strong>Why We Chose This Hotel:</strong> SoulRus offers exceptional value with the lowest price among suitable options and an impressive 5-star rating from 134 reviews. Its proximity to public transport and an airport link, along with nearby dining, makes it a convenient and practical choice for exploring the city.</p>
+
+            <h3>Gallery</h3>
+            <div class="hotel-gallery">
+                <img src="https://lh6.googleusercontent.com/proxy/SiYIi1vCNqbrT812x-fFhClKnZvbcGY2sUHslzukfduZPcIQi4_bdjb6som5WKXlBFFlbYf0rrUPipxBqdU-RPW3FLqe6S9fyU8UwwhtpccGyoYZKb6TkhAtxpycBKf7hq-aGdrrGC6k3xBlxfW6S9fyU8UwwhtpccGyoYZKb6vyHyJyXZ9Q=s287-w287-h192-n-k-no-v1" alt="Hotel exterior, modern building" loading="lazy">
+                <img src="https://lh3.googleusercontent.com/p/AF1QipPzSd0vTFQHOxLfaikVZFTetvP5xw8Gg3HdpVv-=s287-w287-h192-n-k-no-v1" alt="Hotel interior, reception area" loading="lazy">
+                <img src="https://lh3.googleusercontent.com/proxy/4qAHbCArJD1Lk5DpwmvOZ9P-r9WHUJocPPF5rH72N-2hz4uByIDl0ONFFaZOgiFoRhPsqp06ez8QQ0y9cdOpvA2JvfiLwCY-QFOVpBmcNRopES77BB_NfFItGZLTMYhoLyR2zPPlGnr9b4swYZMQKXQbB16N-A=s287-w287-h192-n-k-no-v1" alt="Hotel room, clean and simple" loading="lazy">
+                <img src="https://lh3.googleusercontent.com/proxy/Wjtnn5ifLjznTPwdxCXsK2BlId9iFZeES7Vh5Cdof6MUAai4SanNeAARqRuHoFwG1LaytnE9oLlT4yV295iAxrWCGeAztVdqQIIbPapIcaBXBa_rVQaXukZBZrMGM_ETClGXwUw=s287-w287-h192-n-k-no-v1" alt="Hotel hallway or common area" loading="lazy">
+                <img src="https://lh3.googleusercontent.com/proxy/OojYiHNUVK-W6iHPBdhmC9uVqSR5ZBTkXdtE4s1akWqWgKqU9CfFJHkV5taSk3M0IKMdCACUBrTO06rkDurWF4W6eZsdGLDI1COrOsbR_FSl0niNHDCAnbVop5L0A_m6WhoZ7clgbDF3ZdexEWXoQjL5JKJu9rs=s287-w287-h192-n-k-no-v1" alt="Hotel signage and entrance" loading="lazy">
+                <img src="https://lh3.googleusercontent.com/proxy/tuQdLwQT_YrdMXrlxxwMMCkGzYFzvklGacApnC5Rdj1CR3qtq-G5h78nP1Nx-FI9BCVL9jjReCtnijmwnopCqFWtWBjauj6rq9vQc5xVTYrvjNN6iAa83Kd9cjiAnWM52C6VhE3_J5h9VuILxrYOZwQGW1pS_BM=s287-w287-h192-n-k-no-v1" alt="Hotel building with surrounding area" loading="lazy">
+                <img src="https://lh5.googleusercontent.com/proxy/MQmAEYrn5hIJS1hXPB-NHVOSxsg5Z3C3xjSabzla8Pgb2lYtKZOzsmoKvnRVRBkItJnVBL62-bbcY5E8JDY62RRI511b5hZJxfk6KMsX18LG55yYtQ6YHCulDunjW1NC_-PHCFxSssk2KQYAQZB7jF_TNQVchNg=s287-w287-h192-n-k-no-v1" alt="Hotel exterior at night" loading="lazy">
+                <img src="https://lh3.googleusercontent.com/p/AF1QipP15OOeGT6RbRi_2dx8TVP5UmoMn_6SOWEsVd0K=s287-w287-h192-n-k-no-v1" alt="Hotel courtyard or garden" loading="lazy">
+            </div>
+
+            <div class="hotel-details">
+                <h3>Details & Amenities</h3>
+                <ul>
+                    <li>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"></path></svg>
+                        <strong>Coordinates:</strong> 55.80483, 37.59039
+                    </li>
+                    <li>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M12 11.55l8-4V21l-8-4-8 4V7.55l8 4zM12 3L4 7v14l8-4 8 4V7l-8-4z"></path></svg>
+                        <strong>Price:</strong> 702 RUB per room per night
+                    </li>
+                    <li>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M20 7h-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM10 5h4v2h-4V5zm10 14H4V9h16v10z"></path></svg>
+                        <strong>Total Rooms:</strong> 1
+                    </li>
+                    <li>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>
+                        <strong>Total Cost:</strong> 2808 RUB (for 4 nights)
+                    </li>
+                    <li>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.21 1.79 4 4 4h2c2.21 0 4-1.79 4-4V2h-2v7zm5-3v8c0 1.1-.9 2-2 2H9v-2h7V6h-2V4h3c1.1 0 2 .9 2 2v10h-2v-4h-2v-2h2V9c0-1.1-.9-2-2-2h-3V6h3z"></path></svg>
+                        <strong>Amenities:</strong> No explicit list, but high rating suggests comfort.
+                    </li>
+                </ul>
+            </div>
+            <div class="booking-cta">
+                <a href="http://soulrus.moscow/" target="_blank" rel="noopener noreferrer" class="button">Book SoulRus Now!</a>
+            </div>
+            <div class="map-embed">
+                <iframe src="https://maps.google.com/maps?q=55.80483,37.59039&z=14&output=embed" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </section>
+
+        <section id="itinerary" class="daily-itinerary-section">
+            <h2>Your Detailed Itinerary</h2>
+
+            <!-- Day 1 -->
+            <div class="card day-card">
+                <h3>🗓️ Day 1: October 12, 2025 - Red Square & Kremlin Immersion</h3>
+                <p class="day-theme">Experience Moscow's historic heart with iconic landmarks and a taste of Russian arts.</p>
+
+                <div class="day-summary">
+                    <p><strong>Optimized Route:</strong> Hotel → Red Square → St. Basil's Cathedral → Moscow Kremlin → Bolshoi Theatre → Hotel</p>
+                    <p><strong>Total Distance:</strong> Approximately 16.6 km</p>
+                    <p><strong>Estimated Travel Time:</strong> ~1 hour 10 minutes (driving, excluding walking)</p>
+                    <p><strong>Location:</strong> Red Square (55.754167, 37.620278)</p>
+                    <p><strong>Time:</strong> 09:00 - 18:00 (Moscow Time)</p>
+                </div>
+
+                <div class="place-item">
+                    <h4>Morning: Red Square & St. Basil's Cathedral</h4>
+                    <p>Red Square is the symbolic heart of Moscow and Russia, a UNESCO World Heritage site. St. Basil's Cathedral, with its vibrant, onion-shaped domes, is an iconic symbol of Russia, a 16th-century masterpiece with unique design and intricate frescoes.</p>
+                    <p><strong>Why Visit:</strong> Essential Moscow experience for history and architectural grandeur.</p>
+                    <p><strong>Coordinates:</strong> 55.754167, 37.620278 (Red Square), 55.7522, 37.623 (St. Basil's)</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>Admire the exterior and explore St. Basil's interior.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-10c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg>Take iconic photographs.</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> ~1000 RUB (St. Basil's entry)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.7522,37.623" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Wear warm layers and comfortable walking shoes. Arrive early.</li>
+                    </ul>
+                </div>
+
+                <div class="place-item">
+                    <h4>Afternoon: Moscow Kremlin</h4>
+                    <p>The fortified complex at the heart of Moscow, overseeing the Moskva River. It houses stunning cathedrals, palaces, and museums, including the Armoury Chamber and Diamond Fund, showcasing priceless treasures and Russian heritage.</p>
+                    <p><strong>Why Visit:</strong> Unparalleled historical and cultural experience, deep dive into Russian power and religious art.</p>
+                    <p><strong>Coordinates:</strong> 55.7520, 37.6175</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"></path></svg>Explore Cathedral Square (Assumption, Archangel, Annunciation Cathedrals).</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>Consider Armoury Chamber (separate ticket).</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> ~700 RUB (Kremlin grounds), ~1000 RUB (Armoury, optional)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.7520,37.6175" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Passport needed. Allow 3-4 hours. Book Armoury tickets in advance.</li>
+                    </ul>
+                </div>
+
+                <div class="place-item">
+                    <h4>Evening: Bolshoi Theatre (Performance)</h4>
+                    <p>A historic theatre renowned for world-class opera and ballet. A symbol of Russian culture with stunning neoclassical architecture and opulent interiors.</p>
+                    <p><strong>Why Visit:</strong> Sophisticated evening activity for culture and nightlife enthusiasts.</p>
+                    <p><strong>Coordinates:</strong> 55.7602, 37.6185</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-10c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg>Attend an opera or ballet performance.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>Admire the architecture and interiors.</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> ~3,000 - 10,000 RUB (tickets vary)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.7602,37.6185" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Book tickets months in advance. Smart casual/formal attire.</li>
+                    </ul>
+                </div>
+                <div style="text-align: right; margin-top: 1.5rem;">
+                    <button class="add-to-calendar-btn" data-day="1">
+                        📅 Add Day 1 to Calendar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="card day-card">
+                <h3>🗓️ Day 2: October 13, 2025 - Art, History & Panoramic Views</h3>
+                <p class="day-theme">Immerse yourself in Russian art, relax in a modern park, and witness a majestic cathedral.</p>
+
+                <div class="day-summary">
+                    <p><strong>Optimized Route:</strong> Hotel → State Tretyakov Gallery → Gorky Park → Cathedral of Christ the Savior → Hotel</p>
+                    <p><strong>Total Distance:</strong> Approximately 19.3 km</p>
+                    <p><strong>Estimated Travel Time:</strong> ~1 hour 15 minutes (driving, excluding walking)</p>
+                    <p><strong>Location:</strong> State Tretyakov Gallery (55.7410, 37.6200)</p>
+                    <p><strong>Time:</strong> 09:00 - 18:00 (Moscow Time)</p>
+                </div>
+
+                <div class="place-item">
+                    <h4>Morning: State Tretyakov Gallery</h4>
+                    <p>The foremost museum of Russian fine art, housing masterpieces from the 11th to early 20th century by artists like Repin and Vasnetsov. A comprehensive journey through Russian art.</p>
+                    <p><strong>Why Visit:</strong> Unparalleled insight into Russian artistic heritage, excellent indoor activity for cooler weather.</p>
+                    <p><strong>Coordinates:</strong> 55.7410, 37.6200</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>Explore the extensive collection of icons, portraits, and landscapes.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>Learn about historical and cultural context of masterpieces.</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> ~500-600 RUB (entry fee)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.7410,37.6200" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Allocate 3-4 hours. Audio guide recommended.</li>
+                    </ul>
+                </div>
+
+                <div class="place-item">
+                    <h4>Afternoon: Gorky Park</h4>
+                    <p>Moscow's premier urban park, offering a vibrant mix of recreation, culture, and entertainment. Beautifully landscaped gardens, cycling paths, cafes, and scenic views along the Moskva River.</p>
+                    <p><strong>Why Visit:</strong> Relaxing contrast, taste of contemporary urban life, outdoor enjoyment.</p>
+                    <p><strong>Coordinates:</strong> 55.7289, 37.6098</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>Stroll along the river embankment.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>Visit Garage Museum (optional). Grab coffee/snack.</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> Free entry, ~500 RUB (optional rentals/museum)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.7289,37.6098" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Dress warmly for October weather.</li>
+                    </ul>
+                </div>
+
+                <div class="place-item">
+                    <h4>Evening: Cathedral of Christ the Savior</h4>
+                    <p>The tallest Orthodox Christian church in the world, meticulously rebuilt after its demolition by the Soviet regime. Gleaming golden domes and opulent interiors adorned with frescoes.</p>
+                    <p><strong>Why Visit:</strong> Blend of history, culture, and architectural marvel. Illuminated evening view.</p>
+                    <p><strong>Coordinates:</strong> 55.7447, 37.6056</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>Admire exterior and explore lavish interiors.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>Take elevator to observation deck for panoramic views (optional).</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> Free entry, ~300 RUB (observation deck, optional)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.7447,37.6056" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Respectful attire (shoulders/knees covered).</li>
+                    </ul>
+                </div>
+                <div style="text-align: right; margin-top: 1.5rem;">
+                    <button class="add-to-calendar-btn" data-day="2">
+                        📅 Add Day 2 to Calendar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="card day-card">
+                <h3>🗓️ Day 3: October 14, 2025 - Cold War History & Cultural Exploration</h3>
+                <p class="day-theme">Explore Russia's space achievements and monumental Soviet architecture, then step back into medieval history.</p>
+
+                <div class="day-summary">
+                    <p><strong>Optimized Route:</strong> Hotel → Museum of Cosmonautics → VDNKh (All-Russian Exhibition Center) → Kolomenskoye Museum-Reserve → Hotel</p>
+                    <p><strong>Total Distance:</strong> Approximately 34.9 km</p>
+                    <p><strong>Estimated Travel Time:</strong> ~1 hour 45 minutes (driving, excluding walking)</p>
+                    <p><strong>Location:</strong> Museum of Cosmonautics (55.8228, 37.6394)</p>
+                    <p><strong>Time:</strong> 09:00 - 18:00 (Moscow Time)</p>
+                </div>
+
+                <div class="place-item">
+                    <h4>Morning: Museum of Cosmonautics</h4>
+                    <p>Dedicated to space exploration and Soviet/Russian space programs. Features genuine spacecraft, space suits, and interactive exhibits, detailing milestones of the space race.</p>
+                    <p><strong>Why Visit:</strong> Unique historical and cultural experience, highlighting Russia's contributions to space.</p>
+                    <p><strong>Coordinates:</strong> 55.8228, 37.6394</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>Explore exhibits on Sputnik, Yuri Gagarin, ISS.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>See real spacecraft and astronaut memorabilia.</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> ~500-600 RUB (entry fee)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.8228,37.6394" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Allow 2-3 hours. Indoor activity, good for rainy day.</li>
+                    </ul>
+                </div>
+
+                <div class="place-item">
+                    <h4>Afternoon: VDNKh (All-Russian Exhibition Center)</h4>
+                    <p>A monumental complex showcasing Soviet-era architecture, fountains, and pavilions. A vast park-like area offering a glimpse into Soviet grandiosity and propaganda, with various museums and exhibitions.</p>
+                    <p><strong>Why Visit:</strong> Experience a significant piece of Soviet history and architecture, unique cultural perspective.</p>
+                    <p><strong>Coordinates:</strong> 55.8291, 37.6358</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>Wander through grand pavilions and fountains.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>Visit smaller museums within pavilions (extra fees).</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> Free grounds, ~200-500 RUB (per pavilion museum)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.8291,37.6358" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Wear comfortable, waterproof shoes. VDNKh is enormous.</li>
+                    </ul>
+                </div>
+
+                <div class="place-item">
+                    <h4>Evening: Kolomenskoye Museum-Reserve</h4>
+                    <p>A former royal estate with beautiful architecture and historical significance, including the UNESCO-listed Church of the Ascension. Offers a glimpse into medieval Russia and extensive parkland.</p>
+                    <p><strong>Why Visit:</strong> Tranquil, historically rich experience, serene environment to conclude the day.</p>
+                    <p><strong>Coordinates:</strong> 55.6644, 37.6612 (Church of the Ascension)</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>Visit the Church of the Ascension.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>Explore reconstructed wooden palace of Tsar Alexey Mikhailovich.</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> Free park entry, ~200-400 RUB (per museum)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.6644,37.6612" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Prioritize attractions due to large size. Check closing times.</li>
+                    </ul>
+                </div>
+                <div style="text-align: right; margin-top: 1.5rem;">
+                    <button class="add-to-calendar-btn" data-day="3">
+                        📅 Add Day 3 to Calendar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Day 4 -->
+            <div class="card day-card">
+                <h3>🗓️ Day 4: October 15, 2025 - Local Markets, Arbat Street & Nightlife</h3>
+                <p class="day-theme">Dive into vibrant markets, historic pedestrian streets, and Moscow's chic dining scene.</p>
+
+                <div class="day-summary">
+                    <p><strong>Optimized Route:</strong> Hotel → Izmailovsky Market → Arbat Street → Patriarch Ponds (Evening walk & dinner) → Hotel</p>
+                    <p><strong>Total Distance:</strong> Approximately 38.3 km</p>
+                    <p><strong>Estimated Travel Time:</strong> ~1 hour 40 minutes (driving, excluding walking)</p>
+                    <p><strong>Location:</strong> Izmailovsky Market (55.7946, 37.7656)</p>
+                    <p><strong>Time:</strong> 09:00 - 18:00 (Moscow Time)</p>
+                </div>
+
+                <div class="place-item">
+                    <h4>Morning: Izmailovsky Market (Kremlin in Izmailovo)</h4>
+                    <p>A colorful cultural complex resembling a traditional Russian fortress. A bustling marketplace for souvenirs, antiques, crafts, and traditional goods, with small museums and cafes.</p>
+                    <p><strong>Why Visit:</strong> Unique souvenir hunting, immersion into traditional Russian crafts and atmosphere.</p>
+                    <p><strong>Coordinates:</strong> 55.7946, 37.7656</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>Browse stalls for unique gifts and crafts.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>Visit quirky museums (Vodka, Folk Arts). Sample local snacks.</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> Free grounds, ~200-300 RUB (per museum)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.7946,37.7656" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Be prepared to bargain. Bring cash. Early morning best.</li>
+                    </ul>
+                </div>
+
+                <div class="place-item">
+                    <h4>Afternoon: Arbat Street</h4>
+                    <p>One of Moscow's oldest surviving streets and a popular pedestrian zone. A bohemian quarter with street performers, artists, souvenir shops, and diverse cafes/restaurants.</p>
+                    <p><strong>Why Visit:</strong> Quintessential Moscow experience, leisurely exploration, local cuisine, and lively atmosphere.</p>
+                    <p><strong>Coordinates:</strong> 55.7495, 37.5324</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>Stroll, enjoy street performers and artists.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>Browse shops, have lunch, visit Pushkin Memorial (optional).</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> Free to walk, ~1000 RUB (lunch)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.7495,37.5324" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Beware of pickpockets in crowded areas.</li>
+                    </ul>
+                </div>
+
+                <div class="place-item">
+                    <h4>Evening: Patriarch Ponds (Evening Walk & Dinner)</h4>
+                    <p>A picturesque and tranquil area, famous from Bulgakov's "The Master and Margarita." Known for its beautiful pond, park, elegant buildings, and a hub for trendy restaurants, cafes, and bars.</p>
+                    <p><strong>Why Visit:</strong> Blend of tranquility, literary significance, vibrant dining/nightlife scene.</p>
+                    <p><strong>Coordinates:</strong> 55.7615, 37.5979</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>Enjoy a peaceful evening walk around the ponds.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>Have dinner at an excellent restaurant or drink at a stylish bar.</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> ~2,000 - 5,000+ RUB (dinner & drinks)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.7615,37.5979" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Reservations might be needed. Dress very warmly.</li>
+                    </ul>
+                </div>
+                <div style="text-align: right; margin-top: 1.5rem;">
+                    <button class="add-to-calendar-btn" data-day="4">
+                        📅 Add Day 4 to Calendar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="card day-card">
+                <h3>🗓️ Day 5: October 16, 2025 - Departure</h3>
+                <p class="day-theme">Enjoy a final breakfast before heading to the airport.</p>
+
+                <div class="day-summary">
+                    <p><strong>Optimized Route:</strong> Hotel → Moscow Domodedovo Mikhail Lomonosov Airport</p>
+                    <p><strong>Total Distance:</strong> ~35-40 km</p>
+                    <p><strong>Estimated Travel Time:</strong> ~1 hour 5 minutes (taxi/ride-share)</p>
+                    <p><strong>Location:</strong> Moscow Domodedovo Mikhail Lomonosov Airport (55.4145, 37.8994)</p>
+                    <p><strong>Time:</strong> Based on flight schedule</p>
+                </div>
+
+                <div class="place-item">
+                    <h4>Morning: Departure</h4>
+                    <p>Time to say goodbye to Moscow. Enjoy a final Russian breakfast before your transfer to Domodedovo Airport for your flight.</p>
+                    <ul class="activities">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path></svg>Enjoy breakfast.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"></path></svg>Final packing and check-out.</li>
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg>Transfer to airport.</li>
+                    </ul>
+                    <p class="budget-info"><strong>Budget:</strong> ~800 RUB (breakfast), ~2000 RUB (airport transfer)</p>
+                    <p class="map-link"><strong>Map:</strong> <a href="https://google.com/maps?q=55.4145,37.8994" target="_blank" rel="noopener noreferrer">View on Map</a></p>
+                    <ul class="tips">
+                        <li><svg class="icon" viewBox="0 0 24 24"><path d="M13 14h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-2-2h-2V2h2v2zm4 8h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V4h2v2zm-4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path></svg>Allow ample time for airport transfer, check flight status.</li>
+                    </ul>
+                </div>
+                <div style="text-align: right; margin-top: 1.5rem;">
+                    <button class="add-to-calendar-btn" data-day="5">
+                        📅 Add Day 5 to Calendar
+                    </button>
+                </div>
             </div>
 
         </section>
 
-        <!-- Budget Dashboard -->
-        <section class="card">
-            <h2><i class="fas fa-wallet"></i> Budget Dashboard</h2>
-
-            <div class="budget-grid">
-                <div class="budget-card">
-                    <i class="fas fa-money-bill-wave"></i>
-                    <h4>Total Estimated Cost</h4>
-                    <p>30,008 RUB</p>
-                </div>
-                <div class="budget-card">
-                    <i class="fas fa-hand-holding-usd"></i>
-                    <h4>Remaining Budget</h4>
-                    <p>39,992 RUB</p>
-                </div>
-                <div class="budget-card">
-                    <i class="fas fa-bed"></i>
-                    <h4>Accommodation Cost</h4>
-                    <p>2,808 RUB</p>
-                </div>
-            </div>
-
-            <h3>Expense Breakdown:</h3>
+        <section id="budget" class="card budget-dashboard">
+            <h2>💰 Budget Dashboard</h2>
+            <h3>Accommodation Costs</h3>
             <table class="expense-table">
                 <thead>
                     <tr>
-                        <th>Category</th>
-                        <th>Day 1</th>
-                        <th>Day 2</th>
-                        <th>Day 3</th>
-                        <th>Day 4</th>
-                        <th>Day 5</th>
-                        <th>Total (RUB)</th>
+                        <th>Hotel</th>
+                        <th>Cost/Night</th>
+                        <th>Nights</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="category">Accommodation</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>2,808</td>
+                        <td>SoulRus</td>
+                        <td>702 RUB</td>
+                        <td>4</td>
+                        <td>2808 RUB</td>
                     </tr>
-                    <tr>
-                        <td class="category">Entry Fees</td>
-                        <td>6,700</td>
-                        <td>1,400</td>
-                        <td>1,500</td>
-                        <td>300</td>
-                        <td>-</td>
-                        <td>9,900</td>
-                    </tr>
-                    <tr>
-                        <td class="category">Meals & Snacks</td>
-                        <td>2,000</td>
-                        <td>2,000</td>
-                        <td>2,000</td>
-                        <td>4,000</td>
-                        <td>800</td>
-                        <td>10,800</td>
-                    </tr>
-                    <tr>
-                        <td class="category">Transportation</td>
-                        <td>1,500</td>
-                        <td>1,800</td>
-                        <td>2,000</td>
-                        <td>2,200</td>
-                        <td>2,000</td>
-                        <td>9,500</td>
-                    </tr>
-                    <tr>
-                        <td class="category">Souvenirs</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>2,000</td>
-                        <td>-</td>
-                        <td>2,000</td>
+                    <tr class="total-row">
+                        <td colspan="3">Accommodation Total</td>
+                        <td>2808 RUB</td>
                     </tr>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="5">Grand Total Estimated Spent</td>
-                        <td>30,008</td>
-                    </tr>
-                </tfoot>
             </table>
 
-            <h3>Budget Tips:</h3>
-            <ul>
-                <li><i class="fas fa-lightbulb"></i> Consider utilizing Moscow's efficient metro system for transportation. It's much cheaper than taxis and an attraction in itself with many beautiful stations.</li>
-                <li><i class="fas fa-lightbulb"></i> Look for lunch deals or business lunches offered by many restaurants to save on dining costs.</li>
-                <li><i class="fas fa-lightbulb"></i> Many museums offer student discounts if you have a valid ID.</li>
+            <h3>Daily Estimated Expenses</h3>
+            <table class="expense-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Entry Fees</th>
+                        <th>Meals & Snacks</th>
+                        <th>Transportation</th>
+                        <th>Other (Souvenirs/Optional)</th>
+                        <th>Daily Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Day 1</td>
+                        <td>6700 RUB</td>
+                        <td>2000 RUB</td>
+                        <td>1500 RUB</td>
+                        <td>0 RUB</td>
+                        <td>10,200 RUB</td>
+                    </tr>
+                    <tr>
+                        <td>Day 2</td>
+                        <td>1400 RUB</td>
+                        <td>2000 RUB</td>
+                        <td>1800 RUB</td>
+                        <td>500 RUB</td>
+                        <td>5,700 RUB</td>
+                    </tr>
+                    <tr>
+                        <td>Day 3</td>
+                        <td>1500 RUB</td>
+                        <td>2000 RUB</td>
+                        <td>2000 RUB</td>
+                        <td>0 RUB</td>
+                        <td>5,500 RUB</td>
+                    </tr>
+                    <tr>
+                        <td>Day 4</td>
+                        <td>300 RUB</td>
+                        <td>4000 RUB</td>
+                        <td>2200 RUB</td>
+                        <td>2000 RUB</td>
+                        <td>8,500 RUB</td>
+                    </tr>
+                    <tr>
+                        <td>Day 5</td>
+                        <td>0 RUB</td>
+                        <td>800 RUB</td>
+                        <td>2000 RUB</td>
+                        <td>0 RUB</td>
+                        <td>2,800 RUB</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="5">Total Daily Expenses</td>
+                        <td>32,700 RUB</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="budget-summary">
+                <p><strong>Grand Total Estimated Spent:</strong> 35,508 RUB</p>
+                <p><strong>Assumed Total Trip Budget:</strong> 70,000 RUB</p>
+                <p><strong>Remaining Budget:</strong> 34,492 RUB</p>
+            </div>
+
+            <h3>Budget Tips</h3>
+            <ul class="budget-tips">
+                <li>Consider utilizing Moscow's efficient metro system for transportation. It's much cheaper than taxis and an attraction in itself with many beautiful stations.</li>
+                <li>Look for lunch deals or business lunches offered by many restaurants to save on dining costs.</li>
+                <li>Many museums offer student discounts if you have a valid ID.</li>
             </ul>
         </section>
 
-        <!-- Essentials Section -->
-        <section class="card">
-            <h2><i class="fas fa-clipboard-list"></i> Essentials</h2>
-
-            <h3>Packing List:</h3>
-            <div class="checklist-grid">
+        <section id="essentials" class="essentials-section">
+            <div class="card checklist-card">
+                <h2>📦 Essential Packing List</h2>
                 <ul>
-                    <li class="checklist-item"><input type="checkbox" id="packing1"><label for="packing1">Warm Layers (thermal underwear, sweaters, jacket, scarf, gloves, hat)</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="packing2"><label for="packing2">Comfortable Walking Shoes (waterproof)</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="packing3"><label for="packing3">Umbrella/Rain Gear</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="packing4"><label for="packing4">Smart Casual/Formal Attire (Bolshoi Theatre)</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="packing5"><label for="packing5">Small Backpack (daily essentials)</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="packing6"><label for="packing6">Portable Charger</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="packing7"><label for="packing7">Adapter (Type F or C)</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="packing8"><label for="packing8">Basic Medications</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="packing9"><label for="packing9">Travel-sized toiletries</label></li>
+                    <li><input type="checkbox" id="pack-layers"><label for="pack-layers">Warm Layers (thermal underwear, sweaters, jacket, scarf, gloves, hat)</label></li>
+                    <li><input type="checkbox" id="pack-shoes"><label for="pack-shoes">Comfortable & Waterproof Walking Shoes</label></li>
+                    <li><input type="checkbox" id="pack-rain"><label for="pack-rain">Umbrella/Rain Gear (especially for Day 3)</label></li>
+                    <li><input type="checkbox" id="pack-attire"><label for="pack-attire">Smart Casual/Formal Attire (for Bolshoi Theatre)</label></li>
+                    <li><input type="checkbox" id="pack-backpack"><label for="pack-backpack">Small Backpack for daily essentials</label></li>
+                    <li><input type="checkbox" id="pack-charger"><label for="pack-charger">Portable Charger</label></li>
+                    <li><input type="checkbox" id="pack-adapter"><label for="pack-adapter">Adapter (Type F or C for Russia)</label></li>
+                    <li><input type="checkbox" id="pack-meds"><label for="pack-meds">Basic Medications & personal prescriptions</label></li>
+                    <li><input type="checkbox" id="pack-toiletries"><label for="pack-toiletries">Travel-sized toiletries</label></li>
                 </ul>
             </div>
 
-            <h3>Pre-Trip Checklist:</h3>
-            <div class="checklist-grid">
+            <div class="card checklist-card">
+                <h2>✅ Pre-Trip Checklist</h2>
                 <ul>
-                    <li class="checklist-item"><input type="checkbox" id="precheck1" checked><label for="precheck1">Book hotel via provided links</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="precheck2"><label for="precheck2">Check visa requirements for Russia</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="precheck3"><label for="precheck3">Purchase travel insurance</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="precheck4"><label for="precheck4">Verify attraction operating hours and holiday closures</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="precheck5"><label for="precheck5">Make advance reservations for Bolshoi Theatre and Kremlin Armoury</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="precheck6"><label for="precheck6">Notify bank of international travel</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="precheck7"><label for="precheck7">Download offline maps of Moscow</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="precheck8"><label for="precheck8">Learn a few basic Russian phrases</label></li>
-                    <li class="checklist-item"><input type="checkbox" id="precheck9"><label for="precheck9">Convert some currency to RUB for immediate expenses</label></li>
+                    <li><input type="checkbox" id="pre-hotel" checked><label for="pre-hotel">Book hotel via provided links (SoulRus)</label></li>
+                    <li><input type="checkbox" id="pre-visa"><label for="pre-visa">Check visa requirements for Russia (if applicable)</label></li>
+                    <li><input type="checkbox" id="pre-insurance"><label for="pre-insurance">Purchase travel insurance</label></li>
+                    <li><input type="checkbox" id="pre-hours"><label for="pre-hours">Verify attraction operating hours and holiday closures</label></li>
+                    <li><input type="checkbox" id="pre-reservations"><label for="pre-reservations">Make advance reservations for Bolshoi Theatre & Kremlin Armoury Chamber</label></li>
+                    <li><input type="checkbox" id="pre-bank"><label for="pre-bank">Notify bank of international travel</label></li>
+                    <li><input type="checkbox" id="pre-maps"><label for="pre-maps">Download offline maps of Moscow</label></li>
+                    <li><input type="checkbox" id="pre-phrases"><label for="pre-phrases">Learn a few basic Russian phrases</label></li>
+                    <li><input type="checkbox" id="pre-currency"><label for="pre-currency">Convert some currency to RUB for immediate expenses</label></li>
                 </ul>
             </div>
-
-            <h3 class="travel-tips">Travel Tips:</h3>
-            <ul>
-                <li>Be aware of your surroundings, especially in crowded tourist areas.</li>
-                <li>Keep important documents (passport, visa) secure.</li>
-                <li>Learn a few basic Russian phrases; English might not be widely spoken outside major tourist areas.</li>
-                <li>Tap water is generally safe to drink, but bottled water is widely available.</li>
-                <li>Tipping is becoming more common in Russia; 10% is usually appreciated in restaurants.</li>
-            </ul>
         </section>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p>Moscow Solo Pleasure Trip Itinerary</p>
-            <p>Created by your AI Travel Assistant</p>
-            <p>Contact: <a href="mailto:info@travel.com">info@travel.com</a></p>
-            <button class="btn" onclick="window.print()"><i class="fas fa-print"></i> Print Itinerary</button>
-        </footer>
-    </div>
+    </main>
+
+    <footer class="footer">
+        <p>Your Solo Moscow Adventure Awaits!</p>
+        <div class="contact-info">
+            <p>For inquiries, please contact: <a href="mailto:info@travelplanner.com" style="color: white; text-decoration: underline;">info@travelplanner.com</a></p>
+        </div>
+        <button onclick="window.print()" class="button">🖨️ Print Itinerary</button>
+        <a href="#top" class="button" style="margin-left: 1rem;">Back to Top</a>
+    </footer>
 
     <script>
-        // Smooth scroll for internal links (if any)
+        // Smooth scroll for internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -167,29 +1199,19 @@
             });
         });
 
-        // Image Lightbox (Placeholder - more complex implementation would be needed)
-        document.querySelectorAll('.hotel-gallery img, .place img').forEach(img => {
-            img.style.cursor = 'zoom-in';
-            img.addEventListener('click', () => {
-                // In a real scenario, open a lightbox with the image
-                alert('Image clicked! In a full implementation, this would open a lightbox.');
+        // Basic placeholder for "Add to Calendar" button functionality
+        document.querySelectorAll('.add-to-calendar-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const day = this.dataset.day;
+                alert(`Day ${day} added to your (imaginary) calendar! In a real app, this would integrate with Google Calendar, Outlook, etc.`);
             });
         });
 
-        // Checkbox persistence (basic example using localStorage)
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-            const id = checkbox.id;
-            const savedState = localStorage.getItem(id);
-            if (savedState === 'checked') {
-                checkbox.checked = true;
-            }
-
-            checkbox.addEventListener('change', () => {
-                if (checkbox.checked) {
-                    localStorage.setItem(id, 'checked');
-                } else {
-                    localStorage.removeItem(id);
-                }
+        // Placeholder for image lightbox (requires dedicated library for full functionality)
+        document.querySelectorAll('.hotel-gallery img').forEach(img => {
+            img.addEventListener('click', function() {
+                alert('Image lightbox functionality would open here!');
+                // In a real application, you would add a class to a fullscreen overlay and populate it with this image.
             });
         });
     </script>
