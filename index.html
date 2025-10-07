@@ -3,84 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Personalized Moscow Adventure: Solo Pleasure Trip</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Romantic Escape to Manali - Itinerary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Base Styles & Typography */
         :root {
             --primary-color: #2563eb; /* Blue */
             --secondary-color: #10b981; /* Green */
-            --accent-color: #f59e0b; /* Orange */
+            --accent-color: #f59e0b; /* Warm Orange */
             --text-color: #333;
-            --light-bg: #f8f9fa;
-            --card-bg: #ffffff;
-            --border-color: #e0e0e0;
+            --text-light: #555;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
             --shadow-light: 0 4px 6px rgba(0,0,0,0.1);
-            --shadow-medium: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
             --transition-speed: 0.3s;
         }
 
-        /* Basic Reset & Typography */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
-            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
             color: var(--text-color);
-            background-color: var(--light-bg);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6;
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Playfair Display', serif;
             color: var(--primary-color);
             margin-bottom: 0.8em;
+            line-height: 1.2;
         }
 
-        h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.1; }
-        h2 { font-size: clamp(24px, 4vw, 32px); line-height: 1.2; color: var(--secondary-color); }
-        h3 { font-size: clamp(20px, 3vw, 26px); line-height: 1.3; color: var(--primary-color); }
-        h4 { font-size: clamp(18px, 2.5vw, 22px); line-height: 1.4; }
-        p { margin-bottom: 1em; }
+        h1 { font-size: clamp(2rem, 5vw, 3.2rem); } /* 32-48px */
+        h2 { font-size: clamp(1.5rem, 4vw, 2rem); }  /* 24-32px */
+        h3 { font-size: clamp(1.25rem, 3vw, 1.6rem); color: var(--text-color);}
+        h4 { font-size: clamp(1.1rem, 2.5vw, 1.3rem); color: var(--text-color);}
+        p { font-size: 1rem; margin-bottom: 1em; }
+        a { color: var(--primary-color); text-decoration: none; transition: color var(--transition-speed); }
+        a:hover { color: var(--secondary-color); }
 
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color var(--transition-speed);
-        }
-
-        a:hover {
-            color: var(--accent-color);
-            text-decoration: underline;
-        }
-
-        /* Layout & Container */
+        /* Utility Classes */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem;
-            display: grid;
-            gap: 2rem;
+            padding: 20px;
         }
 
-        /* Cards */
         .card {
-            background: var(--card-bg);
+            background: white;
             border-radius: 12px;
             padding: 24px;
             box-shadow: var(--shadow-light);
             transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            position: relative;
+            margin-bottom: 24px;
         }
 
         .card:hover {
@@ -88,405 +70,480 @@
             box-shadow: var(--shadow-medium);
         }
 
-        /* Buttons */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            display: inline-block;
             padding: 12px 24px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             transition: background-color var(--transition-speed), transform var(--transition-speed);
-            border: none;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 16px;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: var(--card-bg);
-        }
-
-        .btn-primary:hover {
-            background-color: #1e40af; /* Darker primary */
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background-color: var(--secondary-color);
-            color: var(--card-bg);
-        }
-
-        .btn-secondary:hover {
-            background-color: #0d9488; /* Darker secondary */
-            transform: translateY(-2px);
-        }
-
-        .add-to-calendar-btn {
-            background-color: var(--accent-color);
-            color: var(--card-bg);
-            margin-top: 15px;
-        }
-
-        .add-to-calendar-btn:hover {
-            background-color: #d97706; /* Darker accent */
-        }
-
-        /* Specific Sections Styling */
-
-        /* Hero */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #3b82f6 100%);
-            color: white;
-            padding: 60px 20px;
             text-align: center;
-            border-radius: 0 0 20px 20px;
-            position: relative;
-            overflow: hidden;
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
-            transform: rotate(45deg);
-            pointer-events: none;
+
+        .btn:hover {
+            background-color: #e08e0b;
+            transform: translateY(-2px);
+        }
+
+        .btn.primary { background-color: var(--primary-color); }
+        .btn.primary:hover { background-color: #1e52cc; }
+
+        .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            font-size: 1.1em;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1920x600/2563eb/ffffff?text=Manali+Himalayas') center/cover no-repeat;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+            margin-bottom: 40px;
+            position: relative;
         }
 
         .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 4rem);
             color: white;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 0.2em;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+            font-weight: 700;
         }
 
         .hero p {
-            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-bottom: 10px;
             opacity: 0.9;
         }
 
-        .trip-stats {
+        .hero-stats {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            gap: 30px;
             margin-top: 30px;
-        }
-
-        .stat-item {
-            background: rgba(255,255,255,0.2);
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.95em;
-        }
-
-        /* Overview */
-        .overview-card {
-            background: var(--secondary-color);
-            color: white;
-            text-align: center;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: var(--shadow-medium);
-            grid-column: 1 / -1; /* Spans full width */
-        }
-        .overview-card h2 {
-            color: white;
-            margin-bottom: 0.5em;
-        }
-        .overview-card p strong {
-            color: var(--accent-color);
-        }
-        .overview-highlights {
-            display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
+        }
+
+        .hero-stat {
+            background-color: rgba(255,255,255,0.15);
+            padding: 10px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Overview Card */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             margin-top: 20px;
         }
-        .highlight-badge {
-            background: rgba(255,255,255,0.2);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: 600;
+        .overview-grid .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .overview-grid h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        .overview-grid ul {
+            list-style: none;
+            padding: 0;
+        }
+        .overview-grid ul li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+        }
+        .overview-grid ul li .icon {
+            color: var(--secondary-color);
+            margin-right: 10px;
         }
 
         /* Hotel Section */
+        .hotel-section img {
+            max-width: 100%;
+            border-radius: 8px;
+            display: block;
+        }
+
         .hotel-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
             margin-top: 20px;
             margin-bottom: 20px;
         }
+
         .hotel-gallery img {
             width: 100%;
-            height: 150px;
+            height: 180px;
             object-fit: cover;
             border-radius: 8px;
             cursor: pointer;
             transition: transform var(--transition-speed);
         }
+
         .hotel-gallery img:hover {
             transform: scale(1.03);
         }
+
         .hotel-details {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            margin-top: 20px;
-        }
-        .hotel-details div {
-            flex: 1 1 200px;
-        }
-        .hotel-amenities ul {
-            list-style: none;
-            padding: 0;
-        }
-        .hotel-amenities li {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .hotel-amenities li::before {
-            content: '✅'; /* Default checkmark, specific icons override */
-            display: inline-block;
-            margin-right: 5px;
-            font-size: 1.1em;
-            color: var(--secondary-color);
+            margin-bottom: 20px;
         }
 
-        .hotel-booking-btns {
+        .hotel-details > div {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .hotel-details ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .hotel-details ul li {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 25px;
+            align-items: center;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+        .hotel-details ul li .icon { color: var(--secondary-color); }
+
+        .map-embed {
+            width: 100%;
+            height: 300px;
+            border: 0;
+            border-radius: 8px;
+            margin-top: 15px;
         }
 
         /* Daily Itinerary */
-        .day-itinerary {
-            border-left: 4px solid var(--primary-color);
-            padding-left: 20px;
-            margin-left: 10px;
+        .itinerary-day {
+            margin-bottom: 40px;
             position: relative;
+            padding-left: 30px;
+            border-left: 2px solid var(--border-color);
         }
-        .day-itinerary::before {
-            content: '🗓️';
+
+        .itinerary-day::before {
+            content: attr(data-day);
             position: absolute;
-            left: -24px;
+            left: -20px;
             top: 0;
-            font-size: 1.5rem;
-            background: var(--light-bg);
-            padding: 0 5px;
-        }
-
-        .day-itinerary h3 {
-            margin-top: 0;
-            color: var(--primary-color);
-        }
-
-        .day-itinerary > p {
-            font-style: italic;
-            margin-bottom: 1.5em;
-        }
-
-        .place-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
             box-shadow: var(--shadow-light);
-            position: relative;
-            transition: transform var(--transition-speed);
-        }
-        .place-card:hover {
-            transform: translateY(-3px);
         }
 
-        .place-card h4 {
-            color: var(--secondary-color);
-            margin-top: 0;
-            margin-bottom: 10px;
+        .itinerary-event {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 20px;
+            position: relative;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
         }
-        .place-card .time {
+
+        .itinerary-event:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .itinerary-event h4 {
             color: var(--primary-color);
-            font-weight: 600;
-            display: block;
             margin-bottom: 10px;
         }
-        .place-card ul {
-            list-style: none;
-            padding-left: 0;
+
+        .itinerary-event p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
         }
-        .place-card li {
+
+        .event-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .event-details div {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .event-details div .icon { color: var(--accent-color); }
+
+        .activities-list {
+            margin-top: 15px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .activities-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+        .activities-list li .icon { color: var(--secondary-color); margin-top: 2px; }
+
+        .tips-section {
+            background-color: #f0f9ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .tips-section h5 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        .tips-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .tips-section ul li {
             margin-bottom: 5px;
             display: flex;
             align-items: flex-start;
-            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-light);
         }
-        .place-card li::before {
-            content: '✨'; /* Default activity icon */
-            display: inline-block;
-            font-size: 1.1em;
+        .tips-section ul li .icon {
             color: var(--accent-color);
-            flex-shrink: 0;
             margin-top: 2px;
-        }
-        .place-card .tip {
-            background-color: #fffbeb; /* Light yellow */
-            border-left: 4px solid var(--accent-color);
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-top: 15px;
-            font-size: 0.9em;
-            color: #78350f; /* Dark orange */
-        }
-        .place-card .tip strong {
-            color: var(--accent-color);
         }
 
         .daily-summary {
-            margin-top: 25px;
-            padding: 15px;
-            background: var(--light-bg);
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
             border-radius: 10px;
-            border: 1px dashed var(--border-color);
-            font-weight: 600;
-            color: var(--primary-color);
+            margin-top: 20px;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
+
         .daily-summary span {
+            display: flex;
+            align-items: center;
+        }
+        .daily-summary span .icon { color: white; margin-right: 5px; }
+
+        .add-to-calendar-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            margin-top: 15px;
             display: block;
-            margin-bottom: 5px;
+            width: fit-content;
+        }
+        .add-to-calendar-btn:hover {
+            background-color: #0d9669;
+            transform: translateY(-2px);
         }
 
         /* Budget Dashboard */
         .budget-dashboard h3 {
-            margin-bottom: 20px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
         }
 
-        .budget-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        .budget-summary {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
             gap: 20px;
             margin-bottom: 30px;
         }
 
-        .budget-stat {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: var(--shadow-light);
-            text-align: center;
-        }
-        .budget-stat h4 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        .budget-stat .amount {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-        }
-        .budget-chart {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: var(--shadow-light);
-            grid-column: 1 / -1;
-        }
-        .budget-chart h4 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        .chart-bar-container {
-            background-color: var(--light-bg);
-            border-radius: 5px;
-            height: 25px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-        .chart-bar {
-            height: 100%;
-            background-color: var(--accent-color);
-            width: 0; /* JS would set this, for static display, use a fixed percentage */
-            border-radius: 5px;
-            transition: width 1s ease-out;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
+        .budget-card {
+            background: linear-gradient(135deg, var(--primary-color), #4a8dfa);
             color: white;
-            font-weight: 600;
-            padding-right: 10px;
-            font-size: 0.9em;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: var(--shadow-medium);
         }
+        .budget-card.accent {
+            background: linear-gradient(135deg, var(--accent-color), #f7b74d);
+        }
+
+        .budget-card h4 {
+            color: white;
+            margin-bottom: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+        .budget-card p {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
         .expense-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            background: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow-light);
+            font-size: 0.95rem;
         }
+
         .expense-table th, .expense-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid var(--border-color);
+            border: 1px solid var(--border-color);
+            padding: 12px;
             text-align: left;
         }
+
         .expense-table th {
             background-color: var(--primary-color);
             color: white;
             font-weight: 600;
         }
-        .expense-table tbody tr:last-child td {
-            border-bottom: none;
+
+        .expense-table tbody tr:nth-child(even) {
+            background-color: #f0f4f8;
         }
-        .expense-table tbody tr:hover {
-            background-color: var(--light-bg);
-        }
+
         .expense-table tfoot td {
             font-weight: 700;
-            background-color: var(--light-bg);
+            background-color: #e2e8f0;
         }
 
         /* Essentials */
-        .essentials .list-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+        .essentials h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
         }
-        .essentials .checklist ul {
+
+        .checklist {
             list-style: none;
             padding: 0;
         }
-        .essentials .checklist li {
+
+        .checklist li {
+            background-color: white;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
-        }
-        .essentials .checklist input[type="checkbox"] {
-            margin-right: 10px;
-            accent-color: var(--primary-color);
-            width: 18px;
-            height: 18px;
+            font-size: 1rem;
+            color: var(--text-color);
             cursor: pointer;
+            transition: background-color var(--transition-speed);
         }
-        .essentials .tips-list {
-            list-style-type: '💡 ';
-            padding-left: 25px;
+
+        .checklist li:hover {
+            background-color: #f0f4f8;
         }
-        .essentials .tips-list li {
+
+        .checklist input[type="checkbox"] {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 4px;
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0; /* Prevent checkbox from shrinking */
+        }
+
+        .checklist input[type="checkbox"]:checked {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .checklist input[type="checkbox"]:checked::after {
+            content: '✔';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+        }
+
+        .checklist li.checked {
+            text-decoration: line-through;
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        .travel-tips {
+            background-color: #e6f7ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        .travel-tips h4 {
+            color: var(--primary-color);
             margin-bottom: 10px;
+        }
+        .travel-tips ul {
+            list-style: none;
+            padding: 0;
+        }
+        .travel-tips ul li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            display: flex;
+            align-items: flex-start;
+        }
+        .travel-tips ul li .icon {
+            color: var(--accent-color);
+            margin-top: 2px;
         }
 
         /* Footer */
@@ -495,19 +552,21 @@
             color: white;
             padding: 40px 20px;
             text-align: center;
+            border-radius: 15px 15px 0 0;
             margin-top: 50px;
-            border-radius: 20px 20px 0 0;
         }
-        .footer a {
-            color: var(--accent-color);
+
+        .footer p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
         }
+
         .footer .btn {
-            background-color: var(--secondary-color);
-            color: white;
             margin-top: 20px;
+            background-color: var(--secondary-color);
         }
         .footer .btn:hover {
-            background-color: #0d9488;
+            background-color: #0d9669;
         }
 
         /* Print Styles */
@@ -515,560 +574,561 @@
             body {
                 background-color: white;
                 color: black;
+                font-family: serif;
             }
-            .hero, .footer, .add-to-calendar-btn, .btn, .overview-card {
-                display: none; /* Hide non-essential/interactive elements */
+            .hero, .footer, .btn, .add-to-calendar-btn {
+                display: none;
             }
             .container {
-                display: block;
                 padding: 0;
-                gap: 0;
             }
-            .card {
+            .card, .itinerary-event, .daily-summary, .budget-card, .travel-tips {
                 box-shadow: none;
                 border: 1px solid #ccc;
-                margin-bottom: 20px;
                 page-break-inside: avoid;
-                transform: none; /* Remove hover transform */
             }
-            h1, h2, h3, h4, p {
+            h1, h2, h3, h4, h5, h6 {
                 color: black !important;
+                font-family: serif;
             }
             a {
-                color: #0056b3 !important; /* Standard blue for links */
                 text-decoration: underline;
+                color: #000 !important;
             }
-            .hotel-gallery img {
+            img {
                 max-width: 100%;
                 height: auto;
-                object-fit: contain;
             }
-            .day-itinerary {
-                border-left: 1px solid #ccc;
-                margin-left: 0;
+            .checklist input[type="checkbox"] {
+                border: 1px solid #000;
             }
-            .day-itinerary::before {
-                content: '';
+            .checklist input[type="checkbox"]:checked {
+                background-color: #ccc;
+                border-color: #ccc;
             }
-            .place-card .tip {
-                background-color: #f0f0f0;
-                border-left-color: #ccc;
-                color: #333;
-            }
-            .budget-chart, .budget-grid {
-                display: block;
-            }
-            .chart-bar-container, .chart-bar {
-                background-color: #eee;
-                color: #333;
+            .checklist input[type="checkbox"]:checked::after {
+                color: #000;
             }
             .expense-table th {
-                background-color: #f0f0f0;
-                color: #333;
-                border-bottom: 1px solid #ccc;
+                background-color: #eee !important;
+                color: black !important;
             }
-            .expense-table tfoot td {
-                background-color: #f8f8f8;
+            .itinerary-day::before {
+                background-color: #eee !important;
+                color: black !important;
+                border: 1px solid #ccc;
             }
         }
-
 
         /* Responsive Adjustments */
-        @media (min-width: 768px) {
-            .container {
-                padding: 2rem;
-            }
-            .hotel-gallery {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-            .day-itinerary {
-                padding-left: 40px; /* More space for timeline feel */
-            }
-            .day-itinerary::before {
-                left: -32px;
-                font-size: 2rem;
-            }
-            .budget-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        @media (max-width: 768px) {
+            .hero { padding: 60px 20px; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1rem; }
+            .hero-stats { flex-direction: column; gap: 15px; }
+            .overview-grid { grid-template-columns: 1fr; }
+            .hotel-gallery { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .hotel-details { flex-direction: column; }
+            .itinerary-day { padding-left: 20px; }
+            .itinerary-day::before { left: -15px; width: 30px; height: 30px; font-size: 0.9em; }
+            .event-details { grid-template-columns: 1fr; }
+            .daily-summary { flex-direction: column; align-items: flex-start; }
+            .budget-summary { flex-direction: column; }
         }
 
-        @media (min-width: 1024px) {
-            .container {
-                grid-template-columns: 1fr 1fr;
-            }
-            #hero, #overview, #hotel, #budget, #essentials, #footer {
-                grid-column: 1 / -1; /* Full width sections */
-            }
-            .daily-itinerary-section {
-                grid-column: 1 / -1; /* Daily itinerary takes full width */
-            }
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            .card { padding: 15px; }
+            .btn { padding: 10px 18px; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header id="hero" class="hero">
-            <h1>🇷🇺 Your Personalized Moscow Adventure!</h1>
-            <p>A Solo Pleasure Trip | October 12-16, 2025</p>
-            <div class="trip-stats">
-                <div class="stat-item">📅 5 Days / 4 Nights</div>
-                <div class="stat-item">🚶‍♀️ Solo Traveler</div>
-                <div class="stat-item">🌍 Moscow, Russia</div>
-                <div class="stat-item"> किलोमीटर 187.6 km Total Route</div>
-                <div class="stat-item">⏳ ~8h 22m Total Travel Time (excl. attractions)</div>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <h1>Romantic Escape to Manali</h1>
+            <p>October 13 - 17, 2025</p>
+            <p>An enchanting journey through the heart of the Himalayas.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">📅 5 Days / 4 Nights</div>
+                <div class="hero-stat">❤️ 2 Travelers</div>
+                <div class="hero-stat">⛰️ Manali, India</div>
+                <div class="hero-stat">✨ Adventure & Serenity</div>
             </div>
-        </header>
+        </section>
 
-        <section id="overview" class="overview-card card">
+        <!-- Overview Card -->
+        <section class="card" id="overview">
             <h2>Trip Overview</h2>
-            <p><strong>Destination:</strong> Moscow, Russia</p>
-            <p><strong>Duration:</strong> October 12, 2025 - October 16, 2025 (4 nights, 5 days)</p>
-            <p><strong>Travel Companions:</strong> Solo</p>
-            <p><strong>Trip Type:</strong> Pleasure trip, mix of everything (culture, history, nightlife, cuisine)</p>
-            <div class="overview-highlights">
-                <span class="highlight-badge">Culture</span>
-                <span class="highlight-badge">History</span>
-                <span class="highlight-badge">Nightlife</span>
-                <span class="highlight-badge">Cuisine</span>
+            <div class="overview-grid">
+                <div>
+                    <h3>Destination</h3>
+                    <ul>
+                        <li><span class="icon">📍</span> Manali, Himachal Pradesh, India</li>
+                        <li><span class="icon">🏔️</span> Himalayan Mountains</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Companions</h3>
+                    <ul>
+                        <li><span class="icon">💑</span> Romantic Couple</li>
+                        <li><span class="icon">💞</span> Cherished Memories</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Trip Type</h3>
+                    <ul>
+                        <li><span class="icon">🏞️</span> Adventure & Nature</li>
+                        <li><span class="icon">🧘</span> Serenity & Culture</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Highlights</h3>
+                    <ul>
+                        <li><span class="icon">✨</span> Majestic Vistas</li>
+                        <li><span class="icon">🏞️</span> Riverside Dining</li>
+                        <li><span class="icon">🏰</span> Ancient Temples</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
-        <section id="hotel" class="card">
-            <h2>🏨 Recommended Hotel: Axel Hostel</h2>
-            <p><strong>Location:</strong> Close to Moscow city center, near Ulitsa Gasheka, 9, Moscow, 123056</p>
-            <p><strong>Coordinates:</strong> <a href="https://google.com/maps?q=55.7571465,37.646664900000005" target="_blank">View on Map</a></p>
-            <p><strong>Price:</strong> 1148 RUB per room per night</p>
-            <p><strong>Total Accommodation Cost:</strong> 4592 RUB (4 nights)</p>
+        <!-- Hotel Section -->
+        <section class="card hotel-section" id="hotel">
+            <h2>Your Stay: AppleWoods, Manali</h2>
+            <p>Nestled amidst apple orchards, AppleWoods offers a peaceful retreat with stunning mountain views, perfect for a romantic getaway.</p>
 
-            <h3>Why We Chose This Hotel:</h3>
-            <p>Axel Hostel offers an excellent balance of affordability and a prime central location, making it ideal for a solo pleasure trip focused on exploring Moscow's diverse offerings. The inclusion of free breakfast is a great perk, and its proximity to major attractions ensures easy access to cultural sites, historical landmarks, vibrant nightlife, and renowned culinary experiences, all while staying within your budget per night. Its location rating of 4.8 is excellent for accessibility to the city's highlights.</p>
-
-            <h3>Amenities:</h3>
-            <div class="hotel-amenities">
-                <ul>
-                    <li>🍳 Free breakfast</li>
-                    <li>🌐 Free Wi-Fi</li>
-                    <li>❄️ Air conditioning</li>
-                    <li>🧺 Full-service laundry</li>
-                </ul>
-            </div>
-
-            <h3>Hotel Photos:</h3>
             <div class="hotel-gallery">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipN8dbCwUpCwdtx7aUt3oVc0BeWEiK7wANZQVoiq=s10000" alt="Axel Hostel lobby" loading="lazy">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipMAChXNISHw3KKHr9X1BOHJb3Kqnp_8OjS69I6f=s10000" alt="Axel Hostel exterior" loading="lazy">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipMQ-0eFIlYw9VLshmXZH3JlThM9zBoKphO0UhMT=s10000" alt="Axel Hostel room" loading="lazy">
-                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/9f/78/7d/axel-hostel.jpg?w=1200&h=800&s=1" alt="Axel Hostel common area" loading="lazy">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipNPtt2TJQDuxVIdb15A4TR2CfFit99MU-CWr3md=s10000" alt="Axel Hostel bathroom" loading="lazy">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipMCilzru2S7bfMixz1lruxeYAwvdcbByYaX11h2=s10000" alt="Axel Hostel kitchen" loading="lazy">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipMvxHYMnK31pk4qNmaF-cdvfs_QbH1lMSwWM6g4=s10000" alt="Axel Hostel bunk bed" loading="lazy">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipMG3nyIdE7PeaRwEAFiIVL6FO1RqyImPy5RzmYn=s10000" alt="Axel Hostel facade" loading="lazy">
-                <img src="https://lh3.googleusercontent.com/p/AF1QipMjhj8n4JsOF7Nwdjp3wzM1fBJFPLIwBs9d-HLN=s10000" alt="Axel Hostel reception" loading="lazy">
+                <img src="https://via.placeholder.com/400x300/e0f2f7/2563eb?text=AppleWoods+Room" alt="AppleWoods hotel room with mountain view" loading="lazy">
+                <img src="https://via.placeholder.com/400x300/e0f2f7/2563eb?text=AppleWoods+Exterior" alt="AppleWoods hotel exterior surrounded by nature" loading="lazy">
+                <img src="https://via.placeholder.com/400x300/e0f2f7/2563eb?text=AppleWoods+Restaurant" alt="AppleWoods hotel restaurant dining area" loading="lazy">
+                <img src="https://via.placeholder.com/400x300/e0f2f7/2563eb?text=AppleWoods+Garden" alt="AppleWoods hotel garden area" loading="lazy">
             </div>
 
-            <h3>Booking Links:</h3>
-            <div class="hotel-booking-btns">
-                <a href="http://www.axel-hotel.ru/" target="_blank" class="btn btn-primary">Official Website</a>
-                <a href="https://serpapi.com/search.json?adults=1&check_in_date=2025-10-12&check_out_date=2025-10-16&children=0&currency=RUB&engine=google_hotels&gl=ru&hl=en&max_price=10000&property_token=ChoI7IiZkJ_0xoGtARoNL2cvMTFmNTd0ZzlsehAB&q=Hotels+near+Moscow%2C+Russia" target="_blank" class="btn btn-secondary">Check SerpApi Deals</a>
-            </div>
-        </section>
-
-        <section id="daily-itinerary" class="daily-itinerary-section">
-            <h2>🌍 Daily Itinerary</h2>
-
-            <!-- Day 1 -->
-            <div id="day-1" class="card day-itinerary">
-                <h3>Summary: Day 1: Red Square & Kremlin Immersion - Moscow</h3>
-                <p>🗓️ Day 1 - Explore the historical and cultural heart of Moscow.</p>
-
-                <h4>📍 Places:</h4>
-                <div class="place-card">
-                    <h4>1. Red Square, St. Basil's Cathedral & GUM (9:00 AM - 12:00 PM)</h4>
-                    <p>Red Square is undeniably the heart of Moscow and Russia itself, a UNESCO World Heritage site that has witnessed centuries of pivotal historical events. Here, you'll find the kaleidoscopic domes of St. Basil's Cathedral, a masterpiece of Russian architecture. Adjacent is GUM, a magnificent historical department store with stunning architecture.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>🎨 Marvel at the vibrant architecture of St. Basil's Cathedral.</li>
-                            <li>🚶‍♀️ Explore the grandeur of Red Square.</li>
-                            <li>🛍️ Wander through the luxurious GUM department store.</li>
-                            <li>📸 Capture stunning photographs of these landmarks.</li>
-                        </ul>
-                    </p>
-                    <p>Budget: St. Basil's entry: approx. 1000 RUB. GUM entry is free.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.7522,37.6175" target="_blank">Red Square Location</a></p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> Security checks are common. Be prepared for crowds. Photography inside St. Basil's might have restrictions. Early morning is best to avoid peak crowds.</div>
+            <div class="hotel-details">
+                <div>
+                    <h3>Location</h3>
+                    <p>Near Vashisht Temple, Old Manali, Manali</p>
+                    <a href="https://google.com/maps?q=32.2132649,77.2016447" target="_blank" class="btn primary">
+                        <span class="icon">🗺️</span> View on Map
+                    </a>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.953457993077!2d77.19906971497918!3d32.21326498114668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390487c6776118d5%3A0xb3a2e7c1c2e2f69a!2sHotel%20Apple%20Woods!5e0!3m2!1sen!2sin!4v1678912345678!5m2!1sen!2sin" class="map-embed" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-
-                <div class="place-card">
-                    <h4>2. Moscow Kremlin (12:00 PM - 5:00 PM)</h4>
-                    <p>The Moscow Kremlin, a fortified complex at the heart of the city, is a symbol of Russian statehood and power. This historic fortress houses several cathedrals, palaces, and museums, including the famous Armory Chamber.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>🏛️ Tour the Assumption, Archangel, and Annunciation Cathedrals.</li>
-                            <li>💎 Visit the Armory Chamber (separate ticket, book in advance).</li>
-                            <li>🚶‍♀️ Walk along the Kremlin walls for unique views.</li>
-                            <li>✨ Explore the Diamond Fund (optional, separate ticket, book in advance).</li>
-                        </ul>
-                    </p>
-                    <p>Budget: Kremlin grounds ticket: approx. 700-1000 RUB. Armory Chamber: approx. 700-1000 RUB.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.7516,37.6177" target="_blank">Kremlin Location</a></p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> Tickets, especially for the Armory Chamber, should be purchased online in advance. Plan for extensive walking. Passport/ID required.</div>
+                <div>
+                    <h3>Pricing</h3>
+                    <p><strong>₹1049</strong> per night (as of last check)</p>
+                    <p>Total Accommodation (4 nights): <strong>₹4196</strong></p>
+                    <a href="https://example.com/applewoods-booking" target="_blank" class="btn">
+                        <span class="icon">➡️</span> Book Your Stay
+                    </a>
+                    <h3 style="margin-top: 20px;">Amenities</h3>
+                    <ul>
+                        <li><span class="icon">📶</span> Free Wi-Fi</li>
+                        <li><span class="icon">🅿️</span> Free Parking</li>
+                        <li><span class="icon">🍴</span> Restaurant</li>
+                        <li><span class="icon">🌳</span> Garden</li>
+                        <li><span class="icon">🛎️</span> Room Service</li>
+                        <li><span class="icon">🏔️</span> Mountain View</li>
+                    </ul>
                 </div>
-
-                <div class="place-card">
-                    <h4>3. Tverskaya Street & Pushkin Square for Dinner (7:00 PM onwards)</h4>
-                    <p>Tverskaya Street is one of Moscow's main arteries, renowned for its bustling atmosphere, elegant architecture, high-end shops, and diverse culinary scene. Pushkin Square, located along Tverskaya, is a popular meeting spot.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>🍽️ Enjoy a leisurely dinner at one of the many restaurants.</li>
-                            <li>🚶‍♀️ Take an evening stroll, enjoying the illuminated cityscape.</li>
-                            <li>☕ Find a cozy cafe for a hot drink.</li>
-                        </ul>
-                    </p>
-                    <p>Budget: Dinner costs can vary widely, from 1000 RUB for a casual meal to 3000+ RUB.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.7641,37.6099" target="_blank">Tverskaya Street Location</a></p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> Tverskaya is a busy street; be mindful of traffic. Many places will have English menus.</div>
-                </div>
-
-                <p>🚗 Route: Axel Hostel → Red Square → Moscow Kremlin → Tverskaya Street → Axel Hostel</p>
-                <p>📏 Distance: 10.59 km</p>
-                <p>💰 Budget: Estimated 3000-5000 RUB (excluding hotel)</p>
-                <p>⚠️ Tips: Dress in warm layers. Public transport (Metro) is efficient for longer distances.</p>
-                <button class="btn add-to-calendar-btn" data-day="1">📅 Add Day 1 to Calendar</button>
-            </div>
-
-            <!-- Day 2 -->
-            <div id="day-2" class="card day-itinerary">
-                <h3>Summary: Day 2: Art, History & Bohemian Charm - Moscow</h3>
-                <p>🗓️ Day 2 - Dive into Moscow's artistic heritage and bohemian streets.</p>
-
-                <h4>📍 Places:</h4>
-                <div class="place-card">
-                    <h4>1. Pushkin State Museum of Fine Arts (10:00 AM - 2:00 PM)</h4>
-                    <p>The Pushkin State Museum of Fine Arts is one of Moscow's most significant cultural institutions, housing a vast collection of European art from ancient civilizations to the 20th century.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>🖼️ Explore the main building's collection of Old Masters and classical sculptures.</li>
-                            <li>🎨 Admire works by Monet, Renoir, Van Gogh, and Picasso in the European and American Art Gallery.</li>
-                            <li>🛍️ Visit the museum shop for art books.</li>
-                        </ul>
-                    </p>
-                    <p>Budget: Entry fee approx. 500-800 RUB.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.7485,37.6044" target="_blank">Museum Location</a></p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> Arrive shortly after opening to avoid crowds. Check for temporary exhibitions. Allow 3-4 hours.</div>
-                </div>
-
-                <div class="place-card">
-                    <h4>2. Arbat Street (2:30 PM - 5:30 PM)</h4>
-                    <p>Arbat Street is one of Moscow's oldest surviving streets and a charming pedestrian zone that exudes a bohemian and artistic atmosphere. Famous for its street artists, souvenir shops, and cafes.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>🚶‍♀️ Wander along the pedestrian street, observing street performers.</li>
-                            <li>🛍️ Browse souvenir shops for Russian crafts and matryoshka dolls.</li>
-                            <li>☕ Enjoy a coffee or traditional Russian snack.</li>
-                        </ul>
-                    </p>
-                    <p>Budget: Varies based on shopping and dining choices.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.7495,37.5925" target="_blank">Arbat Street Location</a></p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> Be aware of your belongings in crowded areas. Some street artists may charge for photos.</div>
-                </div>
-
-                <div class="place-card">
-                    <h4>3. Bolshoi Theatre & Dinner (7:00 PM onwards)</h4>
-                    <p>The Bolshoi Theatre is one of the world's most iconic cultural landmarks, famous for its ballet and opera. Admire its magnificent neoclassical facade and explore the surrounding area for dinner.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>🏛️ Admire the stunning architecture of the Bolshoi Theatre.</li>
-                            <li>📸 Take photographs, especially when illuminated at night.</li>
-                            <li>🍽️ Enjoy a delicious dinner at a nearby restaurant.</li>
-                        </ul>
-                    </p>
-                    <p>Budget: Dinner costs vary (1500+ RUB). Performance tickets are very expensive and must be booked in advance.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.7611,37.6189" target="_blank">Bolshoi Theatre Location</a></p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> If attending a performance, book months in advance directly from the official website.</div>
-                </div>
-
-                <p>🚗 Route: Axel Hostel → Pushkin State Museum of Fine Arts → Arbat Street → Bolshoi Theatre → Axel Hostel</p>
-                <p>📏 Distance: 13.22 km</p>
-                <p>💰 Budget: Estimated 3000-6000 RUB (excluding hotel and potential performance tickets)</p>
-                <p>⚠️ Tips: Comfortable shoes are essential for exploring the museum and Arbat Street. Consider Metro for longer distances.</p>
-                <button class="btn add-to-calendar-btn" data-day="2">📅 Add Day 2 to Calendar</button>
-            </div>
-
-            <!-- Day 3 -->
-            <div id="day-3" class="card day-itinerary">
-                <h3>Summary: Day 3: Cultural Depths & Panoramic Views - Moscow</h3>
-                <p>🗓️ Day 3 - Delve into Russian art and faith, concluding with breathtaking city views.</p>
-
-                <h4>📍 Places:</h4>
-                <div class="place-card">
-                    <h4>1. Tretyakov Gallery (10:00 AM - 2:00 PM)</h4>
-                    <p>The State Tretyakov Gallery is the foremost repository of Russian fine art, housing a magnificent collection from the 11th to the early 20th century. Features iconic works by renowned Russian artists.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>🖼️ Explore masterpieces of Russian realism, symbolism, and avant-garde.</li>
-                            <li>👨‍🎨 Admire iconic paintings like "Morning in a Pine Forest" and "Ivan the Terrible and His Son Ivan".</li>
-                            <li>🛍️ Visit the museum shop for art books.</li>
-                        </ul>
-                    </p>
-                    <p>Budget: Entry fee approx. 500-600 RUB.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.7410,37.6208" target="_blank">Gallery Location</a></p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> Prioritize specific eras or artists if time is limited. Photography without flash is generally permitted.</div>
-                </div>
-
-                <div class="place-card">
-                    <h4>2. Cathedral of Christ the Saviour (2:30 PM - 4:30 PM)</h4>
-                    <p>An awe-inspiring, majestic Orthodox cathedral with dazzling golden domes and pristine white marble facade. Meticulously rebuilt after demolition during the Soviet era, it's a symbol of spiritual resilience.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>⛪ Admire the exterior architecture and its golden domes.</li>
-                            <li>✨ Explore the grand interior with frescoes and iconography.</li>
-                            <li>🔭 Visit the observation deck for panoramic views (check fees).</li>
-                        </ul>
-                    </p>
-                    <p>Budget: Entry to main cathedral is free. Observation deck/exhibitions: approx. 300-500 RUB.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.7447,37.6056" target="_blank">Cathedral Location</a></p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> Wear modest attire (shoulders/knees covered, headscarf for women). Be respectful of worshippers.</div>
-                </div>
-
-                <div class="place-card">
-                    <h4>3. Observation Deck at Sparrow Hills & Dinner (5:30 PM onwards)</h4>
-                    <p>Sparrow Hills offers one of the most spectacular panoramic views of Moscow, especially enchanting at sunset and after dark when the city lights twinkle. Enjoy the views, then find dinner nearby.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>🌆 Enjoy expansive panoramic views of Moscow.</li>
-                            <li>📸 Capture stunning sunset and night-time photographs.</li>
-                            <li>🚶‍♀️ Stroll around Moscow State University building.</li>
-                            <li>🍽️ Have dinner at a restaurant in the vicinity.</li>
-                        </ul>
-                    </p>
-                    <p>Budget: Free entry to observation deck. Dinner costs vary.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.7107,37.5508" target="_blank">Sparrow Hills Location</a></p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> It can get windy and cold, even in October; bring a warm jacket. Aim for late afternoon for sunset views.</div>
-                </div>
-
-                <p>🚗 Route: Axel Hostel → Tretyakov Gallery → Cathedral of Christ the Saviour → Observation Deck at Sparrow Hills → Axel Hostel</p>
-                <p>📏 Distance: 22.08 km</p>
-                <p>💰 Budget: Estimated 2500-5000 RUB (excluding hotel)</p>
-                <p>⚠️ Tips: A packable rain jacket or umbrella might be useful today (Rain Sum: 5.5mm).</p>
-                <button class="btn add-to-calendar-btn" data-day="3">📅 Add Day 3 to Calendar</button>
-            </div>
-
-            <!-- Day 4 -->
-            <div id="day-4" class="card day-itinerary">
-                <h3>Summary: Day 4: Soviet History & Cultural Wonders - Moscow</h3>
-                <p>🗓️ Day 4 - Explore Soviet grandeur and imperial history, ending with Moscow's vibrant nightlife.</p>
-
-                <h4>📍 Places:</h4>
-                <div class="place-card">
-                    <h4>1. VDNKh & Museum of Cosmonautics (10:00 AM - 3:00 PM)</h4>
-                    <p>VDNKh is a colossal complex embodying Soviet architectural grandeur. Nearby, the Museum of Cosmonautics chronicles Russia's pioneering role in space exploration, with impressive exhibits and artifacts.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>🏛️ Explore VDNKh's fountains (Friendship of Peoples) and pavilions.</li>
-                            <li>🚀 Visit the Museum of Cosmonautics and see real space capsules.</li>
-                            <li>🛰️ Learn about Sputnik, Gagarin, and other space achievements.</li>
-                        </ul>
-                    </p>
-                    <p>Budget: VDNKh entry is free. Museum of Cosmonautics entry: approx. 500-600 RUB.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.8293,37.6258" target="_blank">VDNKh Location</a></p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> VDNKh is vast; consider renting a bicycle or using the electric shuttle. Arrive early for the museum. Dress warmly.</div>
-                </div>
-
-                <div class="place-card">
-                    <h4>2. Tsaritsyno Museum-Reserve (3:30 PM - 7:30 PM)</h4>
-                    <p>A magnificent architectural ensemble and sprawling park with unique Russian Gothic architecture, commissioned by Catherine the Great. Offers a serene and beautiful escape from the city bustle.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>🏰 Explore the Grand Palace and historical buildings.</li>
-                            <li>🌳 Wander through the vast landscaped park, enjoying ponds and bridges.</li>
-                            <li>🎭 Visit the opera house and other exhibition halls.</li>
-                        </ul>
-                    </p>
-                    <p>Budget: Park entry is free. Palace entry: approx. 400-600 RUB.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.6080,37.6710" target="_blank">Tsaritsyno Location</a></p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> Tsaritsyno is very large, plan your route. Wear appropriate footwear for extensive walking. Enjoy the clear sky and sunshine expected!</div>
-                </div>
-
-                <div class="place-card">
-                    <h4>3. Farewell Dinner & Moscow Nightlife (8:00 PM onwards)</h4>
-                    <p>For your final evening, delve into Moscow's vibrant nightlife and culinary scene. Patriarshy Ponds is an upscale neighborhood known for its trendy restaurants, cafes, and bars, perfect for a sophisticated atmosphere.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>🍽️ Choose a restaurant for your farewell dinner (Russian or international cuisine).</li>
-                            <li>🍹 Enjoy a drink and soak in the atmosphere of Moscow's evening hotspots.</li>
-                            <li>✨ Reflect on your Moscow adventures.</li>
-                        </ul>
-                    </p>
-                    <p>Budget: Dinner and drinks can range from 2000 RUB to 5000+ RUB.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.7667,37.5967" target="_blank">Patriarshy Ponds Location</a></p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> Check reviews and make reservations for popular restaurants. Metro runs late, taxis are readily available.</div>
-                </div>
-
-                <p>🚗 Route: Axel Hostel → VDNKh & Museum of Cosmonautics → Tsaritsyno Museum-Reserve → Patriarshy Ponds → Axel Hostel</p>
-                <p>📏 Distance: 85.97 km</p>
-                <p>💰 Budget: Estimated 3000-7000 RUB (excluding hotel)</p>
-                <p>⚠️ Tips: This is a day with longer travel distances between sites. Utilize the Metro for efficiency. Dress very warmly as temperatures will be chilly.</p>
-                <button class="btn add-to-calendar-btn" data-day="4">📅 Add Day 4 to Calendar</button>
-            </div>
-
-            <!-- Day 5 -->
-            <div id="day-5" class="card day-itinerary">
-                <h3>Summary: Day 5: Departure - Moscow</h3>
-                <p>🗓️ Day 5 - Smooth departure from Moscow.</p>
-
-                <h4>📍 Places:</h4>
-                <div class="place-card">
-                    <h4>1. Axel Hostel → Moscow Domodedovo Mikhail Lomonosov Airport (Morning/Afternoon)</h4>
-                    <p>Today marks your departure from Moscow. Ensure you allow ample time for travel to the airport, considering Moscow's traffic. The Aeroexpress train from Paveletsky Station is a reliable option.</p>
-                    <p>Activities:
-                        <ul>
-                            <li>🥐 Enjoy a final breakfast at your hostel or a nearby cafe.</li>
-                            <li>🛍️ Do some last-minute souvenir shopping if time permits.</li>
-                            <li>✈️ Travel to the airport.</li>
-                        </ul>
-                    </p>
-                    <p>Budget: Aeroexpress ticket: approx. 500-600 RUB. Taxi to airport: approx. 1500-2500 RUB.</p>
-                    <p>Map: <a href="https://google.com/maps?q=55.7571465,37.646664900000005" target="_blank">Axel Hostel Location</a> (connecting to airport)</p>
-                    <div class="tip"><strong>⚠️ Tips:</strong> Check your flight terminal in advance. Plan for potential traffic delays if taking a taxi. Aim to be at the airport at least 2-3 hours before your international flight.</div>
-                </div>
-
-                <p>🚗 Route: Axel Hostel → Moscow Domodedovo Mikhail Lomonosov Airport</p>
-                <p>📏 Distance: 55.74 km</p>
-                <p>💰 Budget: Estimated 1000-3000 RUB (for breakfast, transport, last-minute shopping)</p>
-                <p>⚠️ Tips: Double-check all travel documents (passport, visa, flight tickets) before heading to the airport.</p>
-                <button class="btn add-to-calendar-btn" data-day="5">📅 Add Day 5 to Calendar</button>
             </div>
         </section>
 
-        <section id="budget" class="card budget-dashboard">
+        <!-- Daily Itinerary -->
+        <section id="itinerary">
+            <h2>Your Journey Day-by-Day</h2>
+
+            <!-- Day 4 Itinerary -->
+            <div class="itinerary-day" id="day-4" data-day="4">
+                <h3>Day 4: October 16, 2025 - Majestic Vistas and Cultural Immersion</h3>
+                <p style="margin-bottom: 20px; color: var(--text-light);">Optimized Route: Hotel → Rohtang Pass (or Gulaba/Marhi) → Manu Temple → Old Manali Riverside Cafe → Hotel</p>
+
+                <!-- Morning: Excursion to Rohtang Pass -->
+                <div class="itinerary-event">
+                    <h4>Morning: Excursion to Rohtang Pass (or Gulaba/Marhi)</h4>
+                    <p>Rohtang Pass is an iconic and breathtaking high mountain pass on the Eastern Pir Panjal Range of the Himalayas, approximately 51 km from Manali. It connects the Kullu Valley with the Lahaul and Spiti Valleys. In October, there's a good chance of encountering snow, offering spectacular panoramic views of glaciers, peaks, and the Chandra River. The journey to Rohtang Pass is an adventure in itself, with winding roads and dramatic scenery. It’s a perfect spot for couples to witness the raw grandeur of the Himalayas and share awe-inspiring moments amidst nature's magnificence.</p>
+                    <div class="event-details">
+                        <div><span class="icon">📍</span> Location: Rohtang Pass</div>
+                        <div><span class="icon">⏰</span> Time: Morning</div>
+                        <div><span class="icon">📏</span> Distance from Hotel: 51 km</div>
+                        <div><span class="icon">🚗</span> Travel Time: 2 hours</div>
+                        <div><span class="icon">🗺️</span> <a href="https://google.com/maps?q=32.3736,77.2435" target="_blank">View on Map</a></div>
+                    </div>
+                    <h5>Why Visit:</h5>
+                    <p>Experience the dramatic landscapes and snow-capped peaks of the Himalayas, offering a truly unforgettable and romantic experience.</p>
+                    <h5 style="margin-top: 15px;">Activities:</h5>
+                    <ul class="activities-list">
+                        <li><span class="icon">🏔️</span> Panoramic Views: Marvel at the breathtaking views of the surrounding Himalayan peaks and glaciers.</li>
+                        <li><span class="icon">❄️</span> Snow Activities: (If accessible and weather permits) Enjoy playing in the snow or simply soaking in the chilly atmosphere.</li>
+                        <li><span class="icon">🚗</span> Scenic Drive: The journey itself is an experience, with stunning vistas at every turn.</li>
+                    </ul>
+                    <div class="tips-section">
+                        <h5><span class="icon">⚠️</span> Practical Tips:</h5>
+                        <ul>
+                            <li><span class="icon">💰</span> Budget: Entry to the pass is free, but vehicle permits might be required (book in advance if needed, especially for private vehicles). Hiring a taxi can range from ₹2000-₹4000 depending on the season and negotiation.</li>
+                            <li><span class="icon">🎒</span> What to Bring: VERY warm clothing, gloves, caps, waterproof jackets, and sturdy, waterproof shoes. Sunglasses are essential to protect against snow glare.</li>
+                            <li><span class="icon">🛍️</span> What to Buy: Local snacks and hot beverages from roadside vendors.</li>
+                            <li><span class="icon">❗</span> Important Notes: Rohtang Pass can be closed due to heavy snowfall. Always check road conditions before planning your trip. Due to high altitude, some might experience altitude sickness; stay hydrated.</li>
+                            <li><span class="icon">⏰</span> Best Time: Early morning to avoid traffic and enjoy the clearest views.</li>
+                            <li><span class="icon">📸</span> Photo Ops: Capture the vast snowy landscapes, majestic mountains, and memorable moments together.</li>
+                        </ul>
+                    </div>
+                    <p style="margin-top: 15px; font-style: italic;">Travel to Next Location: Rohtang Pass (or Gulaba/Marhi) → Manu Temple | 19.2 km | 1 hour 30 mins</p>
+                </div>
+
+                <!-- Afternoon: Manu Temple -->
+                <div class="itinerary-event">
+                    <h4>Afternoon: Manu Temple</h4>
+                    <p>The Manu Temple, located in Old Manali, is dedicated to the sage Manu, who is believed to be the creator of the human race according to Hindu mythology. This ancient pagoda-style temple, set amidst lush green surroundings and towering deodar trees, offers a serene and spiritual ambiance. Reaching the temple involves a pleasant walk through the charming lanes of Old Manali, adding to its mystical appeal. It's a peaceful retreat where couples can soak in the spiritual energy, admire the traditional architecture, and enjoy tranquil moments away from the bustling town.</p>
+                    <div class="event-details">
+                        <div><span class="icon">📍</span> Location: Manu Temple, Old Manali</div>
+                        <div><span class="icon">⏰</span> Time: Afternoon</div>
+                        <div><span class="icon">📏</span> Distance from Rohtang Pass: 19.2 km</div>
+                        <div><span class="icon">🚗</span> Travel Time: 1 hour 30 mins</div>
+                        <div><span class="icon">🗺️</span> <a href="https://google.com/maps?q=32.2616,77.1729" target="_blank">View on Map</a></div>
+                    </div>
+                    <h5>Why Visit:</h5>
+                    <p>Experience a blend of spiritual tranquility and cultural richness in a serene setting, ideal for a peaceful and reflective afternoon.</p>
+                    <h5 style="margin-top: 15px;">Activities:</h5>
+                    <ul class="activities-list">
+                        <li><span class="icon">🙏</span> Spiritual Experience: Offer prayers and soak in the peaceful atmosphere.</li>
+                        <li><span class="icon">🚶</span> Scenic Walk: Enjoy a leisurely walk through the charming lanes of Old Manali to reach the temple.</li>
+                        <li><span class="icon">🏛️</span> Admire Architecture: Appreciate the unique pagoda-style architecture of the temple.</li>
+                    </ul>
+                    <div class="tips-section">
+                        <h5><span class="icon">⚠️</span> Practical Tips:</h5>
+                        <ul>
+                            <li><span class="icon">💰</span> Budget: No entry fee.</li>
+                            <li><span class="icon">🎒</span> What to Bring: Comfortable walking shoes, a light shawl or scarf (to cover shoulders if desired, out of respect).</li>
+                            <li><span class="icon">❗</span> Important Notes: Remove your shoes before entering the temple. Maintain silence and respect the sanctity of the place.</li>
+                            <li><span class="icon">⏰</span> Best Time: Afternoon for pleasant weather and fewer crowds.</li>
+                            <li><span class="icon">📸</span> Photo Ops: The temple's unique architecture and the serene surroundings.</li>
+                        </ul>
+                    </div>
+                    <p style="margin-top: 15px; font-style: italic;">Travel to Next Location: Manu Temple → Old Manali Riverside Cafe | 0.8 km | 10 mins</p>
+                </div>
+
+                <!-- Evening: Romantic Dinner at an Old Manali Riverside Cafe -->
+                <div class="itinerary-event">
+                    <h4>Evening: Romantic Dinner at an Old Manali Riverside Cafe</h4>
+                    <p>Old Manali is renowned for its bohemian vibe and a plethora of charming riverside cafes that offer stunning views of the Beas River and the surrounding mountains. These cafes often feature cozy seating, ambient lighting, and a relaxed atmosphere, making them perfect for a romantic dinner. You can savor a variety of cuisines, from local Himachali dishes to international fare, while enjoying the soothing sounds of the river. It's an ideal way to end your day, sharing good food and intimate conversations in a picturesque setting.</p>
+                    <div class="event-details">
+                        <div><span class="icon">📍</span> Location: Old Manali Riverside Cafe</div>
+                        <div><span class="icon">⏰</span> Time: Evening</div>
+                        <div><span class="icon">📏</span> Distance from Manu Temple: 0.8 km</div>
+                        <div><span class="icon">🚗</span> Travel Time: 10 mins</div>
+                        <div><span class="icon">🗺️</span> <a href="https://google.com/maps?q=32.2586,77.1770" target="_blank">View on Map</a></div>
+                    </div>
+                    <h5>Why Visit:</h5>
+                    <p>Enjoy a romantic and cozy dinner experience with picturesque riverside views, perfect for a memorable evening.</p>
+                    <h5 style="margin-top: 15px;">Activities:</h5>
+                    <ul class="activities-list">
+                        <li><span class="icon">🍽️</span> Romantic Dinner: Indulge in a delicious meal together.</li>
+                        <li><span class="icon">🥂</span> Relaxation: Unwind and enjoy the charming ambiance and gentle sounds of the river.</li>
+                        <li><span class="icon">🗣️</span> Quality Time: Engage in intimate conversations, reflecting on your trip so far.</li>
+                    </ul>
+                    <div class="tips-section">
+                        <h5><span class="icon">⚠️</span> Practical Tips:</h5>
+                        <ul>
+                            <li><span class="icon">💰</span> Budget: Dinner for two can range from ₹800-₹2000, depending on the cafe and chosen cuisine.</li>
+                            <li><span class="icon">🎒</span> What to Bring: Warm layers, as evenings can be chilly, and your appetite!</li>
+                            <li><span class="icon">❗</span> Important Notes: Some cafes might require advance reservations, especially during peak season.</li>
+                            <li><span class="icon">⏰</span> Best Time: Evening, starting around 7:00 PM to enjoy the transition from dusk to night.</li>
+                            <li><span class="icon">📸</span> Photo Ops: The beautifully lit cafe, the riverside ambiance, and your romantic dinner setting.</li>
+                        </ul>
+                    </div>
+                    <p style="margin-top: 15px; font-style: italic;">Travel to Next Location: Old Manali Riverside Cafe → Hotel | 4.2 km | 30 mins</p>
+                </div>
+
+                <div class="daily-summary">
+                    <span><span class="icon">📏</span> Total Distance Covered: 100.2 km</span>
+                    <span><span class="icon">💰</span> Daily Spending (estimated): ₹3000 - ₹6000</span>
+                </div>
+                <button class="add-to-calendar-btn" data-day="4">
+                    📅 Add Day 4 to Calendar
+                </button>
+            </div>
+
+            <!-- Day 5 Itinerary -->
+            <div class="itinerary-day" id="day-5" data-day="5">
+                <h3>Day 5: October 17, 2025 - Departure</h3>
+
+                <!-- Morning: Leisure and Departure Preparation -->
+                <div class="itinerary-event">
+                    <h4>Morning: Leisure and Departure Preparation</h4>
+                    <p>On your final day, take it easy and enjoy a leisurely morning at your hotel. Savor a relaxed breakfast, pack your belongings, and perhaps spend some time reflecting on the wonderful memories you've created during your romantic escape to Manali. You can enjoy the hotel amenities one last time or simply relax in the comfort of your room before checking out. This allows for a stress-free departure, ensuring you leave Manali feeling refreshed and content.</p>
+                    <div class="event-details">
+                        <div><span class="icon">📍</span> Location: Hotel AppleWoods</div>
+                        <div><span class="icon">⏰</span> Time: Morning</div>
+                        <div><span class="icon">📏</span> Distance from Hotel: 0 km</div>
+                        <div><span class="icon">🚗</span> Travel Time: 0 mins</div>
+                        <div><span class="icon">🗺️</span> <a href="https://google.com/maps?q=32.2132649,77.2016447" target="_blank">View on Map</a></div>
+                    </div>
+                    <h5>Why Visit:</h5>
+                    <p>Provides a relaxed morning to prepare for departure, allowing for a smooth and comfortable end to your trip.</p>
+                    <h5 style="margin-top: 15px;">Activities:</h5>
+                    <ul class="activities-list">
+                        <li><span class="icon">🍳</span> Leisurely Breakfast: Enjoy a final breakfast at your hotel.</li>
+                        <li><span class="icon">🛍️</span> Last-minute Packing: Organize your belongings.</li>
+                        <li><span class="icon">👋</span> Check-out: Complete the check-out formalities.</li>
+                    </ul>
+                    <div class="tips-section">
+                        <h5><span class="icon">⚠️</span> Practical Tips:</h5>
+                        <ul>
+                            <li><span class="icon">💰</span> Budget: No additional spending expected unless for last-minute souvenirs at the hotel.</li>
+                            <li><span class="icon">🎒</span> What to Bring: Ensure all your belongings are packed.</li>
+                            <li><span class="icon">❗</span> Important Notes: Confirm your check-out time with the hotel beforehand.</li>
+                            <li><span class="icon">⏰</span> Best Time: Morning, according to your flight/train schedule and hotel check-out time.</li>
+                            <li><span class="icon">📸</span> Photo Ops: A final picture with the hotel's charming ambiance or the mountain views from your room.</li>
+                        </ul>
+                    </div>
+                    <p style="margin-top: 15px; font-style: italic;">Travel to Next Location: Hotel → Manali Bus Stand (or preferred departure point) | 6.71 km | 25 mins (approximate to Manali Bus Stand)</p>
+                </div>
+
+                <div class="daily-summary">
+                    <span><span class="icon">📏</span> Total Distance Covered: Approximately 6.71 km</span>
+                    <span><span class="icon">💰</span> Daily Spending (estimated): ₹500</span>
+                </div>
+                <button class="add-to-calendar-btn" data-day="5">
+                    📅 Add Day 5 to Calendar
+                </button>
+            </div>
+        </section>
+
+        <!-- Budget Dashboard -->
+        <section class="card budget-dashboard" id="budget">
             <h2>💰 Complete Budget Analysis</h2>
-            <h3>Total Trip Budget: 40,000 RUB</h3>
+            <p><strong>Total Trip Budget:</strong> Please provide your total budget for a more accurate breakdown.</p>
 
-            <div class="budget-grid">
-                <div class="budget-stat">
-                    <h4>Accommodation Cost</h4>
-                    <div class="amount">4,592 RUB</div>
+            <div class="budget-summary">
+                <div class="budget-card">
+                    <h4>Accommodation</h4>
+                    <p>₹4196</p>
                 </div>
-                <div class="budget-stat">
-                    <h4>Estimated Daily Expenses</h4>
-                    <div class="amount">20,350 RUB</div>
+                <div class="budget-card accent">
+                    <h4>Est. Daily Expenses</h4>
+                    <p>₹12851 - ₹22006</p>
                 </div>
-                <div class="budget-stat">
-                    <h4>Grand Total Estimated</h4>
-                    <div class="amount">24,942 RUB</div>
+                <div class="budget-card">
+                    <h4>Total Est. Spent</h4>
+                    <p>₹17047 - ₹26202</p>
                 </div>
             </div>
 
-            <div class="budget-chart card">
-                <h4>Budget Visualization</h4>
-                <p>Remaining Budget: 15,058 RUB</p>
-                <div class="chart-bar-container">
-                    <div class="chart-bar" style="width: 62.35%; background-color: var(--secondary-color);">62.35% Spent</div>
-                    <div class="chart-bar" style="width: 37.65%; background-color: var(--accent-color);">37.65% Remaining</div>
+            <details style="margin-top: 20px;">
+                <summary style="font-weight: 600; cursor: pointer; color: var(--primary-color);">View Detailed Expense Breakdown</summary>
+                <div style="padding-top: 15px;">
+                    <h3>Expenses Breakdown:</h3>
+                    <h4>Accommodation:</h4>
+                    <ul>
+                        <li>Hotel: AppleWoods</li>
+                        <li>Cost: ₹1049 × 4 nights = <strong>₹4196</strong></li>
+                    </ul>
+
+                    <h4>Daily Expenses by Day:</h4>
+                    <table class="expense-table">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Category</th>
+                                <th>Estimated Cost Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="4">1</td>
+                                <td>Entry Fees</td>
+                                <td>₹0</td>
+                            </tr>
+                            <tr>
+                                <td>Activities</td>
+                                <td>₹0</td>
+                            </tr>
+                            <tr>
+                                <td>Transportation</td>
+                                <td>₹200-₹400</td>
+                            </tr>
+                            <tr>
+                                <td>Meals (estimated)</td>
+                                <td>₹1000-₹2000</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Day 1 Subtotal</strong></td>
+                                <td><strong>₹1200-₹2400</strong></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">2</td>
+                                <td>Entry Fees</td>
+                                <td>₹100-₹200</td>
+                            </tr>
+                            <tr>
+                                <td>Activities</td>
+                                <td>₹2000-₹4700</td>
+                            </tr>
+                            <tr>
+                                <td>Transportation</td>
+                                <td>₹500-₹1000</td>
+                            </tr>
+                            <tr>
+                                <td>Meals (estimated)</td>
+                                <td>₹1000-₹2000</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Day 2 Subtotal</strong></td>
+                                <td><strong>₹3600-₹7900</strong></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">3</td>
+                                <td>Entry Fees</td>
+                                <td>₹5-₹10</td>
+                            </tr>
+                            <tr>
+                                <td>Activities</td>
+                                <td>₹50-₹100</td>
+                            </tr>
+                            <tr>
+                                <td>Transportation</td>
+                                <td>₹300-₹600</td>
+                            </tr>
+                            <tr>
+                                <td>Meals (estimated)</td>
+                                <td>₹1000-₹2000</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Day 3 Subtotal</strong></td>
+                                <td><strong>₹1355-₹2710</strong></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">4</td>
+                                <td>Entry Fees</td>
+                                <td>₹0 (Permit/vehicle cost for Rohtang Pass)</td>
+                            </tr>
+                            <tr>
+                                <td>Activities</td>
+                                <td>₹0</td>
+                            </tr>
+                            <tr>
+                                <td>Transportation</td>
+                                <td>₹2000-₹4000</td>
+                            </tr>
+                            <tr>
+                                <td>Meals (estimated)</td>
+                                <td>₹1000-₹2000</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Day 4 Subtotal</strong></td>
+                                <td><strong>₹3000-₹6000</strong></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">5</td>
+                                <td>Entry Fees</td>
+                                <td>₹0</td>
+                            </tr>
+                            <tr>
+                                <td>Activities</td>
+                                <td>₹0</td>
+                            </tr>
+                            <tr>
+                                <td>Transportation</td>
+                                <td>₹200-₹400</td>
+                            </tr>
+                            <tr>
+                                <td>Meals (estimated)</td>
+                                <td>₹300-₹600</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Day 5 Subtotal</strong></td>
+                                <td><strong>₹500-₹1000</strong></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2"><strong>Total Daily Expenses (Estimated Range)</strong></td>
+                                <td><strong>₹9655 - ₹19610</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Accommodation Cost</strong></td>
+                                <td><strong>₹4196</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Grand Total (Estimated Range)</strong></td>
+                                <td><strong>₹13851 - ₹23806</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
-                <p style="font-size:0.9em; text-align: right;">(Based on 40,000 RUB assumed total budget)</p>
-            </div>
+            </details>
 
-            <h3>Daily Expenses Breakdown:</h3>
-            <table class="expense-table">
-                <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>Description</th>
-                        <th>Estimated Cost (RUB)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Day 1</td><td>Entry Fees, Meals, Transportation</td><td>3000 - 5500 (Avg: 4250)</td></tr>
-                    <tr><td>Day 2</td><td>Entry Fees, Meals, Shopping, Transportation</td><td>2800 - 6300 (Avg: 4550)</td></tr>
-                    <tr><td>Day 3</td><td>Entry Fees, Meals, Transportation</td><td>2600 - 4600 (Avg: 3600)</td></tr>
-                    <tr><td>Day 4</td><td>Entry Fees, Meals, Transportation</td><td>3400 - 7000 (Avg: 5200)</td></tr>
-                    <tr><td>Day 5</td><td>Meals, Airport Transportation, Shopping</td><td>1000 - 4500 (Avg: 2750)</td></tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="2">Total Estimated Daily Expenses (Midpoints)</td>
-                        <td>20350 RUB</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">Total Accommodation Cost</td>
-                        <td>4592 RUB</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">Grand Total Estimated Expenses</td>
-                        <td>24942 RUB</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">Remaining Budget</td>
-                        <td>15058 RUB</td>
-                    </tr>
-                </tfoot>
-            </table>
-
-            <h3>Budget Tips:</h3>
-            <ul class="tips-list">
-                <li><strong>Public Transportation:</strong> Moscow's Metro is efficient and affordable. Consider purchasing a Troika card for easy access and discounts.</li>
-                <li><strong>Eating Out:</strong> While Tverskaya and Patriarshy Ponds offer upscale options, explore local "Stolovaya" (cafeterias) for authentic and budget-friendly Russian meals.</li>
-                <li><strong>Free Attractions:</strong> Many parks, exterior views of landmarks, and some museums (on specific days) are free. Prioritize these to save money.</li>
+            <h3 style="margin-top: 30px;">Budget Tips:</h3>
+            <ul class="travel-tips" style="background-color: #fff; border: none; padding: 0;">
+                <li><span class="icon">🚌</span> <strong>Local Transport:</strong> Consider using local buses or shared taxis for shorter distances to save on transportation costs.</li>
+                <li><span class="icon">🍜</span> <strong>Eat Local:</strong> Explore local eateries and dhabas for delicious and affordable Himachali cuisine.</li>
+                <li><span class="icon">🤝</span> <strong>Bargain for Activities:</strong> For adventure activities, don't hesitate to negotiate prices.</li>
             </ul>
         </section>
 
-        <section id="essentials" class="card">
-            <h2>🎒 Travel Essentials</h2>
+        <!-- Essentials Section -->
+        <section class="card essentials" id="essentials">
+            <h2>Essential Preparations</h2>
 
-            <div class="list-group">
-                <div class="packing-list checklist">
-                    <h3>Essential Packing List</h3>
-                    <p>Based on the October weather forecast (chilly with possibilities of rain and snow):</p>
-                    <ul>
-                        <li><input type="checkbox" id="pack-thermal"><label for="pack-thermal">Warm Clothing: Thermal base layers (tops & bottoms)</label></li>
-                        <li><input type="checkbox" id="pack-sweaters"><label for="pack-sweaters">Warm Clothing: Sweaters (wool or fleece)</label></li>
-                        <li><input type="checkbox" id="pack-jacket"><label for="pack-jacket">Warm Clothing: Waterproof and windproof winter jacket</label></li>
-                        <li><input type="checkbox" id="pack-acc"><label for="pack-acc">Warm Clothing: Warm hat, gloves, and scarf</label></li>
-                        <li><input type="checkbox" id="pack-socks"><label for="pack-socks">Warm Clothing: Warm socks (wool or synthetic)</label></li>
-                        <li><input type="checkbox" id="pack-boots"><label for="pack-boots">Footwear: Comfortable, waterproof walking boots with good grip</label></li>
-                        <li><input type="checkbox" id="pack-rain"><label for="pack-rain">Rain Gear: Compact umbrella or packable rain jacket</label></li>
-                        <li><input type="checkbox" id="pack-daypack"><label for="pack-daypack">Essentials: Small daypack for excursions</label></li>
-                        <li><input type="checkbox" id="pack-powerbank"><label for="pack-powerbank">Essentials: Portable power bank for electronic devices</label></li>
-                        <li><input type="checkbox" id="pack-adapter"><label for="pack-adapter">Essentials: Universal travel adapter</label></li>
-                        <li><input type="checkbox" id="pack-toiletries"><label for="pack-toiletries">Essentials: Basic toiletries and personal medications</label></li>
-                        <li><input type="checkbox" id="pack-docs"><label for="pack-docs">Essentials: Copy of important documents (passport, visa, hotel booking)</label></li>
-                        <li><input type="checkbox" id="pack-water"><label for="pack-water">Comfort Items: Reusable water bottle</label></li>
-                        <li><input type="checkbox" id="pack-camera"><label for="pack-camera">Comfort Items: Camera and extra memory cards</label></li>
-                        <li><input type="checkbox" id="pack-notebook"><label for="pack-notebook">Comfort Items: Small notebook and pen for journaling</label></li>
+            <div style="display: flex; flex-wrap: wrap; gap: 30px;">
+                <div style="flex: 1; min-width: 280px;">
+                    <h3><span class="icon">🎒</span> Packing List</h3>
+                    <ul class="checklist" id="packing-list">
+                        <li><input type="checkbox" id="pack-warm-clothing"><label for="pack-warm-clothing">Warm Clothing: Sweaters, thermals, fleece jackets, waterproof/windproof outer shell.</label></li>
+                        <li><input type="checkbox" id="pack-accessories"><label for="pack-accessories">Accessories: Woolen caps, gloves, mufflers.</label></li>
+                        <li><input type="checkbox" id="pack-footwear"><label for="pack-footwear">Footwear: Waterproof, comfortable walking/hiking shoes.</label></li>
+                        <li><input type="checkbox" id="pack-sun-protection"><label for="pack-sun-protection">Sun Protection: Sunglasses, sunscreen, wide-brimmed hat.</label></li>
+                        <li><input type="checkbox" id="pack-rain-gear"><label for="pack-rain-gear">Rain Gear: Compact umbrella or light rain jacket.</label></li>
+                        <li><input type="checkbox" id="pack-medications"><label for="pack-medications">Personal Medications & First-aid.</label></li>
+                        <li><input type="checkbox" id="pack-toiletries"><label for="pack-toiletries">Toiletries: Your usual personal care items.</label></li>
+                        <li><input type="checkbox" id="pack-camera"><label for="pack-camera">Camera: To capture breathtaking landscapes.</label></li>
+                        <li><input type="checkbox" id="pack-power-bank"><label for="pack-power-bank">Power Bank: To keep devices charged.</label></li>
+                        <li><input type="checkbox" id="pack-daypack"><label for="pack-daypack">Daypack: For daily excursions.</label></li>
                     </ul>
                 </div>
 
-                <div class="pre-trip-checklist checklist">
-                    <h3>Pre-Trip Checklist</h3>
-                    <ul>
-                        <li><input type="checkbox" id="check-hotel" checked><label for="check-hotel"><strong>Book hotel</strong> via the provided links to secure your accommodation.</label></li>
-                        <li><input type="checkbox" id="check-visa"><label for="check-visa"><strong>Check visa requirements</strong> for Russia based on your nationality and apply well in advance if needed.</label></li>
-                        <li><input type="checkbox" id="check-hours"><label for="check-hours"><strong>Verify attraction operating hours</strong> closer to your travel dates, especially for museums.</label></li>
-                        <li><input type="checkbox" id="check-reservations"><label for="check-reservations"><strong>Make advance reservations</strong> for the Kremlin Armory Chamber and any Bolshoi Theatre performance.</label></li>
-                        <li><input type="checkbox" id="check-insurance"><label for="check-insurance"><strong>Purchase comprehensive travel insurance</strong> to cover unforeseen circumstances.</label></li>
-                        <li><input type="checkbox" id="check-bank"><label for="check-bank"><strong>Inform your bank</strong> of your travel plans to Russia to avoid issues with card usage.</label></li>
-                        <li><input type="checkbox" id="check-maps"><label for="check-maps"><strong>Download offline maps</strong> for Moscow on your phone (Google Maps, Yandex Maps, Metro app).</label></li>
-                        <li><input type="checkbox" id="check-phrases"><label for="check-phrases"><strong>Learn a few basic Russian phrases</strong> (e.g., "Здравствуйте", "Спасибо", "Пожалуйста").</label></li>
-                        <li><input type="checkbox" id="check-weather"><label for="check-weather"><strong>Pack according to the cold October weather</strong> and be prepared for rain and potential light snow.</label></li>
-                        <li><input type="checkbox" id="check-currency"><label for="check-currency"><strong>Exchange some currency</strong> for Russian Rubles (RUB) or ensure cards are ready for international use.</label></li>
+                <div style="flex: 1; min-width: 280px;">
+                    <h3><span class="icon">✅</span> Pre-Trip Checklist</h3>
+                    <ul class="checklist" id="pre-trip-checklist">
+                        <li><input type="checkbox" id="check-hotel-booking" checked><label for="check-hotel-booking">Book hotel via provided links (AppleWoods).</label></li>
+                        <li><input type="checkbox" id="check-visa"><label for="check-visa">Check visa requirements (if applicable).</label></li>
+                        <li><input type="checkbox" id="check-attraction-hours"><label for="check-attraction-hours">Verify attraction operating hours closer to travel dates.</label></li>
+                        <li><input type="checkbox" id="check-reservations"><label for="check-reservations">Make advance reservations for special dinners or activities.</label></li>
+                        <li><input type="checkbox" id="check-travel-insurance"><label for="check-travel-insurance">Purchase travel insurance for peace of mind.</label></li>
+                        <li><input type="checkbox" id="check-bank-info"><label for="check-bank-info">Inform your bank of your travel dates.</label></li>
+                        <li><input type="checkbox" id="check-offline-maps"><label for="check-offline-maps">Download offline maps of Manali.</label></li>
+                        <li><input type="checkbox" id="check-warm-clothes"><label for="check-warm-clothes">Pack warm clothes, especially for Rohtang Pass.</label></li>
+                        <li><input type="checkbox" id="check-taxi-rohtang"><label for="check-taxi-rohtang">Arrange for a comfortable taxi for Rohtang Pass excursion.</label></li>
                     </ul>
                 </div>
             </div>
-            <p style="text-align: center; margin-top: 30px; font-weight: 600;">Enjoy your incredible solo adventure in Moscow!</p>
+
+            <div class="travel-tips">
+                <h4><span class="icon">💡</span> Travel Tips for Manali</h4>
+                <ul>
+                    <li><span class="icon">Altitude:</span> Manali is at a moderate altitude, but Rohtang Pass is very high. Acclimatize and stay hydrated.</li>
+                    <li><span class="icon">Weather:</span> October brings crisp, clear weather but evenings and high altitudes can be very cold. Dress in layers.</li>
+                    <li><span class="icon">Permits:</span> For Rohtang Pass, vehicle permits are often required and can be booked online. Check well in advance.</li>
+                    <li><span class="icon">Local Respect:</span> When visiting temples, dress modestly and remove shoes. Respect local customs.</li>
+                    <li><span class="icon">Bargaining:</span> Don't hesitate to bargain at local markets and for taxi fares (within reason).</li>
+                </ul>
+            </div>
         </section>
     </div>
 
-    <footer id="footer" class="footer">
-        <h3>Moscow Solo Adventure</h3>
-        <p>Your unforgettable journey through the heart of Russia.</p>
-        <p>For inquiries, contact us at <a href="mailto:info@travelplanner.com">info@travelplanner.com</a></p>
-        <button onclick="window.print()" class="btn">🖨️ Print Itinerary</button>
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <h2>Your Manali Adventure Awaits!</h2>
+        <p>This itinerary was crafted to make your romantic escape to Manali unforgettable.</p>
+        <p>For any queries, please contact us at <a href="mailto:info@travelitinerary.com" style="color: white; text-decoration: underline;">info@travelitinerary.com</a></p>
+        <button class="btn" onclick="window.print()"><span class="icon" style="color:white;">🖨️</span> Print Itinerary</button>
     </footer>
 
     <script>
-        // Smooth scroll for internal links (optional, for nav if added)
+        // Smooth scroll for internal links (optional, CSS scroll-behavior handles most)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1078,37 +1138,35 @@
             });
         });
 
-        // Simple calendar add functionality placeholder
+        // Checkbox functionality
+        document.querySelectorAll('.checklist input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    this.closest('li').classList.add('checked');
+                } else {
+                    this.closest('li').classList.remove('checked');
+                }
+            });
+
+            // Initial state check
+            if (checkbox.checked) {
+                checkbox.closest('li').classList.add('checked');
+            }
+        });
+
+        // Add to Calendar functionality (simplified for demonstration)
         document.querySelectorAll('.add-to-calendar-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const day = this.dataset.day;
-                alert(`Day ${day} added to calendar! (This is a placeholder action)`);
-                // In a real application, you'd use a library like 'add-to-calendar-button' or generate .ics files.
-            });
-        });
-
-        // Progress bar animation for budget chart (for visual effect on load)
-        document.addEventListener('DOMContentLoaded', () => {
-            const chartBars = document.querySelectorAll('.budget-chart .chart-bar');
-            chartBars.forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0'; // Reset to 0 for animation
-                setTimeout(() => {
-                    bar.style.width = width; // Animate to target width
-                }, 100); // Small delay to ensure CSS is applied before animation
-            });
-        });
-
-        // Basic Lightbox functionality (Conceptual, requires more robust JS for full features)
-        document.querySelectorAll('.hotel-gallery img').forEach(img => {
-            img.addEventListener('click', function() {
-                alert(`Viewing image: ${this.alt}\n(A full lightbox would open here in a real application)`);
-                // For a true lightbox:
-                // 1. Create an overlay div
-                // 2. Create an img element inside with src from clicked img
-                // 3. Add close button and event listener
-                // 4. Style overlay and image
-                // 5. Append to body, display block
+                alert(`Simulating "Add Day ${day} to Calendar". In a real application, this would open a calendar event creator.`);
+                // Here you would typically implement logic to create an ICS file or link to Google Calendar/Outlook
+                // Example for Google Calendar:
+                // const title = `Manali Trip - Day ${day}`;
+                // const description = `Details for Day ${day} of your Manali trip.`;
+                // const startDate = '20251013T090000'; // Example: Oct 13, 2025 9:00 AM
+                // const endDate = '20251013T180000'; // Example: Oct 13, 2025 6:00 PM
+                // const location = 'Manali';
+                // window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`, '_blank');
             });
         });
     </script>
