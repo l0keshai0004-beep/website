@@ -3,638 +3,578 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grand European Adventure - Travel Itinerary</title>
-    <meta name="description" content="Detailed itinerary for a Grand European Adventure, covering Paris, Rome, and Barcelona.">
-
-    <!-- Google Fonts for modern typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
+    <title>Tokyo Autumn Adventure - Family Itinerary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Base Styles */
+        /* CSS Variables & Global Styles */
         :root {
             --primary-color: #2563eb; /* Blue */
             --secondary-color: #10b981; /* Green */
-            --accent-color: #f59e0b; /* Warm Orange */
+            --accent-color: #f59e0b; /* Orange */
             --text-color: #333;
-            --light-text-color: #555;
-            --background-color: #f8fafc;
-            --card-background: #ffffff;
+            --light-gray: #f8f8f8;
             --border-color: #e2e8f0;
-            --shadow-light: 0 4px 6px rgba(0,0,0,0.08);
+            --shadow-light: 0 4px 6px rgba(0,0,0,0.1);
             --shadow-medium: 0 10px 15px rgba(0,0,0,0.1);
-            --transition-speed: 0.3s;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
+            background-color: var(--light-gray);
             scroll-behavior: smooth;
         }
 
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 0.8em;
+            color: var(--primary-color);
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-top: 1.5em; }
+        h3 { font-size: clamp(1.4rem, 3vw, 2rem); color: var(--secondary-color); }
+        p { margin-bottom: 1em; }
+        a { color: var(--primary-color); text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: var(--accent-color); }
+
+        /* Layout & Containers */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 1.5rem;
         }
 
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            color: var(--primary-color);
-            margin-bottom: 0.7em;
+        section {
+            padding: 4rem 0;
+            margin-bottom: 2rem;
         }
 
-        h1 { font-size: clamp(2rem, 5vw, 3rem); text-align: center; color: var(--text-color); } /* 32-48px */
-        h2 { font-size: clamp(1.75rem, 4vw, 2.25rem); color: var(--primary-color); margin-top: 1.5em; } /* 24-32px */
-        h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); color: var(--primary-color); }
-        h4 { font-size: clamp(1.1rem, 2.5vw, 1.3rem); color: var(--light-text-color); }
-        p { font-size: 1rem; margin-bottom: 1em; } /* 16px */
-        a { color: var(--primary-color); text-decoration: none; transition: color var(--transition-speed); }
-        a:hover { color: var(--accent-color); text-decoration: underline; }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
 
-        /* General Card Styling */
+        /* Cards */
         .card {
-            background: var(--card-background);
+            background: white;
             border-radius: 12px;
             padding: 24px;
             box-shadow: var(--shadow-light);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            margin-bottom: 25px;
-            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             box-shadow: var(--shadow-medium);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
         /* Buttons */
         .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 8px;
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
-            border: none;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background-color: #1e52cc;
-            transform: translateY(-2px);
-            text-decoration: none;
-        }
-        .btn.btn-secondary {
-            background-color: var(--secondary-color);
-        }
-        .btn.btn-secondary:hover {
-            background-color: #0e9a6e;
-        }
-        .btn.btn-accent {
-            background-color: var(--accent-color);
-        }
-        .btn.btn-accent:hover {
-            background-color: #e08e00;
-        }
-
-        /* Icons */
-        .icon {
             display: inline-flex;
             align-items: center;
-            margin-right: 8px;
-            color: var(--secondary-color);
-            font-size: 1.1em;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-decoration: none;
+            border: none;
         }
-        .icon svg {
-            width: 1.2em;
-            height: 1.2em;
-            margin-right: 5px;
-            fill: currentColor;
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
         }
-        .icon-small svg {
-            width: 1em;
-            height: 1em;
+
+        .btn-primary:hover {
+            background-color: #1d4ed8; /* Darker primary */
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #047857; /* Darker secondary */
+            transform: translateY(-2px);
+        }
+
+        .add-to-calendar-btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        .add-to-calendar-btn:hover {
+            background-color: #d97706; /* Darker accent */
         }
 
         /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #60a5fa 100%);
+        #hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1600x600.png?text=Tokyo+Skyline') center/cover no-repeat;
             color: white;
-            padding: 80px 20px;
             text-align: center;
-            border-radius: 0 0 20px 20px;
-            box-shadow: var(--shadow-medium);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 40px;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            animation: pulse 10s infinite alternate;
-        }
-        @keyframes pulse {
-            from { transform: scale(0.9); opacity: 0.8; }
-            to { transform: scale(1.1); opacity: 1; }
+            padding: 8rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
         }
 
-        .hero h1 {
-            color: white;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
+        #hero .hero-content {
+            max-width: 800px;
         }
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        .hero-stats {
+
+        #hero .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 2rem;
+            margin-top: 2rem;
+            font-size: 1.1rem;
             flex-wrap: wrap;
-            margin-top: 30px;
-            position: relative;
-            z-index: 1;
         }
-        .hero-stat-item {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        /* Overview Card */
-        .overview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .overview-item h4 {
-            margin-top: 0;
-            color: var(--light-text-color);
+        #hero .hero-stats span {
             display: flex;
             align-items: center;
+            gap: 0.5rem;
         }
-        .overview-item p {
+        #hero .hero-stats span::before {
+            content: "✨"; /* Unicode icon placeholder */
+            font-size: 1.2em;
+        }
+        #hero .hero-stats span:nth-child(1)::before { content: "📅"; }
+        #hero .hero-stats span:nth-child(2)::before { content: "⏳"; }
+        #hero .hero-stats span:nth-child(3)::before { content: "👪"; }
+
+        /* Overview Card */
+        #overview .grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        #overview .overview-item h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-color);
+            font-size: 1.2rem;
+        }
+        #overview .overview-item h3 span {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        #overview .overview-item p {
             margin-bottom: 0;
+            color: #555;
         }
 
         /* Hotel Section */
-        .hotel-gallery {
-            position: relative;
-            margin-bottom: 20px;
+        #hotel-section {
+            background-color: white;
         }
-        .hotel-gallery-main img {
+        #hotel-section .hotel-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        #hotel-section .hotel-gallery img {
             width: 100%;
-            height: 350px;
+            height: 200px;
             object-fit: cover;
             border-radius: 8px;
-            box-shadow: var(--shadow-light);
             cursor: pointer;
-            transition: transform var(--transition-speed);
+            transition: transform 0.3s ease;
         }
-        .hotel-gallery-main img:hover {
-            transform: scale(1.01);
+        #hotel-section .hotel-gallery img:hover {
+            transform: scale(1.02);
         }
-        .hotel-thumbnails {
+        #hotel-section .hotel-details {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary-color) var(--background-color);
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
         }
-        .hotel-thumbnails img {
-            width: 80px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 5px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: border-color var(--transition-speed);
+        #hotel-section .hotel-info, #hotel-section .hotel-map {
+            flex: 1;
+            min-width: 300px;
         }
-        .hotel-thumbnails img.active {
-            border-color: var(--primary-color);
-        }
-        .hotel-details ul {
+        #hotel-section .hotel-info ul {
             list-style: none;
             padding: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 10px;
-            margin-top: 20px;
+            margin-top: 1rem;
         }
-        .hotel-details ul li {
+        #hotel-section .hotel-info ul li {
             display: flex;
             align-items: center;
-            margin-bottom: 5px;
-            font-size: 0.95rem;
-            color: var(--light-text-color);
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            color: #555;
         }
-        .hotel-details ul li .icon {
-            margin-right: 10px;
+        #hotel-section .hotel-info ul li span {
             color: var(--secondary-color);
+            font-size: 1.2rem;
         }
-        .booking-cta {
-            margin-top: 25px;
+        #hotel-section .hotel-map iframe {
+            width: 100%;
+            height: 300px;
+            border: 0;
+            border-radius: 8px;
+            box-shadow: var(--shadow-light);
+        }
+        #hotel-section .booking-cta {
+            margin-top: 2rem;
             text-align: center;
         }
 
         /* Daily Itinerary */
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-            margin-left: 20px;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 4px;
-            height: 100%;
-            background-color: var(--border-color);
-            border-radius: 2px;
-        }
-        .day-card {
-            background: var(--card-background);
+        #daily-itinerary .day-card {
+            background: white;
             border-radius: 12px;
-            padding: 20px;
+            padding: 24px;
             box-shadow: var(--shadow-light);
-            margin-bottom: 30px;
-            margin-left: 25px; /* Offset for timeline line */
+            margin-bottom: 2rem;
             position: relative;
-            border: 1px solid var(--border-color);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
         }
-        .day-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-medium);
+        #daily-itinerary .day-card:last-child {
+            margin-bottom: 0;
         }
-        .day-card::before { /* Circle on timeline */
-            content: '';
-            position: absolute;
-            left: -37px; /* Position circle on the line */
-            top: 30px;
-            width: 18px;
-            height: 18px;
-            background-color: var(--primary-color);
-            border-radius: 50%;
-            border: 3px solid var(--background-color);
-            box-shadow: 0 0 0 2px var(--primary-color);
-        }
-        .day-card h3 {
-            margin-top: 0;
+        #daily-itinerary .day-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        #daily-itinerary .day-header h3 {
+            margin: 0;
             color: var(--primary-color);
+            font-size: 1.8rem;
         }
-        .day-card h3 .day-number-badge {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 50px;
-            font-size: 0.8em;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-        }
-        .day-theme {
+        #daily-itinerary .day-theme {
             font-style: italic;
-            color: var(--light-text-color);
-            margin-bottom: 15px;
+            color: #777;
+            font-size: 1.1rem;
         }
-        .place-item {
-            margin-bottom: 15px;
-            padding-left: 20px;
+        #daily-itinerary .place-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-left: 10px;
             border-left: 3px solid var(--secondary-color);
             position: relative;
         }
-        .place-item::before {
-            content: '📍'; /* Pin icon */
+        #daily-itinerary .place-item::before {
+            content: "";
             position: absolute;
-            left: -15px;
-            top: 0px;
-            font-size: 1.2em;
+            left: -13px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
         }
-        .place-item h4 {
-            margin-top: 0;
-            margin-bottom: 5px;
-            color: var(--primary-color);
-            font-family: 'Poppins', sans-serif; /* Keep place names readable */
+        #daily-itinerary .place-content {
+            flex: 1;
         }
-        .place-item .activities {
+        #daily-itinerary .place-content h4 {
+            margin-bottom: 0.5em;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        #daily-itinerary .place-content ul {
             list-style: none;
             padding: 0;
-            margin-top: 5px;
+            margin-top: 0.5rem;
+        }
+        #daily-itinerary .place-content ul li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+            color: #555;
+        }
+        #daily-itinerary .place-content ul li span {
+            color: var(--primary-color);
+            font-size: 1em;
+        }
+        #daily-itinerary .day-summary {
+            margin-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-        }
-        .place-item .activities li {
-            background-color: #e0f2fe; /* Light blue */
-            border-radius: 5px;
-            padding: 5px 10px;
-            font-size: 0.9em;
-            display: flex;
-            align-items: center;
-            color: #2563eb;
+            justify-content: space-between;
+            gap: 1rem;
             font-weight: 500;
         }
-        .place-item .activities li svg {
-            margin-right: 5px;
-        }
-        .day-summary-details {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px dashed var(--border-color);
-        }
-        .day-summary-details p {
+        #daily-itinerary .day-summary div {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            color: var(--light-text-color);
+            gap: 0.5rem;
         }
-        .day-summary-details p strong {
-            color: var(--text-color);
+        #daily-itinerary .day-summary div span {
+            color: var(--primary-color);
+            font-size: 1.2em;
         }
-        .add-to-calendar-btn {
-            margin-top: 20px;
-            width: 100%;
+        #daily-itinerary .day-tips {
+            background-color: #fffbe6; /* Light yellow */
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1.5rem;
+            color: #6a4c00;
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+        }
+        #daily-itinerary .day-tips span {
+            font-size: 1.5rem;
+            color: var(--accent-color);
         }
 
         /* Budget Dashboard */
-        .budget-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .budget-summary {
-            background: linear-gradient(45deg, var(--secondary-color), #34d399);
-            color: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: var(--shadow-medium);
+        #budget-dashboard .summary-cards .card {
             text-align: center;
+            padding: 20px;
         }
-        .budget-summary h3 {
-            color: white;
-            margin-bottom: 5px;
+        #budget-dashboard .summary-cards .card h3 {
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-size: 1.1rem;
         }
-        .budget-summary p {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 0;
+        #budget-dashboard .summary-cards .card p {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
         }
-        .progress-bar-container {
-            width: 100%;
-            background-color: #e0e7ff; /* Light primary */
-            border-radius: 10px;
-            height: 12px;
-            overflow: hidden;
-            margin-bottom: 20px;
+        #budget-dashboard .summary-cards .card:nth-child(2) p { color: var(--accent-color); } /* Spent */
+        #budget-dashboard .summary-cards .card:nth-child(3) p { color: var(--secondary-color); } /* Remaining */
+
+        #budget-dashboard .chart-placeholder {
+            background-color: #eee;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            color: #777;
+            font-style: italic;
         }
-        .progress-bar {
-            height: 100%;
-            background-color: var(--primary-color);
-            border-radius: 10px;
-            width: 0%; /* Will be set by JS/inline style */
-            transition: width 1s ease-out;
-        }
-        .expense-table {
+
+        #budget-dashboard .expense-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 1.5rem;
         }
-        .expense-table th, .expense-table td {
-            padding: 12px 15px;
+        #budget-dashboard .expense-table th,
+        #budget-dashboard .expense-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
             text-align: left;
-            border-bottom: 1px solid var(--border-color);
         }
-        .expense-table th {
-            background-color: #f1f5f9; /* Light grey */
+        #budget-dashboard .expense-table th {
+            background-color: var(--primary-color);
+            color: white;
             font-weight: 600;
-            color: var(--light-text-color);
+            text-transform: uppercase;
+            font-size: 0.9rem;
         }
-        .expense-table tr:last-child td {
-            border-bottom: none;
+        #budget-dashboard .expense-table tbody tr:nth-child(even) {
+            background-color: #f6f6f6;
         }
-        .expense-table tbody tr:hover {
-            background-color: #f8fafc;
-        }
-        .total-row td {
+        #budget-dashboard .expense-table tfoot th,
+        #budget-dashboard .expense-table tfoot td {
             font-weight: 700;
-            color: var(--primary-color);
-            background-color: #eef2ff;
+            background-color: var(--light-gray);
+            border-top: 2px solid var(--primary-color);
         }
 
         /* Essentials */
-        .checklist-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+        #essentials .checklist-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .checklist ul {
+        #essentials ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+        #essentials ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: #555;
+        }
+        #essentials ul li input[type="checkbox"] {
+            margin-right: 10px;
+            min-width: 18px;
+            min-height: 18px;
+            accent-color: var(--secondary-color);
+        }
+        #essentials ul li span {
+            margin-right: 8px;
+            color: var(--primary-color);
+            font-size: 1.2em;
+        }
+        #essentials .travel-tips {
+            background-color: #e6f7ff; /* Light blue */
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        #essentials .travel-tips h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        #essentials .travel-tips ul {
             list-style: none;
             padding: 0;
         }
-        .checklist li {
-            margin-bottom: 10px;
+        #essentials .travel-tips ul li {
+            margin-bottom: 0.5rem;
+            color: #444;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            gap: 0.5rem;
         }
-        .checklist li input[type="checkbox"] {
-            margin-right: 10px;
-            width: 20px;
-            height: 20px;
-            accent-color: var(--secondary-color);
-            cursor: pointer;
-        }
-        .travel-tips {
-            padding-left: 20px;
-            border-left: 3px solid var(--accent-color);
-        }
-        .travel-tips p {
-            margin-bottom: 10px;
-        }
-        .travel-tips p strong {
-            color: var(--accent-color);
+        #essentials .travel-tips ul li::before {
+            content: "💡";
+            font-size: 1.2em;
+            margin-top: 2px;
         }
 
         /* Footer */
-        .footer {
-            background-color: #333;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            margin-top: 60px;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
-        }
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .footer p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #ddd;
-        }
-        .footer-links {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .footer-links a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color var(--transition-speed);
-        }
-        .footer-links a:hover {
-            color: var(--accent-color);
-            text-decoration: underline;
-        }
-        .print-btn {
-            margin-top: 25px;
-            background-color: var(--accent-color);
-        }
-        .print-btn:hover {
-            background-color: #e08e00;
-        }
-
-        /* Lightbox for Images */
-        .lightbox {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
-            justify-content: center;
-            align-items: center;
-        }
-        .lightbox-content {
-            margin: auto;
-            display: block;
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .lightbox-close:hover,
-        .lightbox-close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Sticky Navigation (Simple for now) */
-        .sticky-nav {
-            position: sticky;
-            top: 0;
-            background-color: var(--card-background);
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: var(--shadow-light);
-            z-index: 500;
-            transition: background-color var(--transition-speed);
-        }
-        .sticky-nav nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-        .sticky-nav nav a {
-            font-weight: 600;
-            color: var(--light-text-color);
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: background-color var(--transition-speed), color var(--transition-speed);
-        }
-        .sticky-nav nav a:hover,
-        .sticky-nav nav a.active {
+        footer {
             background-color: var(--primary-color);
             color: white;
-            text-decoration: none;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        footer .footer-nav a {
+            color: white;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+        footer .footer-nav a:hover {
+            color: var(--accent-color);
+        }
+        footer p {
+            margin-top: 1rem;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        footer .print-btn {
+            background-color: var(--secondary-color);
+            margin-top: 1.5rem;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        footer .print-btn:hover {
+            background-color: #047857;
         }
 
-        /* Responsive Design */
+        /* Icons (Unicode) */
+        .icon-map::before { content: "📍"; }
+        .icon-money::before { content: "💰"; }
+        .icon-activity::before { content: "✨"; }
+        .icon-time::before { content: "⏰"; }
+        .icon-bed::before { content: "🏨"; }
+        .icon-wifi::before { content: "📶"; }
+        .icon-kitchen::before { content: "🍳"; }
+        .icon-family::before { content: "👨‍👩‍👧‍👦"; }
+        .icon-calendar::before { content: "🗓️"; }
+        .icon-duration::before { content: "⏳"; }
+        .icon-destination::before { content: "🗺️"; }
+        .icon-type::before { content: "✈️"; }
+        .icon-highlights::before { content: "🌟"; }
+        .icon-route::before { content: "🚗"; }
+        .icon-distance::before { content: "📏"; }
+        .icon-warning::before { content: "⚠️"; }
+        .icon-check::before { content: "✅"; }
+        .icon-passport::before { content: "🛂"; }
+        .icon-plane::before { content: "✈️"; }
+        .icon-luggage::before { content: "🎒"; }
+        .icon-clothes::before { content: "👚"; }
+        .icon-personal::before { content: "💧"; }
+        .icon-gear::before { content: "⚙️"; }
+        .icon-children::before { content: "👶"; }
+        .icon-document::before { content: "📄"; }
+        .icon-total::before { content: "📊"; }
+        .icon-spent::before { content: "💸"; }
+        .icon-remaining::before { content: "✅"; }
+
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 1rem;
             }
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 1.8rem; }
-            .hero { padding: 60px 15px; }
-            .hero-stats { flex-direction: column; align-items: center; }
-            .overview-grid, .budget-grid, .checklist-grid {
+            #hero {
+                padding: 5rem 1rem;
+            }
+            #hero .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .grid {
                 grid-template-columns: 1fr;
             }
-            .hotel-gallery-main img { height: 250px; }
-            .hotel-thumbnails img { width: 70px; height: 50px; }
-            .timeline::before { left: 10px; }
-            .day-card { margin-left: 35px; padding: 15px; }
-            .day-card::before { left: -30px; top: 20px; }
-            .day-card h3 { flex-direction: column; align-items: flex-start; gap: 5px; }
-            .day-card h3 .day-number-badge { margin-bottom: 5px; }
-            .place-item { padding-left: 15px; border-left: 2px solid var(--secondary-color); }
-            .place-item::before { left: -12px; font-size: 1em; }
-            .expense-table th, .expense-table td { padding: 10px; font-size: 0.9rem; }
-            .sticky-nav nav ul { gap: 10px; }
-        }
+            .section-header {
+                margin-bottom: 2rem;
+            }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
 
-        @media (max-width: 480px) {
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.5rem; }
-            .hero { padding: 40px 10px; }
-            .hero p { font-size: 1rem; }
-            .btn { padding: 8px 15px; font-size: 0.9rem; }
-            .footer-links { flex-direction: column; }
+            #daily-itinerary .day-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            #daily-itinerary .day-header h3 {
+                font-size: 1.5rem;
+            }
+            #daily-itinerary .day-theme {
+                font-size: 1rem;
+            }
+            #daily-itinerary .day-summary {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .hotel-details {
+                flex-direction: column;
+            }
         }
 
         /* Print Styles */
@@ -642,586 +582,568 @@
             body {
                 background-color: white;
                 color: black;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+                font-size: 12pt;
+                -webkit-print-color-adjust: exact; /* For background colors */
             }
-            .container {
-                padding: 0;
-            }
-            .hero, .sticky-nav, .footer, .add-to-calendar-btn, .btn.print-btn, .hotel-thumbnails, .lightbox {
+            header, footer, .add-to-calendar-btn, .btn, .booking-cta {
                 display: none !important;
             }
-            .card, .day-card {
+            .container {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+            }
+            section {
+                padding: 1rem 0.5rem;
+                margin-bottom: 1rem;
+                page-break-inside: avoid;
+            }
+            .card {
                 box-shadow: none;
                 border: 1px solid #ccc;
-                page-break-inside: avoid;
-                margin-bottom: 20px;
+                border-radius: 0;
+                padding: 15px;
+                margin-bottom: 1rem;
             }
-            h1, h2, h3, h4 {
+            #hero {
+                background: none;
+                color: black;
+                padding: 1rem 0;
+                text-align: left;
+                min-height: auto;
+            }
+            #hero h1 {
+                color: var(--primary-color);
+                text-shadow: none;
+                font-size: 2rem;
+            }
+            #hero .hero-stats {
+                justify-content: flex-start;
+                gap: 1rem;
+                flex-wrap: nowrap;
+            }
+            #hero .hero-stats span {
+                font-size: 0.9em;
+            }
+            #hero .hero-stats span::before {
+                font-size: 1em;
+            }
+            h2, h3 {
                 color: #333 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            a {
-                color: #000 !important;
-                text-decoration: underline !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .timeline::before {
-                background-color: #ccc;
-            }
-            .day-card::before {
-                background-color: #555 !important;
-                border-color: white !important;
-                box-shadow: 0 0 0 2px #555 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .place-item {
-                border-left-color: #888 !important;
-            }
-            .activities li {
-                background-color: #f0f0f0 !important;
-                color: #555 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .budget-summary {
-                background: #f0f0f0 !important;
-                color: #333 !important;
-                border: 1px solid #ccc;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .progress-bar-container {
-                background-color: #eee;
-            }
-            .progress-bar {
-                background-color: #aaa !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+                margin-top: 1em;
+                font-size: 1.4rem;
             }
             .expense-table th {
-                background-color: #e0e0e0 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .total-row td {
-                background-color: #e0e0e0 !important;
+                background-color: #eee !important;
                 color: #333 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+                border-color: #ccc;
+            }
+            .hotel-gallery img {
+                width: 150px; /* Smaller images for print */
+                height: auto;
+                float: left;
+                margin-right: 10px;
+                margin-bottom: 10px;
+            }
+            .hotel-map iframe {
+                height: 200px;
+                page-break-before: always; /* Ensure map starts on new page if necessary */
+            }
+            .place-item {
+                border-left: 1px dashed #ccc;
+            }
+            .day-tips, #essentials .travel-tips {
+                background-color: #f0f0f0 !important;
+                border-color: #ccc !important;
             }
         }
     </style>
 </head>
 <body>
-    <!-- SVG Icon Definitions (Commonly used icons) -->
-    <svg style="display: none;">
-        <symbol id="icon-duration" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></symbol>
-        <symbol id="icon-calendar" viewBox="0 0 24 24"><path d="M19 4h-2V3c0-.55-.45-1-1-1s-1 .45-1 1v1H8V3c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM5 7V6h14v1H5z"/></symbol>
-        <symbol id="icon-location" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></symbol>
-        <symbol id="icon-group" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></symbol>
-        <symbol id="icon-trip" viewBox="0 0 24 24"><path d="M21 16v-2h-3V6.25c0-.96-.79-1.75-1.75-1.75S14.5 5.29 14.5 6.25V14h-3V3H8v11H5V3H3v13c0 2.21 1.79 4 4 4h9v2h-1v-2h2v-2h3zm-8-2v-4.5h3.5l1.5-1.5V14h-5z"/></symbol>
-        <symbol id="icon-highlight" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></symbol>
-        <symbol id="icon-price" viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.2-1.85 1.28 0 2.33.78 2.33 1.93h2.15c0-2.32-1.92-3.84-4.33-3.84-2.5 0-4.37 1.48-4.37 3.66 0 2.05 1.63 3.1 4.5 3.86 2.53.64 3.37 1.24 3.37 2.31 0 1.09-1.08 1.9-2.35 1.9-1.6 0-2.83-.96-2.9-2.15H6.25c.08 2.33 2.15 3.93 4.45 3.93 2.55 0 4.54-1.57 4.54-3.79 0-2.29-1.75-3.19-4.74-3.9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></symbol>
-        <symbol id="icon-wifi" viewBox="0 0 24 24"><path d="M12 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-4c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0-4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0-4C5.93 2 2 5.93 2 12s3.93 10 10 10 10-3.93 10-10S18.07 2 12 2z"/></symbol>
-        <symbol id="icon-food" viewBox="0 0 24 24"><path d="M19 10h-2V7c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v3H3c-1.1 0-2 .9-2 2v5h22v-5c0-1.1-.9-2-2-2zm-9 9H7v-3h3v3zm4 0h-3v-3h3v3zm4 0h-3v-3h3v3zM6.5 10c-.83 0-1.5-.67-1.5-1.5S5.67 7 6.5 7s1.5.67 1.5 1.5S7.33 10 6.5 10zm11 0c-.83 0-1.5-.67-1.5-1.5S16.67 7 17.5 7s1.5.67 1.5 1.5S18.33 10 17.5 10z"/></symbol>
-        <symbol id="icon-fitness" viewBox="0 0 24 24"><path d="M17 5H7c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-2.5 4c-.83 0-1.5-.67-1.5-1.5S13.67 6 14.5 6s1.5.67 1.5 1.5S15.33 9 14.5 9zM12 17.5c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></symbol>
-        <symbol id="icon-spa" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></symbol>
-        <symbol id="icon-bar" viewBox="0 0 24 24"><path d="M22 10V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v4c1.1 0 2 .9 2 2s-.9 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-4 6H6v-4h12v4zm0-6H6V6h12v4z"/></symbol>
-        <symbol id="icon-map" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></symbol>
-        <symbol id="icon-restaurant" viewBox="0 0 24 24"><path d="M16 6c0-2.21-1.79-4-4-4S8 3.79 8 6H6v16h12V6h-2zm-2 14h-4v-4h4v4zm0-6h-4V6c0-.55.45-1 1-1h2c.55 0 1 .45 1 1v8z"/></symbol>
-        <symbol id="icon-camera" viewBox="0 0 24 24"><path d="M14.43 10L12 6.27 9.57 10H5l4.57 3.64L7.88 18 12 15.3l4.12 2.7L14.43 13.64 19 10z"/></symbol>
-        <symbol id="icon-museum" viewBox="0 0 24 24"><path d="M6 16.5l6-3.75 6 3.75V2h-12v14.5zM12 14.19l-4.5-2.81V5.09l4.5 2.81 4.5-2.81v6.29l-4.5 2.81zM19 17H5v2h14v-2zM19 21H5v2h14v-2z"/></symbol>
-        <symbol id="icon-tour" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></symbol>
-        <symbol id="icon-shoes" viewBox="0 0 24 24"><path d="M21 16v-2h-3V6.25c0-.96-.79-1.75-1.75-1.75S14.5 5.29 14.5 6.25V14h-3V3H8v11H5V3H3v13c0 2.21 1.79 4 4 4h9v2h-1v-2h2v-2h3zm-8-2v-4.5h3.5l1.5-1.5V14h-5z"/></symbol>
-        <symbol id="icon-money" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.25 15.25L13 15v2h-2v-2H9v-2h4V7.75l2.25 2.25L16 9v2h2v2h-2v2h2v2h-2.75z"/></symbol>
-        <symbol id="icon-tips" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></symbol>
-        <symbol id="icon-route" viewBox="0 0 24 24"><path d="M12 18.5c-3.59 0-6.5-2.91-6.5-6.5 0-3.1 2.37-5.65 5.43-6.33L12 2h2v4.06c4.68.83 8 4.75 8 9.44 0 3.59-2.91 6.5-6.5 6.5zM10 4.5l-2 2h4l-2-2zM12 20.5c-2.48 0-4.5-2.02-4.5-4.5s2.02-4.5 4.5-4.5 4.5 2.02 4.5 4.5-2.02 4.5-4.5 4.5z"/></symbol>
-        <symbol id="icon-distance" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 11.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 8.5 12 8.5s2.5 1.12 2.5 2.5S13.38 13.5 12 13.5z"/></symbol>
-        <symbol id="icon-budget" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.25 15.25L13 15v2h-2v-2H9v-2h4V7.75l2.25 2.25L16 9v2h2v2h-2v2h2v2h-2.75z"/></symbol>
-        <symbol id="icon-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></symbol>
-    </svg>
 
-    <!-- Sticky Navigation -->
-    <div class="sticky-nav">
-        <div class="container">
-            <nav>
-                <ul>
-                    <li><a href="#hero" class="nav-link active">Home</a></li>
-                    <li><a href="#overview" class="nav-link">Overview</a></li>
-                    <li><a href="#hotel" class="nav-link">Hotel</a></li>
-                    <li><a href="#itinerary" class="nav-link">Itinerary</a></li>
-                    <li><a href="#budget" class="nav-link">Budget</a></li>
-                    <li><a href="#essentials" class="nav-link">Essentials</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <header id="hero" class="hero">
-        <div class="container">
-            <h1>Grand European Adventure</h1>
-            <p>Unforgettable Journey Through Paris, Rome & Barcelona</p>
-            <div class="hero-stats">
-                <div class="hero-stat-item">
-                    <span class="icon"><svg><use href="#icon-calendar"></use></svg></span>
-                    Dates: Aug 1 - Aug 10, 2024
-                </div>
-                <div class="hero-stat-item">
-                    <span class="icon"><svg><use href="#icon-duration"></use></svg></span>
-                    Duration: 10 Days
-                </div>
-                <div class="hero-stat-item">
-                    <span class="icon"><svg><use href="#icon-trip"></use></svg></span>
-                    3 Countries, 5 Cities, 20+ Activities
-                </div>
-            </div>
-        </div>
+    <header>
+        <!-- A sticky navigation could go here, but for a single-page itinerary, anchor links are simpler -->
     </header>
 
-    <main class="container">
-        <!-- Overview Card -->
-        <section id="overview" class="card">
-            <h2><span class="icon"><svg><use href="#icon-highlight"></use></svg></span>Trip Overview</h2>
-            <div class="overview-grid">
-                <div class="overview-item">
-                    <h4><span class="icon icon-small"><svg><use href="#icon-location"></use></svg></span>Destination</h4>
-                    <p>Europe (Paris, Rome, Barcelona)</p>
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Tokyo Autumn Adventure</h1>
+                <p>Experience the vibrant culture and breathtaking sights of Tokyo with your family!</p>
+                <div class="hero-stats">
+                    <span>October 13 - 17, 2025</span>
+                    <span>5 Days, 4 Nights</span>
+                    <span>2 Adults, 2 Children (7 & 12)</span>
                 </div>
-                <div class="overview-item">
-                    <h4><span class="icon icon-small"><svg><use href="#icon-group"></use></svg></span>Companions</h4>
-                    <p>John & Jane Doe</p>
+            </div>
+        </section>
+
+        <!-- Overview Card Section -->
+        <section id="overview" class="container">
+            <h2 class="section-header">Trip at a Glance</h2>
+            <div class="grid">
+                <div class="card overview-item">
+                    <h3><span class="icon-destination"></span>Destination</h3>
+                    <p>Tokyo, Japan</p>
                 </div>
-                <div class="overview-item">
-                    <h4><span class="icon icon-small"><svg><use href="#icon-trip"></use></svg></span>Trip Type</h4>
-                    <p>Romantic Getaway & Cultural Exploration</p>
+                <div class="card overview-item">
+                    <h3><span class="icon-family"></span>Companions</h3>
+                    <p>Family of 4 (2 Adults, 2 Children)</p>
                 </div>
-                <div class="overview-item">
-                    <h4><span class="icon icon-small"><svg><use href="#icon-highlight"></use></svg></span>Highlights</h4>
-                    <p>Eiffel Tower, Colosseum, Sagrada Familia, Authentic Cuisine, Vibrant Nightlife</p>
+                <div class="card overview-item">
+                    <h3><span class="icon-type"></span>Trip Type</h3>
+                    <p>Cultural Immersion & Theme Park Fun</p>
+                </div>
+                <div class="card overview-item">
+                    <h3><span class="icon-highlights"></span>Highlights</h3>
+                    <p>Akihabara, Shibuya, Harajuku, Imperial Palace, Ueno Park, Tokyo DisneySea</p>
                 </div>
             </div>
         </section>
 
         <!-- Hotel Section -->
-        <section id="hotel" class="card">
-            <h2><span class="icon"><svg><use href="#icon-location"></use></svg></span>Accommodation: Hotel Le Littré, Paris</h2>
-            <div class="hotel-gallery">
-                <div class="hotel-gallery-main">
-                    <img src="https://images.unsplash.com/photo-1549444358-0051e94119d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMzZ8MHwxfHNlYXJjaHwxfHxBcmNoaXRlY3R1cmV8ZW58MHwwfHx8MTcxODE5NzY2MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Hotel Lobby - Luxurious entrance of Hotel Le Littré" loading="lazy" class="active-image">
-                </div>
-                <div class="hotel-thumbnails">
-                    <img src="https://images.unsplash.com/photo-1549444358-0051e94119d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMzZ8MHwxfHNlYXJjaHwxfHxBcmNoaXRlY3R1cmV8ZW58MHwwfHx8MTcxODE5NzY2MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Hotel Lobby Thumbnail" loading="lazy" class="active">
-                    <img src="https://images.unsplash.com/photo-1563911302821-39626e2a2977?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMzZ8MHwxfHNlYXJjaHwxfHxIb3RlbCUyMFJvb218ZW58MHwwfHx8MTcxODE5NzU5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Hotel Room Thumbnail" loading="lazy">
-                    <img src="https://images.unsplash.com/photo-1544609204-ed779ff100b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMzZ8MHwxfHNlYXJjaHwxfHxIb3RlbCUyMFJvb218ZW58MHwwfHx8MTcxODE5NzU5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Hotel Bathroom Thumbnail" loading="lazy">
-                    <img src="https://images.unsplash.com/photo-1562791465-ee441113b2ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMzZ8MHwxfHxIb3RlbCUyMEZvb2R8ZW58MHwwfHx8MTcxODE5NzU5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Hotel Restaurant Thumbnail" loading="lazy">
-                    <img src="https://via.placeholder.com/80x60?text=Hotel+Exterior" alt="Hotel Exterior (Placeholder)" loading="lazy">
-                </div>
-            </div>
-            <div class="hotel-details">
-                <h3>Hotel Le Littré</h3>
-                <p><strong>Location:</strong> 20 Rue de Sèvres, 75006 Paris, France</p>
-                <p>
-                    <a href="https://google.com/maps?q=48.8473,2.3276" target="_blank" class="btn btn-secondary btn-small">
-                        <span class="icon"><svg><use href="#icon-map"></use></svg></span> View on Map
-                    </a>
-                </p>
-                <p><strong>Pricing:</strong> €250/night</p>
-                <h4>Amenities:</h4>
-                <ul>
-                    <li><span class="icon"><svg><use href="#icon-wifi"></use></svg></span>Free Wi-Fi</li>
-                    <li><span class="icon"><svg><use href="#icon-food"></use></svg></span>Breakfast Included</li>
-                    <li><span class="icon"><svg><use href="#icon-fitness"></use></svg></span>Fitness Center</li>
-                    <li><span class="icon"><svg><use href="#icon-spa"></use></svg></span>Spa Services</li>
-                    <li><span class="icon"><svg><use href="#icon-bar"></use></svg></span>Hotel Bar</li>
-                </ul>
-                <div class="booking-cta">
-                    <a href="https://www.booking.com/hotel/fr/le-littre.en.html" target="_blank" class="btn btn-accent">
-                        Book Your Stay Now!
-                    </a>
-                </div>
-            </div>
-        </section>
+        <section id="hotel-section">
+            <div class="container">
+                <h2 class="section-header">Your Home Away From Home</h2>
+                <div class="card">
+                    <h3><span class="icon-bed"></span>MONday Apart Premium AKIHABARA</h3>
+                    <p>Experience comfort and convenience in the heart of Tokyo's electric town.</p>
 
-        <!-- Daily Itinerary -->
-        <section id="itinerary" class="card">
-            <h2><span class="icon"><svg><use href="#icon-calendar"></use></svg></span>Daily Itinerary</h2>
-            <div class="timeline">
-                <!-- Day 1 -->
-                <div class="day-card">
-                    <h3 class="day-header">
-                        <span class="day-number-badge">Day 1</span>
-                        Eiffel Tower, Louvre - Paris
-                    </h3>
-                    <p class="day-theme">🗓️ Day 1 - Parisian Icons</p>
-                    <h4>📍 Places:</h4>
-                    <div class="place-item">
-                        <h4>1. Eiffel Tower (9:00 AM - 12:00 PM)</h4>
-                        <p>Ascend to the top for breathtaking panoramic views of Paris. Don't miss the Champ de Mars.</p>
-                        <ul class="activities">
-                            <li><span class="icon icon-small"><svg><use href="#icon-camera"></use></svg></span>Photography</li>
-                            <li><span class="icon icon-small"><svg><use href="#icon-location"></use></svg></span>Observation Deck</li>
-                            <li><span class="icon icon-small"><svg><use href="#icon-food"></use></svg></span>Picnic Nearby</li>
-                        </ul>
-                        <p>Budget: €30</p>
-                        <p><a href="https://google.com/maps?q=48.8584,2.2945" target="_blank">Map: 48.8584,2.2945</a></p>
+                    <div class="hotel-gallery">
+                        <img src="https://via.placeholder.com/400x250.png?text=Hotel+Room+1" alt="Spacious hotel room with modern decor" loading="lazy">
+                        <img src="https://via.placeholder.com/400x250.png?text=Hotel+Exterior" alt="Modern hotel building exterior" loading="lazy">
+                        <img src="https://via.placeholder.com/400x250.png?text=Hotel+Lobby" alt="Inviting hotel lobby area" loading="lazy">
+                        <img src="https://via.placeholder.com/400x250.png?text=Hotel+Kitchenette" alt="Convenient kitchenette in apartment style room" loading="lazy">
                     </div>
-                    <div class="place-item">
-                        <h4>2. Louvre Museum (2:00 PM - 6:00 PM)</h4>
-                        <p>Explore world-renowned masterpieces like the Mona Lisa and Venus de Milo in this historic palace.</p>
-                        <ul class="activities">
-                            <li><span class="icon icon-small"><svg><use href="#icon-museum"></use></svg></span>Art Viewing</li>
-                            <li><span class="icon icon-small"><svg><use href="#icon-tour"></use></svg></span>Museum Tour</li>
-                            <li><span class="icon icon-small"><svg><use href="#icon-money"></use></svg></span>Gift Shop</li>
-                        </ul>
-                        <p>Budget: €22</p>
-                        <p><a href="https://google.com/maps?q=48.8606,2.3376" target="_blank">Map: 48.8606,2.3376</a></p>
-                    </div>
-                    <div class="day-summary-details">
-                        <p><span class="icon"><svg><use href="#icon-route"></use></svg></span><strong>Route:</strong> Metro Line 9 from Eiffel Tower area to Louvre-Rivoli.</p>
-                        <p><span class="icon"><svg><use href="#icon-distance"></use></svg></span><strong>Distance:</strong> Approx. 3 km</p>
-                        <p><span class="icon"><svg><use href="#icon-budget"></use></svg></span><strong>Budget:</strong> €100 (transport, food, entrance fees)</p>
-                        <p><span class="icon"><svg><use href="#icon-tips"></use></svg></span><strong>Tips:</strong> Book Eiffel Tower and Louvre tickets in advance to avoid long queues. Wear comfortable shoes!</p>
-                    </div>
-                    <button class="add-to-calendar-btn btn" data-day="1" data-title="Grand European Adventure - Day 1: Paris" data-location="Eiffel Tower, Paris" data-start="2024-08-01T09:00:00" data-end="2024-08-01T18:00:00" data-description="Explore Eiffel Tower and Louvre Museum in Paris.">
-                        <span class="icon"><svg><use href="#icon-calendar"></use></svg></span>Add Day 1 to Calendar
-                    </button>
-                </div>
 
-                <!-- Day 2 -->
-                <div class="day-card">
-                    <h3 class="day-header">
-                        <span class="day-number-badge">Day 2</span>
-                        Colosseum, Vatican City - Rome
-                    </h3>
-                    <p class="day-theme">🗓️ Day 2 - Ancient & Holy Rome</p>
-                    <h4>📍 Places:</h4>
-                    <div class="place-item">
-                        <h4>1. Colosseum & Roman Forum (9:00 AM - 1:00 PM)</h4>
-                        <p>Immerse yourself in the gladiatorial history of ancient Rome and explore the ruins of its political center.</p>
-                        <ul class="activities">
-                            <li><span class="icon icon-small"><svg><use href="#icon-tour"></use></svg></span>Guided Tour</li>
-                            <li><span class="icon icon-small"><svg><use href="#icon-museum"></use></svg></span>Historical Exploration</li>
-                            <li><span class="icon icon-small"><svg><use href="#icon-camera"></use></svg></span>Photography</li>
-                        </ul>
-                        <p>Budget: €25</p>
-                        <p><a href="https://google.com/maps?q=41.8902,12.4922" target="_blank">Map: 41.8902,12.4922</a></p>
+                    <div class="hotel-details">
+                        <div class="hotel-info">
+                            <h4>Hotel Details</h4>
+                            <ul>
+                                <li><span class="icon-map"></span><strong>Location:</strong> Akihabara, Tokyo, Japan</li>
+                                <li><span class="icon-money"></span><strong>Cost:</strong> ¥24,750 per night × 4 nights = ¥99,000</li>
+                                <li><span class="icon-check"></span><strong>Amenities:</strong>
+                                    <ul>
+                                        <li><span class="icon-kitchen"></span>Fully equipped kitchenette</li>
+                                        <li><span class="icon-wifi"></span>Free Wi-Fi</li>
+                                        <li><span class="icon-family"></span>Family-friendly rooms</li>
+                                        <li><span class="icon-plane"></span>Easy access to public transport</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="hotel-map">
+                            <h4>Location Map</h4>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.739722749449!2d139.77122131525997!3d35.70014798018861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188c1c4f52f3f1%3A0xc3b5e4c6b5e0c6e9!2sMONday%20Apart%20Premium%20AKIHABARA!5e0!3m2!1sen!2sjp!4v1678901234567!5m2!1sen!2sjp"
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                                title="Map of MONday Apart Premium AKIHABARA">
+                            </iframe>
+                        </div>
                     </div>
-                    <div class="place-item">
-                        <h4>2. Vatican City (2:30 PM - 6:30 PM)</h4>
-                        <p>Visit St. Peter's Basilica and the Vatican Museums, home to the Sistine Chapel.</p>
-                        <ul class="activities">
-                            <li><span class="icon icon-small"><svg><use href="#icon-museum"></use></svg></span>Basilica Visit</li>
-                            <li><span class="icon icon-small"><svg><use href="#icon-tour"></use></svg></span>Museum Tour</li>
-                            <li><span class="icon icon-small"><svg><use href="#icon-highlight"></use></svg></span>Sistine Chapel</li>
-                        </ul>
-                        <p>Budget: €30</p>
-                        <p><a href="https://google.com/maps?q=41.9029,12.4534" target="_blank">Map: 41.9029,12.4534</a></p>
+                    <div class="booking-cta">
+                        <a href="https://example.com/hotel-booking" class="btn btn-primary" target="_blank">Book Your Stay Now</a>
                     </div>
-                    <div class="day-summary-details">
-                        <p><span class="icon"><svg><use href="#icon-route"></use></svg></span><strong>Route:</strong> Metro Line B from Colosseum to Termini, then Metro Line A to Ottaviano for Vatican.</p>
-                        <p><span class="icon"><svg><use href="#icon-distance"></use></svg></span><strong>Distance:</strong> Approx. 5 km</p>
-                        <p><span class="icon"><svg><use href="#icon-budget"></use></svg></span><strong>Budget:</strong> €120</p>
-                        <p><span class="icon"><svg><use href="#icon-tips"></use></svg></span><strong>Tips:</strong> Dress modestly for Vatican City (covered shoulders and knees). Book Vatican tickets ahead!</p>
-                    </div>
-                    <button class="add-to-calendar-btn btn" data-day="2" data-title="Grand European Adventure - Day 2: Rome" data-location="Colosseum, Rome" data-start="2024-08-02T09:00:00" data-end="2024-08-02T18:00:00" data-description="Explore the Colosseum, Roman Forum, and Vatican City in Rome.">
-                        <span class="icon"><svg><use href="#icon-calendar"></use></svg></span>Add Day 2 to Calendar
-                    </button>
-                </div>
-
-                <!-- Day 3 -->
-                <div class="day-card">
-                    <h3 class="day-header">
-                        <span class="day-number-badge">Day 3</span>
-                        Sagrada Familia, Gothic Quarter - Barcelona
-                    </h3>
-                    <p class="day-theme">🗓️ Day 3 - Catalan Modernism & History</p>
-                    <h4>📍 Places:</h4>
-                    <div class="place-item">
-                        <h4>1. Sagrada Familia (9:30 AM - 12:30 PM)</h4>
-                        <p>Marvel at Gaudi's unfinished masterpiece, a breathtaking basilica unlike any other.</p>
-                        <ul class="activities">
-                            <li><span class="icon icon-small"><svg><use href="#icon-museum"></use></svg></span>Interior Visit</li>
-                            <li><span class="icon icon-small"><svg><use href="#icon-highlight"></use></svg></span>Architectural Appreciation</li>
-                            <li><span class="icon icon-small"><svg><use href="#icon-money"></use></svg></span>Gift Shop</li>
-                        </ul>
-                        <p>Budget: €30</p>
-                        <p><a href="https://google.com/maps?q=41.4036,2.1744" target="_blank">Map: 41.4036,2.1744</a></p>
-                    </div>
-                    <div class="place-item">
-                        <h4>2. Gothic Quarter (2:00 PM - 5:00 PM)</h4>
-                        <p>Wander through the labyrinthine streets of Barcelona's oldest neighborhood, rich with history and charm.</p>
-                        <ul class="activities">
-                            <li><span class="icon icon-small"><svg><use href="#icon-location"></use></svg></span>Explore Cathedral</li>
-                            <li><span class="icon icon-small"><svg><use href="#icon-money"></use></svg></span>Boutique Shopping</li>
-                            <li><span class="icon icon-small"><svg><use href="#icon-camera"></use></svg></span>Photography</li>
-                        </ul>
-                        <p>Budget: €0 (exploring)</p>
-                        <p><a href="https://google.com/maps?q=41.3826,2.1764" target="_blank">Map: 41.3826,2.1764</a></p>
-                    </div>
-                    <div class="day-summary-details">
-                        <p><span class="icon"><svg><use href="#icon-route"></use></svg></span><strong>Route:</strong> Metro Line L5 from Sagrada Familia to Diagonal, then L3 to Liceu for Gothic Quarter.</p>
-                        <p><span class="icon"><svg><use href="#icon-distance"></use></svg></span><strong>Distance:</strong> Approx. 2 km</p>
-                        <p><span class="icon"><svg><use href="#icon-budget"></use></svg></span><strong>Budget:</strong> €90</p>
-                        <p><span class="icon"><svg><use href="#icon-tips"></use></svg></span><strong>Tips:</strong> Reserve Sagrada Familia tickets well in advance. Wear comfortable shoes for walking the narrow streets of the Gothic Quarter.</p>
-                    </div>
-                    <button class="add-to-calendar-btn btn" data-day="3" data-title="Grand European Adventure - Day 3: Barcelona" data-location="Sagrada Familia, Barcelona" data-start="2024-08-03T09:30:00" data-end="2024-08-03T17:00:00" data-description="Visit Sagrada Familia and explore the Gothic Quarter in Barcelona.">
-                        <span class="icon"><svg><use href="#icon-calendar"></use></svg></span>Add Day 3 to Calendar
-                    </button>
                 </div>
             </div>
         </section>
 
-        <!-- Budget Dashboard -->
-        <section id="budget" class="card">
-            <h2><span class="icon"><svg><use href="#icon-money"></use></svg></span>Budget Dashboard</h2>
-            <div class="budget-grid">
-                <div class="budget-summary">
-                    <h3>Total Trip Budget</h3>
-                    <p>€2000</p>
+        <!-- Daily Itinerary Section -->
+        <section id="daily-itinerary" class="container">
+            <h2 class="section-header">Your Daily Adventure Plan</h2>
+
+            <!-- Day 1 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <h3>Day 1: Akihabara Exploration - Tokyo</h3>
+                    <p class="day-theme">🗓️ Electric Town & Anime Culture</p>
+                </div>
+                <div class="place-item">
+                    <div class="place-content">
+                        <h4>Akihabara Electric Town (9:00 AM - 6:00 PM)</h4>
+                        <p>Dive into the world of Japanese electronics, anime, manga, and gaming. Explore multi-story department stores, maid cafes, and themed shops.</p>
+                        <ul>
+                            <li><span class="icon-activity"></span><strong>Activities:</strong> Browse electronics, visit anime stores (Mandarake, Animate), play arcade games, experience a maid cafe (optional).</li>
+                            <li><span class="icon-money"></span><strong>Budget:</strong> ¥2,000 (activities), ¥1,000 (transportation), ¥10,000 (meals)</li>
+                            <li><span class="icon-map"></span><strong>Map:</strong> <a href="https://google.com/maps?q=35.6997,139.7735" target="_blank">Akihabara Station</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="day-summary">
+                    <div><span class="icon-route"></span>Route: Local exploration around Akihabara.</div>
+                    <div><span class="icon-distance"></span>Distance: ~3 km walking</div>
+                    <div><span class="icon-money"></span>Daily Budget: ¥13,000</div>
+                </div>
+                <div class="day-tips"><span class="icon-warning"></span><strong>Tips:</strong> Akihabara is best explored on foot. Many shops offer duty-free for tourists. Keep an eye out for unique souvenirs.</div>
+                <button class="add-to-calendar-btn" data-day="1">📅 Add Day 1 to Calendar</button>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <h3>Day 2: Shibuya & Harajuku Immersion - Tokyo</h3>
+                    <p class="day-theme">🗓️ Fashion, Pop Culture & Iconic Crossings</p>
+                </div>
+                <div class="place-item">
+                    <div class="place-content">
+                        <h4>Shibuya Crossing & Hachiko Statue (9:00 AM - 12:00 PM)</h4>
+                        <p>Experience the world's busiest pedestrian intersection and pay respects to the loyal Hachiko dog statue.</p>
+                        <ul>
+                            <li><span class="icon-activity"></span><strong>Activities:</strong> Witness the crossing, take photos, visit Shibuya 109, enjoy a view from Shibuya Sky.</li>
+                            <li><span class="icon-map"></span><strong>Map:</strong> <a href="https://google.com/maps?q=35.6591,139.7037" target="_blank">Shibuya Crossing</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="place-item">
+                    <div class="place-content">
+                        <h4>Meiji Jingu Shrine & Harajuku (1:00 PM - 6:00 PM)</h4>
+                        <p>Find tranquility at the grand Meiji Jingu Shrine, then dive into the quirky fashion and culture of Takeshita Street.</p>
+                        <ul>
+                            <li><span class="icon-activity"></span><strong>Activities:</strong> Explore the shrine grounds, stroll through Takeshita Street, try unique Harajuku snacks, browse fashion boutiques.</li>
+                            <li><span class="icon-money"></span><strong>Budget:</strong> ¥5,000 (shopping/snacks), ¥2,000 (transportation), ¥12,000 (meals)</li>
+                            <li><span class="icon-map"></span><strong>Map:</strong> <a href="https://google.com/maps?q=35.6726,139.7042" target="_blank">Harajuku Station / Takeshita Street</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="day-summary">
+                    <div><span class="icon-route"></span>Route: Subway from Akihabara to Shibuya, walk to Meiji Jingu/Harajuku.</div>
+                    <div><span class="icon-distance"></span>Distance: ~5 km walking + subway</div>
+                    <div><span class="icon-money"></span>Daily Budget: ¥19,000</div>
+                </div>
+                <div class="day-tips"><span class="icon-warning"></span><strong>Tips:</strong> Wear comfortable shoes! Shibuya Sky requires advance booking. Harajuku can get very crowded, especially on weekends.</div>
+                <button class="add-to-calendar-btn" data-day="2">📅 Add Day 2 to Calendar</button>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <h3>Day 3: Imperial Palace & Ueno Park Culture - Tokyo</h3>
+                    <p class="day-theme">🗓️ History, Nature & Art</p>
+                </div>
+                <div class="place-item">
+                    <div class="place-content">
+                        <h4>Imperial Palace East Garden (9:00 AM - 12:00 PM)</h4>
+                        <p>Explore the former site of Edo Castle, now a beautiful public garden. The Imperial Family still resides in the main palace grounds, which are not accessible.</p>
+                        <ul>
+                            <li><span class="icon-activity"></span><strong>Activities:</strong> Stroll through the historic gardens, visit the remaining castle foundations, enjoy the serene atmosphere.</li>
+                            <li><span class="icon-map"></span><strong>Map:</strong> <a href="https://google.com/maps?q=35.6860,139.7540" target="_blank">Imperial Palace East Garden</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="place-item">
+                    <div class="place-content">
+                        <h4>Ueno Park & Zoo (1:00 PM - 5:00 PM)</h4>
+                        <p>Spend the afternoon at Ueno Park, home to several museums, shrines, and Japan's oldest zoo, famous for its pandas.</p>
+                        <ul>
+                            <li><span class="icon-activity"></span><strong>Activities:</strong> Visit Ueno Zoo (entry fee for adults/children), explore shrines, enjoy a walk in the park.</li>
+                            <li><span class="icon-money"></span><strong>Budget:</strong> ¥1,600 (zoo entry for family), ¥1,500 (transportation), ¥11,000 (meals)</li>
+                            <li><span class="icon-map"></span><strong>Map:</strong> <a href="https://google.com/maps?q=35.7144,139.7736" target="_blank">Ueno Park</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="day-summary">
+                    <div><span class="icon-route"></span>Route: Subway from Akihabara to Otemachi (for Imperial Palace), then to Ueno.</div>
+                    <div><span class="icon-distance"></span>Distance: ~4 km walking + subway</div>
+                    <div><span class="icon-money"></span>Daily Budget: ¥14,100</div>
+                </div>
+                <div class="day-tips"><span class="icon-warning"></span><strong>Tips:</strong> The East Garden is free. Ueno Zoo tickets can be purchased on-site. The park also has museums like Tokyo National Museum (optional visit).</div>
+                <button class="add-to-calendar-btn" data-day="3">📅 Add Day 3 to Calendar</button>
+            </div>
+
+            <!-- Day 4 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <h3>Day 4: Tokyo DisneySea Adventure - Urayasu</h3>
+                    <p class="day-theme">🗓️ Magical Marine Adventures</p>
+                </div>
+                <div class="place-item">
+                    <div class="place-content">
+                        <h4>Tokyo DisneySea (9:00 AM - 9:00 PM)</h4>
+                        <p>Embark on an enchanting journey through seven themed ports of call, offering unique attractions, shows, and dining experiences. A magical day for the whole family!</p>
+                        <ul>
+                            <li><span class="icon-activity"></span><strong>Activities:</strong> Explore rides like Journey to the Center of the Earth, Tower of Terror; enjoy parades/shows; meet characters; souvenir shopping.</li>
+                            <li><span class="icon-money"></span><strong>Budget:</strong> ¥33,000 (entry fees for family), ¥10,000 (souvenirs/snacks), ¥3,000 (transportation), ¥15,000 (meals)</li>
+                            <li><span class="icon-map"></span><strong>Map:</strong> <a href="https://google.com/maps?q=35.6264,139.8893" target="_blank">Tokyo DisneySea</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="day-summary">
+                    <div><span class="icon-route"></span>Route: Train to Maihama Station, then Disney Resort Line to DisneySea Station.</div>
+                    <div><span class="icon-distance"></span>Distance: ~15 km (Akihabara to Maihama)</div>
+                    <div><span class="icon-money"></span>Daily Budget: ¥61,000</div>
+                </div>
+                <div class="day-tips"><span class="icon-warning"></span><strong>Tips:</strong> Purchase tickets in advance online. Arrive early to maximize your time. Use the official app for wait times and show schedules. Consider bringing your own snacks and drinks to save money inside the park.</div>
+                <button class="add-to-calendar-btn" data-day="4">📅 Add Day 4 to Calendar</button>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="day-card">
+                <div class="day-header">
+                    <h3>Day 5: Departure Day - Tokyo</h3>
+                    <p class="day-theme">🗓️ Last-minute Souvenirs & Farewell</p>
+                </div>
+                <div class="place-item">
+                    <div class="place-content">
+                        <h4>Morning & Departure (9:00 AM - Departure Time)</h4>
+                        <p>Enjoy a final Japanese breakfast, do some last-minute souvenir shopping near your hotel or at Tokyo Station, then head to the airport.</p>
+                        <ul>
+                            <li><span class="icon-activity"></span><strong>Activities:</strong> Breakfast, souvenir shopping, check-out from hotel, transfer to Narita (NRT) or Haneda (HND) Airport.</li>
+                            <li><span class="icon-money"></span><strong>Budget:</strong> ¥3,000 (souvenirs), ¥1,000 (transportation), ¥5,000 (meals)</li>
+                            <li><span class="icon-map"></span><strong>Map:</strong> <a href="https://google.com/maps?q=35.6812,139.7671" target="_blank">Tokyo Station</a> (major hub for airport transfers)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="day-summary">
+                    <div><span class="icon-route"></span>Route: From Hotel to airport (e.g., Narita Express from Tokyo Station).</div>
+                    <div><span class="icon-distance"></span>Distance: Varies by airport</div>
+                    <div><span class="icon-money"></span>Daily Budget: ¥9,000</div>
+                </div>
+                <div class="day-tips"><span class="icon-warning"></span><strong>Tips:</strong> Confirm airport transfer details in advance. Allow ample time for check-in and security, especially at international airports. Look for airport limousines or express trains for convenience.</div>
+                <button class="add-to-calendar-btn" data-day="5">📅 Add Day 5 to Calendar</button>
+            </div>
+
+        </section>
+
+        <!-- Budget Dashboard Section -->
+        <section id="budget-dashboard" class="container">
+            <h2 class="section-header">Trip Budget Dashboard</h2>
+
+            <div class="summary-cards grid">
+                <div class="card">
+                    <h3><span class="icon-total"></span>Total Budget</h3>
+                    <p>¥400,000</p>
                 </div>
                 <div class="card">
-                    <h3>Spending Breakdown</h3>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 75%; background-color: var(--primary-color);"></div>
-                    </div>
-                    <p>€1500 Spent / €2000 Total (75%)</p>
-                    <table class="expense-table">
-                        <thead>
-                            <tr>
-                                <th>Category</th>
-                                <th>Amount</th>
-                                <th>% of Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Accommodation</td>
-                                <td>€750</td>
-                                <td>37.5%</td>
-                            </tr>
-                            <tr>
-                                <td>Transport</td>
-                                <td>€300</td>
-                                <td>15%</td>
-                            </tr>
-                            <tr>
-                                <td>Activities/Entrance</td>
-                                <td>€250</td>
-                                <td>12.5%</td>
-                            </tr>
-                            <tr>
-                                <td>Food/Drink</td>
-                                <td>€500</td>
-                                <td>25%</td>
-                            </tr>
-                            <tr>
-                                <td>Miscellaneous</td>
-                                <td>€200</td>
-                                <td>10%</td>
-                            </tr>
-                            <tr class="total-row">
-                                <td>Total Spent</td>
-                                <td>€2000</td>
-                                <td>100%</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <h3><span class="icon-spent"></span>Estimated Spent</h3>
+                    <p>¥215,100</p>
                 </div>
+                <div class="card">
+                    <h3><span class="icon-remaining"></span>Remaining Budget</h3>
+                    <p>¥184,900</p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 2rem;">
+                <h3>Expense Breakdown Overview</h3>
+                <div class="chart-placeholder">
+                    <span>(Placeholder for visual charts - e.g., pie chart of expenses)</span>
+                </div>
+
+                <h4 style="margin-top: 1.5rem; color: var(--primary-color);">Accommodation Costs</h4>
+                <table class="expense-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Details</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hotel: MONday Apart Premium AKIHABARA</td>
+                            <td>¥24,750 × 4 nights × 1 room</td>
+                            <td>¥99,000</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2">Total Accommodation</th>
+                            <td>¥99,000</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <h4 style="margin-top: 2rem; color: var(--primary-color);">Estimated Daily Expenses</h4>
+                <table class="expense-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Description</th>
+                            <th>Entry Fees</th>
+                            <th>Activities</th>
+                            <th>Transport</th>
+                            <th>Meals</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Day 1</td>
+                            <td>Akihabara Exploration</td>
+                            <td>¥0</td>
+                            <td>¥2,000</td>
+                            <td>¥1,000</td>
+                            <td>¥10,000</td>
+                            <td>¥13,000</td>
+                        </tr>
+                        <tr>
+                            <td>Day 2</td>
+                            <td>Shibuya & Harajuku Immersion</td>
+                            <td>¥0</td>
+                            <td>¥5,000</td>
+                            <td>¥2,000</td>
+                            <td>¥12,000</td>
+                            <td>¥19,000</td>
+                        </tr>
+                        <tr>
+                            <td>Day 3</td>
+                            <td>Imperial Palace & Ueno Park Culture</td>
+                            <td>¥1,600</td>
+                            <td>¥0</td>
+                            <td>¥1,500</td>
+                            <td>¥11,000</td>
+                            <td>¥14,100</td>
+                        </tr>
+                        <tr>
+                            <td>Day 4</td>
+                            <td>Tokyo DisneySea Adventure</td>
+                            <td>¥33,000</td>
+                            <td>¥10,000</td>
+                            <td>¥3,000</td>
+                            <td>¥15,000</td>
+                            <td>¥61,000</td>
+                        </tr>
+                        <tr>
+                            <td>Day 5</td>
+                            <td>Departure Day</td>
+                            <td>¥0</td>
+                            <td>¥3,000</td>
+                            <td>¥1,000</td>
+                            <td>¥5,000</td>
+                            <td>¥9,000</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="6">Total Estimated Daily Expenses</th>
+                            <td>¥116,100</td>
+                        </tr>
+                        <tr>
+                            <th colspan="6">Grand Total Estimated Spent</th>
+                            <td>¥215,100</td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </section>
 
         <!-- Essentials Section -->
-        <section id="essentials" class="card">
-            <h2><span class="icon"><svg><use href="#icon-check"></use></svg></span>Essentials for Your Trip</h2>
-            <div class="checklist-grid">
-                <div class="card checklist">
-                    <h3>Packing List</h3>
+        <section id="essentials" class="container">
+            <h2 class="section-header">Trip Essentials</h2>
+
+            <div class="grid">
+                <div class="card checklist-card">
+                    <h3><span class="icon-luggage"></span>Essential Packing List</h3>
+                    <p>Considering October in Japan, which is autumn, the weather will generally be mild to cool. Layers are key!</p>
                     <ul>
-                        <li><label><input type="checkbox" id="packing1"> Passport & Visa</label></li>
-                        <li><label><input type="checkbox" id="packing2"> Flight & Hotel Tickets</label></li>
-                        <li><label><input type="checkbox" id="packing3"> Universal Travel Adapter</label></li>
-                        <li><label><input type="checkbox" id="packing4"> Essential Medications</label></li>
-                        <li><label><input type="checkbox" id="packing5"> Sunscreen & Sunglasses</label></li>
-                        <li><label><input type="checkbox" id="packing6"> Comfortable Walking Shoes <span class="icon icon-small"><svg><use href="#icon-shoes"></use></svg></span></label></li>
-                        <li><label><input type="checkbox" id="packing7"> Small Daypack</label></li>
-                        <li><label><input type="checkbox" id="packing8"> Camera & Power Bank</label></li>
-                        <li><label><input type="checkbox" id="packing9"> Reusable Water Bottle</label></li>
-                        <li><label><input type="checkbox" id="packing10"> Light Jacket/Cardigan</label></li>
+                        <li><input type="checkbox" id="packing-1"><label for="packing-1"><span class="icon-clothes"></span>Long-sleeved shirts and t-shirts for layering</label></li>
+                        <li><input type="checkbox" id="packing-2"><label for="packing-2"><span class="icon-clothes"></span>Sweaters or light jackets for cooler evenings</label></li>
+                        <li><input type="checkbox" id="packing-3"><label for="packing-3"><span class="icon-clothes"></span>A waterproof and windproof jacket</label></li>
+                        <li><input type="checkbox" id="packing-4"><label for="packing-4"><span class="icon-clothes"></span>Comfortable walking shoes</label></li>
+                        <li><input type="checkbox" id="packing-5"><label for="packing-5"><span class="icon-clothes"></span>Socks (enough for each day, plus a few extra)</label></li>
+                        <li><input type="checkbox" id="packing-6"><label for="packing-6"><span class="icon-clothes"></span>Pajamas & Casual outfits</label></li>
+                        <li><input type="checkbox" id="packing-7"><label for="packing-7"><span class="icon-personal"></span>Toothbrush, toothpaste, shampoo, conditioner, soap</label></li>
+                        <li><input type="checkbox" id="packing-8"><label for="packing-8"><span class="icon-personal"></span>Sunscreen & Lip balm</label></li>
+                        <li><input type="checkbox" id="packing-9"><label for="packing-9"><span class="icon-personal"></span>Any personal medications & Hand sanitizer</label></li>
+                        <li><input type="checkbox" id="packing-10"><label for="packing-10"><span class="icon-gear"></span>Daypack, Portable charger, Universal travel adapter</label></li>
+                        <li><input type="checkbox" id="packing-11"><label for="packing-11"><span class="icon-gear"></span>Camera and extra batteries</label></li>
+                        <li><input type="checkbox" id="packing-12"><label for="packing-12"><span class="icon-gear"></span>Reusable water bottle & Small umbrella</label></li>
+                        <li><input type="checkbox" id="packing-13"><label for="packing-13"><span class="icon-children"></span>Children's age-appropriate entertainment, extra layers, small first-aid kit</label></li>
+                        <li><input type="checkbox" id="packing-14"><label for="packing-14"><span class="icon-document"></span>Passport, visa, flight/hotel confirmations, travel insurance, copies of documents</label></li>
                     </ul>
                 </div>
-                <div class="card checklist">
-                    <h3>Pre-Trip Checklist</h3>
+
+                <div class="card checklist-card">
+                    <h3><span class="icon-check"></span>Pre-Trip Checklist</h3>
                     <ul>
-                        <li><label><input type="checkbox" id="pretrip1"> Confirm Flight Details</label></li>
-                        <li><label><input type="checkbox" id="pretrip2"> Book All Accommodations</label></li>
-                        <li><label><input type="checkbox" id="pretrip3"> Purchase Travel Insurance</label></li>
-                        <li><label><input type="checkbox" id="pretrip4"> Inform Bank of Travel Dates</label></li>
-                        <li><label><input type="checkbox" id="pretrip5"> Check Phone Roaming Plan</label></li>
-                        <li><label><input type="checkbox" id="pretrip6"> Learn Basic Local Phrases</label></li>
-                        <li><label><input type="checkbox" id="pretrip7"> Pack Smartly & Lightly</label></li>
-                        <li><label><input type="checkbox" id="pretrip8"> Arrange Pet/House Sitter</label></li>
-                        <li><label><input type="checkbox" id="pretrip9"> Download Offline Maps</label></li>
-                        <li><label><input type="checkbox" id="pretrip10"> Emergency Contacts List</label></li>
+                        <li><input type="checkbox" id="pre-trip-1" checked><label for="pre-trip-1"><span class="icon-bed"></span>Book hotel via provided links (MONday Apart Premium AKIHABARA)</label></li>
+                        <li><input type="checkbox" id="pre-trip-2"><label for="pre-trip-2"><span class="icon-passport"></span>Check visa requirements for your nationality</label></li>
+                        <li><input type="checkbox" id="pre-trip-3"><label for="pre-trip-3"><span class="icon-calendar"></span>Verify attraction operating hours and advance booking requirements</label></li>
+                        <li><input type="checkbox" id="pre-trip-4"><label for="pre-trip-4"><span class="icon-calendar"></span>Make advance reservations for Tokyo DisneySea</label></li>
+                        <li><input type="checkbox" id="pre-trip-5"><label for="pre-trip-5"><span class="icon-plane"></span>Purchase travel insurance</label></li>
+                        <li><input type="checkbox" id="pre-trip-6"><label for="pre-trip-6"><span class="icon-money"></span>Exchange currency (JPY) or ensure travel-friendly credit/debit card</label></li>
+                        <li><input type="checkbox" id="pre-trip-7"><label for="pre-trip-7"><span class="icon-map"></span>Download offline maps of Tokyo and transportation apps</label></li>
+                        <li><input type="checkbox" id="pre-trip-8"><label for="pre-trip-8"><span class="icon-check"></span>Learn a few basic Japanese phrases</label></li>
+                        <li><input type="checkbox" id="pre-trip-9"><label for="pre-trip-9"><span class="icon-money"></span>Inform your bank of your travel dates</label></li>
+                        <li><input type="checkbox" id="pre-trip-10"><label for="pre-trip-10"><span class="icon-luggage"></span>Pack according to the weather forecast and activities</label></li>
                     </ul>
                 </div>
-                <div class="card travel-tips">
-                    <h3>Travel Tips</h3>
-                    <p><strong>Local Customs:</strong> Research and respect local customs and etiquette to ensure a smooth trip.</p>
-                    <p><strong>Stay Hydrated:</strong> Always carry water, especially when exploring cities on foot.</p>
-                    <p><strong>Stay Aware:</strong> Be mindful of your surroundings and personal belongings, especially in crowded tourist areas.</p>
-                    <p><strong>Local Cuisine:</strong> Don't hesitate to try local dishes and street food for an authentic experience.</p>
-                    <p><strong>Document Copies:</strong> Keep digital and physical copies of your passport, visa, and important documents separate from the originals.</p>
-                    <p><strong>Enjoy!:</strong> Most importantly, relax and enjoy every moment of your grand adventure!</p>
-                </div>
+            </div>
+
+            <div class="travel-tips card" style="margin-top: 2rem;">
+                <h3>Budget & Travel Tips</h3>
+                <ul>
+                    <li><strong>Eat Local:</strong> Explore local eateries and convenience stores (konbini) for delicious and affordable meals, especially for lunch.</li>
+                    <li><strong>Public Transport Passes:</strong> Consider purchasing a Tokyo Subway Ticket (24/48/72-hour pass) if you plan on using the subway extensively, as it can save money compared to individual tickets.</li>
+                    <li><strong>Souvenir Smart:</strong> Set a clear budget for souvenirs to avoid overspending, and look for unique, locally made items rather than generic tourist traps.</li>
+                </ul>
             </div>
         </section>
     </main>
 
-    <!-- Lightbox for images -->
-    <div id="lightbox" class="lightbox">
-        <span class="lightbox-close">&times;</span>
-        <img class="lightbox-content" id="lightbox-img">
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2024 Grand European Adventure. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="mailto:info@example.com">Contact Us</a>
-            </div>
-            <button class="btn print-btn" onclick="window.print()">
-                <span class="icon"><svg><use href="#icon-calendar"></use></svg></span> Print Itinerary
-            </button>
+    <footer>
+        <div class="container">
+            <nav class="footer-nav">
+                <a href="#hero">Top</a>
+                <a href="#overview">Overview</a>
+                <a href="#hotel-section">Hotel</a>
+                <a href="#daily-itinerary">Itinerary</a>
+                <a href="#budget-dashboard">Budget</a>
+                <a href="#essentials">Essentials</a>
+            </nav>
+            <p>Tokyo Autumn Adventure &copy; 2025. All rights reserved.</p>
+            <p>For inquiries, please contact <a href="mailto:info@example.com">info@example.com</a></p>
+            <button class="print-btn" onclick="window.print()">🖨️ Print Itinerary</button>
         </div>
     </footer>
 
     <script>
-        // Smooth Scrolling for navigation
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-
-                // Update active class for sticky nav
-                document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // Sticky Nav Active State on Scroll
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - sectionHeight / 3) { // Adjust offset for better timing
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Hotel Image Gallery/Carousel functionality
-        const mainHotelImage = document.querySelector('.hotel-gallery-main img');
-        const thumbnails = document.querySelectorAll('.hotel-thumbnails img');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxClose = document.querySelector('.lightbox-close');
-
-        thumbnails.forEach(thumbnail => {
-            thumbnail.addEventListener('click', () => {
-                // Update main image
-                mainHotelImage.src = thumbnail.src;
-                mainHotelImage.alt = thumbnail.alt;
-
-                // Update active thumbnail style
-                thumbnails.forEach(t => t.classList.remove('active'));
-                thumbnail.classList.add('active');
-            });
-        });
-
-        // Lightbox functionality for main image
-        mainHotelImage.addEventListener('click', () => {
-            lightbox.style.display = 'flex'; // Use flex to center content
-            lightboxImg.src = mainHotelImage.src;
-            lightboxImg.alt = mainHotelImage.alt;
-        });
-
-        lightboxClose.addEventListener('click', () => {
-            lightbox.style.display = 'none';
-        });
-
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.style.display = 'none';
-            }
-        });
-
-        // Checkbox persistence (simple local storage)
-        document.querySelectorAll('.checklist input[type="checkbox"]').forEach(checkbox => {
-            const savedState = localStorage.getItem(checkbox.id);
-            if (savedState) {
-                checkbox.checked = JSON.parse(savedState);
-            }
-            checkbox.addEventListener('change', () => {
-                localStorage.setItem(checkbox.id, checkbox.checked);
-            });
-        });
-
-
-        // Add to Calendar functionality (simplified for Google Calendar via URL)
+        // Simple JS for calendar buttons (would typically use a library or more complex logic)
         document.querySelectorAll('.add-to-calendar-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const day = this.dataset.day;
-                const title = this.dataset.title;
-                const location = this.dataset.location;
-                const description = this.dataset.description;
-                const startDate = new Date(this.dataset.start); // ISO format e.g., '2024-08-01T09:00:00'
-                const endDate = new Date(this.dataset.end);   // ISO format e.g., '2024-08-01T18:00:00'
-
-                // Format dates for Google Calendar (YYYYMMDDTHHMMSSZ) - Z for UTC, or use local time without Z
-                const formatCalendarDate = (date) => {
-                    return date.toISOString().replace(/-|:|\.\d{3}/g, '');
-                };
-
-                const formattedStartDate = formatCalendarDate(startDate);
-                const formattedEndDate = formatCalendarDate(endDate);
-
-                // Google Calendar URL structure
-                const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}&dates=${formattedStartDate}/${formattedEndDate}`;
-
-                window.open(googleCalendarUrl, '_blank');
+            button.addEventListener('click', () => {
+                const day = button.dataset.day;
+                alert(`Day ${day} added to calendar! (This is a placeholder action)`);
+                // In a real application, you'd use a library like 'add-to-calendar-button'
+                // or generate an .ics file based on the day's events.
             });
         });
 
-        // Budget Progress Bar Animation
-        const progressBar = document.querySelector('.progress-bar');
-        if (progressBar) {
-            const spent = 1500; // Example value
-            const total = 2000; // Example value
-            const percentage = (spent / total) * 100;
-            progressBar.style.width = `${percentage}%`;
-        }
+        // Basic lightbox functionality for hotel images (optional, could be a dedicated library)
+        document.querySelectorAll('#hotel-section .hotel-gallery img').forEach(img => {
+            img.addEventListener('click', () => {
+                const lightbox = document.createElement('div');
+                lightbox.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.8);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 1000;
+                    cursor: zoom-out;
+                `;
+                const largeImg = document.createElement('img');
+                largeImg.src = img.src.replace('400x250', '800x600'); // Attempt to get a larger placeholder
+                largeImg.alt = img.alt;
+                largeImg.style.cssText = `
+                    max-width: 90%;
+                    max-height: 90%;
+                    object-fit: contain;
+                    border-radius: 8px;
+                    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+                `;
+                lightbox.appendChild(largeImg);
+                document.body.appendChild(lightbox);
 
+                lightbox.addEventListener('click', () => {
+                    document.body.removeChild(lightbox);
+                });
+            });
+        });
     </script>
 </body>
 </html>
