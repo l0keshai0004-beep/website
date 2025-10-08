@@ -3,44 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🇯🇵 Your Family Fun Tokyo Adventure Itinerary! 🇯🇵</title>
+    <title>Your Tokyo Family Fun Adventure! 🇯🇵</title>
+    <link rel="icon" href="https://via.placeholder.com/32/f59e0b?text=TYO" type="image/x-icon">
     <!-- Google Fonts for modern typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Unicode icons (Font Awesome or SVGs would be an alternative for richer icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKx3R1TfwRDA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
-        /* --- CSS Variables & Base Styles --- */
         :root {
             --primary-color: #2563eb; /* Blue */
             --secondary-color: #10b981; /* Green */
-            --accent-color: #f59e0b; /* Warm Orange */
+            --accent-color: #f59e0b; /* Orange */
             --text-color: #333;
-            --light-text-color: #f8fafc;
-            --light-bg: #f8fafc; /* Lighter background */
-            --dark-bg: #e0e7ff; /* Slightly darker for contrast */
-            --card-bg: white;
-            --border-color: #e2e8f0;
+            --light-text-color: #666;
+            --background-color: #f0f2f5;
+            --card-background: #ffffff;
+            --border-radius: 12px;
             --shadow: 0 4px 6px rgba(0,0,0,0.1);
-            --hover-shadow: 0 6px 12px rgba(0,0,0,0.15);
             --transition-speed: 0.3s;
-
-            /* Typography */
-            --font-heading: 'Montserrat', sans-serif;
-            --font-body: 'Poppins', sans-serif;
-            --h1-size: clamp(32px, 5vw, 48px);
-            --h2-size: clamp(24px, 4vw, 32px);
-            --h3-size: clamp(20px, 3vw, 26px);
-            --body-size: 16px;
         }
 
+        /* Base Styles */
         body {
-            font-family: var(--font-body);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
-            margin: 0;
-            background-color: var(--light-bg);
             scroll-behavior: smooth;
         }
 
@@ -50,1282 +43,1121 @@
             padding: 20px;
         }
 
-        /* --- Typography --- */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-heading);
+        h1, h2, h3, h4 {
+            font-family: 'Roboto', sans-serif;
             color: var(--primary-color);
-            margin-top: 0;
             margin-bottom: 15px;
+            font-weight: 600;
         }
 
-        h1 { font-size: var(--h1-size); font-weight: 700; text-align: center; }
-        h2 { font-size: var(--h2-size); font-weight: 600; }
-        h3 { font-size: var(--h3-size); font-weight: 600; color: var(--accent-color); }
-        h4 { font-size: 1.25rem; font-weight: 600; }
-        p { font-size: var(--body-size); margin-bottom: 10px; }
+        h1 { font-size: clamp(32px, 5vw, 48px); text-align: center; margin-bottom: 20px; }
+        h2 { font-size: clamp(24px, 4vw, 32px); border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; margin-top: 40px; }
+        h3 { font-size: clamp(20px, 3vw, 26px); color: var(--secondary-color); margin-top: 30px;}
+        h4 { font-size: clamp(18px, 2.5vw, 22px); }
+        p { margin-bottom: 10px; }
+        ul, ol { margin-bottom: 15px; padding-left: 20px; }
+        li { margin-bottom: 5px; }
 
         a {
             color: var(--primary-color);
             text-decoration: none;
-            transition: color var(--transition-speed);
+            transition: color var(--transition-speed) ease;
         }
         a:hover {
-            color: var(--secondary-color);
-            text-decoration: underline;
+            color: var(--accent-color);
         }
 
-        /* --- Card Base Style --- */
+        /* Card Styles */
         .card {
-            background: var(--card-bg);
-            border-radius: 12px;
+            background: var(--card-background);
+            border-radius: var(--border-radius);
             padding: 24px;
             box-shadow: var(--shadow);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            transition: transform var(--transition-speed) ease-in-out, box-shadow var(--transition-speed) ease-in-out;
             margin-bottom: 30px;
         }
 
         .card:hover {
             transform: translateY(-4px);
-            box-shadow: var(--hover-shadow);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        /* --- Buttons --- */
+        /* Buttons */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            border: none;
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
             border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
             text-align: center;
             text-decoration: none;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            font-weight: 500;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
         }
 
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: var(--light-text-color);
-        }
-        .btn-primary:hover {
-            background-color: #1d4ed8; /* Darker primary */
+        .btn:hover {
+            background-color: #1e40af; /* Darker primary */
             transform: translateY(-2px);
         }
 
         .btn-secondary {
-            background-color: var(--secondary-color);
-            color: var(--light-text-color);
+            background-color: var(--accent-color);
         }
         .btn-secondary:hover {
-            background-color: #0d9488; /* Darker secondary */
-            transform: translateY(-2px);
-        }
-
-        .add-to-calendar-btn {
-            background-color: var(--accent-color);
-            color: var(--light-text-color);
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            margin-top: 15px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: background-color var(--transition-speed);
-        }
-        .add-to-calendar-btn:hover {
             background-color: #d97706; /* Darker accent */
         }
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
 
-        /* --- Hero Section --- */
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #3b82f6 100%);
-            color: var(--light-text-color);
-            padding: 60px 20px;
-            margin-bottom: 30px;
-            border-radius: 12px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1540306775-81230485a3c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 80px 20px;
             text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            margin-bottom: 30px;
             box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: -50px;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at top left, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            transform: rotate(45deg);
-            z-index: 0;
-        }
-        .hero * {
-            position: relative;
-            z-index: 1;
-        }
+
         .hero h1 {
-            color: var(--light-text-color);
+            font-size: clamp(40px, 8vw, 70px);
             margin-bottom: 10px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
+
         .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            opacity: 0.9;
+            font-size: clamp(18px, 3vw, 24px);
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
-        .hero .trip-stats {
+
+        .trip-stats {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 25px;
+            gap: 20px;
             flex-wrap: wrap;
-        }
-        .hero .stat-item {
-            text-align: center;
-        }
-        .hero .stat-item strong {
-            display: block;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        .hero .stat-item span {
-            font-size: 0.9rem;
-            opacity: 0.8;
+            margin-top: 30px;
         }
 
-        /* --- Overview Card --- */
-        .overview-card {
-            border-left: 5px solid var(--secondary-color);
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            border-radius: var(--border-radius);
+            padding: 10px 20px;
+            backdrop-filter: blur(5px);
+            font-weight: 500;
         }
-        .overview-card ul {
+        .stat-item strong { color: var(--accent-color); font-size: 1.2em; }
+
+        /* Navigation */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255,255,255,0.95);
+            padding: 10px 0;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+        }
+
+        .sticky-nav ul {
             list-style: none;
             padding: 0;
             margin: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-        .overview-card ul li {
-            background-color: var(--light-bg);
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
             display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .overview-card ul li strong {
-            color: var(--primary-color);
-        }
-
-        /* --- Hotel Section --- */
-        .hotel-section .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        .hotel-section .gallery img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform var(--transition-speed), border-color var(--transition-speed);
-            border: 2px solid transparent;
-        }
-        .hotel-section .gallery img:hover {
-            transform: scale(1.05);
-            border-color: var(--accent-color);
-        }
-        .hotel-section .amenities ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .hotel-section .amenities li {
-            background-color: var(--dark-bg);
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .hotel-section .booking-links {
-            margin-top: 20px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        /* --- Daily Itinerary --- */
-        .daily-itinerary-section h2 {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 20px; /* Adjust for mobile, will change for desktop */
-            top: 0;
-            width: 4px;
-            height: 100%;
-            background-color: var(--border-color);
-            border-radius: 2px;
-        }
-
-        .day-card {
-            margin-left: 50px; /* Space for the timeline dot */
-            position: relative;
-            padding: 20px;
-            margin-bottom: 40px;
-            border-left: none; /* Remove default card border */
-        }
-        .day-card::before { /* Timeline dot */
-            content: attr(data-day-number);
-            position: absolute;
-            left: -40px; /* Position relative to .day-card */
-            top: 25px;
-            width: 40px;
-            height: 40px;
-            background-color: var(--accent-color);
-            color: var(--light-text-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-            box-shadow: var(--shadow);
-            z-index: 1;
-        }
-        .day-card h3 {
-            margin-bottom: 10px;
-        }
-        .day-card .route-info {
-            background-color: var(--dark-bg);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            display: flex;
             flex-wrap: wrap;
             gap: 15px;
-            font-size: 0.9rem;
-            color: var(--primary-color);
-            align-items: center;
-        }
-        .day-card .place-details {
-            margin-top: 20px;
-            padding-left: 15px;
-            border-left: 3px solid var(--secondary-color);
-        }
-        .day-card .place-details h4 {
-            margin-bottom: 5px;
-            color: var(--primary-color);
-        }
-        .day-card .place-details p {
-            margin-bottom: 5px;
-        }
-        .day-card .place-details ul {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0;
-        }
-        .day-card .place-details ul li {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            margin-bottom: 5px;
-            font-size: 0.95rem;
-        }
-        .day-card .place-details .icon {
-            color: var(--accent-color);
-            font-size: 1.1rem;
-            min-width: 18px; /* For alignment */
-        }
-        .day-card .tips {
-            background-color: #fffbeb; /* Light yellow */
-            border-left: 4px solid var(--accent-color);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-size: 0.95rem;
-        }
-        .day-card .tips strong {
-            color: var(--accent-color);
         }
 
-        /* --- Budget Dashboard --- */
-        .budget-summary {
+        .sticky-nav a {
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+            font-weight: 500;
+        }
+
+        .sticky-nav a:hover, .sticky-nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Overview Card */
+        .overview-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
-        .budget-item {
-            background-color: var(--dark-bg);
-            padding: 15px;
-            border-radius: 8px;
+        .overview-grid div {
             text-align: center;
+            padding: 15px;
+            background-color: var(--background-color);
+            border-radius: 8px;
+            font-weight: 500;
         }
-        .budget-item strong {
-            display: block;
-            font-size: 1.8rem;
-            color: var(--primary-color);
+        .overview-grid i {
+            color: var(--secondary-color);
+            font-size: 1.5em;
             margin-bottom: 5px;
         }
-        .budget-item span {
-            font-size: 0.9rem;
-            color: var(--text-color);
-        }
 
-        .budget-charts {
-            margin-top: 30px;
-        }
-        .budget-chart-bar {
-            background-color: var(--border-color);
-            height: 25px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            color: var(--text-color);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        .budget-chart-bar .fill {
-            height: 100%;
-            background-color: var(--secondary-color);
-            border-radius: 5px;
-            width: 0%; /* Will be set by JS or dynamically in HTML */
-            transition: width var(--transition-speed) ease-out;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 10px;
-            color: var(--light-text-color);
-            white-space: nowrap;
-        }
-        .budget-chart-bar span.label {
-            position: absolute;
-            left: 10px;
-            color: var(--text-color);
-            z-index: 1;
-        }
-        .budget-chart-bar .fill.overbudget {
-            background-color: #ef4444; /* Red */
-        }
-        .budget-chart-bar .fill span {
-            color: var(--light-text-color);
-            text-shadow: 0 0 3px rgba(0,0,0,0.5);
-        }
-
-        .expense-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 30px;
-        }
-        .expense-table th, .expense-table td {
-            border: 1px solid var(--border-color);
-            padding: 12px 15px;
-            text-align: left;
-        }
-        .expense-table th {
-            background-color: var(--dark-bg);
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-        .expense-table tbody tr:nth-child(even) {
-            background-color: var(--light-bg);
-        }
-        .expense-table tfoot td {
-            font-weight: 700;
-            background-color: var(--dark-bg);
-            color: var(--primary-color);
-        }
-
-        /* --- Essentials Section --- */
-        .essentials-section {
+        /* Hotel Section */
+        .hotel-gallery {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-        @media (min-width: 768px) {
-            .essentials-section {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        .packing-list ul, .pre-trip-checklist ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 15px;
-        }
-        .packing-list li, .pre-trip-checklist li {
-            background-color: var(--light-bg);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 10px;
-            border: 1px solid var(--border-color);
+            margin-top: 20px;
         }
-        .packing-list li input[type="checkbox"],
-        .pre-trip-checklist li input[type="checkbox"] {
-            min-width: 20px;
-            min-height: 20px;
+        .hotel-gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
             cursor: pointer;
-            accent-color: var(--secondary-color);
+            transition: transform var(--transition-speed) ease;
         }
-        .packing-list li label, .pre-trip-checklist li label {
-            flex-grow: 1;
-            cursor: pointer;
-            font-size: var(--body-size);
-        }
-        .packing-list li input[type="checkbox"]:checked + label,
-        .pre-trip-checklist li input[type="checkbox"]:checked + label {
-            text-decoration: line-through;
-            color: #6b7280; /* Gray out checked items */
+        .hotel-gallery img:hover {
+            transform: scale(1.05);
         }
 
-        /* --- Footer --- */
-        .footer {
-            background-color: var(--primary-color);
-            color: var(--light-text-color);
-            padding: 40px 20px;
-            margin-top: 50px;
-            border-radius: 12px;
-            text-align: center;
+        .hotel-amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .hotel-amenities span {
+            display: flex;
+            align-items: center;
+            background-color: var(--background-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+        .hotel-amenities i {
+            color: var(--secondary-color);
+            margin-right: 8px;
+        }
+
+        /* Daily Itinerary */
+        .day-card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
             box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            overflow: hidden;
         }
-        .footer p {
-            font-size: 0.95rem;
-            margin-bottom: 10px;
+
+        .day-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 10px; /* Space between title and button */
         }
-        .footer .contact-info a {
-            color: var(--light-text-color);
-            margin: 0 10px;
-            opacity: 0.8;
+        .day-header h3 {
+            color: white;
+            margin: 0;
+            border-bottom: none;
+            font-size: clamp(20px, 3vw, 26px);
         }
-        .footer .contact-info a:hover {
-            opacity: 1;
-            text-decoration: underline;
+        .day-header .add-to-calendar-btn {
+            white-space: nowrap; /* Prevent button text from wrapping */
         }
-        .footer .print-button {
+
+        .day-content {
+            padding: 24px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid var(--primary-color);
             margin-top: 20px;
         }
 
-        /* --- Image Lightbox (Simple CSS-only) --- */
-        .lightbox-overlay {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
+        .timeline-event {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 20px;
         }
-        .lightbox-overlay.active {
-            display: flex;
-        }
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .lightbox-content img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 12px;
-            box-shadow: var(--hover-shadow);
-        }
-        .lightbox-close {
+
+        .timeline-event::before {
+            content: '';
             position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 2.5rem;
-            cursor: pointer;
-            z-index: 1001;
-            transition: color var(--transition-speed);
+            left: -38px; /* Adjust to align with the border */
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--primary-color);
         }
-        .lightbox-close:hover {
+        
+        .timeline-event h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .timeline-event .activities i {
+            color: var(--secondary-color);
+            margin-right: 5px;
+        }
+        .timeline-event .activities span {
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 5px;
+        }
+
+        /* Budget Dashboard */
+        .budget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .budget-summary div {
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+        .budget-total { background-color: var(--primary-color); }
+        .budget-spent { background-color: var(--accent-color); }
+        .budget-remaining { background-color: var(--secondary-color); }
+        .budget-summary div span { font-size: 1.5em; display: block; margin-top: 5px; }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 25px;
+            background-color: var(--secondary-color);
+            width: 0%; /* Will be set by JS or inline style */
+            text-align: center;
+            color: white;
+            line-height: 25px;
+            font-size: 0.9em;
+            transition: width 1s ease-in-out;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        tr:hover { background-color: #ddd; }
+        tfoot { font-weight: bold; }
+        tfoot td { background-color: #e6f7ff; }
+
+
+        /* Essentials */
+        .checklist ul {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .checklist input[type="checkbox"] {
+            margin-right: 10px;
+            min-width: 20px;
+            min-height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary-color); /* Style the checkbox */
+        }
+        .travel-tips {
+            margin-top: 30px;
+        }
+        .travel-tips ul {
+            list-style: disc;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 50px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+        .footer a {
+            color: white;
+            margin: 0 10px;
+        }
+        .footer a:hover {
             color: var(--accent-color);
         }
-        /* Placeholder styling for missing images */
-        img:not([src])::before,
-        img[src=""]:not([src])::before,
-        img[src^="data:"]:not([src])::before {
-            content: "\f03e"; /* Font Awesome image icon */
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            font-size: 3rem;
-            color: var(--border-color);
-            display: flex;
+
+        /* Image Lightbox (Simple CSS) */
+        .lightbox {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 2000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
             align-items: center;
             justify-content: center;
-            width: 100%;
-            height: 100%;
-            background-color: var(--light-bg);
-            border-radius: 8px;
         }
 
-        /* --- Responsive Design --- */
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            .hero {
-                padding: 40px 15px;
-            }
-            .hero h1 {
-                font-size: var(--h1-size); /* Ensure it scales down */
-            }
-            .hero .trip-stats {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .overview-card ul {
-                grid-template-columns: 1fr;
-            }
-            .hotel-section .gallery {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            }
-            .day-card {
-                margin-left: 30px;
-                padding: 15px;
-            }
-            .day-card::before {
-                left: -30px;
-                width: 30px;
-                height: 30px;
-                font-size: 0.9rem;
-                top: 20px;
-            }
-            .timeline::before {
-                left: 15px;
-            }
-            .expense-table {
-                font-size: 0.9rem;
-                display: block; /* Make table scrollable */
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-            .expense-table thead, .expense-table tbody, .expense-table th, .expense-table td, .expense-table tr {
-                display: block;
-            }
-            .expense-table thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-            .expense-table tr { border: 1px solid var(--border-color); margin-bottom: 10px; }
-            .expense-table td {
-                border: none;
-                border-bottom: 1px solid var(--border-color);
-                position: relative;
-                padding-left: 50%;
-                text-align: right;
-            }
-            .expense-table td::before {
-                position: absolute;
-                top: 6px;
-                left: 6px;
-                width: 45%;
-                padding-right: 10px;
-                white-space: nowrap;
-                text-align: left;
-                font-weight: bold;
-                color: var(--primary-color);
-            }
-            .expense-table td:nth-of-type(1)::before { content: "Category"; }
-            .expense-table td:nth-of-type(2)::before { content: "Cost (¥)"; }
-            .expense-table td:nth-of-type(3)::before { content: "Remaining"; }
-            .expense-table tfoot td {
-                text-align: right;
-                font-weight: bold;
-            }
-            .budget-chart-bar .fill span {
-                font-size: 0.8rem;
-            }
-            .budget-chart-bar span.label {
-                font-size: 0.85rem;
-                left: 5px;
-            }
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: var(--border-radius);
+            animation-name: zoom;
+            animation-duration: 0.6s;
         }
 
-        /* --- Print Styles --- */
+        @keyframes zoom {
+            from {transform: scale(0)}
+            to {transform: scale(1)}
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close-btn:hover, .close-btn:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .mb-20 { margin-bottom: 20px; }
+        .mt-20 { margin-top: 20px; }
+        .p-0 { padding: 0; }
+        .m-0 { margin: 0; }
+
+        /* Icons */
+        .icon { margin-right: 5px; color: var(--secondary-color); }
+        .icon-lg { font-size: 1.2em; }
+        .icon-xl { font-size: 1.5em; }
+
+        /* Print Styles */
         @media print {
             body {
                 background-color: white;
                 color: black;
-                font-size: 12pt;
                 -webkit-print-color-adjust: exact; /* For better color printing */
                 print-color-adjust: exact;
             }
-            .container {
-                max-width: 100%;
-                padding: 0;
+            .hero, .sticky-nav, .footer, .add-to-calendar-btn, .lightbox, .btn-print-hidden {
+                display: none !important;
             }
-            .hero, .footer, .btn, .add-to-calendar-btn, .lightbox-overlay {
-                display: none !important; /* Hide non-essential elements */
+            .container {
+                max-width: none;
+                padding: 0;
             }
             .card {
                 box-shadow: none;
-                border: 1px solid #ccc;
-                margin-bottom: 20px;
-                page-break-inside: avoid; /* Avoid breaking cards across pages */
+                border: 1px solid #eee;
+                page-break-inside: avoid;
+                margin-bottom: 15px;
             }
-            h1, h2, h3, h4, h5, h6 {
-                color: black !important;
-                background-color: transparent !important;
+            h1, h2, h3, h4 {
+                color: #333 !important;
+                border-bottom: 1px solid #ccc !important;
+                padding-bottom: 5px !important;
             }
-            a {
-                color: #0000ee !important;
-                text-decoration: underline !important;
+            .day-header {
+                background-color: #eee !important;
+                color: #333 !important;
+                display: block; /* Change to block for print if flex causes issues */
             }
-            .hotel-section .gallery, .budget-charts {
-                display: block; /* Avoid grid/flex issues in print */
+            .day-header h3 {
+                color: #333 !important;
             }
-            .hotel-section .gallery img {
-                width: 100px; /* Smaller for print */
-                height: 80px;
-                float: left;
-                margin-right: 10px;
-                margin-bottom: 10px;
+            .timeline {
+                border-left-color: #ccc !important;
             }
-            .timeline::before, .day-card::before {
+            .timeline-event::before {
                 background-color: #ccc !important;
-                color: black !important;
-            }
-            .day-card {
-                border-left: 1px solid #ccc;
-            }
-            .day-card .tips, .day-card .route-info {
-                background-color: #f0f0f0 !important;
-                border-color: #999 !important;
-            }
-            .expense-table, .expense-table th, .expense-table td {
+                box-shadow: 0 0 0 2px white !important;
                 border-color: #ccc !important;
             }
-            .expense-table tbody tr:nth-child(even) {
-                background-color: #f9f9f9 !important;
-            }
-            input[type="checkbox"] {
-                -webkit-appearance: checkbox; /* Ensure checkboxes are visible */
-                appearance: checkbox;
-            }
-            .budget-item strong, .budget-item span {
+            .budget-summary div {
                 color: black !important;
+                background-color: #eee !important;
             }
-            .budget-chart-bar .fill {
-                background-color: #d3d3d3 !important; /* Grey for print */
-                color: black !important;
+            table th {
+                background-color: #eee !important;
+                color: #333 !important;
             }
-            .budget-chart-bar span.label {
-                color: black !important;
+            .progress-bar-container, .progress-bar {
+                background-color: #e0e0e0 !important;
             }
-            /* Add page breaks for main sections */
-            section {
-                page-break-before: always;
+            .checklist input[type="checkbox"] {
+                accent-color: #999 !important;
             }
-            section:first-of-type {
-                page-break-before: auto;
+        }
+
+        /* Mobile First - Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 15px;
             }
-            .hero + main section {
-                page-break-before: auto; /* Allow first section after hero to print on same page */
+            .sticky-nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .trip-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+            .hotel-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+            .timeline {
+                padding-left: 20px;
+            }
+            .timeline-event::before {
+                left: -32px;
+                top: 8px;
+            }
+            .day-header {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Image Lightbox HTML (hidden by default) -->
-    <div id="lightbox" class="lightbox-overlay">
-        <span class="lightbox-close">&times;</span>
-        <div class="lightbox-content">
-            <img src="" alt="Full size image" id="lightbox-img">
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Hero Section -->
-        <header class="hero">
-            <h1>🇯🇵 Your Family Fun Tokyo Adventure Itinerary! 🇯🇵</h1>
-            <p>Get ready for an incredible 5-day family adventure in Tokyo, Japan!</p>
+    <header class="hero">
+        <div class="container">
+            <h1>🎉 Your Tokyo Family Fun Adventure! 🎉</h1>
+            <p>Get ready for an incredible family trip to Tokyo, Japan!</p>
             <div class="trip-stats">
-                <div class="stat-item">
-                    <strong>Tokyo, Japan</strong>
-                    <span>Destination</span>
+                <div class="stat-item"><i class="fas fa-calendar-alt"></i> Dates: <strong>Oct 13 - 17, 2025</strong></div>
+                <div class="stat-item"><i class="fas fa-clock"></i> Duration: <strong>5 Days, 4 Nights</strong></div>
+                <div class="stat-item"><i class="fas fa-users"></i> Companions: <strong>Family (Ages 5 & 9)</strong></div>
+                <div class="stat-item"><i class="fas fa-map-marker-alt"></i> Destination: <strong>Tokyo, Japan</strong></div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="container">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#hotel">Hotel</a></li>
+                <li><a href="#itinerary">Itinerary</a></li>
+                <li><a href="#budget">Budget</a></li>
+                <li><a href="#essentials">Essentials</a></li>
+                <li><a href="#footer">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="overview" class="card">
+            <h2><i class="fas fa-info-circle icon-xl"></i> Trip Overview</h2>
+            <p>This itinerary is packed with exciting activities and unforgettable experiences designed for you and your school-age children (ages 5 and 9). From magical theme parks to immersive digital art and iconic cityscapes, your family is in for a treat!</p>
+            <div class="overview-grid">
+                <div><i class="fas fa-globe-asia"></i> <span>Destination:</span> Tokyo, Japan</div>
+                <div><i class="fas fa-calendar-check"></i> <span>Duration:</span> 5 Days, 4 Nights</div>
+                <div><i class="fas fa-user-friends"></i> <span>Companions:</span> Family (ages 5 & 9)</div>
+                <div><i class="fas fa-heart"></i> <span>Trip Type:</span> Family Fun</div>
+            </div>
+            <h3>Highlights:</h3>
+            <ul>
+                <li>Magical day at Tokyo Disneyland</li>
+                <li>Immersive digital art at TeamLab Planets TOKYO</li>
+                <li>Whimsical journey to the Ghibli Museum</li>
+                <li>Experience the iconic Shibuya Crossing</li>
+                <li>Explore Akihabara's electrifying culture</li>
+            </ul>
+        </section>
+
+        <section id="hotel" class="card">
+            <h2><i class="fas fa-hotel icon-xl"></i> Hotel Recommendation</h2>
+            <h3>MONday Apart Premium AKIHABARA</h3>
+            <div class="hotel-gallery">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipNhmYROuB4Zug-cv-54kJzqz55VwslWs0Mhno1CWH=s10000" alt="MONday Apart Premium Akihabara Exterior" loading="lazy">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipNpU-kCi5lNcxSKGtw82FsvAO5VaIlfNwlFf_U4=s10000" alt="MONday Apart Premium Akihabara Lobby" loading="lazy">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipMZqY6niK9Z4v0udBWzDf_7jolhTY6kX5PgYAVb=s10000" alt="MONday Apart Premium Akihabara Family Room 1" loading="lazy">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipM7jE9fj2HnwgWChMj05e87Nc1S_35bBluTt0em=s10000" alt="MONday Apart Premium Akihabara Family Room 2" loading="lazy">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipNm94uYeW2CtVmi4b9gZZgQqEl9wV5Z-26x9CIg=s10000" alt="MONday Apart Premium Akihabara Kitchenette" loading="lazy">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipOsT-XMn-WO2hT9CwH95YF2fvGZ_ZdLSLVsWJnO=s10000" alt="MONday Apart Premium Akihabara Bathroom" loading="lazy">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipPj-e39O0MRwBJKXZyKhMiBCHxdTL0cUE_znLA=s10000" alt="MONday Apart Premium Akihabara Amenities" loading="lazy">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipPDiRGITKjN02MW2NwM0Wl2CJnRKADQMShQHl3b=s10000" alt="MONday Apart Premium Akihabara Lounge Area" loading="lazy">
+                <img src="https://lh5.googleusercontent.com/p/AF1QipM1m9yoZj4cb2Jft9Z_xQfZn0VrV4Rtya1d8NU3=s10000" alt="MONday Apart Premium Akihabara Building" loading="lazy">
+            </div>
+            <p class="mt-20"><strong>Location:</strong> Chiyoda-ku, Tokyo (near Akihabara Station) <a href="https://google.com/maps?q=35.69726,139.7790238" target="_blank" class="btn-small btn-secondary"><i class="fas fa-map-marker-alt"></i> View on Map</a></p>
+            <p><strong>Price:</strong> ¥24,750 per room per night</p>
+            <p><strong>Total Accommodation Cost:</strong> ¥99,000 (4 nights)</p>
+            <p><strong>Why We Chose This Hotel:</strong> MONday Apart Premium AKIHABARA is an excellent choice for a family-fun trip to Tokyo. With an outstanding overall rating of 4.8 stars from nearly 400 reviews, it consistently delights guests. The presence of a full kitchen is a significant advantage for families with school-age children, offering flexibility for preparing meals and snacks, which can also help manage the budget. Its location in Akihabara provides immediate access to a vibrant district known for its unique shops and entertainment, perfect for curious minds. The hotel is also noted for being kid-friendly and accessible, ensuring a comfortable stay for everyone.</p>
+            <div class="hotel-amenities">
+                <span><i class="fas fa-wifi"></i> Free Wi-Fi</span>
+                <span><i class="fas fa-kitchen-set"></i> Kitchen (in rooms)</span>
+                <span><i class="fas fa-wheelchair"></i> Accessible</span>
+                <span><i class="fas fa-child"></i> Kid-friendly</span>
+                <span><i class="fas fa-parking"></i> Parking (available for a fee)</span>
+            </div>
+            <div class="mt-20">
+                <a href="https://hotel-monday.com/apartment/akihabara/?utm_source=google_bp&utm_medium=organic&utm_campaign=mapakihabara" target="_blank" class="btn"><i class="fas fa-bookmark"></i> Book Your Stay</a>
+            </div>
+        </section>
+
+        <section id="itinerary">
+            <h2><i class="fas fa-route icon-xl"></i> Daily Itinerary</h2>
+
+            <!-- Day 1 -->
+            <div class="day-card" id="day-1">
+                <div class="day-header">
+                    <h3>Day 1: October 13th, 2025 - Akihabara Arrival & Electrifying Exploration</h3>
+                    <button class="add-to-calendar-btn btn-secondary btn-small" data-day="1" data-title="Tokyo: Akihabara Exploration" data-location="Akihabara Electric Town" data-date="2025-10-13" data-time="09:00-18:00">
+                        📅 Add Day 1 to Calendar
+                    </button>
                 </div>
-                <div class="stat-item">
-                    <strong>Oct 13 - 17, 2025</strong>
-                    <span>Dates</span>
-                </div>
-                <div class="stat-item">
-                    <strong>5 Days / 4 Nights</strong>
-                    <span>Duration</span>
-                </div>
-                <div class="stat-item">
-                    <strong>Family Fun</strong>
-                    <span>Trip Type</span>
+                <div class="day-content">
+                    <p>🗓️ Day 1 - Explore Akihabara, Tokyo's vibrant hub for electronics, anime, manga, and gaming culture, and enjoy dinner at Yodobashi Akiba.</p>
+                    <p><strong>Optimized Route:</strong> MONday Apart Premium AKIHABARA → Akihabara Electric Town → Yodobashi Akiba → MONday Apart Premium AKIHABARA</p>
+                    <p><strong>Total Distance:</strong> 2.5 km | <strong>Estimated Travel Time:</strong> 30 mins</p>
+
+                    <div class="timeline">
+                        <div class="timeline-event">
+                            <h4>1. Afternoon: Akihabara Electric Town (9:00 AM - 12:00 PM)</h4>
+                            <p>Akihabara, often nicknamed "Akiba," is Tokyo's vibrant hub for electronics, anime, manga, and gaming culture. This bustling district is a sensory overload in the best way possible. For children, the sheer volume of colorful displays, character merchandise, and interactive arcade games makes it a fantastic playground.</p>
+                            <p class="activities">
+                                <strong>Activities:</strong>
+                                <span><i class="fas fa-gamepad"></i> Arcade Hopping</span>
+                                <span><i class="fas fa-store"></i> Anime & Manga Merch Hunting</span>
+                                <span><i class="fas fa-robot"></i> Gadget Gazing</span>
+                            </p>
+                            <p><strong>Budget:</strong> ¥2,000</p>
+                            <p><strong>Map:</strong> <a href="https://google.com/maps?q=35.6997,139.7712" target="_blank">Akihabara Electric Town</a></p>
+                            <p><strong>Tips:</strong> Arcades typically cost ¥100-¥200 per game. Weekends are very crowded. Estimated duration: 2-3 hours.</p>
+                        </div>
+                        <div class="timeline-event">
+                            <h4>2. Evening: Yodobashi Akiba (Dinner & Shopping) (12:00 PM - 3:00 PM)</h4>
+                            <p>Yodobashi Akiba is a massive, multi-story electronics department store that's far more than just electronics. It features extensive sections for toys, video games, musical instruments, and a full floor of restaurants, perfect for a family dinner.</p>
+                            <p class="activities">
+                                <strong>Activities:</strong>
+                                <span><i class="fas fa-toy-dinosaur"></i> Toy & Game Exploration</span>
+                                <span><i class="fas fa-utensils"></i> Family Dinner</span>
+                                <span><i class="fas fa-gifts"></i> Souvenir Hunting</span>
+                            </p>
+                            <p><strong>Budget:</strong> ¥13,000</p>
+                            <p><strong>Map:</strong> <a href="https://google.com/maps?q=35.6994,139.7731" target="_blank">Yodobashi Akiba</a></p>
+                            <p><strong>Tips:</strong> Dinner costs typically range from ¥1,500-¥3,000 per person. Can be overwhelming due to size; decide on what you want to see/do beforehand. Estimated duration: 2-3 hours.</p>
+                        </div>
+                    </div>
+                    <p class="mt-20"><strong>Day 1 Summary:</strong> Total Distance Covered: 2.5 km | Daily Spending (estimated): ¥15,000</p>
                 </div>
             </div>
-        </header>
 
-        <main>
-            <!-- Overview Card -->
-            <section id="overview" class="card overview-card">
-                <h2>🌍 Trip Overview</h2>
+            <!-- Day 2 -->
+            <div class="day-card" id="day-2">
+                <div class="day-header">
+                    <h3>Day 2: October 14th, 2025 - Magical Day at Tokyo Disneyland</h3>
+                    <button class="add-to-calendar-btn btn-secondary btn-small" data-day="2" data-title="Tokyo: Disneyland Adventure" data-location="Tokyo Disneyland" data-date="2025-10-14" data-time="09:00-21:00">
+                        📅 Add Day 2 to Calendar
+                    </button>
+                </div>
+                <div class="day-content">
+                    <p>🗓️ Day 2 - Immerse yourselves in the enchanting world of Tokyo Disneyland, followed by a relaxed evening at Ikspiari.</p>
+                    <p><strong>Optimized Route:</strong> MONday Apart Premium AKIHABARA → Tokyo Disneyland → Ikspiari → MONday Apart Premium AKIHABARA</p>
+                    <p><strong>Total Distance:</strong> 36.4 km | <strong>Estimated Travel Time:</strong> 1 hour 15 minutes</p>
+
+                    <div class="timeline">
+                        <div class="timeline-event">
+                            <h4>1. Full Day: Tokyo Disneyland (9:00 AM - 7:00 PM)</h4>
+                            <p>Tokyo Disneyland brings Disney's enchanting stories and characters to life with a unique Japanese charm. Divided into seven themed lands, the park offers a wide array of attractions, parades, and shows for all ages.</p>
+                            <p class="activities">
+                                <strong>Activities:</strong>
+                                <span><i class="fas fa-roller-coaster"></i> Ride Attractions</span>
+                                <span><i class="fas fa-mask"></i> Parades & Shows</span>
+                                <span><i class="fas fa-hand-spock"></i> Character Greetings</span>
+                                <span><i class="fas fa-pizza-slice"></i> Themed Dining</span>
+                            </p>
+                            <p><strong>Budget:</strong> ¥33,000 (Entry fees, food & souvenirs)</p>
+                            <p><strong>Map:</strong> <a href="https://google.com/maps?q=35.632896,139.880392" target="_blank">Tokyo Disneyland</a></p>
+                            <p><strong>Tips:</strong> Book tickets in advance online. Arrive early to maximize your time. Use the Tokyo Disney Resort App for wait times and show schedules. Estimated duration: Full day (8-12 hours).</p>
+                        </div>
+                        <div class="timeline-event">
+                            <h4>2. Evening: Ikspiari (Dinner & Leisure) (7:00 PM - 9:00 PM)</h4>
+                            <p>Ikspiari is a themed shopping mall within Tokyo Disney Resort, offering a diverse range of shops, restaurants, and entertainment. Perfect for unwinding after a busy day at Disneyland.</p>
+                            <p class="activities">
+                                <strong>Activities:</strong>
+                                <span><i class="fas fa-utensils"></i> Family Dinner</span>
+                                <span><i class="fas fa-shopping-bag"></i> Shopping</span>
+                                <span><i class="fas fa-shoe-prints"></i> Relaxed Stroll</span>
+                            </p>
+                            <p><strong>Budget:</strong> ¥2,000 (Transportation to and from Disneyland area)</p>
+                            <p><strong>Map:</strong> <a href="https://google.com/maps?q=35.6366,139.8887" target="_blank">Ikspiari</a></p>
+                            <p><strong>Tips:</strong> Many dining choices available. Can be busy, especially after park closing. Estimated duration: 2-3 hours.</p>
+                        </div>
+                    </div>
+                    <p class="mt-20"><strong>Day 2 Summary:</strong> Total Distance Covered: 36.4 km | Daily Spending (estimated): ¥35,000</p>
+                </div>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="day-card" id="day-3">
+                <div class="day-header">
+                    <h3>Day 3: October 15th, 2025 - Animals and Digital Art Wonders</h3>
+                    <button class="add-to-calendar-btn btn-secondary btn-small" data-day="3" data-title="Tokyo: Zoo & Digital Art" data-location="Ueno Zoo" data-date="2025-10-15" data-time="09:30-19:00">
+                        📅 Add Day 3 to Calendar
+                    </button>
+                </div>
+                <div class="day-content">
+                    <p>🗓️ Day 3 - Enjoy wildlife encounters at Ueno Zoo in the morning, followed by the extraordinary immersive digital art experience at TeamLab Planets TOKYO.</p>
+                    <p><strong>Optimized Route:</strong> MONday Apart Premium AKIHABARA → Ueno Zoo → TeamLab Planets TOKYO → MONday Apart Premium AKIHABARA</p>
+                    <p><strong>Total Distance:</strong> 22.8 km | <strong>Estimated Travel Time:</strong> 1 hour 10 minutes</p>
+
+                    <div class="timeline">
+                        <div class="timeline-event">
+                            <h4>1. Morning to Afternoon: Ueno Zoo (9:30 AM - 1:30 PM)</h4>
+                            <p>Japan's oldest zoo, renowned for its giant pandas and diverse collection of animals. Located within Ueno Park, it offers a wonderful opportunity for children to connect with wildlife.</p>
+                            <p class="activities">
+                                <strong>Activities:</strong>
+                                <span><i class="fas fa-panda"></i> Meet the Pandas</span>
+                                <span><i class="fas fa-hippo"></i> Explore Animal Exhibits</span>
+                                <span><i class="fas fa-train"></i> Monorail Ride</span>
+                                <span><i class="fas fa-hand-holding-heart"></i> Children's Zoo</span>
+                            </p>
+                            <p><strong>Budget:</strong> ¥4,000 (Zoo entry + lunch/snacks)</p>
+                            <p><strong>Map:</strong> <a href="https://google.com/maps?q=35.7175,139.7711" target="_blank">Ueno Zoo</a></p>
+                            <p><strong>Tips:</strong> Arrive shortly after opening (9:30 AM) to avoid crowds. Lines for pandas can be long. Estimated duration: 3-4 hours.</p>
+                        </div>
+                        <div class="timeline-event">
+                            <h4>2. Late Afternoon/Evening: TeamLab Planets TOKYO (3:30 PM - 7:00 PM)</h4>
+                            <p>An extraordinary immersive digital art museum where visitors step barefoot into large-scale, interactive installations. A mesmerizing environment that captivates both adults and children.</p>
+                            <p class="activities">
+                                <strong>Activities:</strong>
+                                <span><i class="fas fa-water"></i> Barefoot Immersion</span>
+                                <span><i class="fas fa-flower"></i> Floating Flower Garden</span>
+                                <span><i class="fas fa-gem"></i> Crystal Universe</span>
+                                <span><i class="fas fa-hand-pointer"></i> Interactive Digital Art</span>
+                            </p>
+                            <p><strong>Budget:</strong> ¥8,000 (TeamLab tickets) + ¥6,000 (dinner) + ¥2,000 (transport)</p>
+                            <p><strong>Map:</strong> <a href="https://google.com/maps?q=35.6601,139.7997" target="_blank">TeamLab Planets TOKYO</a></p>
+                            <p><strong>Tips:</strong> Book tickets online in advance! Wear clothes that can be rolled up (you'll walk through water). Lockers provided. Estimated duration: 1.5-2 hours.</p>
+                        </div>
+                    </div>
+                    <p class="mt-20"><strong>Day 3 Summary:</strong> Total Distance Covered: 22.8 km | Daily Spending (estimated): ¥20,000</p>
+                </div>
+            </div>
+
+            <!-- Day 4 -->
+            <div class="day-card" id="day-4">
+                <div class="day-header">
+                    <h3>Day 4: October 16th, 2025 - Ghibli Magic & Park Play</h3>
+                    <button class="add-to-calendar-btn btn-secondary btn-small" data-day="4" data-title="Tokyo: Ghibli Museum & Park" data-location="Ghibli Museum" data-date="2025-10-16" data-time="10:00-18:00">
+                        📅 Add Day 4 to Calendar
+                    </button>
+                </div>
+                <div class="day-content">
+                    <p>🗓️ Day 4 - Dive into the whimsical world of the Ghibli Museum, followed by a relaxing and playful afternoon at Inokashira Park.</p>
+                    <p><strong>Optimized Route:</strong> MONday Apart Premium AKIHABARA → Ghibli Museum → Inokashira Park → MONday Apart Premium AKIHABAHRA</p>
+                    <p><strong>Total Distance:</strong> 36.8 km | <strong>Estimated Travel Time:</strong> 1 hour 30 minutes</p>
+
+                    <div class="timeline">
+                        <div class="timeline-event">
+                            <h4>1. Morning: Ghibli Museum (10:00 AM - 1:00 PM)</h4>
+                            <p>A whimsical and enchanting museum dedicated to Studio Ghibli. Designed by Hayao Miyazaki, it's a place "where a story begins" with original animation cells, exhibits, and an exclusive short film.</p>
+                            <p class="activities">
+                                <strong>Activities:</strong>
+                                <span><i class="fas fa-bus"></i> Ride the Cat Bus (kids only)</span>
+                                <span><i class="fas fa-paintbrush"></i> Explore Animation Exhibits</span>
+                                <span><i class="fas fa-film"></i> Watch an Exclusive Short Film</span>
+                                <span><i class="fas fa-robot"></i> Rooftop Garden with Robot Soldier</span>
+                            </p>
+                            <p><strong>Budget:</strong> ¥3,000 (Ghibli tickets) + ¥1,500 (cafe)</p>
+                            <p><strong>Map:</strong> <a href="https://google.com/maps?q=35.6980,139.5700" target="_blank">Ghibli Museum</a></p>
+                            <p><strong>Tips:</strong> Tickets MUST be purchased months in advance and they sell out quickly. No photography inside. Estimated duration: 2-3 hours.</p>
+                        </div>
+                        <div class="timeline-event">
+                            <h4>2. Afternoon: Inokashira Park (Lunch & Play) (1:00 PM - 4:00 PM)</h4>
+                            <p>A beautiful public park adjacent to the Ghibli Museum, featuring a large pond, paddle boats, a small zoo, and playgrounds. Perfect for relaxation and family fun.</p>
+                            <p class="activities">
+                                <strong>Activities:</strong>
+                                <span><i class="fas fa-sailboat"></i> Boat Ride</span>
+                                <span><i class="fas fa-hippo"></i> Inokashira Park Zoo</span>
+                                <span><i class="fas fa-child-reaching"></i> Playground Fun</span>
+                                <span><i class="fas fa-basket-shopping"></i> Picnic Lunch</span>
+                            </p>
+                            <p><strong>Budget:</strong> ¥1,500 (boat rental) + ¥10,500 (zoo entry, lunch/snacks) + ¥3,000 (transport)</p>
+                            <p><strong>Map:</strong> <a href="https://google.com/maps?q=35.6997,139.5701" target="_blank">Inokashira Park</a></p>
+                            <p><strong>Tips:</strong> Can get crowded on weekends. Estimated duration: 2-3 hours.</p>
+                        </div>
+                    </div>
+                    <p class="mt-20"><strong>Day 4 Summary:</strong> Total Distance Covered: 36.8 km | Daily Spending (estimated): ¥15,000</p>
+                </div>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="day-card" id="day-5">
+                <div class="day-header">
+                    <h3>Day 5: October 17th, 2025 - Shibuya Crossing & Departure</h3>
+                    <button class="add-to-calendar-btn btn-secondary btn-small" data-day="5" data-title="Tokyo: Shibuya & Departure" data-location="Shibuya Crossing" data-date="2025-10-17" data-time="09:00-14:00">
+                        📅 Add Day 5 to Calendar
+                    </button>
+                </div>
+                <div class="day-content">
+                    <p>🗓️ Day 5 - Experience the iconic Shibuya Crossing and breathtaking panoramic views from Shibuya Sky before heading to Narita Airport for departure.</p>
+                    <p><strong>Optimized Route:</strong> MONday Apart Premium AKIHABARA → Shibuya Crossing & Hachiko Statue → Shibuya Sky → MONday Apart Premium AKIHABARA → Narita Airport (NRT)</p>
+                    <p><strong>Total Distance:</strong> 82 km | <strong>Estimated Travel Time:</strong> 2 hours (to airport)</p>
+
+                    <div class="timeline">
+                        <div class="timeline-event">
+                            <h4>1. Morning: Shibuya Crossing & Hachiko Statue (9:00 AM - 10:30 AM)</h4>
+                            <p>The most famous intersection in the world, a chaotic yet mesmerizing spectacle. Also visit the poignant Hachiko Statue, a tribute to the loyal Akita dog.</p>
+                            <p class="activities">
+                                <strong>Activities:</strong>
+                                <span><i class="fas fa-people-arrows"></i> Shibuya Scramble</span>
+                                <span><i class="fas fa-dog"></i> Visit Hachiko Statue</span>
+                                <span><i class="fas fa-store-alt"></i> Window Shopping</span>
+                            </p>
+                            <p><strong>Budget:</strong> Free (except for optional purchases)</p>
+                            <p><strong>Map:</strong> <a href="https://google.com/maps?q=35.6591,139.7007" target="_blank">Shibuya Crossing</a></p>
+                            <p><strong>Tips:</strong> Can be incredibly crowded, especially during peak hours. Keep a close eye on children. Estimated duration: 1-1.5 hours.</p>
+                        </div>
+                        <div class="timeline-event">
+                            <h4>2. Late Morning: Shibuya Sky (10:30 AM - 12:30 PM)</h4>
+                            <p>An open-air observation deck atop Shibuya Scramble Square, offering unparalleled panoramic views of Tokyo, including iconic landmarks and Mount Fuji on a clear day.</p>
+                            <p class="activities">
+                                <strong>Activities:</strong>
+                                <span><i class="fas fa-city"></i> Panoramic Views</span>
+                                <span><i class="fas fa-camera"></i> Photo Opportunities</span>
+                                <span><i class="fas fa-binoculars"></i> Sky Edge Viewpoint</span>
+                            </p>
+                            <p><strong>Budget:</strong> ¥6,000 (Shibuya Sky tickets) + ¥4,000 (transport to airport)</p>
+                            <p><strong>Map:</strong> <a href="https://google.com/maps?q=35.6591,139.7007" target="_blank">Shibuya Sky (Shibuya Scramble Square)</a></p>
+                            <p><strong>Tips:</strong> Book tickets online in advance! Can be windy at the top, secure loose items. Estimated duration: 1.5-2 hours.</p>
+                        </div>
+                    </div>
+                    <p class="mt-20"><strong>Day 5 Summary:</strong> Total Distance Covered: 82 km | Daily Spending (estimated): ¥10,000</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="budget" class="card">
+            <h2><i class="fas fa-money-bill-wave icon-xl"></i> Budget Dashboard</h2>
+            <p><strong>Total Trip Budget:</strong> ¥1,500,000</p>
+
+            <div class="budget-grid">
+                <div class="budget-total">Total Budget<span>¥1,500,000</span></div>
+                <div class="budget-spent">Estimated Spent<span>¥194,000</span></div>
+                <div class="budget-remaining">Remaining Budget<span>¥1,306,000</span></div>
+            </div>
+
+            <h3>Spending Overview</h3>
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 12.93%;" data-progress="12.93%">
+                    12.93% of Budget Used (¥194,000)
+                </div>
+            </div>
+
+            <h3>Detailed Expenses</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Cost (JPY)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Accommodation</td>
+                        <td>MONday Apart Premium AKIHABARA (4 nights)</td>
+                        <td>99,000</td>
+                    </tr>
+                    <tr>
+                        <td>Day 1 Expenses</td>
+                        <td>Akihabara Exploration (meals, activities)</td>
+                        <td>15,000</td>
+                    </tr>
+                    <tr>
+                        <td>Day 2 Expenses</td>
+                        <td>Tokyo Disneyland (entry, meals, transport)</td>
+                        <td>35,000</td>
+                    </tr>
+                    <tr>
+                        <td>Day 3 Expenses</td>
+                        <td>Ueno Zoo & TeamLab Planets (entry, meals, transport)</td>
+                        <td>20,000</td>
+                    </tr>
+                    <tr>
+                        <td>Day 4 Expenses</td>
+                        <td>Ghibli Museum & Inokashira Park (entry, activities, meals, transport)</td>
+                        <td>15,000</td>
+                    </tr>
+                    <tr>
+                        <td>Day 5 Expenses</td>
+                        <td>Shibuya & Departure (entry, transport)</td>
+                        <td>10,000</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"><strong>TOTAL ESTIMATED SPENT</strong></td>
+                        <td><strong>¥194,000</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><strong>TOTAL REMAINING BUDGET</strong></td>
+                        <td><strong>¥1,306,000</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <h3>Budget Tips:</h3>
+            <ul>
+                <li><i class="fas fa-store icon"></i> <strong>Convenience Store Meals:</strong> Utilize local convenience stores (Konbini) like 7-Eleven, FamilyMart, or Lawson for affordable and delicious meals.</li>
+                <li><i class="fas fa-subway icon"></i> <strong>Public Transportation Passes:</strong> Consider purchasing a Suica or Pasmo IC card for seamless travel on Tokyo's extensive train and subway network.</li>
+                <li><i class="fas fa-tree icon"></i> <strong>Free Attractions:</strong> Take advantage of Tokyo's many free attractions, such as parks (Ueno Park, Shinjuku Gyoen), walking tours, and window shopping in vibrant districts.</li>
+                <li><i class="fas fa-child icon"></i> <strong>Kids' Meals:</strong> Many restaurants offer special kids' menus or smaller portions at a reduced price.</li>
+            </ul>
+        </section>
+
+        <section id="essentials" class="card">
+            <h2><i class="fas fa-list-check icon-xl"></i> Essentials</h2>
+
+            <h3>Packing List (Mid-October)</h3>
+            <div class="checklist">
+                <h4><i class="fas fa-shirt icon"></i> Clothing:</h4>
                 <ul>
-                    <li><i class="fas fa-map-marker-alt"></i> <strong>Destination:</strong> Tokyo, Japan</li>
-                    <li><i class="fas fa-calendar-alt"></i> <strong>Duration:</strong> October 13, 2025 – October 17, 2025 (5 days, 4 nights)</li>
-                    <li><i class="fas fa-users"></i> <strong>Travel Companions:</strong> Family with school-age children (ages 7 and 12)</li>
-                    <li><i class="fas fa-suitcase-rolling"></i> <strong>Trip Type:</strong> Family Fun</li>
+                    <li><input type="checkbox" id="pack-tshirts" checked><label for="pack-tshirts">Light layers: T-shirts, long-sleeved shirts (temperatures can vary, max 29.7°C, min 19.8°C)</label></li>
+                    <li><input type="checkbox" id="pack-pants" checked><label for="pack-pants">Comfortable pants/jeans and shorts</label></li>
+                    <li><input type="checkbox" id="pack-jacket" checked><label for="pack-jacket">Light jacket or cardigan for evenings and air-conditioned interiors</label></li>
+                    <li><input type="checkbox" id="pack-rain" checked><label for="pack-rain">Lightweight rain jackets or umbrellas (chance of rain on arrival day)</label></li>
+                    <li><input type="checkbox" id="pack-shoes" checked><label for="pack-shoes">Comfortable walking shoes (essential for theme parks and city exploration)</label></li>
+                    <li><input type="checkbox" id="pack-socks" checked><label for="pack-socks">Plenty of socks</label></li>
+                    <li><input type="checkbox" id="pack-pajamas" checked><label for="pack-pajamas">Sleepwear</label></li>
                 </ul>
-            </section>
-
-            <!-- Hotel Section -->
-            <section id="hotel" class="card hotel-section">
-                <h2>🏨 Hotel Recommendation: MONday Apart Premium AKIHABARA</h2>
-                <p><strong>Location:</strong> 3-20 Kandaizumicho, Chiyoda City, Tokyo 101-0024, Japan (Akihabara area)</p>
-                <p><strong>Coordinates:</strong> <a href="https://google.com/maps?q=35.69726,139.7790238" target="_blank" rel="noopener noreferrer">35.69726, 139.7790238 <i class="fas fa-external-link-alt"></i></a></p>
-                <p><strong>Price:</strong> ¥24,750 per room per night</p>
-                <p><strong>Total Accommodation Cost:</strong> ¥99,000 (¥24,750 × 4 nights × 1 room)</p>
-
-                <h3>Why We Chose This Hotel:</h3>
-                <p>MONday Apart Premium AKIHABARA is an excellent choice for your family trip to Tokyo. With its apartment-style rooms featuring a kitchen, it offers the convenience and flexibility ideal for families with children. The hotel's high overall rating (4.8 stars) and specific positive reviews mentioning its kid-friendly amenities further reinforce its suitability. Located in the vibrant Akihabara district, it provides easy access to entertainment and transportation, making it a perfect base for exploring the city.</p>
-
-                <h3>Amenities:</h3>
-                <ul class="amenities">
-                    <li><i class="fas fa-wifi"></i> Free Wi-Fi</li>
-                    <li><i class="fas fa-parking"></i> Parking (paid)</li>
-                    <li><i class="fas fa-kitchen-set"></i> Kitchen</li>
-                    <li><i class="fas fa-wheelchair"></i> Accessible rooms</li>
-                    <li><i class="fas fa-child"></i> Kid-friendly</li>
-                </ul>
-
-                <h3>Booking Links:</h3>
-                <div class="booking-links">
-                    <a href="https://hotel-monday.com/apartment/akihabara/?utm_source=google_bp&utm_medium=organic&utm_campaign=mapakihabara" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                        <i class="fas fa-hotel"></i> Book on Hotel Website
-                    </a>
-                </div>
-
-                <h3>Hotel Photos:</h3>
-                <div class="gallery">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipNhmYROuB4Zug-cv-54kJzqz55VzWs0Mhno1CWH=s10000" alt="Hotel exterior" loading="lazy">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipNpU-kCi5lNcxSKGtw82FsvAO5VaIlfNwlFf_U4=s10000" alt="Hotel room interior with bed" loading="lazy">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipM7jE9fj2HnwgWChMj05e87Nc1S_35bBluTt0em=s10000" alt="Hotel kitchen area" loading="lazy">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipMZqY6niK9Z4v0udBWzDf_7jolhTY6kX5PgYAVb=s10000" alt="Hotel dining area" loading="lazy">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipNm94uYeW2CtVmi4b9gZZQEl9wV5Z-26x9CIg=s10000" alt="Hotel bathroom" loading="lazy">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipOsT-XMn-WO2hT9CwH95YF2fvGZ_ZdLSLVsWJnO=s10000" alt="Hotel lobby" loading="lazy">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipPj-e39O0MRwBJKXZyKhMiBCHxdTL0cUE_znLA=s10000" alt="Hotel amenities area" loading="lazy">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipPDiRGITKjN02MW2NwM0Wl2CJnRKADQMShQHl3b=s10000" alt="Hotel washing machine" loading="lazy">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipM1m9yoZj4cb2Jft9Z_xQfZn0VrV4Rtya1d8NU3=s10000" alt="Hotel room with sofa" loading="lazy">
-                </div>
-            </section>
-
-            <!-- Daily Itinerary -->
-            <section id="itinerary" class="daily-itinerary-section">
-                <h2>🗓️ Daily Itinerary</h2>
-                <div class="timeline">
-                    <!-- Day 1 -->
-                    <article class="day-card card" id="day-1" data-day-number="1">
-                        <h3>Summary: Day 1: Arrival & Akihabara Electric Town Fun - Tokyo</h3>
-                        <p>🗓️ Day 1 - Arrival & Akihabara Electric Town Fun</p>
-
-                        <div class="route-info">
-                            <i class="fas fa-map-marked-alt"></i> <strong>Optimized Route:</strong> Hotel → Akihabara Electric Town → Hotel
-                            <i class="fas fa-route"></i> <strong>Total Distance:</strong> 2 km
-                            <i class="fas fa-clock"></i> <strong>Estimated Travel Time:</strong> 15-20 minutes (walking)
-                        </div>
-
-                        <div class="place-details">
-                            <h4>📍 Akihabara Electric Town</h4>
-                            <p><strong>Time:</strong> Afternoon</p>
-                            <p>Akihabara, affectionately known as "Akiba," is Tokyo's vibrant hub for electronics, anime, manga, and gaming culture. This bustling district transforms into a paradise for tech enthusiasts and pop culture fans with its multi-story electronics stores, specialized anime shops, and unique maid cafes. Bright neon signs and animated billboards create an energetic atmosphere, especially in the evening. It's a place where traditional Japanese culture meets futuristic trends, offering a sensory overload of sights and sounds. For families, Akihabara is an exciting adventure, with plenty of opportunities to discover new gadgets, quirky souvenirs, and engaging entertainment.</p>
-                            <ul>
-                                <li><span class="icon fas fa-robot"></span> <strong>Activities:</strong> Explore Electronics Stores, Arcade Games at SEGA/Taito Station, Anime & Manga Shopping, Gachapon Machines.</li>
-                                <li><span class="icon fas fa-dollar-sign"></span> <strong>Budget:</strong> ¥5,000-¥10,000 (for games and small souvenirs)</li>
-                                <li><span class="icon fas fa-map-marker-alt"></span> <strong>Map:</strong> <a href="https://google.com/maps?q=35.6997,139.7714" target="_blank" rel="noopener noreferrer">35.6997° N, 139.7714° E <i class="fas fa-external-link-alt"></i></a></li>
-                            </ul>
-                            <div class="tips">
-                                <strong>⚠️ Tips:</strong> Akihabara can be very crowded, especially on weekends. Keep an eye on children in busy areas. Best time: Afternoon to early evening. Estimated duration: 3-4 hours. Photo Ops: Chuo Dori street, colorful shop displays.
-                            </div>
-                        </div>
-                        <button class="add-to-calendar-btn" data-day="1" data-date="2025-10-13" data-title="Akihabara Electric Town Fun" data-location="Akihabara, Tokyo" data-description="Explore electronics, anime, arcades." data-start-time="13:00" data-end-time="17:00">
-                            📅 Add Day 1 to Calendar
-                        </button>
-                    </article>
-
-                    <!-- Day 2 -->
-                    <article class="day-card card" id="day-2" data-day-number="2">
-                        <h3>Summary: Day 2: Exploring Shibuya - Iconic Crossings and Youth Culture - Tokyo</h3>
-                        <p>🗓️ Day 2 - Exploring Shibuya - Iconic Crossings and Youth Culture</p>
-
-                        <div class="route-info">
-                            <i class="fas fa-map-marked-alt"></i> <strong>Optimized Route:</strong> Hotel → Shibuya Crossing → Hachiko Memorial Statue → Shibuya Center Gai → Shibuya Sky → Hotel
-                            <i class="fas fa-route"></i> <strong>Total Distance:</strong> 10.9 km
-                            <i class="fas fa-clock"></i> <strong>Estimated Travel Time:</strong> 40-50 minutes (train/subway + walking)
-                        </div>
-
-                        <div class="place-details">
-                            <h4>📍 Shibuya Crossing & Hachiko Memorial Statue</h4>
-                            <p><strong>Time:</strong> Morning</p>
-                            <p>Shibuya Crossing is arguably the most famous intersection in the world, a mesmerizing dance of humanity as hundreds of people cross from all directions simultaneously. Just outside Shibuya Station, you'll find the Hachiko Memorial Statue, a poignant tribute to an incredibly loyal Akita dog. This heartwarming story of loyalty has made Hachiko a beloved figure and his statue a popular meeting point.</p>
-                            <ul>
-                                <li><span class="icon fas fa-traffic-light"></span> <strong>Activities:</strong> Experience Shibuya Crossing, Visit Hachiko Memorial Statue, People Watching.</li>
-                                <li><span class="icon fas fa-dollar-sign"></span> <strong>Budget:</strong> Free to visit.</li>
-                                <li><span class="icon fas fa-map-marker-alt"></span> <strong>Map:</strong> <a href="https://google.com/maps?q=35.6590,139.7034" target="_blank" rel="noopener noreferrer">Shibuya Crossing: 35.6590° N, 139.7034° E <i class="fas fa-external-link-alt"></i></a></li>
-                            </ul>
-                            <div class="tips">
-                                <strong>⚠️ Tips:</strong> Shibuya Crossing can be overwhelming due to the crowd. Keep children close. Best time: Morning for fewer crowds. Estimated duration: 1.5-2 hours. Photo Ops: From corners of the crossing, and with Hachiko.
-                            </div>
-                        </div>
-
-                        <div class="place-details">
-                            <h4>📍 Shibuya Center Gai & Shopping</h4>
-                            <p><strong>Time:</strong> Afternoon</p>
-                            <p>Shibuya Center Gai is a lively pedestrian street branching off from Shibuya Crossing, pulsating with youth culture, trendy shops, restaurants, and entertainment venues. It's a bustling artery where you can find everything from fashion boutiques and music stores to karaoke boxes and izakayas. It perfectly embodies the fashionable and energetic spirit of Shibuya.</p>
-                            <ul>
-                                <li><span class="icon fas fa-shopping-bag"></span> <strong>Activities:</strong> Window Shopping, Music & Entertainment, Grab a Snack, Purikura (Photo Booths).</li>
-                                <li><span class="icon fas fa-dollar-sign"></span> <strong>Budget:</strong> ¥3,000-¥7,000 (for snacks and small purchases).</li>
-                                <li><span class="icon fas fa-map-marker-alt"></span> <strong>Map:</strong> <a href="https://google.com/maps?q=35.6596,139.6993" target="_blank" rel="noopener noreferrer">35.6596° N, 139.6993° E <i class="fas fa-external-link-alt"></i></a></li>
-                            </ul>
-                            <div class="tips">
-                                <strong>⚠️ Tips:</strong> Center Gai can be extremely crowded. Be mindful of belongings. Best time: Late morning to afternoon. Estimated duration: 2-3 hours. Photo Ops: Colorful storefronts, street art.
-                            </div>
-                        </div>
-
-                        <div class="place-details">
-                            <h4>📍 Shibuya Sky</h4>
-                            <p><strong>Time:</strong> Evening</p>
-                            <p>Shibuya Sky is an open-air observation deck offering unparalleled panoramic views of Tokyo. Rising 229 meters above Shibuya, it provides a breathtaking 360-degree vista that includes iconic landmarks like Shibuya Crossing, Tokyo Tower, and even Mount Fuji on a clear day.</p>
-                            <ul>
-                                <li><span class="icon fas fa-binoculars"></span> <strong>Activities:</strong> Panoramic Views, Sunset & Night Views, Photography, Relax in seating areas.</li>
-                                <li><span class="icon fas fa-dollar-sign"></span> <strong>Budget:</strong> ¥500-¥2,200 per person (booking online in advance recommended).</li>
-                                <li><span class="icon fas fa-map-marker-alt"></span> <strong>Map:</strong> <a href="https://google.com/maps?q=35.6586,139.7007" target="_blank" rel="noopener noreferrer">35.6586° N, 139.7007° E <i class="fas fa-external-link-alt"></i></a></li>
-                            </ul>
-                            <div class="tips">
-                                <strong>⚠️ Tips:</strong> Check weather for clear visibility. Book in advance for sunset slots. Light jacket recommended as it can be windy. Estimated duration: 1.5-2 hours. Photo Ops: The entire deck.
-                            </div>
-                        </div>
-                        <button class="add-to-calendar-btn" data-day="2" data-date="2025-10-14" data-title="Shibuya Exploration & Shibuya Sky" data-location="Shibuya, Tokyo" data-description="Iconic crossing, Hachiko, shopping, and panoramic views from Shibuya Sky." data-start-time="09:00" data-end-time="20:00">
-                            📅 Add Day 2 to Calendar
-                        </button>
-                    </article>
-
-                    <!-- Day 3 -->
-                    <article class="day-card card" id="day-3" data-day-number="3">
-                        <h3>Summary: Day 3: Culture, Nature, and Sky-High Views - Tokyo</h3>
-                        <p>🗓️ Day 3 - Culture, Nature, and Sky-High Views</p>
-
-                        <div class="route-info">
-                            <i class="fas fa-map-marked-alt"></i> <strong>Optimized Route:</strong> Hotel → Tokyo National Museum & Ueno Park → Tokyo Skytree → Hotel
-                            <i class="fas fa-route"></i> <strong>Total Distance:</strong> 8.4 km
-                            <i class="fas fa-clock"></i> <strong>Estimated Travel Time:</strong> 50-60 minutes (subway/train)
-                        </div>
-
-                        <div class="place-details">
-                            <h4>📍 Tokyo National Museum & Ueno Park</h4>
-                            <p><strong>Time:</strong> Morning</p>
-                            <p>The Tokyo National Museum, Japan's largest and oldest national museum, houses an unparalleled collection of Japanese and Asian art and archaeological artifacts. Its grand buildings are set within the expansive and beautiful Ueno Park, a cultural oasis, home to several museums, a zoo, temples, and shrines, as well as a large pond.</p>
-                            <ul>
-                                <li><span class="icon fas fa-palette"></span> <strong>Activities:</strong> Explore Tokyo National Museum (art, artifacts, samurai armor), Stroll through Ueno Park, Visit Ueno Zoo (Optional), Paddle Boat on Shinobazu Pond (Seasonal).</li>
-                                <li><span class="icon fas fa-dollar-sign"></span> <strong>Budget:</strong> ¥0-¥1,000 for museum, ¥0-¥600 for zoo (per adult, children free/discounted).</li>
-                                <li><span class="icon fas fa-map-marker-alt"></span> <strong>Map:</strong> <a href="https://google.com/maps?q=35.7188,139.7769" target="_blank" rel="noopener noreferrer">Tokyo National Museum: 35.7188° N, 139.7769° E <i class="fas fa-external-link-alt"></i></a></li>
-                            </ul>
-                            <div class="tips">
-                                <strong>⚠️ Tips:</strong> Plan to focus on specific sections of the museum. Check zoo hours if visiting. Estimated duration: 3-4 hours. Photo Ops: Museum facade, Ueno Park scenery.
-                            </div>
-                        </div>
-
-                        <div class="place-details">
-                            <h4>📍 Tokyo Skytree</h4>
-                            <p><strong>Time:</strong> Afternoon/Evening</p>
-                            <p>The Tokyo Skytree is an awe-inspiring broadcasting and observation tower, reaching a height of 634 meters. It boasts two observation decks (Tembo Deck at 350m, Tembo Galleria at 450m) offering breathtaking panoramic views of Tokyo. At its base is Tokyo Solamachi, a large shopping and entertainment complex.</p>
-                            <ul>
-                                <li><span class="icon fas fa-tower-observation"></span> <strong>Activities:</strong> Ascend to the Observation Decks, Walk on the Skywalk, Explore Tokyo Solamachi, Enjoy Night Views.</li>
-                                <li><span class="icon fas fa-dollar-sign"></span> <strong>Budget:</strong> ¥950-¥3,100 per person (booking online in advance recommended).</li>
-                                <li><span class="icon fas fa-map-marker-alt"></span> <strong>Map:</strong> <a href="https://google.com/maps?q=35.7100,139.8107" target="_blank" rel="noopener noreferrer">35.7100° N, 139.8107° E <i class="fas fa-external-link-alt"></i></a></li>
-                            </ul>
-                            <div class="tips">
-                                <strong>⚠️ Tips:</strong> Can be very crowded; consider Fast Skytree Ticket. Best time: Late afternoon to early evening for both day and night views. Estimated duration: 2-3 hours (excluding Solamachi). Photo Ops: From the observation decks, and from below.
-                            </div>
-                        </div>
-                        <button class="add-to-calendar-btn" data-day="3" data-date="2025-10-15" data-title="Ueno Park & Tokyo Skytree" data-location="Ueno Park & Tokyo Skytree, Tokyo" data-description="Cultural morning in Ueno, followed by sky-high views from Tokyo Skytree." data-start-time="09:00" data-end-time="18:00">
-                            📅 Add Day 3 to Calendar
-                        </button>
-                    </article>
-
-                    <!-- Day 4 -->
-                    <article class="day-card card" id="day-4" data-day-number="4">
-                        <h3>Summary: Day 4: Immersive Art & Futuristic Fun in Odaiba - Tokyo</h3>
-                        <p>🗓️ Day 4 - Immersive Art & Futuristic Fun in Odaiba</p>
-
-                        <div class="route-info">
-                            <i class="fas fa-map-marked-alt"></i> <strong>Optimized Route:</strong> Hotel → TeamLab Planets TOKYO → DiverCity Tokyo Plaza (Odaiba) → Hotel
-                            <i class="fas fa-route"></i> <strong>Total Distance:</strong> 17.5 km
-                            <i class="fas fa-clock"></i> <strong>Estimated Travel Time:</strong> 1 hour - 1 hour 15 minutes (train/subway)
-                        </div>
-
-                        <div class="place-details">
-                            <h4>📍 TeamLab Planets TOKYO</h4>
-                            <p><strong>Time:</strong> Morning</p>
-                            <p>TeamLab Planets TOKYO is an extraordinary, immersive digital art museum where you literally become part of the art. Visitors walk barefoot through several enormous installations that engage all the senses, from wading through water with digital koi to wandering through an infinite crystal universe.</p>
-                            <ul>
-                                <li><span class="icon fas fa-lightbulb"></span> <strong>Activities:</strong> Walk Through Water (digital koi), Infinite Crystal Universe, Floating Flower Garden, Body Immersive Art.</li>
-                                <li><span class="icon fas fa-dollar-sign"></span> <strong>Budget:</strong> ¥1,000-¥3,200 per person (booking online in advance essential).</li>
-                                <li><span class="icon fas fa-map-marker-alt"></span> <strong>Map:</strong> <a href="https://google.com/maps?q=35.6635,139.7997" target="_blank" rel="noopener noreferrer">35.6635° N, 139.7997° E <i class="fas fa-external-link-alt"></i></a></li>
-                            </ul>
-                            <div class="tips">
-                                <strong>⚠️ Tips:</strong> Wear comfortable clothes that can be rolled up (water installations). You'll be barefoot. Book in advance. Estimated duration: 2-3 hours. Photo Ops: Every installation is unique.
-                            </div>
-                        </div>
-
-                        <div class="place-details">
-                            <h4>📍 Odaiba Exploration</h4>
-                            <p><strong>Time:</strong> Afternoon</p>
-                            <p>Odaiba is a large, reclaimed island in Tokyo Bay, transformed into a futuristic entertainment hub with stunning waterfront views. It's a playground for all ages, featuring innovative architecture, expansive shopping malls, and family-friendly attractions like the life-sized Unicorn Gundam statue.</p>
-                            <ul>
-                                <li><span class="icon fas fa-robot"></span> <strong>Activities:</strong> See the Giant Gundam Statue (DiverCity Tokyo Plaza), Explore DiverCity Tokyo Plaza, Miraikan (National Museum of Emerging Science and Innovation) (Optional, fee applies), Palette Town Ferris Wheel (Optional, fee applies), Odaiba Marine Park.</li>
-                                <li><span class="icon fas fa-dollar-sign"></span> <strong>Budget:</strong> ¥2,000-¥5,000 per person (depending on attractions).</li>
-                                <li><span class="icon fas fa-map-marker-alt"></span> <strong>Map:</strong> <a href="https://google.com/maps?q=35.6253,139.7770" target="_blank" rel="noopener noreferrer">DiverCity Tokyo Plaza: 35.6253° N, 139.7770° E <i class="fas fa-external-link-alt"></i></a></li>
-                            </ul>
-                            <div class="tips">
-                                <strong>⚠️ Tips:</strong> The Yurikamome line offers great views. Prioritize attractions based on family interest. Best time: Afternoon into early evening to catch Gundam show and sunset views. Estimated duration: 4-5 hours. Photo Ops: Gundam statue, Rainbow Bridge views.
-                            </div>
-                        </div>
-                        <button class="add-to-calendar-btn" data-day="4" data-date="2025-10-16" data-title="TeamLab Planets & Odaiba Fun" data-location="Odaiba, Tokyo" data-description="Immersive digital art at TeamLab and futuristic fun in Odaiba." data-start-time="09:00" data-end-time="18:00">
-                            📅 Add Day 4 to Calendar
-                        </button>
-                    </article>
-
-                    <!-- Day 5 -->
-                    <article class="day-card card" id="day-5" data-day-number="5">
-                        <h3>Summary: Day 5: Morning Relaxation & Departure - Tokyo</h3>
-                        <p>🗓️ Day 5 - Morning Relaxation & Departure</p>
-
-                        <div class="route-info">
-                            <i class="fas fa-map-marked-alt"></i> <strong>Optimized Route:</strong> Hotel → Imperial Palace East Garden → Hotel (for luggage pickup) → Airport
-                            <i class="fas fa-route"></i> <strong>Total Distance:</strong> 4 km
-                            <i class="fas fa-clock"></i> <strong>Estimated Travel Time:</strong> 25-30 minutes (excluding travel to airport)
-                        </div>
-
-                        <div class="place-details">
-                            <h4>📍 Imperial Palace East Garden</h4>
-                            <p><strong>Time:</strong> Morning</p>
-                            <p>The Imperial Palace East Garden is a serene and beautifully maintained garden located on the grounds of the former Edo Castle. While the inner palace grounds are not accessible, the East Garden offers a peaceful retreat with lush greenery, ancient stone walls, moats, and remnants of the former castle keep.</p>
-                            <ul>
-                                <li><span class="icon fas fa-tree"></span> <strong>Activities:</strong> Stroll through the Gardens, Explore Castle Remnants, Relax and Reflect, Photography.</li>
-                                <li><span class="icon fas fa-dollar-sign"></span> <strong>Budget:</strong> Free entry.</li>
-                                <li><span class="icon fas fa-map-marker-alt"></span> <strong>Map:</strong> <a href="https://google.com/maps?q=35.6865,139.7578" target="_blank" rel="noopener noreferrer">35.6865° N, 139.7578° E <i class="fas fa-external-link-alt"></i></a></li>
-                            </ul>
-                            <div class="tips">
-                                <strong>⚠️ Tips:</strong> Gardens are closed on Mondays and Fridays. Check opening hours. Estimated duration: 1.5-2 hours. Photo Ops: Garden landscapes, stone walls.
-                            </div>
-                        </div>
-
-                        <div class="place-details">
-                            <h4>✈️ Late Morning: Check-out and Departure</h4>
-                            <p>After a relaxing morning at the Imperial Palace East Garden, head back to your hotel to collect your luggage and prepare for your departure from Japan.</p>
-                            <ul>
-                                <li><span class="icon fas fa-plane-departure"></span> <strong>Travel to Airport:</strong> MONday Apart Premium AKIHABARA → Haneda Airport (HND)</li>
-                                <li><span class="icon fas fa-route"></span> <strong>Distance:</strong> Approximately 20-25 km</li>
-                                <li><span class="icon fas fa-clock"></span> <strong>Estimated Travel Time:</strong> 45 minutes - 1 hour (train/taxi)</li>
-                            </ul>
-                        </div>
-                        <button class="add-to-calendar-btn" data-day="5" data-date="2025-10-17" data-title="Imperial Palace East Garden & Departure" data-location="Imperial Palace East Garden, Tokyo" data-description="Morning stroll before heading to Haneda Airport (HND)." data-start-time="09:00" data-end-time="12:00">
-                            📅 Add Day 5 to Calendar
-                        </button>
-                    </article>
-                </div>
-            </section>
-
-            <!-- Budget Dashboard -->
-            <section id="budget" class="card budget-dashboard">
-                <h2>💰 Complete Budget Analysis</h2>
-                <p><strong>Total Trip Budget:</strong> ¥400,000</p>
-
-                <h3>Budget Summary:</h3>
-                <div class="budget-summary">
-                    <div class="budget-item">
-                        <strong>¥168,700</strong>
-                        <span>Total Estimated Spent</span>
-                    </div>
-                    <div class="budget-item">
-                        <strong>¥231,300</strong>
-                        <span>Remaining Budget</span>
-                    </div>
-                    <div class="budget-item">
-                        <strong>¥99,000</strong>
-                        <span>Accommodation Cost</span>
-                    </div>
-                </div>
-
-                <h3>Expenses Breakdown:</h3>
-                <h4>Visual Chart (Estimated spending vs. Remaining)</h4>
-                <div class="budget-charts">
-                    <div class="budget-chart-bar">
-                        <span class="label">Total Spent:</span>
-                        <div class="fill" style="width: calc((168700 / 400000) * 100%); background-color: var(--primary-color);">
-                            <span>¥168,700</span>
-                        </div>
-                    </div>
-                    <div class="budget-chart-bar">
-                        <span class="label">Remaining:</span>
-                        <div class="fill" style="width: calc((231300 / 400000) * 100%); background-color: var(--secondary-color);">
-                            <span>¥231,300</span>
-                        </div>
-                    </div>
-                    <div class="budget-chart-bar">
-                        <span class="label">Accommodation:</span>
-                        <div class="fill" style="width: calc((99000 / 400000) * 100%); background-color: var(--accent-color);">
-                            <span>¥99,000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <h4>Daily Expense Table:</h4>
-                <table class="expense-table">
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Cost (¥)</th>
-                            <th>Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Accommodation (4 nights)</td>
-                            <td>99,000</td>
-                            <td>MONday Apart Premium AKIHABARA</td>
-                        </tr>
-                        <tr>
-                            <td>Day 1: Akihabara</td>
-                            <td>13,000</td>
-                            <td>Activities & Meals</td>
-                        </tr>
-                        <tr>
-                            <td>Day 2: Shibuya</td>
-                            <td>15,000</td>
-                            <td>Shibuya Sky, Transport & Meals</td>
-                        </tr>
-                        <tr>
-                            <td>Day 3: Ueno & Skytree</td>
-                            <td>18,500</td>
-                            <td>Museum, Skytree, Transport & Meals</td>
-                        </tr>
-                        <tr>
-                            <td>Day 4: Odaiba</td>
-                            <td>19,200</td>
-                            <td>TeamLab, Transport & Meals</td>
-                        </tr>
-                        <tr>
-                            <td>Day 5: Departure</td>
-                            <td>4,000</td>
-                            <td>Light meal</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td>Grand Total Spent</td>
-                            <td>168,700</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Remaining Budget</td>
-                            <td>231,300</td>
-                            <td>From ¥400,000 total budget</td>
-                        </tr>
-                    </tfoot>
-                </table>
-
-                <h3>Budget Tips:</h3>
+                <h4><i class="fas fa-children icon"></i> For Children:</h4>
                 <ul>
-                    <li><i class="fas fa-utensils"></i> <strong>Eat at local eateries:</strong> Look for "ramen-ya", "udon-ya", and "izakayas". Convenience stores offer budget-friendly bentos.</li>
-                    <li><i class="fas fa-subway"></i> <strong>Utilize public transportation passes:</strong> Consider Tokyo Metro or JR Pass for cost-effective travel.</li>
-                    <li><i class="fas fa-tree"></i> <strong>Look for free activities:</strong> Many parks, shrines, and temples offer free entry. Enjoy window shopping and people-watching.</li>
+                    <li><input type="checkbox" id="pack-kids-clothing" checked><label for="pack-kids-clothing">Age-appropriate clothing (considering potential spills and changes)</label></li>
+                    <li><input type="checkbox" id="pack-toys" checked><label for="pack-toys">Small, familiar toys or books for downtime/travel</label></li>
+                    <li><input type="checkbox" id="pack-kids-firstaid" checked><label for="pack-kids-firstaid">Kid-friendly first-aid kit (band-aids, antiseptic wipes)</label></li>
                 </ul>
-            </section>
-
-            <!-- Essentials -->
-            <section id="essentials" class="card essentials-section">
-                <h2>✨ Essentials for Your Trip</h2>
-
-                <div class="packing-list">
-                    <h3><i class="fas fa-box-open"></i> Packing List</h3>
-                    <ul>
-                        <li><input type="checkbox" id="pack-layers"><label for="pack-layers">Layers (light jackets, sweaters, long-sleeved shirts for October)</label></li>
-                        <li><input type="checkbox" id="pack-shoes"><label for="pack-shoes">Comfortable walking shoes (essential!)</label></li>
-                        <li><input type="checkbox" id="pack-rain"><label for="pack-rain">Compact umbrella or light rain jacket</label></li>
-                        <li><input type="checkbox" id="pack-casual"><label for="pack-casual">Casual wear (T-shirts, trousers, jeans)</label></li>
-                        <li><input type="checkbox" id="pack-swim"><label for="pack-swim">Swimwear (optional - if hotel has pool/onsen)</label></li>
-                        <li><input type="checkbox" id="pack-kid-ent"><label for="pack-kid-ent">Age-appropriate entertainment for children (small toys, books)</label></li>
-                        <li><input type="checkbox" id="pack-kid-snack"><label for="pack-kid-snack">Favorite snacks for children</label></li>
-                        <li><input type="checkbox" id="pack-kid-bag"><label for="pack-kid-bag">Small backpack for each child</label></li>
-                        <li><input type="checkbox" id="pack-adapter"><label for="pack-adapter">Travel adapter (Type A/B, 100V for Japan)</label></li>
-                        <li><input type="checkbox" id="pack-powerbank"><label for="pack-powerbank">Portable power bank</label></li>
-                        <li><input type="checkbox" id="pack-firstaid"><label for="pack-firstaid">Basic first-aid kit (band-aids, pain relievers, personal meds)</label></li>
-                        <li><input type="checkbox" id="pack-sanitizer"><label for="pack-sanitizer">Hand sanitizer</label></li>
-                    </ul>
-                </div>
-
-                <div class="pre-trip-checklist">
-                    <h3><i class="fas fa-list-check"></i> Pre-Trip Checklist</h3>
-                    <ul>
-                        <li><input type="checkbox" id="check-hotel" checked><label for="check-hotel">Book hotel via provided links (MONday Apart Premium AKIHABARA)</label></li>
-                        <li><input type="checkbox" id="check-visa"><label for="check-visa">Check visa requirements for Japan (if applicable)</label></li>
-                        <li><input type="checkbox" id="check-hours"><label for="check-hours">Verify attraction operating hours closer to travel dates</label></li>
-                        <li><input type="checkbox" id="check-reservations"><label for="check-reservations">Make advance reservations for TeamLab Planets TOKYO and Shibuya Sky</label></li>
-                        <li><input type="checkbox" id="check-insurance"><label for="check-insurance">Purchase travel insurance</label></li>
-                        <li><input type="checkbox" id="check-bank"><label for="check-bank">Notify bank/credit card companies of travel plans</label></li>
-                        <li><input type="checkbox" id="check-apps"><label for="check-apps">Download useful apps (Google Maps, Tokyo Subway, translation)</label></li>
-                        <li><input type="checkbox" id="check-customs"><label for="check-customs">Research local customs and basic Japanese phrases</label></li>
-                        <li><input type="checkbox" id="check-weather"><label for="check-weather">Pack according to weather forecast</label></li>
-                        <li><input type="checkbox" id="check-airport"><label for="check-airport">Confirm airport transfer details to/from Haneda Airport (HND)</label></li>
-                    </ul>
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p><strong>Tokyo Family Adventure Itinerary</strong></p>
-            <p>Created to make your travel planning exciting and effortless.</p>
-            <div class="contact-info">
-                <p>Contact Us: <a href="mailto:info@travelitinerary.com">info@travelitinerary.com</a> | <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                <h4><i class="fas fa-suitcase-medical icon"></i> Toiletries & Health:</h4>
+                <ul>
+                    <li><input type="checkbox" id="pack-sunscreen" checked><label for="pack-sunscreen">Sunscreen and hats (UV index up to 4.85)</label></li>
+                    <li><input type="checkbox" id="pack-insect" checked><label for="pack-insect">Insect repellent (especially for parks)</label></li>
+                    <li><input type="checkbox" id="pack-meds" checked><label for="pack-meds">Any personal medications</label></li>
+                    <li><input type="checkbox" id="pack-sanitizer" checked><label for="pack-sanitizer">Hand sanitizer and face masks (good practice in crowded areas)</label></li>
+                </ul>
+                <h4><i class="fas fa-mobile-screen-button icon"></i> Electronics:</h4>
+                <ul>
+                    <li><input type="checkbox" id="pack-powerbank" checked><label for="pack-powerbank">Portable power bank for phones and cameras</label></li>
+                    <li><input type="checkbox" id="pack-adapter" checked><label for="pack-adapter">Universal travel adapter (Japan uses Type A and B plugs, 100V)</label></li>
+                    <li><input type="checkbox" id="pack-camera" checked><label for="pack-camera">Camera and extra memory cards</label></li>
+                </ul>
+                <h4><i class="fas fa-bag-shopping icon"></i> Miscellaneous:</h4>
+                <ul>
+                    <li><input type="checkbox" id="pack-backpack" checked><label for="pack-backpack">Small backpack for day trips</label></li>
+                    <li><input type="checkbox" id="pack-waterbottle" checked><label for="pack-waterbottle">Reusable water bottles</label></li>
+                    <li><input type="checkbox" id="pack-documents" checked><label for="pack-documents">Printed copies of your itinerary, hotel booking, and important addresses</label></li>
+                    <li><input type="checkbox" id="pack-cash" checked><label for="pack-cash">Some cash (for smaller shops and arcades)</label></li>
+                    <li><input type="checkbox" id="pack-reusablebags" checked><label for="pack-reusablebags">Reusable shopping bags</label></li>
+                </ul>
             </div>
-            <div class="print-button">
-                <button class="btn btn-secondary" onclick="window.print()"><i class="fas fa-print"></i> Print Itinerary</button>
+
+            <h3 class="mt-20">Pre-Trip Checklist</h3>
+            <div class="checklist">
+                <ul>
+                    <li><input type="checkbox" id="pre-bookhotel" checked><label for="pre-bookhotel">Book hotel via provided links</label></li>
+                    <li><input type="checkbox" id="pre-visa"><label for="pre-visa">Check visa requirements for Japan (if applicable for your nationality).</label></li>
+                    <li><input type="checkbox" id="pre-insurance"><label for="pre-insurance">Purchase travel insurance.</label></li>
+                    <li><input type="checkbox" id="pre-ghibli" checked><label for="pre-ghibli"><strong>Book Ghibli Museum tickets in advance (critically important, they sell out quickly!).</strong></label></li>
+                    <li><input type="checkbox" id="pre-disneyland" checked><label for="pre-disneyland">Book Tokyo Disneyland tickets in advance.</label></li>
+                    <li><input type="checkbox" id="pre-teamlab" checked><label for="pre-teamlab">Book TeamLab Planets TOKYO tickets in advance.</label></li>
+                    <li><input type="checkbox" id="pre-shibuyasky" checked><label for="pre-shibuyasky">Book Shibuya Sky tickets in advance.</label></li>
+                    <li><input type="checkbox" id="pre-apps"><label for="pre-apps">Research and download useful apps: Google Maps (for navigation), Tokyo Disney Resort App (for wait times), Japan Travel (for train routes).</label></li>
+                    <li><input type="checkbox" id="pre-currency"><label for="pre-currency">Exchange some currency to JPY for initial expenses.</label></li>
+                    <li><input type="checkbox" id="pre-bank"><label for="pre-bank">Notify your bank of your travel plans to avoid issues with card usage.</label></li>
+                    <li><input type="checkbox" id="pre-pack"><label for="pre-pack">Pack according to the weather forecast and planned activities.</label></li>
+                    <li><input type="checkbox" id="pre-wifi"><label for="pre-wifi">Confirm international roaming or purchase a local SIM card/pocket Wi-Fi.</label></li>
+                </ul>
             </div>
-        </footer>
+
+            <h3 class="mt-20 travel-tips">Travel Tips</h3>
+            <ul>
+                <li><i class="fas fa-hand-holding-heart icon"></i> <strong>Respect Local Customs:</strong> Politeness and respect are highly valued in Japan. Bowing is common, but a simple nod is also appreciated.</li>
+                <li><i class="fas fa-train-subway icon"></i> <strong>Public Transport is Key:</strong> Tokyo's train and subway system is efficient and extensive. It's often the best way to get around.</li>
+                <li><i class="fas fa-language icon"></i> <strong>Learn Basic Phrases:</strong> Even a few Japanese phrases like "Arigato" (Thank you) or "Sumimasen" (Excuse me/Sorry) can go a long way.</li>
+                <li><i class="fas fa-cash-register icon"></i> <strong>Cash is Still King (Sometimes):</strong> While cards are widely accepted, many smaller shops, restaurants, and vending machines still prefer cash.</li>
+                <li><i class="fas fa-utensils icon"></i> <strong>Food Etiquette:</strong> Don't stick chopsticks upright in your rice. Slurping noodles is generally acceptable and can even be a sign of enjoyment!</li>
+                <li><i class="fas fa-trash-can icon"></i> <strong>Carry a Trash Bag:</strong> Public trash cans are rare in Japan. It's common to carry your trash until you find a bin (often near convenience stores or train stations).</li>
+                <li><i class="fas fa-umbrella-beach icon"></i> <strong>Be Prepared for Weather Changes:</strong> October usually has pleasant weather, but sudden rain showers can occur. A light umbrella or rain jacket is always a good idea.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer" id="footer">
+        <div class="container">
+            <p><strong>Your Tokyo Family Fun Adventure!</strong></p>
+            <p>We hope you have an absolutely fantastic and memorable family trip to Tokyo!</p>
+            <p>
+                <a href="mailto:info@example.com"><i class="fas fa-envelope"></i> Contact Us</a> |
+                <a href="#"><i class="fas fa-question-circle"></i> FAQ</a>
+            </p>
+            <p class="mt-20"><button onclick="window.print()" class="btn btn-secondary btn-print-hidden"><i class="fas fa-print"></i> Print Itinerary</button></p>
+            <p>&copy; 2023 Travel Planner. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Structure -->
+    <div id="image-lightbox" class="lightbox">
+        <span class="close-btn" role="button" aria-label="Close image lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="Enlarged image from hotel gallery">
     </div>
 
-    <!-- JavaScript for interactivity -->
     <script>
-        // --- Add to Calendar Functionality ---
-        document.querySelectorAll('.add-to-calendar-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const day = button.dataset.day;
-                const date = button.dataset.date;
-                const title = button.dataset.title;
-                const location = button.dataset.location;
-                const description = button.dataset.description;
-                const startTime = button.dataset.startTime;
-                const endTime = button.dataset.endTime;
-
-                const eventDetails = {
-                    day: day,
-                    date: date,
-                    title: title,
-                    location: location,
-                    description: description,
-                    startTime: startTime,
-                    endTime: endTime,
-                    fullDate: `${date}T${startTime}:00`, // ISO format for potential ICS generation
-                    endDate: `${date}T${endTime}:00`
-                };
-
-                alert(`📅 Simulating adding "${title}" (Day ${day}) to your calendar!
-                \nDetails:
-                Date: ${date}
-                Time: ${startTime} - ${endTime}
-                Location: ${location}
-                Description: ${description}
-                \nCheck the console for event data.`);
-                console.log(`Adding event for Day ${day}:`, eventDetails);
-
-                // For a real application, you would use a library (e.g., 'add-to-calendar-button' or generate an .ics file)
-                // or link to a web service like Google Calendar:
-                // const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${eventDetails.fullDate.replace(/[-:]/g, '')}/${eventDetails.endDate.replace(/[-:]/g, '')}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
-                // window.open(googleCalendarUrl, '_blank');
+        // Smooth scroll for navigation
+        document.querySelectorAll('.sticky-nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Optional: Highlight active nav item
+                document.querySelectorAll('.sticky-nav a').forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
             });
         });
 
-        // --- Image Lightbox Functionality ---
-        const lightbox = document.getElementById('lightbox');
+        // Simple Lightbox functionality
+        const lightbox = document.getElementById('image-lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxClose = document.querySelector('.lightbox-close');
-        const galleryImages = document.querySelectorAll('.hotel-section .gallery img');
+        const closeBtn = document.querySelector('.close-btn');
 
-        galleryImages.forEach(img => {
-            img.addEventListener('click', () => {
-                lightbox.classList.add('active');
-                lightboxImg.src = img.src;
-                lightboxImg.alt = img.alt;
+        document.querySelectorAll('.hotel-gallery img').forEach(image => {
+            image.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = image.src;
+                lightboxImg.alt = image.alt;
+                // Add ARIA attributes for accessibility
+                lightbox.setAttribute('aria-hidden', 'false');
+                closeBtn.focus(); // Focus on close button when opened
             });
         });
 
-        lightboxClose.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-            lightboxImg.src = ''; // Clear image src
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            lightbox.setAttribute('aria-hidden', 'true');
         });
 
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) { // Close if clicking outside the image itself
-                lightbox.classList.remove('active');
-                lightboxImg.src = '';
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                lightbox.setAttribute('aria-hidden', 'true');
             }
         });
 
-        // --- Checkbox functionality (native HTML is sufficient, but this ensures accessibility if needed) ---
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', (event) => {
-                const label = event.target.nextElementSibling;
-                if (label && label.tagName === 'LABEL') {
-                    if (event.target.checked) {
-                        console.log(`Checked: ${label.textContent}`);
-                    } else {
-                        console.log(`Unchecked: ${label.textContent}`);
-                    }
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+                lightbox.style.display = 'none';
+                lightbox.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+
+        // Add to Calendar functionality (simplified)
+        document.querySelectorAll('.add-to-calendar-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const day = this.dataset.day;
+                const title = this.dataset.title;
+                const location = this.dataset.location;
+                const date = this.dataset.date;
+                const time = this.dataset.time; // e.g., "09:00-18:00"
+
+                alert(`
+                Added to Calendar (Simulation):
+                Event: ${title}
+                Date: ${date}
+                Time: ${time}
+                Location: ${location}
+                Day: ${day}
+                `);
+
+                // For a real application, you would generate an iCal file or use a third-party API
+                // Example: window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${date}T090000/${date}T180000&details=${encodeURIComponent('Details for day ' + day)}&location=${encodeURIComponent(location)}`, '_blank');
+            });
+        });
+
+        // Budget Progress Bar Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBar = document.querySelector('.progress-bar');
+            const progress = progressBar.getAttribute('data-progress');
+            progressBar.style.width = progress;
+            // Announce progress for screen readers after animation
+            progressBar.setAttribute('aria-valuenow', parseFloat(progress));
+            progressBar.setAttribute('aria-valuemin', '0');
+            progressBar.setAttribute('aria-valuemax', '100');
+            progressBar.setAttribute('aria-label', `Budget used: ${progress}`);
+        });
+
+        // Add keyboard navigation to checkboxes
+        document.querySelectorAll('.checklist input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('keydown', (e) => {
+                if (e.key === ' ' || e.key === 'Enter') {
+                    e.preventDefault();
+                    checkbox.checked = !checkbox.checked;
                 }
             });
         });
 
-        // --- Simple Fade-in for cards (Optional, for aesthetic only) ---
-        const cards = document.querySelectorAll('.card');
-        const options = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, options);
-
-        cards.forEach(card => {
-            card.style.opacity = 0;
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow var(--transition-speed)';
-            observer.observe(card);
-        });
     </script>
 </body>
 </html>
