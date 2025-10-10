@@ -3,139 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Osaka Family Fun Trip Itinerary</title>
+    <title>Your Tokyo Family Fun Itinerary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
         :root {
-            --primary-color: #6a0572; /* Deep Purple */
-            --secondary-color: #fca311; /* Vibrant Orange */
-            --accent-color: #1a535c; /* Dark Teal */
-            --light-bg: #f5f5f5;
-            --dark-text: #333;
-            --light-text: #fff;
-            --card-bg: #ffffff;
-            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            --border-radius: 12px;
+            --primary-color: #3f51b5; /* Indigo */
+            --secondary-color: #ff9800; /* Orange */
+            --accent-color: #4caf50; /* Green */
+            --background-light: #f4f7f6;
+            --card-background: #ffffff;
+            --text-color-dark: #333;
+            --text-color-light: #666;
+            --border-radius-card: 15px;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--light-bg);
-            color: var(--dark-text);
+            background-color: var(--background-light);
+            color: var(--text-color-dark);
             line-height: 1.6;
         }
 
         .container {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+            margin: 20px auto;
+            padding: 0 20px;
         }
 
         header {
             background-color: var(--primary-color);
-            color: var(--light-text);
+            color: white;
             padding: 40px 20px;
             text-align: center;
-            border-bottom-left-radius: var(--border-radius);
-            border-bottom-right-radius: var(--border-radius);
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
+            border-bottom-left-radius: var(--border-radius-card);
+            border-bottom-right-radius: var(--border-radius-card);
+            margin-bottom: 20px;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.8em;
+            font-size: 3em;
             font-weight: 700;
         }
 
         header p {
             font-size: 1.2em;
-            margin-top: 10px;
+            opacity: 0.9;
         }
 
         section {
-            background-color: var(--card-bg);
+            background-color: var(--card-background);
             padding: 30px;
-            margin-bottom: 30px;
-            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            border-radius: var(--border-radius-card);
             box-shadow: var(--shadow);
         }
 
         h2 {
             color: var(--primary-color);
             font-size: 2em;
-            margin-bottom: 20px;
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 10px;
+            margin-bottom: 25px;
             text-align: center;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
         }
 
         h3 {
-            color: var(--accent-color);
+            color: var(--primary-color);
             font-size: 1.5em;
-            margin-top: 25px;
+            margin-top: 20px;
             margin-bottom: 15px;
         }
 
         .card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
+            background-color: var(--card-background);
+            padding: 25px;
+            border-radius: var(--border-radius-card);
             box-shadow: var(--shadow);
-            padding: 20px;
             margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .card.flex-row {
-            flex-direction: row;
-            flex-wrap: wrap;
-        }
-        .card.flex-row > div {
-            flex: 1;
-            min-width: 280px;
         }
 
-        .flight-details, .hotel-details {
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .flex-item {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 15px;
-        }
-        .flight-details p, .hotel-details p {
-            margin: 0;
-            padding: 8px 0;
-            border-bottom: 1px dashed #eee;
-        }
-        .flight-details p:last-child, .hotel-details p:last-child {
-            border-bottom: none;
+            margin-top: 20px;
         }
 
-        .btn {
+        .info-item {
+            background-color: var(--background-light);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.95em;
+        }
+
+        .info-item strong {
+            color: var(--primary-color);
+        }
+
+        .button {
             display: inline-block;
             background-color: var(--secondary-color);
-            color: var(--light-text);
-            padding: 10px 20px;
+            color: white;
+            padding: 12px 25px;
             border-radius: 8px;
             text-decoration: none;
-            transition: background-color 0.3s ease;
-            text-align: center;
-            border: none;
-            cursor: pointer;
             font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: center;
         }
 
-        .btn:hover {
-            background-color: #e08e00;
+        .button:hover {
+            background-color: #e68900;
+            transform: translateY(-2px);
         }
-
-        .btn-primary {
+        
+        .button.primary {
             background-color: var(--primary-color);
         }
-        .btn-primary:hover {
-            background-color: #4a034d;
+        .button.primary:hover {
+            background-color: #303f9f;
+        }
+
+        .flight-option {
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            background-color: #fafafa;
+        }
+
+        .flight-option h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.3em;
+        }
+
+        .flight-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 20px;
+            margin-bottom: 15px;
+        }
+
+        .flight-details div strong {
+            color: var(--text-color-dark);
         }
 
         .hotel-gallery {
@@ -144,264 +179,254 @@
             gap: 10px;
             margin-top: 20px;
         }
+
         .hotel-gallery img {
             width: 100%;
             height: 120px;
             object-fit: cover;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: transform 0.2s ease-in-out;
-        }
-        .hotel-gallery img:hover {
-            transform: scale(1.03);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .amenities-list {
+            list-style: none;
+            padding: 0;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-top: 15px;
         }
-        .amenities-list span {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-            padding: 8px 12px;
+
+        .amenities-list li {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 8px 15px;
             border-radius: 20px;
             font-size: 0.9em;
-            white-space: nowrap;
+            font-weight: 500;
         }
 
-        .day-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            padding: 25px;
-            margin-bottom: 25px;
+        .daily-itinerary .day-card {
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 20px;
+            position: relative;
         }
-        .day-card h3 {
-            color: var(--primary-color);
-            margin-top: 0;
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            text-align: left;
+        .daily-itinerary .day-card:before {
+            content: "Day " attr(data-day);
+            position: absolute;
+            left: -10px;
+            top: -15px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
         }
-        .day-overview {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-            font-size: 0.95em;
-        }
-        .day-overview p {
-            margin: 0;
-            padding: 5px 0;
-        }
+
         .place-card {
             border: 1px solid #e0e0e0;
-            border-radius: var(--border-radius);
             padding: 20px;
-            margin-bottom: 20px;
-            background-color: #fcfcfc;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            background-color: #fafafa;
         }
+        
         .place-card h4 {
-            color: var(--accent-color);
-            font-size: 1.3em;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        .place-card ul {
-            list-style-type: disc;
-            margin-left: 20px;
-            padding: 0;
-        }
-        .place-card ul li {
-            margin-bottom: 5px;
-        }
-        .place-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .place-info-grid strong {
-            color: var(--accent-color);
-        }
-        .place-map-btn {
-            margin-top: 15px;
-        }
-        .day-summary {
-            background-color: #fff3e0;
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin-top: 25px;
-            font-size: 0.95em;
-        }
-        .day-summary strong {
             color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.25em;
         }
 
-        /* Budget Dashboard */
-        .budget-overview {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 30px;
+        .place-card ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .place-card ul li {
+            margin-bottom: 5px;
+            color: var(--text-color-light);
+        }
+
+        .place-card .practical-info, .place-card .tips {
+            margin-top: 15px;
+            border-top: 1px dashed #e0e0e0;
+            padding-top: 15px;
+        }
+
+        .place-card .practical-info strong, .place-card .tips strong {
+            color: var(--secondary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .budget-summary {
             text-align: center;
+            margin-bottom: 30px;
         }
-        .budget-item {
-            background-color: #e0f7fa;
-            border-radius: var(--border-radius);
-            padding: 15px 20px;
-            min-width: 200px;
-            flex: 1;
-        }
-        .budget-item.spent {
-            background-color: #ffe0b2;
-        }
-        .budget-item.remaining {
-            background-color: #c8e6c9;
-        }
-        .budget-item h4 {
-            margin-top: 0;
-            color: var(--accent-color);
-        }
-        .budget-item p {
-            font-size: 1.5em;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin: 5px 0 0;
+
+        .budget-summary div {
+            font-size: 1.1em;
+            margin-bottom: 8px;
         }
 
         .budget-bar-container {
             width: 100%;
+            height: 30px;
             background-color: #e0e0e0;
-            border-radius: 10px;
-            height: 20px;
+            border-radius: 15px;
             overflow: hidden;
-            margin-top: 10px;
+            margin-top: 15px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
         }
 
         .budget-bar {
             height: 100%;
-            background-color: var(--secondary-color);
-            border-radius: 10px;
+            background-color: var(--accent-color);
             width: 0%; /* Will be set by JS */
-            transition: width 1s ease-out;
+            transition: width 0.8s ease-out;
+            border-radius: 15px 0 0 15px;
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            padding-right: 5px;
-            box-sizing: border-box;
-            color: var(--light-text);
-            font-size: 0.8em;
+            padding-left: 10px;
+            color: white;
             font-weight: 600;
+            font-size: 0.9em;
+            justify-content: flex-end; /* Pushes text to the right if bar is long enough */
+            padding-right: 10px;
+            box-sizing: border-box;
+        }
+        .budget-bar span {
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
-        .expense-category h4 {
-            color: var(--accent-color);
-            margin-bottom: 10px;
+        .budget-breakdown-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
         }
-        .expense-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px dotted #eee;
+
+        .budget-category-item {
+            background-color: #f7f7f7;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-color);
         }
-        .expense-item:last-child {
-            border-bottom: none;
+        
+        .budget-category-item.daily-expenses {
+            border-left-color: var(--secondary-color);
         }
+
+        .budget-category-item strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
         .budget-tips ul {
-            list-style-type: none;
+            list-style: none;
             padding: 0;
         }
+
         .budget-tips ul li {
-            background-color: #e3f2fd;
+            background-color: #e8f5e9; /* Light green */
             padding: 10px 15px;
-            border-left: 5px solid var(--primary-color);
             margin-bottom: 10px;
-            border-radius: var(--border-radius);
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .budget-tips ul li::before {
+            content: '💡';
+            margin-right: 10px;
+            font-size: 1.2em;
         }
 
-        /* Packing List & Checklist */
-        .list-category {
-            margin-bottom: 25px;
-        }
-        .list-category h4 {
-            color: var(--accent-color);
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
-        }
-        .checkbox-item {
+        .list-item {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
             cursor: pointer;
-            user-select: none;
+            font-size: 1.05em;
         }
-        .checkbox-item input[type="checkbox"] {
-            margin-right: 10px;
-            width: 18px;
-            height: 18px;
+
+        .list-item input[type="checkbox"] {
+            margin-right: 15px;
+            transform: scale(1.4);
             accent-color: var(--primary-color);
         }
-        .checkbox-item.completed label {
-            text-decoration: line-through;
-            color: #888;
-        }
-        .priority-tag {
-            background-color: #f0f0f0;
-            color: #555;
-            padding: 3px 8px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            margin-left: 10px;
-            font-weight: 600;
-        }
-        .priority-tag.high { background-color: #ffe0b2; color: #d32f2f; }
-        .priority-tag.medium { background-color: #fff9c4; color: #f57f17; }
-        .priority-tag.low { background-color: #e8f5e9; color: #388e3c; }
+
+        .priority-high { color: #d32f2f; font-weight: 600; } /* Red */
+        .priority-medium { color: #f57c00; font-weight: 600; } /* Orange */
+        .priority-low { color: #1976d2; font-weight: 600; } /* Blue */
 
         footer {
-            background-color: var(--accent-color);
-            color: var(--light-text);
             text-align: center;
             padding: 30px 20px;
-            margin-top: 30px;
-            border-top-left-radius: var(--border-radius);
-            border-top-right-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-        footer p {
-            margin: 0 0 15px 0;
+            background-color: var(--primary-color);
+            color: white;
+            border-top-left-radius: var(--border-radius-card);
+            border-top-right-radius: var(--border-radius-card);
+            margin-top: 20px;
         }
 
-        /* Responsive Design */
+        footer .button {
+            background-color: var(--accent-color);
+            margin-top: 20px;
+        }
+        footer .button:hover {
+            background-color: #388e3c;
+        }
+        
+        .map-link {
+            background-color: #4285F4; /* Google Maps blue */
+            margin-top: 10px;
+        }
+        .map-link:hover {
+            background-color: #3367D6;
+        }
+
         @media (max-width: 768px) {
             header h1 {
-                font-size: 2em;
+                font-size: 2.5em;
             }
-            header p {
-                font-size: 1em;
+            .flex-container {
+                flex-direction: column;
             }
-            h2 {
-                font-size: 1.8em;
-            }
-            .flight-details, .hotel-details {
+            .info-grid {
                 grid-template-columns: 1fr;
             }
-            .day-overview {
-                flex-direction: column;
-                align-items: flex-start;
+            .flight-details {
+                grid-template-columns: 1fr;
             }
-            .budget-item {
-                width: 100%;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                color: black;
             }
-            .card.flex-row {
-                flex-direction: column;
+            header, footer {
+                background-color: #f0f0f0 !important;
+                color: #333 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .button, .amenities-list li, .budget-tips ul li, .budget-bar {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            section, .card, .flight-option, .place-card, .info-item, .budget-category-item {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            .map-link, .booking-link {
+                display: none; /* Hide buttons for print */
+            }
+            .list-item input[type="checkbox"] {
+                display: inline-block; /* ensure checkboxes print */
             }
         }
     </style>
@@ -409,450 +434,463 @@
 <body>
     <div class="container">
         <header>
-            <h1>Family Fun in Japan (Osaka)</h1>
-            <p>From 2025-10-13 to 2025-10-17 | 4 Days | With Family with school-age child</p>
+            <h1>Your Family Adventure to Tokyo, Japan!</h1>
+            <p>From 2025-10-13 to 2025-10-17 (4 days) | Trip Type: Family Fun</p>
+            <p>Companions: Family with school-age child</p>
         </header>
 
         <section id="flights">
-            <h2>Flights</h2>
-            <div class="card">
-                <h3>Cheapest Flight:
-                    <span style="color: var(--secondary-color);">
-                        ¥0 N/A
-                    </span>
-                </h3>
-                <div class="flight-details">
-                    <p><strong>Airline:</strong> No valid flights available based on the provided data.</p>
-                    <p><strong>Flight Number:</strong> N/A</p>
-                    <p><strong>Departure:</strong> N/A on N/A at N/A</p>
-                    <p><strong>Return:</strong> N/A on N/A at N/A</p>
-                    <p><strong>From:</strong> N/A</p>
-                    <p><strong>To:</strong> N/A</p>
+            <h2>Flight Details</h2>
+            <div class="flex-container">
+                <div class="flex-item card flight-option">
+                    <h4>Cheapest Option: Air India (AI)</h4>
+                    <div class="flight-details">
+                        <div><strong>Departure:</strong> Air India (AI) AI XXX</div>
+                        <div><strong>Route:</strong> Delhi to Tokyo</div>
+                        <div><strong>Date:</strong> 2025-10-12</div>
+                        <div><strong>Time:</strong> 03:20</div>
+                        <div><strong>Return:</strong> Air India (AI) AI XXX</div>
+                        <div><strong>Route:</strong> Tokyo to Delhi</div>
+                        <div><strong>Date:</strong> 2025-10-17</div>
+                        <div><strong>Time:</strong> 21:10</div>
+                    </div>
+                    <p><strong>Price:</strong> ¥211,311</p>
+                    <a href="https://flight.easemytrip.com/InternationalRoundTrip/Index?srch=DEL-Delhi-India|NRT-Tokyo-Japan|12/10/2025-17/10/2025&px=2-1-0&cbn=0&ar=undefined&isow=false&isdm=true&lang=en-us&CouponCode=&ompAff=&bc=&ISWL=&isRL=true&CCODE=IN&curr=INR&apptype=B2C" target="_blank" class="button booking-link">Book Air India</a>
                 </div>
-                <div style="text-align: center;">
-                    <a href="N/A" target="_blank" class="btn" style="pointer-events: none; opacity: 0.6;">Book Now</a>
-                </div>
-            </div>
 
-            <div class="card">
-                <h3>Fastest Flight:
-                    <span style="color: var(--secondary-color);">
-                        ¥0 N/A
-                    </span>
-                </h3>
-                <div class="flight-details">
-                    <p><strong>Airline:</strong> No valid flights available based on the provided data.</p>
-                    <p><strong>Flight Number:</strong> N/A</p>
-                    <p><strong>Departure:</strong> N/A on N/A at N/A</p>
-                    <p><strong>Return:</strong> N/A on N/A at N/A</p>
-                    <p><strong>From:</strong> N/A</p>
-                    <p><strong>To:</strong> N/A</p>
-                </div>
-                <div style="text-align: center;">
-                    <a href="N/A" target="_blank" class="btn" style="pointer-events: none; opacity: 0.6;">Book Now</a>
+                <div class="flex-item card flight-option">
+                    <h4>Fastest Option: Japan Airlines (JL)</h4>
+                    <div class="flight-details">
+                        <div><strong>Departure:</strong> Japan Airlines (JL) JL XXX</div>
+                        <div><strong>Route:</strong> Delhi to Tokyo</div>
+                        <div><strong>Date:</strong> 2025-10-12</div>
+                        <div><strong>Time:</strong> 19:05</div>
+                        <div><strong>Return:</strong> Japan Airlines (JL) JL XXX</div>
+                        <div><strong>Route:</strong> Tokyo to Delhi</div>
+                        <div><strong>Date:</strong> 2025-10-17</div>
+                        <div><strong>Time:</strong> 06:20</div>
+                    </div>
+                    <p><strong>Price:</strong> ¥237,692</p>
+                    <a href="https://flight.easemytrip.com/InternationalRoundTrip/Index?srch=DEL-Delhi-India|NRT-Tokyo-Japan|12/10/2025-17/10/2025&px=2-1-0&cbn=0&ar=undefined&isow=false&isdm=true&lang=en-us&CouponCode=&ompAff=&bc=&ISWL=&isRL=true&CCODE=IN&curr=INR&apptype=B2C" target="_blank" class="button booking-link">Book Japan Airlines</a>
                 </div>
             </div>
         </section>
 
         <section id="hotel">
-            <h2>Accommodation</h2>
+            <h2>Accommodation: HOTEL MYSTAYS PREMIER Omori</h2>
             <div class="card">
-                <h3>The Royal Park Hotel Iconic Osaka-Midosuji</h3>
-                <p><strong>Location:</strong> Osaka</p>
-                <p><strong>Total Cost:</strong> 115944 JPY (for 4 nights, 1 room)</p>
-                <p><strong>Price per Night:</strong> 28986 JPY</p>
-                <p><strong>Reason for Selection:</strong> This 5-star hotel offers a blend of luxury and convenience, with amenities like a fitness center and kid-friendly facilities, making it an excellent choice for a family fun trip. Its central location in Osaka provides easy access to major attractions.</p>
+                <p><strong>Location:</strong> Omori, Tokyo</p>
+                <p><strong>Price:</strong> ¥16,740 per night (1 room for 4 nights)</p>
+                <p><strong>Total Accommodation Cost:</strong> ¥66,960</p>
+                <p><strong>Reason for Selection:</strong> This 4-star hotel offers a comfortable and family-friendly stay, providing good value within your budget. Its convenient location ensures easy access to public transportation and key attractions, making it an ideal base for exploring Tokyo with a child.</p>
 
                 <h3>Amenities</h3>
-                <div class="amenities-list">
-                    <span>Free Wi-Fi</span><span>Parking ($)</span><span>Fitness center</span><span>Bar</span><span>Restaurant</span><span>Accessible</span><span>Kid-friendly</span>
-                </div>
+                <ul class="amenities-list">
+                    <li>Free Wi-Fi</li>
+                    <li>Parking ($)</li>
+                    <li>Restaurant</li>
+                    <li>Accessible</li>
+                </ul>
 
-                <h3>Gallery</h3>
+                <h3>Hotel Gallery</h3>
                 <div class="hotel-gallery">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipNikFycvOpeiLu8BSn7Wx1Yfq6Wb5S-hzUqM-M_=s10000" alt="Hotel Image 1">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipNeec1NQ3AsB9CijolbwpbC9pwkEQ8lLIGfruKP=s10000" alt="Hotel Image 2">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipM2OIij0MQs4V0wlT701LxjPf-bzdvVQOMg5sHW=s10000" alt="Hotel Image 3">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipOK9mPgn3Ibw7JrK062Yh8M69KNtliIHyDLM529=s10000" alt="Hotel Image 4">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipPv9zo1Yj0m7GRSJ55oaJv9CJzx1g4aueNO306i=s10000" alt="Hotel Image 5">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipNW-w7tzj45152EqzBUM1toK82slDW1gvfZRuq4=s10000" alt="Hotel Image 6">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipN_WecuTD1AACzkJCdit7kiQ6Sl5DT9Cgzkm1bm=s10000" alt="Hotel Image 7">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipOr-3lGBWAd4R-IrszUih8Nd9Rcmkp_PCzdDXuy=s10000" alt="Hotel Image 8">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipNtVGk8GSay1p5covqKrEp5rXYxuOdcrXzyUEAN=s10000" alt="Hotel Image 9">
+                    <img src="https://lh4.googleusercontent.com/proxy/lMxkq5sD0SaCM0P3vltIfN-NlYDTE6wKIiuC3a8h1rI4LAAUKailcpnz3hrCx1a4nZBdKET2e_nTSF0ksJydcJkRO1VaeQ7p7OnEddTeI03rIfCpKxNZyHTNuIO1HLJtjmnVYl0LYazTHt6g3JKs-wNOc3NjQ=s287-w287-h192-n-k-no-v1" alt="Hotel MYSTAYS PREMIER Omori Image 1">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipPCZb4XvOE6fCzi19siOuqSNCedl_AFHX4aw1ew=s287-w287-h192-n-k-no-v1" alt="Hotel MYSTAYS PREMIER Omori Image 2">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNi6q2CDkCdn7eBBXvIwPWFyZVgQ3D7nBP7CJfp=s287-w287-h192-n-k-no-v1" alt="Hotel MYSTAYS PREMIER Omori Image 3">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipPWNHUuRU02TggbyQFBqOXkNAWaF_aFLMAikT5K=s287-w287-h192-n-k-no-v1" alt="Hotel MYSTAYS PREMIER Omori Image 4">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipM7td4EReQS-GMYj6GxcwZEJAb1fqdSh9h6VqDR=s287-w287-h192-n-k-no-v1" alt="Hotel MYSTAYS PREMIER Omori Image 5">
                 </div>
 
-                <div style="text-align: center; margin-top: 30px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                    <a href="https://www.royalparkhotels.co.jp/ic/osakamidosuji/" target="_blank" class="btn btn-primary">Book Hotel</a>
-                    <a href="https://www.google.com/maps/search/?api=1&query=34.687176199999996,135.4999413" target="_blank" class="btn">View on Map</a>
+                <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a href="https://www.google.com/aclk?sa=l&ai=DChsSEwis7vGwq5mQAxXiQH8AHcIGGUoYACICCAEQAxoCb2E&co=1&ase=2&gclid=EAIaIQobChMIrO7xsKuZkAMV4kB_AB3CBhlKEA0YASABEgIG3_D_BwE&cid=CAASWeRo2ZjxfpXTn83rnZOkca8gJutdG4aW9CagbhxCOJyLLS4hMRmP90OK-5P5PLSfwo095mhub9PokD5bGtggQKEvHU-nAf8S11pebvuimvVGD6WY_eBy73jh&category=acrcp_v1_48&sig=AOD64_2ve6k4BgQG7iI61OKCGabo7g9grw&adurl=" target="_blank" class="button booking-link">Book Hotel</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=35.5904367,139.73243979999998(HOTEL%20MYSTAYS%20PREMIER%20Omori)" target="_blank" class="button map-link">View on Map</a>
                 </div>
             </div>
         </section>
 
-        <section id="itinerary">
+        <section id="daily-itinerary">
             <h2>Daily Itinerary</h2>
 
-            <div class="day-card">
-                <h3>Day 1: 2025-10-13 - Arrival and Osaka's Historical & Entertainment Hub</h3>
-                <div class="day-overview">
-                    <p><strong>Route:</strong> Hotel → Osaka Castle → Dotonbori → Hotel</p>
-                    <p><strong>Total Distance:</strong> 9.4 km</p>
-                    <p><strong>Total Travel Time:</strong> 28 min</p>
-                </div>
+            <div class="daily-itinerary">
+                
+                <div class="card day-card" data-day="1">
+                    <h3>Day 1: Arrival & Gentle Exploration (2025-10-13)</h3>
+                    <p><strong>Optimized Route:</strong> HOTEL MYSTAYS PREMIER Omori → Shinagawa Aquarium → Omori Kaigan Beach Park → HOTEL MYSTAYS PREMIER Omori</p>
+                    <p><strong>Total Distance:</strong> 4.5 km | <strong>Total Travel Time:</strong> 18 minutes (estimated)</p>
 
-                <div class="place-card">
-                    <h4>Afternoon: Osaka Castle</h4>
-                    <p>Osaka Castle is a majestic landmark that played a significant role in Japanese history. Its current iteration, built in 1931, houses a museum detailing its past, and the surrounding park offers beautiful scenery, especially during autumn. It's a fantastic spot for families to learn about feudal Japan and enjoy panoramic city views from the main tower.</p>
-                    <p><strong>Why Visit:</strong> A historical gem offering cultural insights and stunning city views, perfect for engaging children with stories of samurai and ancient Japan.</p>
                     
-                    <h4>Activities:</h4>
-                    <ul>
-                        <li>Explore the castle museum</li>
-                        <li>Enjoy the panoramic views from the observation deck</li>
-                        <li>Walk around the castle grounds and Nishinomaru Garden</li>
-                    </ul>
-
-                    <h4>Practical Info:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>Entry Fee:</strong> ¥600 for adults (Castle Tower), free for children under 15</p>
-                        <p><strong>Estimated Cost:</strong> ¥1200</p>
-                        <p><strong>Best Time:</strong> Morning or late afternoon to avoid crowds</p>
-                        <p><strong>Duration:</strong> 2-3 hours</p>
-                        <p><strong>Accessibility:</strong> Wheelchair accessible with elevators in the castle tower</p>
+                    <div class="place-card">
+                        <h4>Afternoon: Shinagawa Aquarium</h4>
+                        <p>Discover a vibrant underwater world at Shinagawa Aquarium, home to a diverse collection of marine life. Enjoy captivating dolphin and sea lion shows, marvel at colorful fish, and explore the impressive shark tank. It's a perfect engaging activity for families, especially with a young child, offering both entertainment and educational value.</p>
+                        <p><strong>Why Visit:</strong> Perfect for a relaxed first day after arrival, offering interactive exhibits and exciting animal shows that will delight both children and adults.</p>
+                        
+                        <div class="practical-info">
+                            <strong>Practical Info:</strong>
+                            <ul>
+                                <li><strong>Entry Fee:</strong> Adults: ¥1350, Children (4-12): ¥600</li>
+                                <li><strong>Estimated Cost:</strong> ¥3,300</li>
+                                <li><strong>Best Time:</strong> Weekday afternoons for fewer crowds</li>
+                                <li><strong>Duration:</strong> 2-3 hours</li>
+                                <li><strong>Accessibility:</strong> Wheelchair and stroller accessible, elevators available</li>
+                            </ul>
+                        </div>
+                        <div class="tips">
+                            <strong>Tips:</strong>
+                            <ul>
+                                <li><strong>What to Bring:</strong> Comfortable shoes, Camera</li>
+                                <li><strong>What to Buy:</strong> Souvenirs from the gift shop</li>
+                                <li><strong>Safety Notes:</strong> Keep an eye on children near water exhibits, Follow staff instructions during shows</li>
+                                <li><strong>Customs/Etiquette:</strong> No flash photography in certain areas</li>
+                                <li><strong>Booking Required:</strong> No</li>
+                                <li><strong>Photo Spots:</strong> Dolphin show area, Underwater tunnel</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=35.6025,139.7348(Shinagawa%20Aquarium)" target="_blank" class="button map-link">View on Map</a>
                     </div>
-
-                    <h4>Tips:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>What to Bring:</strong> Comfortable walking shoes, Camera</p>
-                        <p><strong>What to Buy:</strong> Souvenirs from the castle shop</p>
-                        <p><strong>Safety Notes:</strong> Be aware of uneven surfaces in the park</p>
-                        <p><strong>Customs/Etiquette:</strong> Remove shoes when entering certain areas if requested</p>
-                        <p><strong>Booking Required:</strong> No</p>
-                        <p><strong>Photo Spots:</strong> Front of the main castle tower, Views from the observation deck</p>
-                    </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=34.6873159,135.525547" target="_blank" class="btn place-map-btn">View on Map</a>
-                </div>
-
-                <div class="place-card">
-                    <h4>Evening: Dotonbori</h4>
-                    <p>Dotonbori is Osaka's most famous entertainment district, known for its dazzling neon lights, eccentric billboards, and an abundance of restaurants and street food stalls. It's a vibrant area that comes alive at night, offering a feast for the senses with its delicious local cuisine and lively atmosphere. Families can enjoy a casual stroll, try various snacks, and take iconic photos.</p>
-                    <p><strong>Why Visit:</strong> Experience the vibrant nightlife and culinary delights of Osaka, with plenty of sights and sounds to captivate both adults and children.</p>
                     
-                    <h4>Activities:</h4>
-                    <ul>
-                        <li>Try local street food like Takoyaki and Okonomiyaki</li>
-                        <li>Take photos with the Glico Running Man sign</li>
-                        <li>Enjoy a canal cruise (seasonal)</li>
-                    </ul>
-
-                    <h4>Practical Info:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>Entry Fee:</strong> Free (activities and food extra)</p>
-                        <p><strong>Estimated Cost:</strong> ¥3000-5000 (for food and snacks)</p>
-                        <p><strong>Best Time:</strong> Evening for the full neon spectacle</p>
-                        <p><strong>Duration:</strong> 2-3 hours</p>
-                        <p><strong>Accessibility:</strong> Mostly flat, but can be crowded</p>
+                    <div class="place-card">
+                        <h4>Evening: Omori Kaigan Beach Park</h4>
+                        <p>Enjoy a refreshing stroll along Omori Kaigan Beach Park, a pleasant waterfront area offering scenic views and a tranquil atmosphere. It's an ideal spot for families to unwind after a day of travel, allowing children to play and enjoy the fresh air. You can watch the sunset over Tokyo Bay and enjoy a relaxed evening.</p>
+                        <p><strong>Why Visit:</strong> A peaceful outdoor space for relaxation and light activity, perfect for families to enjoy the Tokyo Bay breeze and scenic views.</p>
+                        
+                        <div class="practical-info">
+                            <strong>Practical Info:</strong>
+                            <ul>
+                                <li><strong>Entry Fee:</strong> Free</li>
+                                <li><strong>Estimated Cost:</strong> Free</li>
+                                <li><strong>Best Time:</strong> Late afternoon/early evening</li>
+                                <li><strong>Duration:</strong> 1-1.5 hours</li>
+                                <li><strong>Accessibility:</strong> Paved paths suitable for strollers and wheelchairs</li>
+                            </ul>
+                        </div>
+                        <div class="tips">
+                            <strong>Tips:</strong>
+                            <ul>
+                                <li><strong>What to Bring:</strong> Light jacket (for evening breeze), Water bottle</li>
+                                <li><strong>What to Buy:</strong> </li>
+                                <li><strong>Safety Notes:</strong> Supervise children near the water</li>
+                                <li><strong>Customs/Etiquette:</strong> Dispose of trash properly</li>
+                                <li><strong>Booking Required:</strong> No</li>
+                                <li><strong>Photo Spots:</strong> Sunset views over Tokyo Bay</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=35.5940,139.7360(Omori%20Kaigan%20Beach%20Park)" target="_blank" class="button map-link">View on Map</a>
                     </div>
-
-                    <h4>Tips:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>What to Bring:</strong> Empty stomach, Camera</p>
-                        <p><strong>What to Buy:</strong> Souvenir snacks</p>
-                        <p><strong>Safety Notes:</strong> Watch out for crowds, especially with children</p>
-                        <p><strong>Customs/Etiquette:</strong> It's generally okay to eat street food while walking in Dotonbori</p>
-                        <p><strong>Booking Required:</strong> No</p>
-                        <p><strong>Photo Spots:</strong> Glico Running Man sign, Ebisubashi Bridge</p>
+                    
+                    <div class="day-summary info-item">
+                        <strong>Day Summary:</strong>
+                        <p>Total Distance Traveled: 4.5 km</p>
+                        <p>Estimated Spending: ¥13,800</p>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=34.668729,135.500201" target="_blank" class="btn place-map-btn">View on Map</a>
                 </div>
+                
+                <div class="card day-card" data-day="2">
+                    <h3>Day 2: Magical Adventures at Tokyo DisneySea (2025-10-14)</h3>
+                    <p><strong>Optimized Route:</strong> HOTEL MYSTAYS PREMIER Omori → Tokyo DisneySea → HOTEL MYSTAYS PREMIER Omori</p>
+                    <p><strong>Total Distance:</strong> 40.12 km | <strong>Total Travel Time:</strong> 1 hour 20 minutes (estimated driving)</p>
 
-                <div class="day-summary">
-                    <p><strong>Day 1 Summary:</strong></p>
-                    <p>Total Distance Traveled: 9.4 km</p>
-                    <p>Estimated Daily Spending: 5600 JPY (Entry Fees: 600, Meals: 5000)</p>
+                    
+                    <div class="place-card">
+                        <h4>Full Day: Tokyo DisneySea</h4>
+                        <p>Embark on an unforgettable journey to Tokyo DisneySea, a uniquely themed park inspired by oceanic myths and legends. Explore seven themed ports, enjoy thrilling rides, dazzling shows, and meet beloved Disney characters. It's an unparalleled experience for families, offering endless fun and enchantment for visitors of all ages, especially a 4-year-old.</p>
+                        <p><strong>Why Visit:</strong> A world-class theme park offering unique aquatic-themed adventures, thrilling rides, and enchanting shows perfect for creating magical family memories.</p>
+                        
+                        <div class="practical-info">
+                            <strong>Practical Info:</strong>
+                            <ul>
+                                <li><strong>Entry Fee:</strong> Adults (18+): ¥9400, Juniors (12-17): ¥7800, Children (4-11): ¥5600</li>
+                                <li><strong>Estimated Cost:</strong> ¥24,400</li>
+                                <li><strong>Best Time:</strong> Weekdays outside of school holidays</li>
+                                <li><strong>Duration:</strong> Full day (8+ hours)</li>
+                                <li><strong>Accessibility:</strong> Stroller rentals available, accessible rides and facilities</li>
+                                <li><strong>FastPass/Premier Access:</strong> Consider purchasing Disney Premier Access for popular attractions.</li>
+                            </ul>
+                        </div>
+                        <div class="tips">
+                            <strong>Tips:</strong>
+                            <ul>
+                                <li><strong>What to Bring:</strong> Comfortable walking shoes, Rain gear (umbrella/poncho), Sunscreen and hat, Snacks and drinks (some outside food allowed), Portable charger</li>
+                                <li><strong>What to Buy:</strong> Disney merchandise, Souvenirs</li>
+                                <li><strong>Safety Notes:</strong> Stay hydrated, Keep track of children in crowded areas, Check ride height requirements</li>
+                                <li><strong>Customs/Etiquette:</strong> Respect queues, No smoking outside designated areas</li>
+                                <li><strong>Booking Required:</strong> Yes</li>
+                                <li><strong>Photo Spots:</strong> In front of the AquaSphere, Mysterious Island, Mermaid Lagoon</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=35.6273,139.8821(Tokyo%20DisneySea)" target="_blank" class="button map-link">View on Map</a>
+                    </div>
+                    
+                    <div class="day-summary info-item">
+                        <strong>Day Summary:</strong>
+                        <p>Total Distance Traveled: 40.12 km</p>
+                        <p>Estimated Spending: ¥46,400</p>
+                    </div>
                 </div>
+                
+                <div class="card day-card" data-day="3">
+                    <h3>Day 3: Culture and Nature in Ueno and Asakusa (2025-10-15)</h3>
+                    <p><strong>Optimized Route:</strong> HOTEL MYSTAYS PREMIER Omori → Ueno Park → Tokyo National Museum → Sensō-ji Temple & Nakamise-dori → HOTEL MYSTAYS PREMIER Omori</p>
+                    <p><strong>Total Distance:</strong> 34.76 km | <strong>Total Travel Time:</strong> 1 hour 45 minutes (estimated driving)</p>
+
+                    
+                    <div class="place-card">
+                        <h4>Morning: Ueno Park</h4>
+                        <p>Ueno Park is a sprawling public park known for its numerous museums, a zoo, and beautiful natural scenery. It's a fantastic spot for families, offering a blend of cultural enrichment and outdoor activities. You can enjoy a leisurely walk, visit the zoo, or explore one of the many cultural institutions within its grounds.</p>
+                        <p><strong>Why Visit:</strong> A cultural and natural oasis with diverse attractions, including museums, a zoo, and beautiful gardens, perfect for a family day out.</p>
+                        
+                        <div class="practical-info">
+                            <strong>Practical Info:</strong>
+                            <ul>
+                                <li><strong>Entry Fee:</strong> Park: Free, Zoo: Adults ¥600, Children (0-12): Free</li>
+                                <li><strong>Estimated Cost:</strong> ¥1,200</li>
+                                <li><strong>Best Time:</strong> Morning to early afternoon</li>
+                                <li><strong>Duration:</strong> 2-3 hours</li>
+                                <li><strong>Accessibility:</strong> Mostly flat with paved paths, stroller and wheelchair friendly</li>
+                            </ul>
+                        </div>
+                        <div class="tips">
+                            <strong>Tips:</strong>
+                            <ul>
+                                <li><strong>What to Bring:</strong> Comfortable shoes, Snacks and water</li>
+                                <li><strong>What to Buy:</strong> Zoo souvenirs</li>
+                                <li><strong>Safety Notes:</strong> Keep children close in crowded areas, Be mindful of feeding times at the zoo</li>
+                                <li><strong>Customs/Etiquette:</strong> No littering, Follow zoo rules</li>
+                                <li><strong>Booking Required:</strong> No</li>
+                                <li><strong>Photo Spots:</strong> Panda exhibit, Shinobazu Pond</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=35.7144,139.7744(Ueno%20Park)" target="_blank" class="button map-link">View on Map</a>
+                    </div>
+                    
+                    <div class="place-card">
+                        <h4>Late Morning: Tokyo National Museum</h4>
+                        <p>Located within Ueno Park, the Tokyo National Museum is Japan's oldest and largest museum, housing an extensive collection of art and artifacts from Japan and other Asian countries. It provides a fascinating insight into Japanese history and culture. While a 4-year-old might not grasp everything, the grand architecture and some visual exhibits can still be engaging.</p>
+                        <p><strong>Why Visit:</strong> Explore Japan's rich history and art through a vast collection of artifacts, offering a deeper understanding of the country's cultural heritage.</p>
+                        
+                        <div class="practical-info">
+                            <strong>Practical Info:</strong>
+                            <ul>
+                                <li><strong>Entry Fee:</strong> Adults: ¥1000, Children (under 18): Free</li>
+                                <li><strong>Estimated Cost:</strong> ¥2,000</li>
+                                <li><strong>Best Time:</strong> Late morning</li>
+                                <li><strong>Duration:</strong> 1.5-2 hours</li>
+                                <li><strong>Accessibility:</strong> Wheelchair and stroller accessible, elevators available</li>
+                            </ul>
+                        </div>
+                        <div class="tips">
+                            <strong>Tips:</strong>
+                            <ul>
+                                <li><strong>What to Bring:</strong> Quiet activities for child (drawing pad)</li>
+                                <li><strong>What to Buy:</strong> Books, postcards, traditional crafts</li>
+                                <li><strong>Safety Notes:</strong> Be mindful of museum etiquette (no running, loud noises)</li>
+                                <li><strong>Customs/Etiquette:</strong> No touching exhibits</li>
+                                <li><strong>Booking Required:</strong> No</li>
+                                <li><strong>Photo Spots:</strong> Main building facade</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=35.7188,139.7767(Tokyo%20National%20Museum)" target="_blank" class="button map-link">View on Map</a>
+                    </div>
+                    
+                    <div class="place-card">
+                        <h4>Afternoon: Sensō-ji Temple & Nakamise-dori</h4>
+                        <p>Immerse yourselves in traditional Japanese culture at Sensō-ji, Tokyo's oldest temple, and wander through Nakamise-dori, a bustling shopping street leading up to the temple. Children will love the vibrant atmosphere, traditional snacks, and unique souvenirs. It's a lively and visually stimulating experience for the whole family.</p>
+                        <p><strong>Why Visit:</strong> Experience ancient Tokyo with a majestic temple and a vibrant traditional market street, offering cultural insights and unique shopping opportunities.</p>
+                        
+                        <div class="practical-info">
+                            <strong>Practical Info:</strong>
+                            <ul>
+                                <li><strong>Entry Fee:</strong> Free (temple grounds), some areas may have small fees</li>
+                                <li><strong>Estimated Cost:</strong> Free (excluding purchases)</li>
+                                <li><strong>Best Time:</strong> Afternoon</li>
+                                <li><strong>Duration:</strong> 2-3 hours</li>
+                                <li><strong>Accessibility:</strong> Main paths are accessible, some smaller shops may have steps</li>
+                            </ul>
+                        </div>
+                        <div class="tips">
+                            <strong>Tips:</strong>
+                            <ul>
+                                <li><strong>What to Bring:</strong> Small bag for souvenirs, Cash for street vendors</li>
+                                <li><strong>What to Buy:</strong> Traditional sweets (e.g., ningyo-yaki), Handicrafts, yukata</li>
+                                <li><strong>Safety Notes:</strong> Watch for crowds on Nakamise-dori, Be aware of your surroundings</li>
+                                <li><strong>Customs/Etiquette:</strong> Bow before entering the temple, Wash hands and mouth at the purification fountain before entering</li>
+                                <li><strong>Booking Required:</strong> No</li>
+                                <li><strong>Photo Spots:</strong> Kaminarimon Gate, Nakamise-dori, Sensō-ji Main Hall</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=35.7147,139.7967(Sens%C5%8D-ji%20Temple%20&%20Nakamise-dori)" target="_blank" class="button map-link">View on Map</a>
+                    </div>
+                    
+                    <div class="day-summary info-item">
+                        <strong>Day Summary:</strong>
+                        <p>Total Distance Traveled: 34.76 km</p>
+                        <p>Estimated Spending: ¥19,200</p>
+                    </div>
+                </div>
+                
+                <div class="card day-card" data-day="4">
+                    <h3>Day 4: Futuristic Fun in Odaiba & Art Immersion (2025-10-16)</h3>
+                    <p><strong>Optimized Route:</strong> HOTEL MYSTAYS PREMIER Omori → teamLab Planets TOKYO DMM → Joypolis/DiverCity Tokyo Plaza → HOTEL MYSTAYS PREMIER Omori</p>
+                    <p><strong>Total Distance:</strong> 40.9 km | <strong>Total Travel Time:</strong> 1 hour 45 minutes (estimated driving)</p>
+
+                    
+                    <div class="place-card">
+                        <h4>Morning: teamLab Planets TOKYO DMM</h4>
+                        <p>Dive into an immersive digital art experience at teamLab Planets. This unique museum features large-scale, interactive art installations where you become part of the artwork. Children will be captivated by the flowing digital waterfalls, walking through koi ponds, and rooms filled with soft, giant spheres. It's a truly mesmerizing and sensory experience for the entire family.</p>
+                        <p><strong>Why Visit:</strong> An immersive digital art museum offering a unique, interactive, and visually stunning experience that appeals to all ages, igniting imagination and wonder.</p>
+                        
+                        <div class="practical-info">
+                            <strong>Practical Info:</strong>
+                            <ul>
+                                <li><strong>Entry Fee:</strong> Adults: ¥3200, Children (4-12): ¥1000</li>
+                                <li><strong>Estimated Cost:</strong> ¥7,400</li>
+                                <li><strong>Best Time:</strong> Morning to avoid large crowds</li>
+                                <li><strong>Duration:</strong> 1.5-2 hours</li>
+                                <li><strong>Accessibility:</strong> Requires walking barefoot through water and uneven surfaces; not suitable for wheelchairs/strollers inside exhibits. Lockers available.</li>
+                            </ul>
+                        </div>
+                        <div class="tips">
+                            <strong>Tips:</strong>
+                            <ul>
+                                <li><strong>What to Bring:</strong> Shorts or pants that can be rolled up (water areas), Towel (optional), Portable charger for phone (many photo ops)</li>
+                                <li><strong>What to Buy:</strong> Souvenirs from the gift shop</li>
+                                <li><strong>Safety Notes:</strong> Be careful on wet surfaces, Keep an eye on children as it can be dark in some areas</li>
+                                <li><strong>Customs/Etiquette:</strong> Follow staff instructions for exhibit interaction</li>
+                                <li><strong>Booking Required:</strong> Yes</li>
+                                <li><strong>Photo Spots:</strong> Crystal World, Koi Pond</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=35.6469,139.7867(teamLab%20Planets%20TOKYO%20DMM)" target="_blank" class="button map-link">View on Map</a>
+                    </div>
+                    
+                    <div class="place-card">
+                        <h4>Afternoon: Joypolis & DiverCity Tokyo Plaza</h4>
+                        <p>Experience thrilling indoor rides and arcade games at Tokyo Joypolis, a multi-story amusement park, followed by shopping and entertainment at DiverCity Tokyo Plaza. Outside DiverCity, marvel at the life-sized Unicorn Gundam statue, which offers an exciting light show. This area provides a lively mix of entertainment for the whole family.</p>
+                        <p><strong>Why Visit:</strong> A hub of futuristic entertainment with indoor rides, arcade games, and the iconic Gundam statue, perfect for an afternoon of family fun.</p>
+                        
+                        <div class="practical-info">
+                            <strong>Practical Info:</strong>
+                            <ul>
+                                <li><strong>Entry Fee:</strong> Joypolis: Entry only ¥1200, Passport (rides included): Adults ¥5000, Children (7-17) ¥4000, (4-6) ¥2500. DiverCity/Gundam: Free entry.</li>
+                                <li><strong>Estimated Cost:</strong> ¥10,000 (for 3 passports)</li>
+                                <li><strong>Best Time:</strong> Afternoon to evening</li>
+                                <li><strong>Duration:</strong> 3-4 hours</li>
+                                <li><strong>Accessibility:</strong> Joypolis may have some restrictions for smaller children on certain rides; DiverCity is fully accessible.</li>
+                            </ul>
+                        </div>
+                        <div class="tips">
+                            <strong>Tips:</strong>
+                            <ul>
+                                <li><strong>What to Bring:</strong> Comfortable shoes, Extra cash for games/souvenirs</li>
+                                <li><strong>What to Buy:</strong> Gundam models, Japanese fashion, snacks</li>
+                                <li><strong>Safety Notes:</strong> Supervise children on rides and in crowded areas</li>
+                                <li><strong>Customs/Etiquette:</strong> No outside food or drinks in Joypolis</li>
+                                <li><strong>Booking Required:</strong> No</li>
+                                <li><strong>Photo Spots:</strong> Unicorn Gundam statue, Inside Joypolis with fun backgrounds</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=35.6273,139.7788(Joypolis%20&%20DiverCity%20Tokyo%20Plaza)" target="_blank" class="button map-link">View on Map</a>
+                    </div>
+                    
+                    <div class="day-summary info-item">
+                        <strong>Day Summary:</strong>
+                        <p>Total Distance Traveled: 40.9 km</p>
+                        <p>Estimated Spending: ¥33,900</p>
+                    </div>
+                </div>
+                
+                <div class="card day-card" data-day="5">
+                    <h3>Day 5: Departure from Tokyo (2025-10-17)</h3>
+                    <p><strong>Optimized Route:</strong> HOTEL MYSTAYS PREMIER Omori → Haneda Airport (HND)</p>
+                    <p><strong>Total Distance:</strong> 17.0 km | <strong>Total Travel Time:</strong> 26 minutes (estimated public transport/taxi)</p>
+
+                    
+                    <div class="place-card">
+                        <h4>Morning: Haneda Airport (HND)</h4>
+                        <p>Your departure from Tokyo will be from Haneda Airport, a major international hub known for its efficiency and range of amenities. Allow ample time for check-in, security, and any last-minute souvenir shopping. The airport offers various dining options and shops, ensuring a comfortable waiting experience before your flight.</p>
+                        <p><strong>Why Visit:</strong> Facilitate a smooth and comfortable departure from Tokyo, with access to dining, shopping, and essential airport services.</p>
+                        
+                        <div class="practical-info">
+                            <strong>Practical Info:</strong>
+                            <ul>
+                                <li><strong>Entry Fee:</strong> Free</li>
+                                <li><strong>Estimated Cost:</strong> Varies (meals/shopping)</li>
+                                <li><strong>Best Time:</strong> Dependent on flight schedule</li>
+                                <li><strong>Duration:</strong> 3-4 hours prior to flight</li>
+                                <li><strong>Accessibility:</strong> Fully accessible with elevators, ramps, and accessible restrooms</li>
+                            </ul>
+                        </div>
+                        <div class="tips">
+                            <strong>Tips:</strong>
+                            <ul>
+                                <li><strong>What to Bring:</strong> Passports and travel documents, Flight tickets, Any last-minute items to check-in</li>
+                                <li><strong>What to Buy:</strong> Omiyage (souvenir snacks), traditional crafts, electronics</li>
+                                <li><strong>Safety Notes:</strong> Arrive early to avoid rush, Keep valuables secure</li>
+                                <li><strong>Customs/Etiquette:</strong> Follow airport guidelines</li>
+                                <li><strong>Booking Required:</strong> No</li>
+                                <li><strong>Photo Spots:</strong> Observation deck for plane spotting</li>
+                            </ul>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=35.5494,139.7798(Haneda%20Airport%20(HND))" target="_blank" class="button map-link">View on Map</a>
+                    </div>
+                    
+                    <div class="day-summary info-item">
+                        <strong>Day Summary:</strong>
+                        <p>Total Distance Traveled: 17.0 km</p>
+                        <p>Estimated Spending: ¥12,000</p>
+                    </div>
+                </div>
+                
             </div>
-            
-            <div class="day-card">
-                <h3>Day 2: 2025-10-14 - Thrills and Fantasy at Universal Studios Japan</h3>
-                <div class="day-overview">
-                    <p><strong>Route:</strong> Hotel → Universal Studios Japan → Hotel</p>
-                    <p><strong>Total Distance:</strong> 18.0 km</p>
-                    <p><strong>Total Travel Time:</strong> 40 min</p>
-                </div>
-
-                <div class="place-card">
-                    <h4>Full Day: Universal Studios Japan</h4>
-                    <p>Universal Studios Japan is a world-renowned theme park offering thrilling rides, spectacular shows, and immersive themed areas based on popular movies and franchises. From The Wizarding World of Harry Potter to Super Nintendo World, there's something for every family member. It promises a day full of excitement and unforgettable memories.</p>
-                    <p><strong>Why Visit:</strong> A fantastic destination for families looking for a day of exhilarating rides, live entertainment, and magical experiences with beloved characters.</p>
-                    
-                    <h4>Activities:</h4>
-                    <ul>
-                        <li>Ride the Hollywood Dream – The Ride</li>
-                        <li>Explore The Wizarding World of Harry Potter and try Butterbeer</li>
-                        <li>Experience Super Nintendo World and Mario Kart: Koopa's Challenge</li>
-                        <li>Watch various shows and parades</li>
-                    </ul>
-
-                    <h4>Practical Info:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>Entry Fee:</strong> Adults: ¥8,600 – ¥9,800, Children (4-11): ¥5,600 – ¥6,800 (prices vary by season)</p>
-                        <p><strong>Estimated Cost:</strong> ¥20000 (tickets and some food/souvenirs)</p>
-                        <p><strong>Best Time:</strong> Arrive early, especially on weekdays, to maximize time and avoid long queues. Consider purchasing an Express Pass.</p>
-                        <p><strong>Duration:</strong> Full day (8-10 hours)</p>
-                        <p><strong>Accessibility:</strong> Wheelchair rentals available, accessible restrooms and attractions</p>
-                    </div>
-
-                    <h4>Tips:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>What to Bring:</strong> Comfortable shoes, Sunscreen/hat (if sunny), Rain gear (if rain is forecast), Water bottle, Snacks</p>
-                        <p><strong>What to Buy:</strong> Souvenirs from themed shops, Character merchandise</p>
-                        <p><strong>Safety Notes:</strong> Keep track of children in crowded areas, Follow ride safety instructions</p>
-                        <p><strong>Customs/Etiquette:</strong> Queue patiently, Respect park rules</p>
-                        <p><strong>Booking Required:</strong> Yes</p>
-                        <p><strong>Photo Spots:</strong> Hogwarts Castle, Mario's Castle, Minion Park</p>
-                    </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=34.6654495,135.4323334" target="_blank" class="btn place-map-btn">View on Map</a>
-                </div>
-
-                <div class="day-summary">
-                    <p><strong>Day 2 Summary:</strong></p>
-                    <p>Total Distance Traveled: 18.0 km</p>
-                    <p>Estimated Daily Spending: 19200 JPY (Entry Fees: 14200, Meals: 5000)</p>
-                </div>
-            </div>
-            
-            <div class="day-card">
-                <h3>Day 3: 2025-10-15 - Aquatic Wonders and Skyline Views</h3>
-                <div class="day-overview">
-                    <p><strong>Route:</strong> Hotel → Osaka Aquarium Kaiyukan → Tempozan Ferris Wheel → Hotel</p>
-                    <p><strong>Total Distance:</strong> 22.8 km</p>
-                    <p><strong>Total Travel Time:</strong> 45 min</p>
-                </div>
-
-                <div class="place-card">
-                    <h4>Morning: Osaka Aquarium Kaiyukan</h4>
-                    <p>Osaka Aquarium Kaiyukan is one of Japan's most spectacular aquariums, featuring a unique presentation of marine life from the Pacific Rim. Its massive central tank houses a whale shark, and visitors descend through multiple levels, observing diverse species from various ocean habitats. It's an educational and mesmerizing experience for all ages, particularly captivating for children.</p>
-                    <p><strong>Why Visit:</strong> A captivating underwater journey showcasing diverse marine life, including the impressive whale shark, perfect for family exploration and learning.</p>
-                    
-                    <h4>Activities:</h4>
-                    <ul>
-                        <li>Observe marine animals from the Pacific Rim</li>
-                        <li>Walk through the Aqua Gate and various themed exhibits</li>
-                        <li>Enjoy interactive exhibits</li>
-                    </ul>
-
-                    <h4>Practical Info:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>Entry Fee:</strong> Adults: ¥2,700, Children (7-12): ¥1,400, Infants (3-6): ¥700</p>
-                        <p><strong>Estimated Cost:</strong> ¥4800</p>
-                        <p><strong>Best Time:</strong> Morning to avoid large crowds, especially on weekends</p>
-                        <p><strong>Duration:</strong> 2-3 hours</p>
-                        <p><strong>Accessibility:</strong> Wheelchair and stroller accessible with elevators and ramps</p>
-                    </div>
-
-                    <h4>Tips:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>What to Bring:</strong> Camera, Comfortable shoes</p>
-                        <p><strong>What to Buy:</strong> Marine-themed souvenirs</p>
-                        <p><strong>Safety Notes:</strong> Keep children close in crowded areas</p>
-                        <p><strong>Customs/Etiquette:</strong> No flash photography in certain areas</p>
-                        <p><strong>Booking Required:</strong> No</p>
-                        <p><strong>Photo Spots:</strong> Main Pacific Ocean tank, Jellyfish exhibit</p>
-                    </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=34.656094,135.429767" target="_blank" class="btn place-map-btn">View on Map</a>
-                </div>
-
-                <div class="place-card">
-                    <h4>Afternoon: Tempozan Ferris Wheel</h4>
-                    <p>Located right next to Kaiyukan, the Tempozan Ferris Wheel offers breathtaking panoramic views of Osaka Bay, the city skyline, and even the Akashi Kaikyo Bridge on a clear day. Riding one of the world's largest Ferris wheels provides a relaxing and memorable experience, especially for families looking to enjoy the scenery from a different perspective.</p>
-                    <p><strong>Why Visit:</strong> Provides spectacular aerial views of Osaka and its surroundings, offering a fun and relaxing break after the aquarium.</p>
-                    
-                    <h4>Activities:</h4>
-                    <ul>
-                        <li>Enjoy the panoramic views of Osaka Bay and city</li>
-                        <li>Ride in a 'see-through' gondola for an extra thrill (limited availability)</li>
-                    </ul>
-
-                    <h4>Practical Info:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>Entry Fee:</strong> ¥800 per person</p>
-                        <p><strong>Estimated Cost:</strong> ¥2400</p>
-                        <p><strong>Best Time:</strong> Late afternoon for sunset views or clear days</p>
-                        <p><strong>Duration:</strong> 15-20 minutes per ride</p>
-                        <p><strong>Accessibility:</strong> Wheelchair accessible gondolas available</p>
-                    </div>
-
-                    <h4>Tips:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>What to Bring:</strong> Camera</p>
-                        <p><strong>What to Buy:</strong> Not specified</p>
-                        <p><strong>Safety Notes:</strong> Not specified</p>
-                        <p><strong>Customs/Etiquette:</strong> Not specified</p>
-                        <p><strong>Booking Required:</strong> No</p>
-                        <p><strong>Photo Spots:</strong> Views from the top of the Ferris wheel</p>
-                    </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=34.65627,135.43105" target="_blank" class="btn place-map-btn">View on Map</a>
-                </div>
-
-                <div class="day-summary">
-                    <p><strong>Day 3 Summary:</strong></p>
-                    <p>Total Distance Traveled: 22.8 km</p>
-                    <p>Estimated Daily Spending: 11200 JPY (Entry Fees: 7200, Meals: 4000)</p>
-                </div>
-            </div>
-            
-            <div class="day-card">
-                <h3>Day 4: 2025-10-16 - Sacred Deer and Ancient Temples in Nara</h3>
-                <div class="day-overview">
-                    <p><strong>Route:</strong> Hotel → Nara Park → Todai-ji Temple → Hotel</p>
-                    <p><strong>Total Distance:</strong> 66.0 km</p>
-                    <p><strong>Total Travel Time:</strong> 1 hr 30 min</p>
-                </div>
-
-                <div class="place-card">
-                    <h4>Morning: Nara Park</h4>
-                    <p>Nara Park is a vast public park located in the city of Nara, famous for being home to hundreds of wild deer that roam freely. These deer are considered messengers of the gods in Shinto and are very accustomed to humans, allowing visitors to feed them special 'shika senbei' (deer crackers). It's a unique and delightful experience for families, especially children, to interact with these gentle creatures amidst beautiful natural scenery.</p>
-                    <p><strong>Why Visit:</strong> A unique opportunity for children and adults to interact with friendly wild deer in a beautiful natural setting, a truly memorable Japanese experience.</p>
-                    
-                    <h4>Activities:</h4>
-                    <ul>
-                        <li>Feed the wild deer with shika senbei (deer crackers)</li>
-                        <li>Stroll through the scenic park grounds</li>
-                        <li>Enjoy a picnic amidst nature</li>
-                    </ul>
-
-                    <h4>Practical Info:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>Entry Fee:</strong> Free (deer crackers ¥200 per pack)</p>
-                        <p><strong>Estimated Cost:</strong> ¥1000</p>
-                        <p><strong>Best Time:</strong> Morning or late afternoon to avoid peak crowds and heat</p>
-                        <p><strong>Duration:</strong> 2-3 hours</p>
-                        <p><strong>Accessibility:</strong> Generally flat and easy to navigate with strollers/wheelchairs</p>
-                    </div>
-
-                    <h4>Tips:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>What to Bring:</strong> Comfortable walking shoes, Camera, Hat/sunscreen</p>
-                        <p><strong>What to Buy:</strong> Shika senbei (deer crackers), Deer-themed souvenirs</p>
-                        <p><strong>Safety Notes:</strong> Deer can be pushy for food, supervise children, Do not tease the deer</p>
-                        <p><strong>Customs/Etiquette:</strong> Bow to the deer when offering food (they might bow back!)</p>
-                        <p><strong>Booking Required:</strong> No</p>
-                        <p><strong>Photo Spots:</strong> Feeding the deer, Deer with scenic temple backgrounds</p>
-                    </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=34.685088,135.842274" target="_blank" class="btn place-map-btn">View on Map</a>
-                </div>
-
-                <div class="place-card">
-                    <h4>Afternoon: Todai-ji Temple</h4>
-                    <p>Todai-ji Temple is a UNESCO World Heritage site and one of Japan's most historically significant and impressive temples. It houses a gigantic bronze statue of the Great Buddha (Daibutsu) in its main hall, which is also the world's largest wooden building. The sheer scale of the temple and the Buddha statue is awe-inspiring and offers a profound cultural experience for the whole family.</p>
-                    <p><strong>Why Visit:</strong> Witness the grandeur of one of Japan's most important temples and its colossal Great Buddha statue, a truly magnificent cultural landmark.</p>
-                    
-                    <h4>Activities:</h4>
-                    <ul>
-                        <li>Marvel at the Great Buddha statue</li>
-                        <li>Walk through the massive main hall</li>
-                        <li>Try to squeeze through the pillar hole in the main hall (said to grant enlightenment)</li>
-                    </ul>
-
-                    <h4>Practical Info:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>Entry Fee:</strong> Adults: ¥600, Children (under 12): ¥300</p>
-                        <p><strong>Estimated Cost:</strong> ¥1500</p>
-                        <p><strong>Best Time:</strong> Morning or late afternoon to avoid peak tourist times</p>
-                        <p><strong>Duration:</strong> 1.5-2 hours</p>
-                        <p><strong>Accessibility:</strong> Main hall is accessible via ramps, some uneven paths in the surrounding area</p>
-                    </div>
-
-                    <h4>Tips:</h4>
-                    <div class="place-info-grid">
-                        <p><strong>What to Bring:</strong> Camera, Respectful attire (shoulders and knees covered)</p>
-                        <p><strong>What to Buy:</strong> Temple charms and souvenirs</p>
-                        <p><strong>Safety Notes:</strong> Be mindful of crowds inside the hall</p>
-                        <p><strong>Customs/Etiquette:</strong> Be quiet and respectful inside the temple, No photography of certain artifacts if signs indicate</p>
-                        <p><strong>Booking Required:</strong> No</p>
-                        <p><strong>Photo Spots:</strong> Great Buddha statue, Outside view of the main hall</p>
-                    </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=34.688849,135.837424" target="_blank" class="btn place-map-btn">View on Map</a>
-                </div>
-
-                <div class="day-summary">
-                    <p><strong>Day 4 Summary:</strong></p>
-                    <p>Total Distance Traveled: 66.0 km</p>
-                    <p>Estimated Daily Spending: 6900 JPY (Entry Fees: 900, Transport: 2000, Meals: 4000)</p>
-                </div>
-            </div>
-            
         </section>
 
-        <section id="budget">
+        <section id="budget-dashboard">
             <h2>Budget Dashboard</h2>
-            <div class="budget-overview">
-                <div class="budget-item">
-                    <h4>Total Budget</h4>
-                    <p>400000 JPY</p>
-                </div>
-                <div class="budget-item spent">
-                    <h4>Total Spent</h4>
-                    <p>158844 JPY</p>
-                </div>
-                <div class="budget-item remaining">
-                    <h4>Remaining Budget</h4>
-                    <p>241156 JPY</p>
-                </div>
-            </div>
-
-            <h3>Budget Progress</h3>
-            <div class="budget-bar-container">
-                <div class="budget-bar" id="budgetProgressBar"></div>
-            </div>
-            <p style="text-align: right; margin-top: 5px; font-size: 0.9em; color: #666;">
-                <span id="spentPercentage">0%</span> of budget spent.
-            </p>
-
-            <h3>Expenses Breakdown</h3>
-            <div class="card flex-row">
-                <div>
-                    <h4>Flights</h4>
-                    <div class="expense-item">
-                        <span>No valid flights available based on the provided data.</span>
-                        <span>0 JPY</span>
-                    </div>
-                </div>
-                <div>
-                    <h4>Accommodation</h4>
-                    <div class="expense-item">
-                        <span>The Royal Park Hotel Iconic Osaka-Midosuji (4 nights)</span>
-                        <span>115944 JPY</span>
-                    </div>
-                </div>
-                <div>
-                    <h4>Daily Expenses</h4>
-                    <div class="expense-item">
-                        <span>Day 1: Entry Fees (600) + Meals (5000)</span>
-                        <span>5600 JPY</span>
-                    </div>
-                    <div class="expense-item">
-                        <span>Day 2: Entry Fees (14200) + Meals (5000)</span>
-                        <span>19200 JPY</span>
-                    </div>
-                    <div class="expense-item">
-                        <span>Day 3: Entry Fees (7200) + Meals (4000)</span>
-                        <span>11200 JPY</span>
-                    </div>
-                    <div class="expense-item">
-                        <span>Day 4: Entry Fees (900) + Transport (2000) + Meals (4000)</span>
-                        <span>6900 JPY</span>
+            <div class="card budget-summary">
+                <p><strong>Total Trip Budget:</strong> ¥450,000</p>
+                <p><strong>Total Estimated Spent:</strong> ¥389,771</p>
+                <p><strong>Remaining Budget:</strong> ¥60,229</p>
+                <div class="budget-bar-container">
+                    <div class="budget-bar" style="width: 86.62%; background-color: var(--primary-color);">
+                        <span>Spent: 86.62%</span>
                     </div>
                 </div>
             </div>
 
-            <h3>Budget Tips</h3>
+            <h3>Budget Breakdown</h3>
+            <div class="info-grid budget-breakdown-list">
+                
+                <div class="budget-category-item">
+                    <strong>Flights</strong>
+                    <p>Air India (AI)</p>
+                    <p>Cost: ¥211,311</p>
+                </div>
+                
+                <div class="budget-category-item">
+                    <strong>Accommodation</strong>
+                    <p>HOTEL MYSTAYS PREMIER Omori</p>
+                    <p>Total: ¥66,960</p>
+                </div>
+                
+                <div class="budget-category-item daily-expenses">
+                    <strong>Daily Expenses (Sum)</strong>
+                    <p>Entry Fees: ¥48,300</p>
+                    <p>Activities: ¥0</p>
+                    <p>Transport: ¥15,000</p>
+                    <p>Meals: ¥45,000</p>
+                    <p>Shopping: ¥12,000</p>
+                    <p><strong>Grand Total Daily: ¥125,300</strong></p>
+                </div>
+                
+            </div>
+
+            <h3 style="margin-top: 30px;">Budget Tips</h3>
             <div class="budget-tips">
                 <ul>
-                    <li>Utilize public transportation with an IC card (e.g., ICOCA, Suica) for cost-effective travel.</li>
-                    <li>Look for family meal deals or set menus at restaurants to save on dining costs.</li>
-                    <li>Consider packing some snacks and drinks for the day to avoid frequent purchases at attractions.</li>
-                    <li>Explore free attractions like public parks and scenic walks to balance out paid activities.</li>
+                    <li>Utilize public transportation with an IC card (Suica/Pasmo) for cost-effective travel.</li>
+                    <li>Look for family meal deals or bento boxes at convenience stores for budget-friendly lunches.</li>
+                    <li>Many museums offer free admission for young children.</li>
+                    <li>Consider packing some snacks and drinks for outings to save on impulse purchases.</li>
+                    <li>Prioritize key attractions and allocate budget accordingly, as entry fees can add up.</li>
                 </ul>
             </div>
         </section>
@@ -860,250 +898,272 @@
         <section id="packing-list">
             <h2>Packing List</h2>
             <div class="card">
-                <div class="list-category">
-                    <h4>Clothing</h4>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-clothing-0">
-                        <label for="pack-clothing-0">Comfortable walking shoes</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-clothing-1">
-                        <label for="pack-clothing-1">Layers for varying temperatures (average October weather)</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-clothing-2">
-                        <label for="pack-clothing-2">Light jacket or sweater</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-clothing-3">
-                        <label for="pack-clothing-3">Rain jacket or umbrella (for potential rain)</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-clothing-4">
-                        <label for="pack-clothing-4">Casual outfits</label>
-                    </div>
+                <h3>Clothing</h3>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="clothing-0">
+                    <label for="clothing-0">Comfortable walking shoes</label>
                 </div>
-                <div class="list-category">
-                    <h4>Footwear</h4>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-footwear-0">
-                        <label for="pack-footwear-0">Comfortable walking shoes</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-footwear-1">
-                        <label for="pack-footwear-1">Extra socks</label>
-                    </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="clothing-1">
+                    <label for="clothing-1">Layered clothing (temperatures can vary)</label>
                 </div>
-                <div class="list-category">
-                    <h4>Essentials</h4>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-essentials-0">
-                        <label for="pack-essentials-0">Passport and visa (if required)</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-essentials-1">
-                        <label for="pack-essentials-1">Travel insurance documents</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-essentials-2">
-                        <label for="pack-essentials-2">Japanese Yen (cash)</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-essentials-3">
-                        <label for="pack-essentials-3">Credit/debit cards</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-essentials-4">
-                        <label for="pack-essentials-4">Universal power adapter</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-essentials-5">
-                        <label for="pack-essentials-5">Portable charger</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-essentials-6">
-                        <label for="pack-essentials-6">Basic first-aid kit</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-essentials-7">
-                        <label for="pack-essentials-7">Hand sanitizer</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-essentials-8">
-                        <label for="pack-essentials-8">Reusable water bottle</label>
-                    </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="clothing-2">
+                    <label for="clothing-2">Rain jacket or umbrella</label>
                 </div>
-                <div class="list-category">
-                    <h4>Medication</h4>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-medication-0">
-                        <label for="pack-medication-0">Any personal prescription medications</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-medication-1">
-                        <label for="pack-medication-1">Over-the-counter pain relievers</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-medication-2">
-                        <label for="pack-medication-2">Motion sickness medication (for travel)</label>
-                    </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="clothing-3">
+                    <label for="clothing-3">Casual outfits</label>
                 </div>
-                <div class="list-category">
-                    <h4>Electronics</h4>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-electronics-0">
-                        <label for="pack-electronics-0">Smartphone and charger</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-electronics-1">
-                        <label for="pack-electronics-1">Camera and extra batteries</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-electronics-2">
-                        <label for="pack-electronics-2">Tablet/entertainment for children</label>
-                    </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="clothing-4">
+                    <label for="clothing-4">Sleepwear</label>
                 </div>
-                <div class="list-category">
-                    <h4>Miscellaneous</h4>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-miscellaneous-0">
-                        <label for="pack-miscellaneous-0">Small backpack for daily excursions</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-miscellaneous-1">
-                        <label for="pack-miscellaneous-1">Travel pillow (for longer journeys)</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-miscellaneous-2">
-                        <label for="pack-miscellaneous-2">Snacks for children</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-miscellaneous-3">
-                        <label for="pack-miscellaneous-3">Activity books/small toys for entertainment</label>
-                    </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="clothing-5">
+                    <label for="clothing-5">Swimsuit (if hotel has a pool)</label>
                 </div>
-                <div class="list-category">
-                    <h4>Documents</h4>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-documents-0">
-                        <label for="pack-documents-0">Hotel booking confirmation</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-documents-1">
-                        <label for="pack-documents-1">Flight information</label>
-                    </div>
-                    <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                        <input type="checkbox" id="pack-documents-2">
-                        <label for="pack-documents-2">Copies of important documents (passport, visa)</label>
-                    </div>
+                
+                <h3>Footwear</h3>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="footwear-0">
+                    <label for="footwear-0">Sneakers</label>
                 </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="footwear-1">
+                    <label for="footwear-1">Sandals (for hotel/casual wear)</label>
+                </div>
+                
+                <h3>Essentials</h3>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="essentials-0">
+                    <label for="essentials-0">Travel adapters (Type A/B)</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="essentials-1">
+                    <label for="essentials-1">Portable power bank</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="essentials-2">
+                    <label for="essentials-2">Medication (prescription and over-the-counter)</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="essentials-3">
+                    <label for="essentials-3">Basic toiletries</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="essentials-4">
+                    <label for="essentials-4">Hand sanitizer</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="essentials-5">
+                    <label for="essentials-5">Reusable water bottle</label>
+                </div>
+                
+                <h3>Medication</h3>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="medication-0">
+                    <label for="medication-0">Any personal prescription medications</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="medication-1">
+                    <label for="medication-1">Pain relievers</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="medication-2">
+                    <label for="medication-2">Band-aids</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="medication-3">
+                    <label for="medication-3">Allergy medicine</label>
+                </div>
+                
+                <h3>Electronics</h3>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="electronics-0">
+                    <label for="electronics-0">Smartphone and charger</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="electronics-1">
+                    <label for="electronics-1">Camera and accessories</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="electronics-2">
+                    <label for="electronics-2">Tablet for child (for entertainment)</label>
+                </div>
+                
+                <h3>Miscellaneous</h3>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="miscellaneous-0">
+                    <label for="miscellaneous-0">Small backpack for day trips</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="miscellaneous-1">
+                    <label for="miscellaneous-1">Sunscreen and hat</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="miscellaneous-2">
+                    <label for="miscellaneous-2">Travel pillow</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="miscellaneous-3">
+                    <label for="miscellaneous-3">Ziploc bags (for wet clothes, snacks)</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="miscellaneous-4">
+                    <label for="miscellaneous-4">Entertainment for child (small toys, books)</label>
+                </div>
+                
+                <h3>Documents</h3>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="documents-0">
+                    <label for="documents-0">Passport and visa (if applicable)</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="documents-1">
+                    <label for="documents-1">Flight and hotel confirmations</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="documents-2">
+                    <label for="documents-2">Travel insurance details</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="documents-3">
+                    <label for="documents-3">Copies of important documents</label>
+                </div>
+                
+                <div class="list-item">
+                    <input type="checkbox" id="documents-4">
+                    <label for="documents-4">International driving permit (if planning to drive)</label>
+                </div>
+                
             </div>
         </section>
 
         <section id="pre-trip-checklist">
-            <h2>Pre-Trip Checklist</h2>
+            <h2>Pre-trip Checklist</h2>
             <div class="card">
-                <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                
+                <div class="list-item">
                     <input type="checkbox" id="checklist-0" >
-                    <label for="checklist-0">Check passport validity and visa requirements</label>
-                    <span class="priority-tag high">high</span>
+                    <label for="checklist-0">Confirm flight bookings and check-in online <span class="priority-high">(High Priority)</span></label>
                 </div>
-                <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                
+                <div class="list-item">
                     <input type="checkbox" id="checklist-1" >
-                    <label for="checklist-1">Book flights (if not already done)</label>
-                    <span class="priority-tag high">high</span>
+                    <label for="checklist-1">Secure hotel reservation <span class="priority-high">(High Priority)</span></label>
                 </div>
-                <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                
+                <div class="list-item">
                     <input type="checkbox" id="checklist-2" >
-                    <label for="checklist-2">Confirm hotel reservation</label>
-                    <span class="priority-tag high">high</span>
+                    <label for="checklist-2">Check passport validity and visa requirements <span class="priority-high">(High Priority)</span></label>
                 </div>
-                <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                
+                <div class="list-item">
                     <input type="checkbox" id="checklist-3" >
-                    <label for="checklist-3">Purchase travel insurance</label>
-                    <span class="priority-tag medium">medium</span>
+                    <label for="checklist-3">Purchase travel insurance <span class="priority-high">(High Priority)</span></label>
                 </div>
-                <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                
+                <div class="list-item">
                     <input type="checkbox" id="checklist-4" >
-                    <label for="checklist-4">Exchange currency to JPY</label>
-                    <span class="priority-tag medium">medium</span>
+                    <label for="checklist-4">Exchange currency to JPY or arrange for international ATM withdrawals <span class="priority-medium">(Medium Priority)</span></label>
                 </div>
-                <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                
+                <div class="list-item">
                     <input type="checkbox" id="checklist-5" >
-                    <label for="checklist-5">Download offline maps and translation apps</label>
-                    <span class="priority-tag low">low</span>
+                    <label for="checklist-5">Research and book tickets for Tokyo DisneySea and teamLab Planets <span class="priority-high">(High Priority)</span></label>
                 </div>
-                <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                
+                <div class="list-item">
                     <input type="checkbox" id="checklist-6" >
-                    <label for="checklist-6">Research local customs and etiquette</label>
-                    <span class="priority-tag low">low</span>
+                    <label for="checklist-6">Download useful travel apps (e.g., translation, navigation, public transport) <span class="priority-medium">(Medium Priority)</span></label>
                 </div>
-                <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                
+                <div class="list-item">
                     <input type="checkbox" id="checklist-7" >
-                    <label for="checklist-7">Pack essential medications and first-aid supplies</label>
-                    <span class="priority-tag high">high</span>
+                    <label for="checklist-7">Pack appropriate clothing and essentials <span class="priority-high">(High Priority)</span></label>
                 </div>
-                <div class="checkbox-item" onclick="toggleCheckbox(this)">
+                
+                <div class="list-item">
                     <input type="checkbox" id="checklist-8" >
-                    <label for="checklist-8">Inform bank about travel dates to avoid card issues</label>
-                    <span class="priority-tag medium">medium</span>
+                    <label for="checklist-8">Notify bank of travel plans <span class="priority-low">(Low Priority)</span></label>
                 </div>
-                <div class="checkbox-item" onclick="toggleCheckbox(this)">
-                    <input type="checkbox" id="checklist-9" >
-                    <label for="checklist-9">Arrange for pet care or house sitting if needed</label>
-                    <span class="priority-tag medium">medium</span>
-                </div>
+                
             </div>
         </section>
-
-        <footer>
-            <p>Your unforgettable trip to Japan (Osaka) awaits!</p>
-            <p>2025-10-13 to 2025-10-17</p>
-            <button class="btn btn-primary" onclick="window.print()">Print Itinerary</button>
-        </footer>
     </div>
 
+    <footer>
+        <p>&copy; 2025 Your Tokyo Family Fun Trip Planner</p>
+        <p>Enjoy your magical adventure!</p>
+        <button onclick="window.print()" class="button primary">Print Itinerary</button>
+    </footer>
+
     <script>
-        function toggleCheckbox(element) {
-            const checkbox = element.querySelector('input[type="checkbox"]');
-            if (checkbox) {
-                checkbox.checked = !checkbox.checked;
-                if (checkbox.checked) {
-                    element.classList.add('completed');
-                } else {
-                    element.classList.remove('completed');
-                }
-            }
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            const totalBudget = 400000;
-            const totalSpent = 158844;
-            const progressBar = document.getElementById('budgetProgressBar');
-            const spentPercentageDisplay = document.getElementById('spentPercentage');
-
-            if (totalBudget > 0) {
-                const percentage = (totalSpent / totalBudget) * 100;
-                progressBar.style.width = Math.min(percentage, 100) + '%';
-                progressBar.textContent = Math.round(percentage) + '% Spent';
-                spentPercentageDisplay.textContent = Math.round(percentage) + '%';
-            } else {
-                progressBar.style.width = '0%';
-                progressBar.textContent = '0% Spent';
-                spentPercentageDisplay.textContent = '0%';
+            // Animate budget bar
+            const budgetBar = document.querySelector('.budget-bar');
+            if (budgetBar) {
+                const spentPercentage = 86.62; // Hardcoded from JSON calc
+                setTimeout(() => {
+                    budgetBar.style.width = spentPercentage + '%';
+                    budgetBar.innerHTML = `<span>Spent: ${spentPercentage.toFixed(2)}%</span>`;
+                }, 500); // Small delay for animation effect
             }
 
-            // Set priority colors for checklist
-            const checklistItems = document.querySelectorAll('#pre-trip-checklist .checkbox-item');
-            const priorities = [
-                "high", "high", "high", "medium", "medium",
-                "low", "low", "high", "medium", "medium"
-            ];
+            // Checkbox functionality for Packing List and Pre-trip Checklist
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', (event) => {
+                    const label = event.target.nextElementSibling;
+                    if (event.target.checked) {
+                        label.style.textDecoration = 'line-through';
+                        label.style.color = 'var(--text-color-light)';
+                    } else {
+                        label.style.textDecoration = 'none';
+                        label.style.color = 'var(--text-color-dark)';
+                    }
+                });
+            });
 
-            checklistItems.forEach((item, index) => {
-                const priorityTag = item.querySelector('.priority-tag');
-                if (priorityTag && priorities[index]) {
-                    priorityTag.classList.add(priorities[index]);
+            // Set initial state for pre-checked items (if any, though JSON shows none)
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const label = checkbox.nextElementSibling;
+                    if (label) {
+                        label.style.textDecoration = 'line-through';
+                        label.style.color = 'var(--text-color-light)';
+                    }
                 }
             });
         });
