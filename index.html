@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bengaluru Trip Itinerary</title>
+    <title>Dubai Family Adventure Itinerary</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
         :root {
-            --primary-color: #6A1B9A; /* Deep Purple */
-            --secondary-color: #FFA726; /* Orange */
-            --accent-color: #8D6E63; /* Brown */
-            --background-light: #F3E5F5; /* Light Purple */
-            --background-dark: #E1BEE7; /* Medium Purple */
-            --text-color: #333;
-            --light-text-color: #666;
-            --white: #fff;
-            --card-bg: #FFFFFF;
-            --border-radius: 15px;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --primary-color: #007BFF; /* A vibrant blue for travel */
+            --secondary-color: #28a745; /* A complementary green */
+            --accent-color: #ffc107; /* A warm yellow for highlights */
+            --text-color: #343a40; /* Dark gray for readability */
+            --light-text-color: #6c757d; /* Lighter gray for secondary text */
+            --background-color: #f8f9fa; /* Light background */
+            --card-background: #ffffff; /* White for cards */
+            --border-color: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--background-light);
+            background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
-            scroll-behavior: smooth;
         }
 
         .container {
@@ -37,150 +35,89 @@
             padding: 0 15px;
         }
 
-        header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #AD1457 100%);
-            color: var(--white);
-            padding: 60px 20px;
-            text-align: center;
-            border-bottom-left-radius: var(--border-radius);
-            border-bottom-right-radius: var(--border-radius);
+        .card {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            margin-bottom: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
         }
 
-        header h1 {
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-weight: 600;
+        }
+        h1 { font-size: 2.8em; text-align: center; margin-bottom: 20px; color: #0056b3; }
+        h2 { font-size: 2.2em; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 25px; }
+        h3 { font-size: 1.8em; color: var(--secondary-color); margin-bottom: 15px;}
+        h4 { font-size: 1.4em; color: var(--primary-color); margin-bottom: 10px;}
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://source.unsplash.com/1600x900/?dubai-skyline,family-travel') no-repeat center center/cover;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+        .hero h1 {
+            color: white;
             font-size: 3.5em;
             margin-bottom: 10px;
-            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-
-        header p {
+        .hero p {
             font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        .hero .details {
+            font-size: 1.1em;
             opacity: 0.9;
         }
 
-        section {
-            background-color: var(--card-bg);
-            padding: 30px;
-            margin-bottom: 25px;
+        .flight-option {
+            background-color: var(--background-color);
+            padding: 20px;
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            transition: transform 0.2s ease-in-out;
-        }
-
-        section:hover {
-            transform: translateY(-5px);
-        }
-
-        h2 {
-            color: var(--primary-color);
-            font-size: 2.2em;
-            margin-top: 0;
-            margin-bottom: 25px;
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 10px;
-            text-align: center;
-        }
-
-        h3 {
-            color: var(--accent-color);
-            font-size: 1.6em;
-            margin-top: 25px;
+            border: 1px solid var(--border-color);
             margin-bottom: 15px;
         }
 
-        h4 {
-            color: var(--primary-color);
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }
-
-        .card {
-            background-color: var(--background-light);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--background-dark);
-            transition: all 0.2s ease-in-out;
-        }
-        .card:hover {
-            transform: scale(1.01);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        .hotel-details {
+            display: flex;
+            flex-wrap: wrap;
             gap: 20px;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .flight-card, .hotel-card, .day-card, .place-card, .budget-card, .list-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            box-shadow: var(--shadow);
             margin-bottom: 20px;
         }
-        .flight-card h4, .hotel-card h4 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 8px;
-            margin-top: 0;
-            margin-bottom: 15px;
+        .hotel-info, .hotel-gallery, .hotel-amenities {
+            flex: 1 1 calc(33.333% - 14px); /* Three columns for hotel details */
+            min-width: 280px;
+            background-color: var(--background-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
         }
-        .flight-card p, .hotel-card p, .day-card p, .place-card p {
-            margin: 8px 0;
-        }
-        .flight-card strong, .hotel-card strong, .day-card strong, .place-card strong {
-            color: var(--accent-color);
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            color: var(--white);
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            margin-top: 15px;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1em;
-        }
-
-        .btn:hover {
-            background-color: #E68A00; /* Darker orange */
-            transform: translateY(-2px);
-        }
-
-        .btn.disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
         .hotel-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             gap: 10px;
-            margin-top: 15px;
+            align-items: center;
         }
-
         .hotel-gallery img {
             width: 100%;
-            height: 120px;
+            height: 80px;
             object-fit: cover;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
         }
 
         .amenities-list {
@@ -188,880 +125,1508 @@
             padding: 0;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
+            gap: 8px;
         }
-
         .amenities-list li {
-            background-color: var(--background-dark);
-            color: var(--primary-color);
+            background-color: #e9f5ff;
             padding: 8px 12px;
-            border-radius: 20px;
+            border-radius: 6px;
             font-size: 0.9em;
-            text-align: center;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid #cce5ff;
+        }
+        .amenities-list li::before {
+            content: '✔️'; /* Checkmark icon */
+            color: var(--primary-color);
+            font-size: 0.8em;
         }
 
-        .daily-itinerary .day-card {
-            border: 1px solid var(--primary-color);
-            padding: 25px;
-            margin-bottom: 30px;
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
         }
-        .daily-itinerary .day-card h3 {
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
         }
-        .daily-itinerary .day-card .place-card {
-            margin-left: 20px;
-            border-left: 4px solid var(--secondary-color);
-            padding-left: 20px;
-            background-color: var(--background-light);
-            box-shadow: none;
+        .btn-secondary {
+            background-color: var(--secondary-color);
         }
-        .daily-itinerary .day-card .place-card h4 {
+        .btn-secondary:hover {
+            background-color: #218838;
+        }
+        .btn-outline {
+            background-color: transparent;
             color: var(--primary-color);
-            margin-top: 0;
+            border: 2px solid var(--primary-color);
         }
-        .daily-itinerary .day-card .place-card ul {
-            padding-left: 20px;
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .booking-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .daily-itinerary-day {
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+        }
+        .daily-itinerary-day h3 {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            margin: -25px -25px 25px -25px;
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.8em;
+        }
+        .daily-itinerary-day h3 span {
+            font-size: 0.7em;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+        .place {
+            background-color: var(--background-color);
+            border-left: 5px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+        .place:last-child {
+            margin-bottom: 0;
+        }
+        .place h4 {
+            margin-top: 0;
+            color: var(--secondary-color);
+            font-size: 1.6em;
             margin-bottom: 10px;
         }
-        .daily-itinerary .day-card .place-card li {
-            margin-bottom: 5px;
-        }
-        .daily-itinerary .day-card .place-card .practical-info,
-        .daily-itinerary .day-card .place-card .tips-section {
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 1px dashed var(--background-dark);
-        }
-        .daily-itinerary .day-card .place-card .practical-info div,
-        .daily-itinerary .day-card .place-card .tips-section div {
-            margin-bottom: 5px;
-        }
-
-        .budget-summary {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .budget-summary p {
-            font-size: 1.2em;
+        .place .time {
             font-weight: 600;
-            margin: 5px 0;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            display: block;
         }
-        .budget-summary .total-budget {
-            font-size: 1.8em;
+        .place-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .place-detail-col {
+            flex: 1 1 calc(50% - 10px);
+            min-width: 280px;
+        }
+        .place-detail-col ul {
+            list-style: none;
+            padding: 0;
+        }
+        .place-detail-col ul li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .place-detail-col ul li strong {
+            margin-right: 5px;
             color: var(--primary-color);
         }
-        .budget-summary .remaining-budget {
-            font-size: 1.5em;
-            color: #4CAF50; /* Green for remaining */
+        .place-detail-col ul.tips-list li::before, .activities-list li::before {
+            content: '• ';
+            color: var(--secondary-color);
+            margin-right: 5px;
+            font-weight: 900;
         }
-        .budget-summary .total-spent {
-            font-size: 1.5em;
-            color: #F44336; /* Red for spent */
+        .practical-info, .tips-section {
+            background-color: #f1f7fc;
+            border: 1px solid #d0e7f7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .practical-info h5, .tips-section h5 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .photo-spots {
+            font-style: italic;
+            color: var(--light-text-color);
+            margin-top: 10px;
         }
 
+        .day-summary {
+            background-color: #e6f7e9;
+            border: 1px solid #b3e0bd;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-top: 30px;
+            font-weight: 600;
+            color: #218838;
+        }
+        .day-summary p {
+            margin: 5px 0;
+        }
+        .day-summary .total-spending {
+            font-size: 1.2em;
+            color: var(--primary-color);
+        }
 
-        .budget-chart {
+        /* Budget Dashboard */
+        .budget-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .budget-item {
+            flex: 1 1 calc(33.333% - 20px);
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border: 1px solid #cce5ff;
+            min-width: 250px;
+        }
+        .budget-item.total {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .budget-item.total h4 {
+            color: white;
+        }
+        .budget-item.spent {
+            background-color: #ffe0e6;
+            color: #d1003f;
+            border-color: #ffc2d1;
+        }
+        .budget-item.spent h4 { color: #d1003f; }
+
+        .budget-item.remaining {
+            background-color: #e6ffed;
+            color: #28a745;
+            border-color: #c2ffe0;
+        }
+        .budget-item.remaining h4 { color: #28a745; }
+
+
+        .budget-chart-container {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
-
-        .chart-bar-container {
+        .budget-chart-bar {
+            background-color: var(--background-color);
+            border-radius: 8px;
+            overflow: hidden;
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid var(--border-color);
         }
-
-        .chart-label {
-            width: 120px;
+        .budget-chart-bar .label {
             font-weight: 600;
-            color: var(--accent-color);
-            font-size: 0.9em;
+            margin-right: 15px;
+            width: 100px;
+            min-width: 80px;
+            color: var(--primary-color);
         }
-
-        .chart-bar {
-            flex-grow: 1;
+        .budget-chart-bar .bar {
             height: 25px;
-            background-color: var(--background-dark);
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .chart-fill {
-            height: 100%;
-            background-color: var(--primary-color);
-            border-radius: 5px;
-            transition: width 0.8s ease-out;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            padding-right: 5px;
-            color: var(--white);
+            padding-right: 10px;
+            font-size: 0.9em;
+            color: white;
             font-weight: 600;
-            font-size: 0.8em;
-            white-space: nowrap;
+            transition: width 0.5s ease-out;
+            min-width: 20px; /* Ensure bar is visible even if value is small */
         }
-        .chart-fill.flights { background-color: #6A1B9A; }
-        .chart-fill.accommodation { background-color: #AD1457; }
-        .chart-fill.daily { background-color: #FFA726; }
-        .chart-fill.total { background-color: #388E3C; }
-
+        .bar.flights { background-color: #ff6384; }
+        .bar.accommodation { background-color: #36a2eb; }
+        .bar.entry-fees { background-color: #cc65fe; }
+        .bar.transport { background-color: #ffce56; }
+        .bar.meals { background-color: #4bc0c0; }
+        .bar.shopping { background-color: #ff9f40; }
         .budget-tips ul {
             list-style: none;
             padding: 0;
         }
         .budget-tips li {
-            background-color: var(--background-light);
-            margin-bottom: 10px;
+            background-color: #eaf7f7;
+            border-left: 5px solid #00cec9;
             padding: 10px 15px;
-            border-left: 4px solid var(--secondary-color);
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-size: 0.95em;
         }
 
-        .checklist ul {
-            list-style: none;
-            padding: 0;
-        }
 
-        .checklist li {
-            background-color: var(--background-light);
-            margin-bottom: 10px;
-            padding: 10px 15px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        /* Lists (Packing, Checklist) */
+        .checklist-group {
+            margin-bottom: 20px;
+        }
+        .checklist-group h4 {
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .checklist-item {
             display: flex;
             align-items: center;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px dotted #e0e0e0;
         }
-
-        .checklist li input[type="checkbox"] {
-            margin-right: 10px;
-            min-width: 18px;
-            min-height: 18px;
-            cursor: pointer;
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        .checklist-item input[type="checkbox"] {
+            margin-right: 12px;
+            min-width: 20px;
+            min-height: 20px;
             accent-color: var(--primary-color);
+            cursor: pointer;
         }
-
-        .checklist li.completed {
+        .checklist-item label {
+            flex-grow: 1;
+            cursor: pointer;
+            font-size: 1.05em;
+        }
+        .checklist-item.completed label {
             text-decoration: line-through;
             color: var(--light-text-color);
-            opacity: 0.8;
         }
-
-        .checklist li .priority {
-            font-size: 0.8em;
-            padding: 3px 8px;
-            border-radius: 12px;
-            margin-left: auto;
-            color: var(--white);
+        .checklist-item .priority {
+            font-size: 0.85em;
+            padding: 4px 8px;
+            border-radius: 5px;
+            margin-left: 10px;
+            text-transform: uppercase;
             font-weight: 600;
         }
+        .priority.high { background-color: #ffe0e6; color: #d1003f; }
+        .priority.medium { background-color: #fff3cd; color: #ffc107; }
+        .priority.low { background-color: #d1ecf1; color: #17a2b8; }
 
-        .priority-high { background-color: #D32F2F; } /* Red */
-        .priority-medium { background-color: #FFB300; } /* Amber */
-        .priority-low { background-color: #4CAF50; } /* Green */
-
-        footer {
+        /* Footer */
+        .footer {
             text-align: center;
-            padding: 30px 20px;
+            padding: 30px;
             background-color: var(--primary-color);
-            color: var(--white);
+            color: white;
             border-top-left-radius: var(--border-radius);
             border-top-right-radius: var(--border-radius);
+            margin-top: 30px;
             box-shadow: var(--shadow);
-            margin-top: 20px;
         }
-
-        footer p {
-            margin: 0 0 15px 0;
+        .footer p {
+            margin: 0;
             font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .footer .btn {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+        }
+        .footer .btn:hover {
+            background-color: #e0a800;
+            color: var(--text-color);
         }
 
-        /* Responsive adjustments */
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            header h1 {
+            .hero h1 {
                 font-size: 2.5em;
             }
-            header p {
+            .hero p {
                 font-size: 1em;
             }
             h2 {
                 font-size: 1.8em;
             }
             h3 {
-                font-size: 1.4em;
+                font-size: 1.5em;
+                margin-bottom: 10px;
             }
-            .grid-3, .grid-2 {
-                grid-template-columns: 1fr;
+            .hotel-details {
+                flex-direction: column;
+                gap: 15px;
             }
-            .daily-itinerary .day-card .place-card {
-                margin-left: 0;
-                border-left: none;
-                padding-left: 0;
-                border-top: 4px solid var(--secondary-color);
-                padding-top: 15px;
-                margin-top: 20px;
+            .hotel-info, .hotel-gallery, .hotel-amenities {
+                flex: 1 1 100%;
+                min-width: unset;
             }
-            .chart-bar-container {
+            .hotel-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            }
+            .daily-itinerary-day h3 {
                 flex-direction: column;
                 align-items: flex-start;
+                padding: 15px;
             }
-            .chart-label {
-                width: auto;
-                margin-bottom: 5px;
+            .daily-itinerary-day h3 span {
+                margin-top: 5px;
+                font-size: 0.8em;
+            }
+            .place-details {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .budget-item {
+                flex: 1 1 100%;
+            }
+            .budget-chart-bar .label {
+                width: 70px;
+                font-size: 0.85em;
+            }
+            .budget-chart-bar .bar {
+                font-size: 0.8em;
             }
         }
 
         @media print {
             body {
-                background-color: #fff;
-                color: #000;
+                background-color: white;
+                color: black;
+                margin: 0;
+                padding: 0;
             }
             .container {
                 margin: 0;
-                padding: 0;
+                padding: 10px;
                 max-width: none;
             }
-            header, footer, .btn {
+            .card, .hero, .footer, .btn, .booking-links {
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                padding: 0;
+                margin-bottom: 10px;
+                background-color: transparent;
+                color: black;
+            }
+            .hero, .footer {
+                background: none !important;
+                color: black !important;
+                text-align: left;
+                padding-bottom: 0;
+            }
+            .hero h1, .hero p {
+                color: black !important;
+                text-shadow: none !important;
+            }
+            h1, h2, h3, h4, .daily-itinerary-day h3 {
+                color: #000 !important;
+                border-bottom: 1px solid #ccc !important;
+                padding-bottom: 5px !important;
+                margin-bottom: 10px !important;
+                background: none !important;
+            }
+            .daily-itinerary-day h3 span {
+                color: black !important;
+            }
+            .flight-option, .hotel-details, .place-details {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .flight-info, .hotel-info, .hotel-gallery, .hotel-amenities, .place, .budget-item, .budget-chart-bar {
+                border: 1px solid #eee;
+                padding: 10px;
+                margin-bottom: 10px;
+                background-color: white;
+            }
+            .hotel-gallery img {
+                width: 50px;
+                height: 40px;
+            }
+            .amenities-list, .budget-tips ul {
+                list-style: disc;
+                padding-left: 20px;
+            }
+            .amenities-list li::before {
+                content: none;
+            }
+            .checklist-item input[type="checkbox"] {
                 display: none;
             }
-            section {
-                box-shadow: none;
+            .checklist-item.completed label::before {
+                content: '✔ ';
+                margin-right: 5px;
+            }
+            .priority {
+                display: none;
+            }
+            .budget-chart-bar .bar {
+                background-color: #ddd !important; /* Lighter for print */
+                color: #555 !important;
+            }
+            .budget-chart-bar {
                 border: 1px solid #eee;
-                margin-bottom: 15px;
-                page-break-inside: avoid;
-            }
-            h2 {
-                border-bottom: 1px solid #ccc;
-                color: #000;
-            }
-            .card {
-                box-shadow: none;
-                border: 1px solid #eee;
-            }
-            .daily-itinerary .day-card .place-card {
-                border-left: 1px solid #eee;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Bengaluru Trip</h1>
-        <p>A 2-day budget-friendly, shopping, and city exploration with Friends</p>
-        <p>From 14 October 2025 to 16 October 2025</p>
-    </header>
-
     <div class="container">
-        <section id="flights">
-            <h2>✈️ Your Flights</h2>
-            <div class="grid-2">
-                <div class="card flight-card">
-                    <h4>Cheapest Flight</h4>
-                    <p><strong>Name:</strong> Departure: SG-151, Return: IX-2018</p>
-                    <p><strong>Flight Number:</strong> SG-151/IX-2018</p>
-                    <p><strong>Departure:</strong> 2025-10-14, 20:00 from Delhi</p>
-                    <p><strong>Return:</strong> 2025-10-16, 07:20 to Bengaluru</p>
-                    <p><strong>Price:</strong> 48324 INR</p>
-                    <a href="No link provided." target="_blank" class="btn disabled" aria-disabled="true">Booking Not Available</a>
-                </div>
-                <div class="card flight-card">
-                    <h4>Fastest Flight</h4>
-                    <p><strong>Name:</strong> Departure: 6E-2562, Return: IX-2018</p>
-                    <p><strong>Flight Number:</strong> 6E-2562/IX-2018</p>
-                    <p><strong>Departure:</strong> 2025-10-14, 07:50 from Delhi</p>
-                    <p><strong>Return:</strong> 2025-10-16, 07:20 to Bengaluru</p>
-                    <p><strong>Price:</strong> 48813 INR</p>
-                    <a href="No link provided." target="_blank" class="btn disabled" aria-disabled="true">Booking Not Available</a>
-                </div>
-            </div>
+        <header class="hero">
+            <h1>Dubai Family Adventure</h1>
+            <p>From 2025-10-13 to 2025-10-17 (4 nights)</p>
+            <p class="details">Traveling with: Family with school-age child</p>
+            <p class="details">Trip Type: Family fun, exploring the beauty of Dubai with a focus on malls</p>
+        </header>
+
+        <section id="flights" class="card">
+            <h2>✈️ Flights</h2>
+            <p>No valid flights available.</p>
         </section>
 
-        <section id="hotel">
-            <h2>🏨 Your Accommodation</h2>
-            <div class="card hotel-card">
-                <h3>Lusia Inn, Bengaluru</h3>
-                <p><strong>Price per night:</strong> 1499 INR</p>
-                <p><strong>Rooms:</strong> 2, <strong>Nights:</strong> 2</p>
-                <p><strong>Total Cost:</strong> 5996 INR</p>
-                <p><strong>Reason for selection:</strong> Lusia Inn offers a budget-friendly stay with a good overall rating of 4.0 from 666 reviews. It includes free breakfast and essential amenities like air conditioning and room service, making it a comfortable choice for friends exploring Bengaluru on a budget.</p>
-
-                <h4>Amenities:</h4>
-                <ul class="amenities-list">
-                    <li>Kid-friendly</li>
-                    <li>Restaurant</li>
-                    <li>Room service</li>
-                    <li>Airport shuttle</li>
-                    <li>Free breakfast</li>
-                    <li>Air conditioning</li>
-                </ul>
-
-                <h4>Hotel Gallery:</h4>
-                <div class="hotel-gallery">
-                    <img src="https://lh5.googleusercontent.com/proxy/dOFmfoaWHCNvvWNCchx8dZMM8bAMI-yXzrb43RYFSdx5H7X8JnNXuEqzNIM2P1dLlNiBhofQaWsDqzY42s2g_RE5FgxlIzPqVgeeG4zlRy1ym8ohKFRNGqQxiC_PIYEyGcSz9c-H4Gb82KmdYyZGXFr34_HNCtI=w225-h150-k-no" alt="Lusia Inn Image 1">
+        <section id="hotel" class="card">
+            <h2>🏨 Hotel: Dorus Hotel</h2>
+            <div class="hotel-details">
+                <div class="hotel-info">
+                    <h4>Location & Overview</h4>
+                    <p><strong>Location:</strong> Al Nakhal, Dubai, United Arab Emirates</p>
+                    <p><strong>Total Cost:</strong> 1064 AED for 4 nights (1 room)</p>
+                    <p><strong>Price per Night:</strong> 266 AED</p>
+                    <p><strong>Reason for Selection:</strong> The Dorus Hotel offers a great balance of comfort and value, with a kid-friendly atmosphere and amenities like a pool and spa, making it ideal for a family trip. Its convenient location allows easy access to Dubai's attractions and malls.</p>
+                    <div class="booking-links">
+                        <a href="https://www.google.com/maps/search/?api=1&query=25.272063,55.315811" target="_blank" class="btn btn-outline">View on Map</a>
+                        <a href="https://www.google.com/aclk?sa=l&ai=DChsSEwjkoeOpl5mQAxV3XkgAHfrKATYYACICCAEQCxoCY2U&co=1&ase=2&gclid=EAIaIQobChMI5KHjqZeZkAMVd15IAB36ygE2EA0YASABEgIcdvD_BwE&cid=CAASNuRoLzbDpeBryHd_pBkG1whIos5NUYkYSRSHbmCAs2ckf3KNOCbPhaxlV4hNiY04_84gdsKMlA&category=acrcp_v1_48&sig=AOD64_0mUni7cDG-25OFTXXiPaV7itxgdg&adurl=" target="_blank" class="btn">Book Now (Option 1)</a>
+                        <a href="https://dorus-hotel.com/" target="_blank" class="btn">Book Now (Option 2)</a>
+                    </div>
                 </div>
-
-                <a href="https://www.google.com/aclk?sa=l&ai=DChsSEwia7dvIi5mQAxUPmCIFHXokG2EYACICCAEQAxoHdmlja3ZyYQ&co=1&ase=2&gclid=EAIaIQobChMImu3byIuZkAMVD5giBR16JBthEA0YCCABEgLNw_D_BwE&cid=CAASQuRoT0l_pIcutdf9DALbzrzjyjlGqkYaAMcrqJKDgiXwhCD83kZJO-Xre5ysa-E8j8RMS2Bk0Wtht_v--grdt6L0uQ&category=acrcp_v1_48&sig=AOD64_34pJHXIirLwyi7SMVDLOo0eQ6nSA&adurl=" target="_blank" class="btn">Book Lusia Inn</a>
+                <div class="hotel-amenities">
+                    <h4>Amenities</h4>
+                    <ul class="amenities-list">
+                        <li>Spa</li>
+                        <li>Pool</li>
+                        <li>Kid-friendly</li>
+                        <li>Restaurant</li>
+                        <li>Room service</li>
+                        <li>Airport shuttle</li>
+                        <li>Fitness center</li>
+                        <li>Outdoor pool</li>
+                        <li>Air conditioning</li>
+                        <li>Breakfast ($)</li>
+                        <li>Free Wi-Fi</li>
+                        <li>Parking</li>
+                        <li>Full-service laundry</li>
+                        <li>Accessible</li>
+                        <li>Business center</li>
+                    </ul>
+                </div>
+                <div class="hotel-gallery">
+                    <h4>Gallery</h4>
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipMjq_fDZ20WbdbYydXahYclF89EClbuOv8YH0_=s10000" alt="Dorus Hotel Image 1">
+                    <img src="https://photos.hotelbeds.com/giata/original/13/136682/136682a_hb_ba_006.jpg" alt="Dorus Hotel Image 2">
+                    <img src="https://photos.hotelbeds.com/giata/original/13/136682/136682a_hb_w_010.jpg" alt="Dorus Hotel Image 3">
+                    <img src="https://cdn.worldota.net/t/1024x768/content/9c/zz/9cad6c0eeda4c3bc5e57499fab649af95b047ed2.jpeg" alt="Dorus Hotel Image 4">
+                    <img src="https://lh5.googleusercontent.com/p/AF1QipOA-vEExBZ2PIiB_hOTzZr5WnhPWEvtNGXQ2L-K=s10000" alt="Dorus Hotel Image 5">
+                    <img src="https://lh5.googleusercontent.com/p/CIHM0ogKEICAgID1sszRXw=s10000" alt="Dorus Hotel Image 6">
+                    <img src="https://lh5.googleusercontent.com/p/CIHM0ogKEICAgICWzrzAWQ=s10000" alt="Dorus Hotel Image 7">
+                    <img src="https://lh5.googleusercontent.com/p/CIABIhC6W71rX2J2Q_2Jk6ZwCdGf=s10000" alt="Dorus Hotel Image 8">
+                    <img src="https://lh5.googleusercontent.com/p/CIHM0ogKEICAgIC4lZfURA=s10000" alt="Dorus Hotel Image 9">
+                </div>
             </div>
         </section>
 
         <section id="daily-itinerary">
             <h2>🗓️ Daily Itinerary</h2>
-
-            <div class="daily-itinerary">
+            
+            <div class="daily-itinerary-day card">
+                <h3>Day 1: Arrival & Iconic Dubai Landmarks <span>(2025-10-13)</span></h3>
+                <p><strong>Route:</strong> Dorus Hotel → Dubai Mall → Burj Khalifa → The Dubai Fountain → Dorus Hotel</p>
+                <p><strong>Total Distance:</strong> 28.5 km | <strong>Travel Time:</strong> 1 hour 15 minutes</p>
                 
-                <div class="card day-card">
-                    <h3>Day 1: 14 October 2025 - Arrival and Evening Shopping Spree</h3>
-                    <p><strong>Route:</strong> Lusia Inn → Phoenix Marketcity → Lusia Inn</p>
-                    <p><strong>Total Distance:</strong> 32.8 km | <strong>Total Travel Time:</strong> 1h 14m</p>
-
-                    <div class="place-card">
-                        <h4>Afternoon: Arrival and Hotel Check-in</h4>
-                        <p>Upon arrival in Bengaluru, proceed to Lusia Inn for check-in. Take some time to relax and freshen up before heading out for your first city exploration.</p>
-                        <p><strong>Why visit:</strong> Starting your trip with a comfortable check-in allows for relaxation and preparation for the exciting days ahead.</p>
-                        <h5>Activities:</h5>
-                        <ul>
-                            <li>Check into your rooms</li>
-                            <li>Unpack and relax</li>
-                            <li>Enjoy complimentary welcome drinks (if available)</li>
-                        </ul>
-                        <div class="practical-info">
-                            <h5>Practical Info:</h5>
-                            <div><strong>Entry Fee:</strong> N/A</div>
-                            <div><strong>Estimated Cost:</strong> N/A</div>
-                            <div><strong>Best Time:</strong> Post-arrival</div>
-                            <div><strong>Duration:</strong> 1-2 hours</div>
-                            <div><strong>Accessibility:</strong> Hotel is generally accessible, confirm specific room accessibility if needed.</div>
+                <div class="place">
+                    <span class="time">Afternoon</span>
+                    <h4>Dubai Mall</h4>
+                    <p>The Dubai Mall is one of the world's largest shopping malls, offering an unparalleled retail experience with over 1,200 stores. Beyond shopping, it features a diverse range of entertainment options including an indoor theme park, an Olympic-sized ice rink, and the Dubai Aquarium & Underwater Zoo. It's a perfect destination for families to spend hours exploring.</p>
+                    <p><strong>Why Visit:</strong> As requested, a premier mall experience. It combines shopping with world-class entertainment, making it ideal for families with a school-age child. The variety of attractions ensures there's something for everyone.</p>
+                    <p><strong>Travel from previous:</strong> 14.5 km, 20 minutes (Taxi/Metro)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.1972,55.2792" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Explore various stores and luxury boutiques.</li>
+                                <li>Visit the Dubai Aquarium & Underwater Zoo (pre-booking recommended).</li>
+                                <li>Enjoy games and rides at VR Park.</li>
+                                <li>Have lunch at one of the many restaurants.</li>
+                            </ul>
                         </div>
-                        <div class="tips-section">
-                            <h5>Tips:</h5>
-                            <div><strong>What to Bring:</strong> Travel documents, Comfortable change of clothes</div>
-                            <div><strong>What to Buy:</strong> Not specified</div>
-                            <div><strong>Safety Notes:</strong> Keep valuables secure during travel and check-in</div>
-                            <div><strong>Customs/Etiquette:</strong> Not specified</div>
-                            <div><strong>Photo Spots:</strong> Not specified</div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> Free (individual attractions have fees)</p>
+                                <p><strong>Estimated Cost:</strong> AED 200-500 (depending on activities and shopping)</p>
+                                <p><strong>Best Time:</strong> Afternoon to evening for cooler temperatures and fountain show</p>
+                                <p><strong>Duration:</strong> 4-6 hours</p>
+                                <p><strong>Accessibility:</strong> Fully accessible with elevators, escalators, and wheelchair rentals</p>
+                            </div>
                         </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=12.963327,77.58222599999999" target="_blank" class="btn">View on Map</a>
-                    </div>
-                    
-                    <div class="place-card">
-                        <h4>Evening: Phoenix Marketcity</h4>
-                        <p>Phoenix Marketcity is one of Bengaluru's largest and most popular malls, offering an extensive range of international and Indian brands, a multiplex cinema, and numerous dining options. It's a fantastic spot for an evening of shopping, entertainment, and a lively atmosphere.</p>
-                        <p><strong>Why visit:</strong> Perfect for friends looking for a comprehensive shopping experience, diverse culinary choices, and evening entertainment.</p>
-                        <h5>Activities:</h5>
-                        <ul>
-                            <li>Explore fashion, electronics, and lifestyle stores</li>
-                            <li>Catch a movie at the multiplex</li>
-                            <li>Enjoy dinner at one of the many restaurants</li>
-                            <li>Window shopping and people-watching</li>
-                        </ul>
-                        <div class="practical-info">
-                            <h5>Practical Info:</h5>
-                            <div><strong>Entry Fee:</strong> Free (shopping and activities extra)</div>
-                            <div><strong>Estimated Cost:</strong> Varies based on shopping/dining</div>
-                            <div><strong>Best Time:</strong> Evenings for a vibrant atmosphere</div>
-                            <div><strong>Duration:</strong> 3-4 hours</div>
-                            <div><strong>Accessibility:</strong> Wheelchair accessible, lifts and escalators available.</div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Comfortable walking shoes, Water bottle, Camera</li>
+                                    <li><strong>What to Buy:</strong> Souvenirs, Fashion items, Electronics</li>
+                                    <li><strong>Safety Notes:</strong> Keep children close in crowded areas., Be aware of personal belongings.</li>
+                                    <li><strong>Customs & Etiquette:</strong> Dress modestly., Avoid public displays of affection.</li>
+                                    <li><strong>Booking Required:</strong> No</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> Front of Dubai Aquarium, Inside the mall near grand waterfalls</p>
+                            </div>
                         </div>
-                        <div class="tips-section">
-                            <h5>Tips:</h5>
-                            <div><strong>What to Bring:</strong> Comfortable walking shoes, Shopping bags, Power bank for phone</div>
-                            <div><strong>What to Buy:</strong> Fashion apparel, Souvenirs, Electronics</div>
-                            <div><strong>Safety Notes:</strong> Keep an eye on personal belongings in crowded areas</div>
-                            <div><strong>Customs/Etiquette:</strong> Bargaining is not common in branded stores</div>
-                            <div><strong>Photo Spots:</strong> Inside the mall with interesting displays, Around the central atrium</div>
-                        </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=12.9972,77.6975" target="_blank" class="btn">View on Map</a>
-                    </div>
-                    
-                    <div class="day-summary card">
-                        <h4>Day 1 Summary:</h4>
-                        <p><strong>Total Distance:</strong> 32.8 km</p>
-                        <p><strong>Estimated Spending:</strong> 5100 INR</p>
-                        <ul>
-                            <li>Entry Fees: 0 INR</li>
-                            <li>Activities: 0 INR</li>
-                            <li>Transport: 600 INR</li>
-                            <li>Meals: 1500 INR</li>
-                            <li>Shopping: 3000 INR</li>
-                        </ul>
                     </div>
                 </div>
                 
-                <div class="card day-card">
-                    <h3>Day 2: 15 October 2025 - Gardens, Luxury, and Street Shopping</h3>
-                    <p><strong>Route:</strong> Lusia Inn → Lalbagh Botanical Garden → UB City Mall → Commercial Street → Lusia Inn</p>
-                    <p><strong>Total Distance:</strong> 26.6 km | <strong>Total Travel Time:</strong> 1h 37m</p>
-
-                    <div class="place-card">
-                        <h4>Morning: Lalbagh Botanical Garden</h4>
-                        <p>Lalbagh Botanical Garden is a historic garden dating back to the 18th century, famous for its magnificent glasshouse, diverse plant collections, and beautiful landscape. It offers a serene escape from the city's hustle and bustle, perfect for a morning stroll among friends.</p>
-                        <p><strong>Why visit:</strong> A refreshing natural oasis in the city, ideal for nature lovers and a relaxed morning outing before a day of shopping.</p>
-                        <h5>Activities:</h5>
-                        <ul>
-                            <li>Explore the Glass House</li>
-                            <li>Walk amidst diverse flora</li>
-                            <li>Visit the Lalbagh Rock</li>
-                            <li>Enjoy bird watching</li>
-                        </ul>
-                        <div class="practical-info">
-                            <h5>Practical Info:</h5>
-                            <div><strong>Entry Fee:</strong> ₹20-₹30 (estimated)</div>
-                            <div><strong>Estimated Cost:</strong> ₹30</div>
-                            <div><strong>Best Time:</strong> Morning for pleasant weather</div>
-                            <div><strong>Duration:</strong> 2-3 hours</div>
-                            <div><strong>Accessibility:</strong> Mostly accessible pathways, but some areas might be uneven.</div>
+                <div class="place">
+                    <span class="time">Evening</span>
+                    <h4>Burj Khalifa</h4>
+                    <p>Standing as a global icon, the Burj Khalifa is the tallest building in the world, dominating the Dubai skyline. Visitors can ascend to the 'At The Top' observation decks on the 124th, 125th, and 148th floors for breathtaking panoramic views of the city, ocean, and desert. It's an architectural marvel that offers an unforgettable perspective of Dubai.</p>
+                    <p><strong>Why Visit:</strong> An absolute must-see for any visitor to Dubai, offering unparalleled views and a sense of awe. It's a great photo opportunity and a memorable experience for the entire family, especially at sunset.</p>
+                    <p><strong>Travel from previous:</strong> 0.5 km, 5 minutes (Walking)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.1972,55.2741" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Ascend to the observation deck 'At The Top' (pre-booking essential).</li>
+                                <li>Enjoy the stunning 360-degree views of Dubai.</li>
+                                <li>Learn about the history and construction of the Burj Khalifa.</li>
+                            </ul>
                         </div>
-                        <div class="tips-section">
-                            <h5>Tips:</h5>
-                            <div><strong>What to Bring:</strong> Water bottle, Sunscreen, Hat, Camera</div>
-                            <div><strong>What to Buy:</strong> Plants from the nursery (if open)</div>
-                            <div><strong>Safety Notes:</strong> Stick to designated paths</div>
-                            <div><strong>Customs/Etiquette:</strong> Respect the flora and fauna, no littering</div>
-                            <div><strong>Photo Spots:</strong> Glass House, Floral displays, Lalbagh Rock</div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> AED 169-399 (prices vary by time and floor)</p>
+                                <p><strong>Estimated Cost:</strong> AED 169-399 per person</p>
+                                <p><strong>Best Time:</strong> Sunset for spectacular views (book well in advance)</p>
+                                <p><strong>Duration:</strong> 1.5-2 hours</p>
+                                <p><strong>Accessibility:</strong> Fully accessible</p>
+                            </div>
                         </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=12.9507,77.5848" target="_blank" class="btn">View on Map</a>
-                    </div>
-                    
-                    <div class="place-card">
-                        <h4>Afternoon: UB City Mall</h4>
-                        <p>UB City is Bengaluru's first luxury mall, housing high-end international brands, exquisite dining experiences, and art galleries. It's an ideal spot for those who appreciate luxury shopping and a sophisticated ambiance, offering a stark contrast to the garden's tranquility.</p>
-                        <p><strong>Why visit:</strong> Experience luxury shopping and fine dining, making it a perfect spot for friends to indulge or simply enjoy the upscale environment.</p>
-                        <h5>Activities:</h5>
-                        <ul>
-                            <li>Browse luxury fashion and accessory brands</li>
-                            <li>Have lunch at a gourmet restaurant</li>
-                            <li>Visit the art gallery (if interested)</li>
-                            <li>Enjoy the architecture and ambiance</li>
-                        </ul>
-                        <div class="practical-info">
-                            <h5>Practical Info:</h5>
-                            <div><strong>Entry Fee:</strong> Free (shopping and dining extra)</div>
-                            <div><strong>Estimated Cost:</strong> Varies based on shopping/dining</div>
-                            <div><strong>Best Time:</strong> Afternoons</div>
-                            <div><strong>Duration:</strong> 2-3 hours</div>
-                            <div><strong>Accessibility:</strong> Wheelchair accessible, equipped with lifts and ramps.</div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Camera, Booking confirmation</li>
+                                    <li><strong>What to Buy:</strong> Souvenirs from the gift shop</li>
+                                    <li><strong>Safety Notes:</strong> Follow staff instructions.</li>
+                                    <li><strong>Customs & Etiquette:</strong> No specific etiquette, but be respectful.</li>
+                                    <li><strong>Booking Required:</strong> Yes</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> Observation decks, Base of the tower</p>
+                            </div>
                         </div>
-                        <div class="tips-section">
-                            <h5>Tips:</h5>
-                            <div><strong>What to Bring:</strong> Wallet, Comfortable shoes</div>
-                            <div><strong>What to Buy:</strong> Luxury items, Designer wear</div>
-                            <div><strong>Safety Notes:</strong> Not specified</div>
-                            <div><strong>Customs/Etiquette:</strong> Not specified</div>
-                            <div><strong>Photo Spots:</strong> Architecture of the mall, Outdoor spaces with city views</div>
-                        </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=12.9716,77.5946" target="_blank" class="btn">View on Map</a>
-                    </div>
-                    
-                    <div class="place-card">
-                        <h4>Late Afternoon/Evening: Commercial Street</h4>
-                        <p>Commercial Street is a bustling shopping paradise renowned for its vibrant street shopping experience. From trendy clothing and accessories to traditional Indian wear and jewelry, you can find a wide array of products here. It's a lively area perfect for budget-friendly shopping and experiencing local market culture.</p>
-                        <p><strong>Why visit:</strong> A must-visit for budget-conscious shoppers and those wanting to experience the local street market culture of Bengaluru.</p>
-                        <h5>Activities:</h5>
-                        <ul>
-                            <li>Bargain for clothing, accessories, and souvenirs</li>
-                            <li>Explore the narrow lanes and diverse shops</li>
-                            <li>Enjoy street food and local snacks</li>
-                            <li>Experience the lively atmosphere</li>
-                        </ul>
-                        <div class="practical-info">
-                            <h5>Practical Info:</h5>
-                            <div><strong>Entry Fee:</strong> Free (shopping extra)</div>
-                            <div><strong>Estimated Cost:</strong> Varies based on shopping</div>
-                            <div><strong>Best Time:</strong> Late afternoon to evening</div>
-                            <div><strong>Duration:</strong> 2-3 hours</div>
-                            <div><strong>Accessibility:</strong> Crowded and uneven sidewalks, may be challenging for wheelchair users.</div>
-                        </div>
-                        <div class="tips-section">
-                            <h5>Tips:</h5>
-                            <div><strong>What to Bring:</strong> Cash (for easier bargaining), Shopping bags, Comfortable walking shoes</div>
-                            <div><strong>What to Buy:</strong> Clothes, Jewelry, Accessories, Handicrafts</div>
-                            <div><strong>Safety Notes:</strong> Be aware of pickpockets in crowded areas, Bargain politely</div>
-                            <div><strong>Customs/Etiquette:</strong> It's customary to bargain for prices here</div>
-                            <div><strong>Photo Spots:</strong> Colorful shops and street scenes</div>
-                        </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=12.9806,77.6074" target="_blank" class="btn">View on Map</a>
-                    </div>
-                    
-                    <div class="day-summary card">
-                        <h4>Day 2 Summary:</h4>
-                        <p><strong>Total Distance:</strong> 26.6 km</p>
-                        <p><strong>Estimated Spending:</strong> 5730 INR</p>
-                        <ul>
-                            <li>Entry Fees: 30 INR</li>
-                            <li>Activities: 0 INR</li>
-                            <li>Transport: 500 INR</li>
-                            <li>Meals: 1200 INR</li>
-                            <li>Shopping: 4000 INR</li>
-                        </ul>
                     </div>
                 </div>
                 
-                <div class="card day-card">
-                    <h3>Day 3: 16 October 2025 - Historical Grandeur and Last-Minute Shopping</h3>
-                    <p><strong>Route:</strong> Lusia Inn → Bangalore Palace → Forum Mall Koramangala → Lusia Inn</p>
-                    <p><strong>Total Distance:</strong> 23.4 km | <strong>Total Travel Time:</strong> 1h 22m</p>
-
-                    <div class="place-card">
-                        <h4>Morning: Bangalore Palace</h4>
-                        <p>Bangalore Palace is a magnificent royal palace built in the Tudor Revival style, reminiscent of England's Windsor Castle. It offers a glimpse into the opulent lifestyle of the Wodeyars, the erstwhile maharajas of Mysore. The palace grounds are also used for various events and concerts.</p>
-                        <p><strong>Why visit:</strong> A unique historical landmark providing insight into royal Indian architecture and history, perfect for cultural exploration.</p>
-                        <h5>Activities:</h5>
-                        <ul>
-                            <li>Explore the palace interiors and artifacts</li>
-                            <li>Admire the architecture and intricate carvings</li>
-                            <li>Stroll through the palace grounds</li>
-                            <li>Learn about the history of the Wodeyar dynasty</li>
-                        </ul>
-                        <div class="practical-info">
-                            <h5>Practical Info:</h5>
-                            <div><strong>Entry Fee:</strong> ₹230 (Indian citizens, estimated)</div>
-                            <div><strong>Estimated Cost:</strong> ₹230</div>
-                            <div><strong>Best Time:</strong> Morning to avoid crowds and heat</div>
-                            <div><strong>Duration:</strong> 1.5-2 hours</div>
-                            <div><strong>Accessibility:</strong> Partially accessible; some areas may have stairs.</div>
+                <div class="place">
+                    <span class="time">Evening</span>
+                    <h4>The Dubai Fountain</h4>
+                    <p>Set on the 30-acre Burj Lake, The Dubai Fountain is the world's largest choreographed fountain system, performing to a selection of popular music. The captivating water shows, reaching heights of up to 150 meters, are a mesmerizing spectacle of light, water, and sound. It's a free public attraction that draws crowds every evening.</p>
+                    <p><strong>Why Visit:</strong> A beautiful and free attraction that is incredibly popular with families. The stunning choreography and music create a magical atmosphere, providing a perfect end to the first day of exploration.</p>
+                    <p><strong>Travel from previous:</strong> 0.3 km, 3 minutes (Walking)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.1973,55.2764" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Watch the spectacular fountain shows (every 30 minutes from 6 PM).</li>
+                            </ul>
                         </div>
-                        <div class="tips-section">
-                            <h5>Tips:</h5>
-                            <div><strong>What to Bring:</strong> Camera (extra fee for photography), Comfortable shoes</div>
-                            <div><strong>What to Buy:</strong> Souvenirs from the palace shop</div>
-                            <div><strong>Safety Notes:</strong> Not specified</div>
-                            <div><strong>Customs/Etiquette:</strong> Respect the historical property</div>
-                            <div><strong>Photo Spots:</strong> Palace exterior, Interiors (if photography allowed with fee)</div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> Free</p>
+                                <p><strong>Estimated Cost:</strong> Free</p>
+                                <p><strong>Best Time:</strong> Evening for light and music shows</p>
+                                <p><strong>Duration:</strong> 30 minutes (for multiple shows)</p>
+                                <p><strong>Accessibility:</strong> Accessible from Dubai Mall promenade</p>
+                            </div>
                         </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=12.9918,77.5912" target="_blank" class="btn">View on Map</a>
-                    </div>
-                    
-                    <div class="place-card">
-                        <h4>Late Morning/Early Afternoon: Forum Mall Koramangala</h4>
-                        <p>Forum Mall Koramangala is one of Bengaluru's most iconic and popular malls, known for its wide selection of retail stores, food court, restaurants, and a large multiplex. It's a great place for last-minute shopping, grabbing a quick bite, or simply enjoying the bustling mall atmosphere before heading to the airport.</p>
-                        <p><strong>Why visit:</strong> Convenient for last-minute shopping and a relaxed meal before departure, offering a mix of brands and entertainment.</p>
-                        <h5>Activities:</h5>
-                        <ul>
-                            <li>Shop for fashion, gifts, or electronics</li>
-                            <li>Enjoy lunch at the food court or a restaurant</li>
-                            <li>Catch a quick movie (optional)</li>
-                            <li>Gather souvenirs for friends and family</li>
-                        </ul>
-                        <div class="practical-info">
-                            <h5>Practical Info:</h5>
-                            <div><strong>Entry Fee:</strong> Free (shopping and dining extra)</div>
-                            <div><strong>Estimated Cost:</strong> Varies based on shopping/dining</div>
-                            <div><strong>Best Time:</strong> Late morning/early afternoon</div>
-                            <div><strong>Duration:</strong> 2-3 hours</div>
-                            <div><strong>Accessibility:</strong> Wheelchair accessible, lifts and escalators available.</div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Camera</li>
+                                    <li><strong>What to Buy:</strong> Not specified</li>
+                                    <li><strong>Safety Notes:</strong> Be mindful of crowds.</li>
+                                    <li><strong>Customs & Etiquette:</strong> Not specified</li>
+                                    <li><strong>Booking Required:</strong> No</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> Along the promenade, especially near the Burj Khalifa</p>
+                            </div>
                         </div>
-                        <div class="tips-section">
-                            <h5>Tips:</h5>
-                            <div><strong>What to Bring:</strong> Shopping list, Travel bags (for purchases)</div>
-                            <div><strong>What to Buy:</strong> Apparel, Gifts, Local products</div>
-                            <div><strong>Safety Notes:</strong> Not specified</div>
-                            <div><strong>Customs/Etiquette:</strong> Not specified</div>
-                            <div><strong>Photo Spots:</strong> Mall interiors, Food court ambiance</div>
-                        </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=12.9345,77.6111" target="_blank" class="btn">View on Map</a>
-                    </div>
-                    
-                    <div class="place-card">
-                        <h4>Afternoon: Departure from Bengaluru</h4>
-                        <p>After a memorable trip exploring Bengaluru's vibrant shopping scenes and cultural landmarks, it's time to head to the airport for your departure. Ensure you have ample time for check-in and security procedures.</p>
-                        <p><strong>Why visit:</strong> Concluding your trip with smooth departure arrangements ensures a stress-free end to your travel experience.</p>
-                        <h5>Activities:</h5>
-                        <ul>
-                            <li>Check out from the hotel</li>
-                            <li>Travel to Kempegowda International Airport (BLR)</li>
-                            <li>Complete airport formalities</li>
-                            <li>Board your flight</li>
-                        </ul>
-                        <div class="practical-info">
-                            <h5>Practical Info:</h5>
-                            <div><strong>Entry Fee:</strong> N/A</div>
-                            <div><strong>Estimated Cost:</strong> ₹1000-₹1500 (airport transfer)</div>
-                            <div><strong>Best Time:</strong> Allow 3-4 hours before flight departure</div>
-                            <div><strong>Duration:</strong> 3-4 hours</div>
-                            <div><strong>Accessibility:</strong> Airport facilities are wheelchair accessible.</div>
-                        </div>
-                        <div class="tips-section">
-                            <h5>Tips:</h5>
-                            <div><strong>What to Bring:</strong> Boarding pass, ID proof, Passport (if international), All packed luggage</div>
-                            <div><strong>What to Buy:</strong> Not specified</div>
-                            <div><strong>Safety Notes:</strong> Arrive early to avoid rush, Keep an eye on your luggage</div>
-                            <div><strong>Customs/Etiquette:</strong> Not specified</div>
-                            <div><strong>Photo Spots:</strong> Not specified</div>
-                        </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=12.963327,77.58222599999999" target="_blank" class="btn">View on Map</a>
-                    </div>
-                    
-                    <div class="day-summary card">
-                        <h4>Day 3 Summary:</h4>
-                        <p><strong>Total Distance:</strong> 23.4 km</p>
-                        <p><strong>Estimated Spending:</strong> 4230 INR</p>
-                        <ul>
-                            <li>Entry Fees: 230 INR</li>
-                            <li>Activities: 0 INR</li>
-                            <li>Transport: 1000 INR</li>
-                            <li>Meals: 1000 INR</li>
-                            <li>Shopping: 2000 INR</li>
-                        </ul>
                     </div>
                 </div>
                 
+                <div class="day-summary">
+                    <h4>Day 1 Summary:</h4>
+                    <p><strong>Total Distance:</strong> 28.5 km</p>
+                    <p><strong>Total Spending:</strong> 600 AED</p>
+                    <ul>
+                        <li>Entry Fees: 300 AED</li>
+                        <li>Activities: 0 AED</li>
+                        <li>Transport: 50 AED</li>
+                        <li>Meals: 250 AED</li>
+                        <li>Shopping: 0 AED</li>
+                    </ul>
+                    <p class="total-spending"><strong>Remaining Budget:</strong> 9936 AED</p>
+                </div>
             </div>
+            
+            <div class="daily-itinerary-day card">
+                <h3>Day 2: Indoor Winter Wonderland & Beach Fun <span>(2025-10-14)</span></h3>
+                <p><strong>Route:</strong> Dorus Hotel → Mall of the Emirates → Ski Dubai → Jumeirah Beach Residence (JBR) Beach → Dorus Hotel</p>
+                <p><strong>Total Distance:</strong> 48.0 km | <strong>Travel Time:</strong> 1 hour 40 minutes</p>
+                
+                <div class="place">
+                    <span class="time">Morning</span>
+                    <h4>Mall of the Emirates</h4>
+                    <p>Mall of the Emirates is a premium shopping resort known for its luxurious brands and the iconic Ski Dubai. It offers a wide array of fashion, lifestyle, and dining options, alongside unique entertainment. This mall provides a blend of high-end shopping and extraordinary attractions, making it a comprehensive destination for families.</p>
+                    <p><strong>Why Visit:</strong> Another one of Dubai's top malls, fulfilling the user's preference for mall exploration. Its main draw, Ski Dubai, provides a fantastic and unique indoor experience perfect for a school-age child, especially given the hot outdoor weather.</p>
+                    <p><strong>Travel from previous:</strong> 18.0 km, 25 minutes (Taxi/Metro)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.1189,55.2016" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Explore the retail outlets.</li>
+                                <li>Enjoy breakfast/brunch at one of the many cafes.</li>
+                            </ul>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> Free (individual attractions have fees)</p>
+                                <p><strong>Estimated Cost:</strong> AED 100-300</p>
+                                <p><strong>Best Time:</strong> Morning to avoid peak crowds</p>
+                                <p><strong>Duration:</strong> 2-3 hours (excluding Ski Dubai)</p>
+                                <p><strong>Accessibility:</strong> Fully accessible</p>
+                            </div>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Comfortable shoes</li>
+                                    <li><strong>What to Buy:</strong> Fashion, Souvenirs</li>
+                                    <li><strong>Safety Notes:</strong> Not specified</li>
+                                    <li><strong>Customs & Etiquette:</strong> Dress modestly.</li>
+                                    <li><strong>Booking Required:</strong> No</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> Not specified</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="place">
+                    <span class="time">Late Morning/Afternoon</span>
+                    <h4>Ski Dubai</h4>
+                    <p>Ski Dubai is an incredible indoor ski resort within Mall of the Emirates, offering real snow, ski slopes, and various snow activities year-round. It's home to penguins and provides opportunities for skiing, snowboarding, and tobogganing. It’s a remarkable escape from the desert heat and a thrilling experience for all ages.</p>
+                    <p><strong>Why Visit:</strong> A unique and exciting experience for the family, especially the child. It offers a refreshing contrast to Dubai's warm climate and provides a wide range of snow-based fun, fitting the 'family fun' trip type.</p>
+                    <p><strong>Travel from previous:</strong> 0.5 km, 5 minutes (Walking, inside Mall of the Emirates)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.1151,55.2001" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Skiing or snowboarding lessons (optional).</li>
+                                <li>Play in the Snow Park with bobsleds, toboggans, and a snowball fight arena.</li>
+                                <li>Meet the resident penguins (additional cost).</li>
+                                <li>Enjoy a hot chocolate at the Avalanche Café.</li>
+                            </ul>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> AED 210-490 (various packages available)</p>
+                                <p><strong>Estimated Cost:</strong> AED 250-350 per person</p>
+                                <p><strong>Best Time:</strong> Anytime during opening hours, less crowded mornings</p>
+                                <p><strong>Duration:</strong> 2-3 hours</p>
+                                <p><strong>Accessibility:</strong> Accessible, but mobility might be challenging on snow</p>
+                            </div>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Warm clothes (provided with some packages, but own layers are good), Gloves, Camera (waterproof advised)</li>
+                                    <li><strong>What to Buy:</strong> Souvenirs from the Ski Dubai shop</li>
+                                    <li><strong>Safety Notes:</strong> Follow safety guidelines for slopes and rides.</li>
+                                    <li><strong>Customs & Etiquette:</strong> Not specified</li>
+                                    <li><strong>Booking Required:</strong> Yes</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> With penguins, On the ski slopes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="place">
+                    <span class="time">Late Afternoon/Evening</span>
+                    <h4>Jumeirah Beach Residence (JBR) Beach</h4>
+                    <p>JBR Beach is a vibrant public beach offering golden sands, clear waters, and a bustling promenade. It's an ideal spot for relaxation, water sports, and enjoying stunning views of the Arabian Gulf and Ain Dubai. The adjacent 'The Beach' at JBR features numerous dining, shopping, and entertainment options, creating a lively atmosphere.</p>
+                    <p><strong>Why Visit:</strong> Offers a relaxing beach experience and a chance to enjoy Dubai's beautiful coastline. The surrounding area with shops and eateries makes it a great family-friendly evening outing, away from the heat of the day.</p>
+                    <p><strong>Travel from previous:</strong> 9.5 km, 15 minutes (Taxi)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.0770,55.1306" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Relax on the beach.</li>
+                                <li>Swim in the Arabian Gulf.</li>
+                                <li>Enjoy a walk along The Walk at JBR.</li>
+                                <li>Dine at one of the beachfront restaurants.</li>
+                            </ul>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> Free (activities like sunbed rental, water sports have fees)</p>
+                                <p><strong>Estimated Cost:</strong> AED 100-300 (for dinner/casual spending)</p>
+                                <p><strong>Best Time:</strong> Late afternoon or evening for pleasant temperatures</p>
+                                <p><strong>Duration:</strong> 2-3 hours</p>
+                                <p><strong>Accessibility:</strong> Accessible with paved walkways</p>
+                            </div>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Swimwear, Sunscreen, Hat, Sunglasses, Towel</li>
+                                    <li><strong>What to Buy:</strong> Not specified</li>
+                                    <li><strong>Safety Notes:</strong> Swim in designated areas., Be mindful of sun exposure.</li>
+                                    <li><strong>Customs & Etiquette:</strong> Modest swimwear is generally acceptable on public beaches., Change clothes in designated changing rooms.</li>
+                                    <li><strong>Booking Required:</strong> No</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> With Ain Dubai in the background, Along The Walk</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="day-summary">
+                    <h4>Day 2 Summary:</h4>
+                    <p><strong>Total Distance:</strong> 48.0 km</p>
+                    <p><strong>Total Spending:</strong> 670 AED</p>
+                    <ul>
+                        <li>Entry Fees: 300 AED</li>
+                        <li>Activities: 0 AED</li>
+                        <li>Transport: 70 AED</li>
+                        <li>Meals: 300 AED</li>
+                        <li>Shopping: 0 AED</li>
+                    </ul>
+                    <p class="total-spending"><strong>Remaining Budget:</strong> 9266 AED</p>
+                </div>
+            </div>
+            
+            <div class="daily-itinerary-day card">
+                <h3>Day 3: Old Dubai Charm & Modern Marvels <span>(2025-10-15)</span></h3>
+                <p><strong>Route:</strong> Dorus Hotel → Dubai Gold Souk → Dubai Spice Souk → Dubai Creek Abra Ride → The Dubai Frame → Dorus Hotel</p>
+                <p><strong>Total Distance:</strong> 28.0 km | <strong>Travel Time:</strong> 1 hour 30 minutes</p>
+                
+                <div class="place">
+                    <span class="time">Morning</span>
+                    <h4>Dubai Gold Souk</h4>
+                    <p>The Dubai Gold Souk is a traditional market famous for its dazzling array of gold jewelry. With hundreds of retailers, it's a place where you can find intricate designs and excellent deals on gold, platinum, and diamonds. It offers a glimpse into Dubai's trading history and a vibrant shopping experience.</p>
+                    <p><strong>Why Visit:</strong> A unique cultural and shopping experience, showcasing Dubai's traditional trading side. It's fascinating for all ages to see the sheer volume of gold, and parents might enjoy the opportunity to haggle.</p>
+                    <p><strong>Travel from previous:</strong> 2.0 km, 5 minutes (Taxi)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.2709,55.2974" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Window shop for gold and precious stones.</li>
+                                <li>Practice your haggling skills for a good deal.</li>
+                            </ul>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> Free</p>
+                                <p><strong>Estimated Cost:</strong> Variable (if purchasing gold)</p>
+                                <p><strong>Best Time:</strong> Morning to avoid crowds and intense heat</p>
+                                <p><strong>Duration:</strong> 1-2 hours</p>
+                                <p><strong>Accessibility:</strong> Paved walkways, can be crowded</p>
+                            </div>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Cash (for smaller purchases), Camera</li>
+                                    <li><strong>What to Buy:</strong> Gold jewelry, Souvenirs</li>
+                                    <li><strong>Safety Notes:</strong> Be aware of surroundings in crowded areas.</li>
+                                    <li><strong>Customs & Etiquette:</strong> Bargaining is expected.</li>
+                                    <li><strong>Booking Required:</strong> No</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> Showcases of intricate gold designs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="place">
+                    <span class="time">Morning</span>
+                    <h4>Dubai Spice Souk</h4>
+                    <p>Adjacent to the Gold Souk, the Dubai Spice Souk is a fragrant market brimming with a vibrant selection of spices, herbs, dried fruits, and nuts. The air is filled with exotic aromas, and the colorful displays create a sensory feast. It's a wonderful place to explore traditional Middle Eastern ingredients and culture.</p>
+                    <p><strong>Why Visit:</strong> A sensory experience that offers insight into traditional Emirati trade. The vibrant colors and aromas are captivating, and it's an educational experience for children to learn about different spices.</p>
+                    <p><strong>Travel from previous:</strong> 0.2 km, 2 minutes (Walking)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.2713,55.2981" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Explore the stalls and sample different spices.</li>
+                                <li>Purchase unique spices and local delicacies.</li>
+                            </ul>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> Free</p>
+                                <p><strong>Estimated Cost:</strong> Variable (if purchasing spices)</p>
+                                <p><strong>Best Time:</strong> Morning</p>
+                                <p><strong>Duration:</strong> 1-1.5 hours</p>
+                                <p><strong>Accessibility:</strong> Paved walkways, can be crowded</p>
+                            </div>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Cash</li>
+                                    <li><strong>What to Buy:</strong> Spices, Dates, Dried fruits</li>
+                                    <li><strong>Safety Notes:</strong> Not specified</li>
+                                    <li><strong>Customs & Etiquette:</strong> Bargaining is common.</li>
+                                    <li><strong>Booking Required:</strong> No</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> Colorful spice displays</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="place">
+                    <span class="time">Lunchtime</span>
+                    <h4>Dubai Creek Abra Ride</h4>
+                    <p>The Dubai Creek is the historical heart of the city, and an abra ride offers a traditional and affordable way to cross its waters between Deira and Bur Dubai. These small, wooden boats provide a charming perspective of the old trading ports and the city's origins. It's a serene break from the bustling souks.</p>
+                    <p><strong>Why Visit:</strong> A charming and authentic experience that offers a glimpse into Old Dubai. It's a relaxing and inexpensive activity for the family, providing beautiful views and a taste of history.</p>
+                    <p><strong>Travel from previous:</strong> 0.5 km, 5 minutes (Walking)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.2676,55.2977" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Enjoy a traditional abra ride across Dubai Creek.</li>
+                                <li>Take photos of the traditional dhows and waterfront.</li>
+                            </ul>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> AED 1 per person, per ride</p>
+                                <p><strong>Estimated Cost:</strong> AED 10-20</p>
+                                <p><strong>Best Time:</strong> Late morning or early afternoon</p>
+                                <p><strong>Duration:</strong> 10-15 minutes per ride</p>
+                                <p><strong>Accessibility:</strong> Requires stepping onto a boat, may not be wheelchair accessible</p>
+                            </div>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Small cash</li>
+                                    <li><strong>What to Buy:</strong> Not specified</li>
+                                    <li><strong>Safety Notes:</strong> Not specified</li>
+                                    <li><strong>Customs & Etiquette:</strong> Not specified</li>
+                                    <li><strong>Booking Required:</strong> No</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> Views of Old Dubai from the creek</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="place">
+                    <span class="time">Afternoon</span>
+                    <h4>The Dubai Frame</h4>
+                    <p>The Dubai Frame is an architectural landmark that offers panoramic views of both old and new Dubai. This impressive structure frames iconic sights, allowing visitors to literally see the city's past and present. It features a museum on the ground floor detailing Dubai's evolution and a transparent glass walkway at the top.</p>
+                    <p><strong>Why Visit:</strong> A unique architectural marvel that provides a stunning perspective of Dubai's contrasting landscapes. It's both educational and visually impressive, appealing to all family members.</p>
+                    <p><strong>Travel from previous:</strong> 4.0 km, 10 minutes (Taxi)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.2631,55.3117" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Explore the museum showcasing Dubai's transformation.</li>
+                                <li>Walk across the transparent glass bridge at the top.</li>
+                                <li>Enjoy panoramic views of Old and New Dubai.</li>
+                            </ul>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> AED 50 (adults), AED 20 (children)</p>
+                                <p><strong>Estimated Cost:</strong> AED 120 (for 2 adults, 1 child)</p>
+                                <p><strong>Best Time:</strong> Late afternoon for daylight and sunset views</p>
+                                <p><strong>Duration:</strong> 1.5-2 hours</p>
+                                <p><strong>Accessibility:</strong> Fully accessible with elevators</p>
+                            </div>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Camera</li>
+                                    <li><strong>What to Buy:</strong> Souvenirs</li>
+                                    <li><strong>Safety Notes:</strong> Follow guidelines on the glass walk.</li>
+                                    <li><strong>Customs & Etiquette:</strong> Not specified</li>
+                                    <li><strong>Booking Required:</strong> Yes</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> Glass bridge, Panoramic views from the top</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="day-summary">
+                    <h4>Day 3 Summary:</h4>
+                    <p><strong>Total Distance:</strong> 28.0 km</p>
+                    <p><strong>Total Spending:</strong> 430 AED</p>
+                    <ul>
+                        <li>Entry Fees: 120 AED</li>
+                        <li>Activities: 0 AED</li>
+                        <li>Transport: 60 AED</li>
+                        <li>Meals: 250 AED</li>
+                        <li>Shopping: 0 AED</li>
+                    </ul>
+                    <p class="total-spending"><strong>Remaining Budget:</strong> 8836 AED</p>
+                </div>
+            </div>
+            
+            <div class="daily-itinerary-day card">
+                <h3>Day 4: Adventure & Entertainment <span>(2025-10-16)</span></h3>
+                <p><strong>Route:</strong> Dorus Hotel → IMG Worlds of Adventure → Global Village → Dorus Hotel</p>
+                <p><strong>Total Distance:</strong> 76.0 km | <strong>Travel Time:</strong> 2 hours 10 minutes</p>
+                
+                <div class="place">
+                    <span class="time">Morning/Afternoon</span>
+                    <h4>IMG Worlds of Adventure</h4>
+                    <p>IMG Worlds of Adventure is the world's largest indoor theme park, featuring four epic zones: Marvel, Cartoon Network, Lost Valley – Dinosaur Adventure, and IMG Boulevard. It offers thrilling rides, live shows, and immersive attractions based on popular characters and prehistoric creatures. It's a fantastic all-day entertainment hub for families, protected from the outdoor heat.</p>
+                    <p><strong>Why Visit:</strong> An excellent choice for 'family fun' and a school-age child, offering a full day of excitement and thrills in an air-conditioned environment, perfect for Dubai's climate.</p>
+                    <p><strong>Travel from previous:</strong> 30.0 km, 35 minutes (Taxi)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.0931,55.4851" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Experience various thrilling rides and attractions in each zone.</li>
+                                <li>Watch live shows and meet character mascots.</li>
+                                <li>Enjoy lunch at one of the themed restaurants.</li>
+                            </ul>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> AED 345 (adults), AED 305 (children)</p>
+                                <p><strong>Estimated Cost:</strong> AED 995 (for 2 adults, 1 child)</p>
+                                <p><strong>Best Time:</strong> Full day experience</p>
+                                <p><strong>Duration:</strong> 6-8 hours</p>
+                                <p><strong>Accessibility:</strong> Fully accessible</p>
+                            </div>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Comfortable shoes, Water bottle</li>
+                                    <li><strong>What to Buy:</strong> Souvenirs from themed shops</li>
+                                    <li><strong>Safety Notes:</strong> Follow ride safety instructions., Stay hydrated.</li>
+                                    <li><strong>Customs & Etiquette:</strong> Not specified</li>
+                                    <li><strong>Booking Required:</strong> Yes</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> With Marvel and Cartoon Network characters, In front of dinosaur exhibits</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="place">
+                    <span class="time">Evening</span>
+                    <h4>Global Village</h4>
+                    <p>Global Village is a multi-cultural festival park, offering pavilions representing countries from around the world. Each pavilion showcases the country's unique culture, products, food, and entertainment. It features a vast array of shopping, dining, and live performances, culminating in a dazzling fireworks display on weekends. It's a vibrant and diverse family attraction.</p>
+                    <p><strong>Why Visit:</strong> Offers a unique blend of culture, entertainment, and shopping from around the world, providing a fun and educational experience for the family. Its evening operating hours are perfect for avoiding the daytime heat.</p>
+                    <p><strong>Travel from previous:</strong> 28.0 km, 30 minutes (Taxi)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.0747,55.3170" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Explore pavilions from different countries.</li>
+                                <li>Shop for unique handicrafts and international products.</li>
+                                <li>Enjoy diverse international cuisine.</li>
+                                <li>Watch live cultural shows and performances.</li>
+                                <li>Experience carnival rides and games.</li>
+                            </ul>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> AED 20-25 per person</p>
+                                <p><strong>Estimated Cost:</strong> AED 65 (entry) + AED 300-500 (food/shopping)</p>
+                                <p><strong>Best Time:</strong> Evening (opens late afternoon)</p>
+                                <p><strong>Duration:</strong> 3-4 hours</p>
+                                <p><strong>Accessibility:</strong> Generally accessible, some areas may be crowded</p>
+                            </div>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Comfortable walking shoes, Cash (for some smaller vendors), Camera</li>
+                                    <li><strong>What to Buy:</strong> Handicrafts, Spices, Textiles, Souvenirs</li>
+                                    <li><strong>Safety Notes:</strong> Keep an eye on children in crowded areas.</li>
+                                    <li><strong>Customs & Etiquette:</strong> Dress modestly.</li>
+                                    <li><strong>Booking Required:</strong> No</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> In front of country pavilions, With live performers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="day-summary">
+                    <h4>Day 4 Summary:</h4>
+                    <p><strong>Total Distance:</strong> 76.0 km</p>
+                    <p><strong>Total Spending:</strong> 1470 AED</p>
+                    <ul>
+                        <li>Entry Fees: 1020 AED</li>
+                        <li>Activities: 0 AED</li>
+                        <li>Transport: 100 AED</li>
+                        <li>Meals: 350 AED</li>
+                        <li>Shopping: 0 AED</li>
+                    </ul>
+                    <p class="total-spending"><strong>Remaining Budget:</strong> 7366 AED</p>
+                </div>
+            </div>
+            
+            <div class="daily-itinerary-day card">
+                <h3>Day 5: Waterpark Thrills & Departure <span>(2025-10-17)</span></h3>
+                <p><strong>Route:</strong> Dorus Hotel → Aquaventure Waterpark → Dorus Hotel (for checkout) → Dubai International Airport</p>
+                <p><strong>Total Distance:</strong> 60.0 km | <strong>Travel Time:</strong> 1 hour 50 minutes</p>
+                
+                <div class="place">
+                    <span class="time">Morning/Afternoon</span>
+                    <h4>Aquaventure Waterpark</h4>
+                    <p>Located at Atlantis, The Palm, Aquaventure Waterpark is one of the largest and most exciting waterparks in the Middle East and Europe. It boasts thrilling slides, river rides, a private beach, and unique marine animal experiences. It's a perfect destination for a day of exhilarating water fun for the whole family.</p>
+                    <p><strong>Why Visit:</strong> A fantastic 'family fun' activity, especially for a school-age child. It offers a refreshing and exciting way to spend the last day before departure, providing lasting memories.</p>
+                    <p><strong>Travel from previous:</strong> 28.0 km, 30 minutes (Taxi)</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=25.1206,55.1328" target="_blank" class="btn btn-outline">View on Map</a>
+                    <div class="place-details">
+                        <div class="place-detail-col">
+                            <h5>Activities:</h5>
+                            <ul class="activities-list">
+                                <li>Experience various water slides and rides.</li>
+                                <li>Relax on the private beach.</li>
+                                <li>Interact with marine animals (additional cost).</li>
+                                <li>Enjoy lunch at one of the waterpark's eateries.</li>
+                            </ul>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="practical-info">
+                                <h5>Practical Info:</h5>
+                                <p><strong>Entry Fee:</strong> AED 299 (adults), AED 249 (children)</p>
+                                <p><strong>Estimated Cost:</strong> AED 847 (for 2 adults, 1 child)</p>
+                                <p><strong>Best Time:</strong> Morning to maximize time and avoid afternoon crowds</p>
+                                <p><strong>Duration:</strong> 5-6 hours</p>
+                                <p><strong>Accessibility:</strong> Accessible, but some rides have restrictions</p>
+                            </div>
+                        </div>
+                        <div class="place-detail-col">
+                            <div class="tips-section">
+                                <h5>Tips:</h5>
+                                <ul class="tips-list">
+                                    <li><strong>What to Bring:</strong> Swimwear, Sunscreen, Hat, Sunglasses, Towel, Waterproof phone case</li>
+                                    <li><strong>What to Buy:</strong> Not specified</li>
+                                    <li><strong>Safety Notes:</strong> Follow all ride instructions., Stay hydrated.</li>
+                                    <li><strong>Customs & Etiquette:</strong> Modest swimwear is preferred, but typical swimwear is acceptable within the park.</li>
+                                    <li><strong>Booking Required:</strong> Yes</li>
+                                </ul>
+                                <p class="photo-spots"><strong>Photo Spots:</strong> Throughout the waterpark, especially near iconic slides</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="day-summary">
+                    <h4>Day 5 Summary:</h4>
+                    <p><strong>Total Distance:</strong> 60.0 km</p>
+                    <p><strong>Total Spending:</strong> 1127 AED</p>
+                    <ul>
+                        <li>Entry Fees: 847 AED</li>
+                        <li>Activities: 0 AED</li>
+                        <li>Transport: 80 AED</li>
+                        <li>Meals: 200 AED</li>
+                        <li>Shopping: 0 AED</li>
+                    </ul>
+                    <p class="total-spending"><strong>Remaining Budget:</strong> 6239 AED</p>
+                </div>
+            </div>
+            
         </section>
 
-        <section id="budget-dashboard">
+        <section id="budget-dashboard" class="card">
             <h2>💰 Budget Dashboard</h2>
-            <div class="card budget-card">
-                <div class="budget-summary">
-                    <p class="total-budget">Total Budget: 80000 INR</p>
-                    <p class="total-spent">Total Spent: 69380 INR</p>
-                    <p class="remaining-budget">Remaining Budget: 10620 INR</p>
+            <div class="budget-summary">
+                <div class="budget-item total">
+                    <h4>Total Budget</h4>
+                    <p>11000 AED</p>
                 </div>
-
-                <h3>Expense Breakdown:</h3>
-                <div class="budget-chart">
-                    <div class="chart-bar-container">
-                        <div class="chart-label">Flights</div>
-                        <div class="chart-bar">
-                            <div class="chart-fill flights" style="width: 69.65%;">69.65% (48324 INR)</div>
-                        </div>
-                    </div>
-                    <div class="chart-bar-container">
-                        <div class="chart-label">Accommodation</div>
-                        <div class="chart-bar">
-                            <div class="chart-fill accommodation" style="width: 8.64%;">8.64% (5996 INR)</div>
-                        </div>
-                    </div>
-                    <div class="chart-bar-container">
-                        <div class="chart-label">Daily Expenses</div>
-                        <div class="chart-bar">
-                            <div class="chart-fill daily" style="width: 21.74%;">21.74% (15060 INR)</div>
-                        </div>
-                    </div>
-                    <div class="chart-bar-container">
-                        <div class="chart-label">Total Spent</div>
-                        <div class="chart-bar">
-                            <div class="chart-fill total" style="width: 86.72%;">86.72% (69380 INR)</div>
-                        </div>
-                    </div>
+                <div class="budget-item spent">
+                    <h4>Total Spent</h4>
+                    <p>4761 AED</p>
                 </div>
+                <div class="budget-item remaining">
+                    <h4>Remaining Budget</h4>
+                    <p>6239 AED</p>
+                </div>
+            </div>
 
-                <h3>Budget Tips:</h3>
-                <ul class="budget-tips">
-                    <li>Utilize local transport like auto-rickshaws or ride-sharing apps for shorter distances to save on taxi fares.</li>
-                    <li>Explore local eateries for authentic and budget-friendly meals.</li>
-                    <li>Look for sales and discounts if shopping at malls.</li>
-                    <li>Consider visiting free attractions like parks and gardens to balance the budget.</li>
+            <h3>Expense Breakdown</h3>
+            <div class="budget-chart-container">
+                <div class="budget-chart-bar">
+                    <span class="label">Flights</span>
+                    <div class="bar flights" style="width: 0%;">0 AED</div>
+                </div>
+                <div class="budget-chart-bar">
+                    <span class="label">Accommodation</span>
+                    <div class="bar accommodation" style="width: 9.672727272727272%;">1064 AED</div>
+                </div>
+                <div class="budget-chart-bar">
+                    <span class="label">Entry Fees</span>
+                    <div class="bar entry-fees" style="width: 23.518181818181817%;">2587 AED</div>
+                </div>
+                <div class="budget-chart-bar">
+                    <span class="label">Transport</span>
+                    <div class="bar transport" style="width: 3.272727272727273%;">360 AED</div>
+                </div>
+                <div class="budget-chart-bar">
+                    <span class="label">Meals</span>
+                    <div class="bar meals" style="width: 12.272727272727273%;">1350 AED</div>
+                </div>
+                <div class="budget-chart-bar">
+                    <span class="label">Shopping</span>
+                    <div class="bar shopping" style="width: 0%;">0 AED</div>
+                </div>
+            </div>
+
+            <div class="budget-tips">
+                <h3>Budget Tips</h3>
+                <ul>
+                    <li>Utilize Dubai Metro for cost-effective transportation where possible.</li>
+                    <li>Look for combo tickets or family passes for attractions to save on entry fees.</li>
+                    <li>Consider eating at local eateries or food courts for more budget-friendly meal options.</li>
+                    <li>Book attractions and tours in advance online for potential discounts.</li>
                 </ul>
             </div>
         </section>
 
-        <section id="packing-list">
+        <section id="packing-list" class="card">
             <h2>🎒 Packing List</h2>
-            <div class="card list-card checklist" id="packingList">
-                <h3>Clothing</h3>
-                <ul>
-                    <li><label><input type="checkbox" data-list="packing" data-category="clothing" data-index="0"> Lightweight cotton clothes (t-shirts, shirts, dresses) for warm weather</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="clothing" data-index="1"> One light jacket or shawl for evenings or air-conditioned places</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="clothing" data-index="2"> Comfortable sleepwear</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="clothing" data-index="3"> Undergarments</label></li>
-                </ul>
-                <h3>Footwear</h3>
-                <ul>
-                    <li><label><input type="checkbox" data-list="packing" data-category="footwear" data-index="0"> Comfortable walking shoes or sandals</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="footwear" data-index="1"> One pair of dressier shoes (optional)</label></li>
-                </ul>
-                <h3>Essentials</h3>
-                <ul>
-                    <li><label><input type="checkbox" data-list="packing" data-category="essentials" data-index="0"> Toiletries (toothbrush, toothpaste, shampoo, soap)</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="essentials" data-index="1"> Sunscreen</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="essentials" data-index="2"> Insect repellent</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="essentials" data-index="3"> Hand sanitizer</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="essentials" data-index="4"> Small umbrella or raincoat (for unexpected showers)</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="essentials" data-index="5"> Personal medications</label></li>
-                </ul>
-                <h3>Medication</h3>
-                <ul>
-                    <li><label><input type="checkbox" data-list="packing" data-category="medication" data-index="0"> Pain relievers</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="medication" data-index="1"> Band-aids</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="medication" data-index="2"> Antacids</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="medication" data-index="3"> Any personal prescription medicines</label></li>
-                </ul>
-                <h3>Electronics</h3>
-                <ul>
-                    <li><label><input type="checkbox" data-list="packing" data-category="electronics" data-index="0"> Phone and charger</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="electronics" data-index="1"> Power bank</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="electronics" data-index="2"> Camera and accessories</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="electronics" data-index="3"> Universal travel adapter (if needed)</label></li>
-                </ul>
-                <h3>Miscellaneous</h3>
-                <ul>
-                    <li><label><input type="checkbox" data-list="packing" data-category="miscellaneous" data-index="0"> Small backpack or day bag</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="miscellaneous" data-index="1"> Reusable water bottle</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="miscellaneous" data-index="2"> Sunglasses</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="miscellaneous" data-index="3"> Reading material or entertainment for travel time</label></li>
-                </ul>
-                <h3>Documents</h3>
-                <ul>
-                    <li><label><input type="checkbox" data-list="packing" data-category="documents" data-index="0"> Flight tickets and hotel booking confirmations</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="documents" data-index="1"> Government-issued ID</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="documents" data-index="2"> Any necessary visas (if applicable)</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="documents" data-index="3"> Photocopies of important documents</label></li>
-                    <li><label><input type="checkbox" data-list="packing" data-category="documents" data-index="4"> Health insurance details</label></li>
-                </ul>
+            <div class="checklist-group">
+                <h4>Clothing</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="clothing-0">
+                    <label for="clothing-0">Lightweight and breathable clothing (cotton, linen)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="clothing-1">
+                    <label for="clothing-1">Modest outfits for cultural sites (shoulders and knees covered)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="clothing-2">
+                    <label for="clothing-2">Swimwear</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="clothing-3">
+                    <label for="clothing-3">Warm layers for Ski Dubai (though provided with some packages)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="clothing-4">
+                    <label for="clothing-4">Casual evening wear</label>
+                </div>
+            </div>
+            <div class="checklist-group">
+                <h4>Footwear</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="footwear-0">
+                    <label for="footwear-0">Comfortable walking shoes</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="footwear-1">
+                    <label for="footwear-1">Sandals or flip-flops</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="footwear-2">
+                    <label for="footwear-2">Water shoes (for waterparks)</label>
+                </div>
+            </div>
+            <div class="checklist-group">
+                <h4>Essentials</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-0">
+                    <label for="essentials-0">Sunscreen (high SPF)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-1">
+                    <label for="essentials-1">Hat and sunglasses</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-2">
+                    <label for="essentials-2">Reusable water bottle</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-3">
+                    <label for="essentials-3">Small backpack or day bag</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-4">
+                    <label for="essentials-4">Travel adapter</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-5">
+                    <label for="essentials-5">Basic first-aid kit</label>
+                </div>
+            </div>
+            <div class="checklist-group">
+                <h4>Medication</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="medication-0">
+                    <label for="medication-0">Any personal prescription medications</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="medication-1">
+                    <label for="medication-1">Over-the-counter pain relievers</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="medication-2">
+                    <label for="medication-2">Motion sickness medication (if prone)</label>
+                </div>
+            </div>
+            <div class="checklist-group">
+                <h4>Electronics</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="electronics-0">
+                    <label for="electronics-0">Phone and charger</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="electronics-1">
+                    <label for="electronics-1">Portable power bank</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="electronics-2">
+                    <label for="electronics-2">Camera and extra memory card</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="electronics-3">
+                    <label for="electronics-3">Waterproof phone case (for water activities)</label>
+                </div>
+            </div>
+            <div class="checklist-group">
+                <h4>Miscellaneous</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="miscellaneous-0">
+                    <label for="miscellaneous-0">Travel pillow (for flights)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="miscellaneous-1">
+                    <label for="miscellaneous-1">Small umbrella (for sun protection)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="miscellaneous-2">
+                    <label for="miscellaneous-2">Entertainment for child during travel/downtime</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="miscellaneous-3">
+                    <label for="miscellaneous-3">Snacks</label>
+                </div>
+            </div>
+            <div class="checklist-group">
+                <h4>Documents</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="documents-0">
+                    <label for="documents-0">Passport and visa (if required)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="documents-1">
+                    <label for="documents-1">Flight tickets and hotel booking confirmations</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="documents-2">
+                    <label for="documents-2">Travel insurance details</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="documents-3">
+                    <label for="documents-3">Copies of important documents</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="documents-4">
+                    <label for="documents-4">Driver's license (if planning to rent a car)</label>
+                </div>
             </div>
         </section>
 
-        <section id="pre-trip-checklist">
-            <h2>✅ Pre-Trip Checklist</h2>
-            <div class="card list-card checklist" id="preTripChecklist">
-                <ul>
-                    <li>
-                        <label>
-                            <input type="checkbox" data-list="pretrip" data-index="0"> Confirm flight bookings and check-in online.
-                        </label>
-                        <span class="priority priority-high">High</span>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" data-list="pretrip" data-index="1"> Inform bank about travel plans to avoid card issues.
-                        </label>
-                        <span class="priority priority-medium">Medium</span>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" data-list="pretrip" data-index="2"> Arrange for airport transfers.
-                        </label>
-                        <span class="priority priority-high">High</span>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" data-list="pretrip" data-index="3"> Download offline maps of Bengaluru.
-                        </label>
-                        <span class="priority priority-medium">Medium</span>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" data-list="pretrip" data-index="4"> Pack according to the weather forecast and itinerary.
-                        </label>
-                        <span class="priority priority-high">High</span>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" data-list="pretrip" data-index="5"> Exchange currency to INR or withdraw cash.
-                        </label>
-                        <span class="priority priority-high">High</span>
-                    </li>
-                </ul>
+        <section id="pre-trip-checklist" class="card">
+            <h2>✔️ Pre-trip Checklist</h2>
+            <div class="checklist-group">
+                <div class="checklist-item">
+                    <input type="checkbox" id="pre-trip-0" >
+                    <label for="pre-trip-0">Check passport validity (at least 6 months beyond travel date)</label>
+                    <span class="priority high">High</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pre-trip-1" >
+                    <label for="pre-trip-1">Arrange visa if necessary</label>
+                    <span class="priority high">High</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pre-trip-2" >
+                    <label for="pre-trip-2">Book flights</label>
+                    <span class="priority high">High</span>
+                </div>
+                <div class="checklist-item completed">
+                    <input type="checkbox" id="pre-trip-3" checked>
+                    <label for="pre-trip-3">Confirm hotel booking</label>
+                    <span class="priority high">High</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pre-trip-4" >
+                    <label for="pre-trip-4">Purchase travel insurance</label>
+                    <span class="priority medium">Medium</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pre-trip-5" >
+                    <label for="pre-trip-5">Convert currency to AED or ensure access to funds</label>
+                    <span class="priority high">High</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pre-trip-6" >
+                    <label for="pre-trip-6">Download offline maps of Dubai</label>
+                    <span class="priority medium">Medium</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pre-trip-7" >
+                    <label for="pre-trip-7">Pre-book tickets for major attractions (Burj Khalifa, IMG Worlds, Aquaventure)</label>
+                    <span class="priority high">High</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pre-trip-8" >
+                    <label for="pre-trip-8">Inform bank of travel plans</label>
+                    <span class="priority medium">Medium</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pre-trip-9" >
+                    <label for="pre-trip-9">Pack appropriate clothing for hot weather and modest dressing for cultural sites</label>
+                    <span class="priority high">High</span>
+                </div>
             </div>
         </section>
     </div>
 
-    <footer>
-        <p>Enjoy your Budget-friendly, shopping, and city exploration trip to Bengaluru with Friends!</p>
-        <button class="btn" onclick="window.print()">🖨️ Print Itinerary</button>
+    <footer class="footer">
+        <p>Your unforgettable family adventure in Dubai awaits!</p>
+        <button onclick="window.print()" class="btn">Print Itinerary</button>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Function to load checklist state from localStorage
-            function loadChecklistState(listName, type = 'indexed') {
-                const savedState = JSON.parse(localStorage.getItem(listName)) || {};
-                const checkboxes = document.querySelectorAll(`#${listName} input[type="checkbox"]`);
-
-                checkboxes.forEach(checkbox => {
-                    if (type === 'indexed') {
-                        const index = checkbox.dataset.index;
-                        const parent = checkbox.closest('li');
-                        if (savedState[index]) {
-                            checkbox.checked = true;
-                            if (parent) parent.classList.add('completed');
-                        } else {
-                            checkbox.checked = false;
-                            if (parent) parent.classList.remove('completed');
-                        }
-                    } else if (type === 'category') {
-                        const category = checkbox.dataset.category;
-                        const index = checkbox.dataset.index;
-                        const parent = checkbox.closest('li');
-                        if (savedState[category] && savedState[category][index]) {
-                            checkbox.checked = true;
-                            if (parent) parent.classList.add('completed');
-                        } else {
-                            checkbox.checked = false;
-                            if (parent) parent.classList.remove('completed');
-                        }
+            // Checkbox interactivity for packing list
+            document.querySelectorAll('#packing-list .checklist-item input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', (event) => {
+                    if (event.target.checked) {
+                        event.target.closest('.checklist-item').classList.add('completed');
+                    } else {
+                        event.target.closest('.checklist-item').classList.remove('completed');
                     }
                 });
-            }
+            });
 
-            // Function to save checklist state to localStorage
-            function saveChecklistState(listName, checkbox, type = 'indexed') {
-                let savedState = JSON.parse(localStorage.getItem(listName)) || {};
-                const parent = checkbox.closest('li');
-
-                if (type === 'indexed') {
-                    const index = checkbox.dataset.index;
-                    savedState[index] = checkbox.checked;
-                } else if (type === 'category') {
-                    const category = checkbox.dataset.category;
-                    const index = checkbox.dataset.index;
-                    if (!savedState[category]) {
-                        savedState[category] = {};
+            // Checkbox interactivity for pre-trip checklist
+            document.querySelectorAll('#pre-trip-checklist .checklist-item input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', (event) => {
+                    if (event.target.checked) {
+                        event.target.closest('.checklist-item').classList.add('completed');
+                    } else {
+                        event.target.closest('.checklist-item').classList.remove('completed');
                     }
-                    savedState[category][index] = checkbox.checked;
-                }
-
-                localStorage.setItem(listName, JSON.stringify(savedState));
+                });
+                // Initialize state based on 'checked' attribute
                 if (checkbox.checked) {
-                    if (parent) parent.classList.add('completed');
-                } else {
-                    if (parent) parent.classList.remove('completed');
+                    checkbox.closest('.checklist-item').classList.add('completed');
                 }
+            });
+
+            // Budget Chart Animation (for visual flair)
+            const totalBudget = parseFloat("11000"); // Directly use totalBudget from JSON
+            if (totalBudget > 0) {
+                const expenseData = {
+                    "Flights": 0,
+                    "Accommodation": 1064,
+                    "Entry Fees": 2587, /* Sum of daily entryFees */
+                    "Transport": 360, /* Sum of daily transport */
+                    "Meals": 1350, /* Sum of daily meals */
+                    "Shopping": 0 /* Sum of daily shopping */
+                };
+
+                document.querySelectorAll('.budget-chart-bar').forEach(chartBar => {
+                    const labelSpan = chartBar.querySelector('.label');
+                    const barElement = chartBar.querySelector('.bar');
+                    const category = labelSpan.textContent;
+                    const value = expenseData[category];
+
+                    if (value !== undefined) {
+                        const percentage = (value / totalBudget) * 100;
+                        barElement.style.width = `${Math.max(percentage, 0)}%`; // Ensure non-negative width
+                        barElement.textContent = `${value} AED`;
+                    }
+                });
             }
-
-            // Load states on page load
-            loadChecklistState('packingList', 'category');
-            loadChecklistState('preTripChecklist', 'indexed');
-
-            // Add event listeners for packing list checkboxes
-            document.querySelectorAll('#packingList input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', (event) => {
-                    saveChecklistState('packingList', event.target, 'category');
-                });
-            });
-
-            // Add event listeners for pre-trip checklist checkboxes
-            document.querySelectorAll('#preTripChecklist input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', (event) => {
-                    saveChecklistState('preTripChecklist', event.target, 'indexed');
-                });
-            });
-
-            // Handle disabled booking links
-            document.querySelectorAll('.btn').forEach(button => {
-                if (button.href.includes('No link provided.') || button.href === '') {
-                    button.classList.add('disabled');
-                    button.removeAttribute('href');
-                    button.setAttribute('aria-disabled', 'true');
-                }
-            });
         });
-
-        // Function to determine priority class
-        function getPriorityClass(priority) {
-            switch (priority.toLowerCase()) {
-                case 'high': return 'priority-high';
-                case 'medium': return 'priority-medium';
-                case 'low': return 'priority-low';
-                default: return '';
-            }
-        }
     </script>
 </body>
 </html>
