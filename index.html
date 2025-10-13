@@ -3,1341 +3,1018 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaipur Trip Itinerary</title>
+    <title>Joshimath Adventure - Your Trip Itinerary</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap');
-
-        :root {
-            --primary-color: #8B0000; /* Dark Red - Royal feel */
-            --secondary-color: #FFD700; /* Gold - Accent */
-            --background-color: #FFF8DC; /* Cornsilk - Light background */
-            --card-background: #FFFFFF; /* White */
-            --text-color: #333333; /* Dark Grey */
-            --light-text-color: #666666; /* Medium Grey */
-            --border-color: #EEEEEE; /* Light Grey for borders */
-            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            --border-radius: 12px;
-        }
-
+        /* General Styles */
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            background-color: #f4f7f6;
+            color: #333;
             line-height: 1.6;
-            overflow-x: hidden;
         }
-
         .container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 0 15px;
         }
-
-        header {
-            background-color: var(--primary-color);
-            color: var(--card-background);
-            padding: 40px 0;
-            text-align: center;
-            border-bottom-left-radius: var(--border-radius);
-            border-bottom-right-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
         }
-
-        header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3em;
+        h1 {
+            font-size: 2.8em;
+            text-align: center;
+            margin-top: 30px;
             margin-bottom: 10px;
         }
-
-        header p {
-            font-size: 1.2em;
-            margin: 5px 0;
-        }
-
-        section {
-            background-color: var(--card-background);
-            padding: 30px;
-            margin-bottom: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-
         h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--primary-color);
             font-size: 2.2em;
-            margin-top: 0;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--secondary-color);
+            border-bottom: 2px solid #a8dadc;
             padding-bottom: 10px;
-            text-align: center;
+            margin-top: 40px;
         }
-
         h3 {
-            color: var(--primary-color);
-            font-size: 1.6em;
+            font-size: 1.8em;
+            color: #1a535c;
             margin-top: 25px;
-            margin-bottom: 15px;
         }
-
         h4 {
-            color: var(--text-color);
-            font-size: 1.3em;
+            font-size: 1.4em;
+            color: #457b9d;
             margin-top: 20px;
-            margin-bottom: 10px;
         }
-
         .card {
-            background-color: #fcfcfc;
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border-color);
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.2s ease-in-out;
         }
-
-        .card-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+        .card:hover {
+            transform: translateY(-5px);
         }
-
-        .card-row > .card {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .detail-item strong {
-            color: var(--primary-color);
-        }
-
         .button {
             display: inline-block;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
+            background-color: #1a535c;
+            color: #ffffff;
             padding: 10px 20px;
-            border-radius: 5px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
             text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 10px;
+            transition: background-color 0.3s ease;
             margin-right: 10px;
-            border: none;
-            cursor: pointer;
+            margin-top: 10px;
         }
-
         .button:hover {
-            background-color: #e6c200;
-            transform: translateY(-2px);
+            background-color: #457b9d;
+        }
+        .button.secondary {
+            background-color: #a8dadc;
+            color: #1a535c;
+        }
+        .button.secondary:hover {
+            background-color: #8ecbd4;
+        }
+        .list-unstyled {
+            list-style: none;
+            padding-left: 0;
+        }
+        .detail-item {
+            margin-bottom: 8px;
+        }
+        .detail-item strong {
+            color: #457b9d;
         }
 
-        .button.primary {
-            background-color: var(--primary-color);
-            color: var(--card-background);
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Joshimath_valley.jpg/1200px-Joshimath_valley.jpg') no-repeat center center/cover;
+            color: #ffffff;
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        .hero h1 {
+            color: #ffffff;
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        .hero p {
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+        }
+        .hero span {
+            display: block;
+            margin-top: 10px;
         }
 
-        .button.primary:hover {
-            background-color: #6a0000;
+        /* Flights Section */
+        .flights-section .card {
+            background-color: #e0fbff;
+            border-left: 5px solid #457b9d;
         }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
+        .flight-card {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .flight-detail {
+            background-color: #f7fdfd;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #cceeff;
+        }
+        .flight-detail h4 {
+            color: #1a535c;
+            margin-top: 0;
+        }
+        .flight-detail .price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #e63946;
+            margin-top: 10px;
+        }
+        .no-flights-message {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
             margin-top: 20px;
         }
 
-        .gallery img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: var(--border-radius);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
-
-        .gallery img:hover {
-            transform: scale(1.03);
-        }
-
-        .amenities-list {
-            list-style: none;
-            padding: 0;
+        /* Hotel Section */
+        .hotel-gallery {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
         }
-
-        .amenities-list li {
-            background-color: #f0f8ff;
-            color: var(--text-color);
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 1px solid #c0e0ff;
-            font-size: 0.9em;
+        .hotel-gallery img {
+            width: 100%;
+            max-width: 250px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-
-        .itinerary-day {
-            margin-bottom: 40px;
-            border-left: 4px solid var(--secondary-color);
-            padding-left: 20px;
-        }
-
-        .itinerary-day h3 {
-            margin-top: 0;
-            color: var(--primary-color);
-            font-family: 'Playfair Display', serif;
-        }
-
-        .itinerary-place {
-            background-color: #fefefe;
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border-color);
-            position: relative;
-        }
-        
-        .itinerary-place:before {
-            content: '';
-            position: absolute;
-            left: -28px; /* Align with the day's border */
-            top: 25px;
-            width: 12px;
-            height: 12px;
-            background-color: var(--primary-color);
-            border-radius: 50%;
-            border: 2px solid var(--card-background);
-            box-shadow: 0 0 0 2px var(--secondary-color);
-        }
-
-        .itinerary-place h4 {
-            color: var(--primary-color);
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-
-        .itinerary-place ul {
-            list-style: disc;
-            margin-left: 20px;
-            padding-left: 0;
-            margin-bottom: 10px;
-        }
-
-        .itinerary-place ul li {
-            margin-bottom: 5px;
-        }
-
-        .itinerary-info-grid {
+        .hotel-amenities ul {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 10px;
-            margin-top: 15px;
-            background-color: #f7f7f7;
-            padding: 15px;
-            border-radius: var(--border-radius);
-        }
-
-        .itinerary-info-grid div strong {
-            color: var(--primary-color);
-        }
-
-        .itinerary-tips {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px dashed var(--border-color);
-        }
-
-        .itinerary-tips p {
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .itinerary-tips ul {
-            list-style-type: square;
-            margin-left: 20px;
             padding-left: 0;
+            list-style: none;
+        }
+        .hotel-amenities li {
+            background-color: #f0f8ff;
+            border-left: 4px solid #457b9d;
+            padding: 8px 15px;
+            border-radius: 6px;
         }
 
+        /* Daily Itinerary */
+        .day-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+            border-top: 5px solid #e63946;
+        }
+        .day-card h3 {
+            color: #e63946;
+            border-bottom: 1px dashed #e63946;
+            padding-bottom: 10px;
+        }
+        .place-card {
+            background-color: #fdfdfd;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 3px solid #a8dadc;
+        }
+        .place-card h4 {
+            color: #1a535c;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .place-card .time-distance {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .place-card ul {
+            list-style: disc;
+            margin-left: 20px;
+        }
+        .place-card ul li {
+            margin-bottom: 5px;
+        }
+        .day-summary {
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        /* Budget Dashboard */
         .budget-summary {
             display: flex;
+            justify-content: space-around;
             flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            gap: 15px;
         }
-
         .budget-item {
-            flex: 1;
-            min-width: 250px;
+            background-color: #f0f4f7;
+            border-radius: 10px;
+            padding: 15px 20px;
             text-align: center;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            font-size: 1.1em;
-            font-weight: bold;
+            flex: 1;
+            min-width: 150px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
-
-        .budget-item.total {
-            background-color: var(--primary-color);
-            color: var(--card-background);
+        .budget-item strong {
+            font-size: 1.4em;
+            display: block;
+            margin-top: 5px;
         }
-
-        .budget-item.spent {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .budget-item.remaining {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
+        .budget-item.total strong { color: #1a535c; }
+        .budget-item.spent strong { color: #e63946; }
+        .budget-item.remaining strong { color: #28a745; }
 
         .budget-chart-container {
             margin-top: 30px;
-            padding: 20px;
-            background-color: #f7f7f7;
-            border-radius: var(--border-radius);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
-
-        .budget-chart {
-            display: flex;
+        .budget-bar {
             height: 30px;
-            border-radius: 5px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
             overflow: hidden;
-            margin-top: 15px;
-            margin-bottom: 20px;
+            position: relative;
+            margin-top: 10px;
         }
-
-        .chart-bar.spent {
-            background-color: var(--primary-color);
-            /* width will be set by JS */
-            transition: width 1s ease-in-out;
+        .budget-spent-bar {
+            height: 100%;
+            background-color: #e63946;
+            width: 41.7%; /* Set dynamically based on JSON */
+            border-radius: 15px;
+            transition: width 1s ease-out;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
-
-        .chart-bar.remaining {
-            background-color: var(--secondary-color);
-            /* width will be set by JS */
-            transition: width 1s ease-in-out;
+        .budget-remaining-bar {
+            height: 100%;
+            background-color: #28a745;
+            width: 58.3%; /* Set dynamically based on JSON */
+            border-radius: 15px;
+            transition: width 1s ease-out;
+            position: absolute;
+            top: 0;
+            right: 0;
         }
-        
-        .budget-details {
-            margin-top: 20px;
+        .budget-bar-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #555;
         }
-
-        .budget-details table {
+        .budget-breakdown table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            margin-top: 20px;
         }
-
-        .budget-details th, .budget-details td {
-            border: 1px solid var(--border-color);
+        .budget-breakdown th, .budget-breakdown td {
+            border: 1px solid #ddd;
             padding: 10px;
             text-align: left;
         }
-
-        .budget-details th {
-            background-color: var(--primary-color);
-            color: var(--card-background);
+        .budget-breakdown th {
+            background-color: #f2f2f2;
             font-weight: bold;
+            color: #1a535c;
         }
-
-        .budget-details tr:nth-child(even) {
+        .budget-breakdown tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-
         .budget-tips ul {
-            list-style: decimal;
+            list-style: square;
             margin-left: 20px;
-            padding-left: 0;
         }
 
-        .list-item {
+        /* Packing List & Pre-trip Checklist */
+        .checklist-item {
             display: flex;
             align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px dashed var(--border-color);
+            margin-bottom: 10px;
+            background-color: #f8fcfd;
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #e0eff5;
         }
-
-        .list-item:last-child {
-            border-bottom: none;
-        }
-
-        .list-item input[type="checkbox"] {
+        .checklist-item input[type="checkbox"] {
             margin-right: 15px;
             width: 20px;
             height: 20px;
-            accent-color: var(--primary-color);
+            accent-color: #1a535c;
             cursor: pointer;
         }
-
-        .list-item label {
+        .checklist-item label {
             flex-grow: 1;
             cursor: pointer;
+            font-size: 1.1em;
+            color: #34495e;
         }
-
-        .list-item.completed label {
+        .checklist-item label.completed {
             text-decoration: line-through;
-            color: var(--light-text-color);
+            color: #7f8c8d;
         }
-
-        .priority-label {
-            font-size: 0.8em;
-            padding: 3px 8px;
-            border-radius: 10px;
-            margin-left: 10px;
-            font-weight: bold;
-        }
-
-        .priority-label.high { background-color: #ffe0e0; color: #cc0000; }
-        .priority-label.medium { background-color: #fffacd; color: #cc8400; }
-        .priority-label.low { background-color: #e0ffe0; color: #008000; }
-
-
-        footer {
-            background-color: var(--primary-color);
-            color: var(--card-background);
-            text-align: center;
-            padding: 25px 0;
-            margin-top: 30px;
-            border-top-left-radius: var(--border-radius);
-            border-top-right-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-
-        footer button {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            border: none;
-            padding: 10px 20px;
+        .checklist-item .priority {
+            font-size: 0.85em;
+            padding: 4px 8px;
             border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            margin-top: 15px;
+            color: #ffffff;
+            margin-left: 10px;
+            text-transform: capitalize;
+        }
+        .priority.high { background-color: #e63946; }
+        .priority.medium { background-color: #f4a261; }
+        .priority.low { background-color: #2a9d8f; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            background-color: #1a535c;
+            color: #ffffff;
+            border-radius: 12px 12px 0 0;
+        }
+        .footer p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .footer .button {
+            background-color: #a8dadc;
+            color: #1a535c;
+        }
+        .footer .button:hover {
+            background-color: #f1faee;
         }
 
-        footer button:hover {
-            background-color: #e6c200;
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5em;
+            .container {
+                margin: 10px auto;
+                padding: 0 10px;
             }
-            header p {
-                font-size: 1em;
+            h1 {
+                font-size: 2.5em;
             }
             h2 {
                 font-size: 1.8em;
             }
             h3 {
-                font-size: 1.4em;
+                font-size: 1.5em;
             }
-            .card-row {
-                flex-direction: column;
+            .hero {
+                padding: 60px 15px;
             }
-            .itinerary-info-grid {
+            .hero h1 {
+                font-size: 2.8em;
+            }
+            .hero p {
+                font-size: 1.1em;
+            }
+            .hotel-gallery img {
+                max-width: 180px;
+                height: 120px;
+            }
+            .hotel-amenities ul {
                 grid-template-columns: 1fr;
             }
-            .gallery {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            .budget-summary {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .budget-item {
+                min-width: unset;
+                margin-bottom: 10px;
+            }
+            .checklist-item {
+                flex-wrap: wrap;
+            }
+            .checklist-item label {
+                margin-bottom: 5px;
+            }
+            .checklist-item .priority {
+                margin-top: 5px;
+                margin-left: 0;
             }
         }
-        @media print {
-            body {
-                background-color: #fff;
-                color: #000;
-                margin: 0;
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
             }
-            .container {
-                max-width: none;
-                margin: 0;
-                padding: 0;
+            h2 {
+                font-size: 1.5em;
             }
-            header, footer, .button {
-                display: none;
+            .hero h1 {
+                font-size: 2.2em;
             }
-            section {
-                box-shadow: none;
-                border-radius: 0;
-                margin-bottom: 10px;
+            .flight-detail, .place-card, .card {
                 padding: 15px;
-                page-break-inside: avoid;
-            }
-            h2, h3, h4 {
-                color: #000;
-                border-bottom: 1px solid #ccc;
-                padding-bottom: 5px;
-                margin-bottom: 10px;
-            }
-            .itinerary-day {
-                border-left: 2px solid #ccc;
-                padding-left: 10px;
-            }
-            .itinerary-place {
-                box-shadow: none;
-                border: 1px solid #eee;
-                padding: 10px;
-            }
-            .itinerary-place:before {
-                display: none;
-            }
-            .budget-item, .list-item, .amenities-list li {
-                box-shadow: none;
-                border: 1px solid #eee;
-                background-color: #fff;
-                color: #000;
-            }
-            .budget-chart-container {
-                box-shadow: none;
-                background-color: #fff;
-            }
-            .chart-bar {
-                background-color: #eee !important;
-            }
-            .priority-label {
-                border: 1px solid #ccc;
-                background-color: #f0f0f0 !important;
-                color: #000 !important;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Jaipur, India</h1>
-            <p>From 2025-10-14 to 2025-10-17 (3 days)</p>
-            <p>Traveling with: friend</p>
-            <p>Trip Type: Historical exploration, focusing on forts</p>
-        </div>
-    </header>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Joshimath Adventure Awaits!</h1>
+            <p>
+                <strong>Destination:</strong> Joshimath, India <br>
+                <strong>Dates:</strong> 2025-10-21 to 2025-10-23 (2 nights) <br>
+                <strong>Travel Style:</strong> Adventurous trip, traveling alone.
+            </p>
+        </section>
 
-    <main class="container">
-        <section id="flights">
-            <h2>Flights</h2>
-            <div class="card-row">
-                <div class="card">
-                    <h3>Cheapest Flight</h3>
-                    <div class="details-grid">
-                        <div class="detail-item"><strong>Airline:</strong> Not provided</div>
-                        <div class="detail-item"><strong>Flight No.:</strong> N/A</div>
-                        <div class="detail-item"><strong>From:</strong> Noida</div>
-                        <div class="detail-item"><strong>To:</strong> Jaipur</div>
-                        <div class="detail-item"><strong>Departure:</strong> 2025-10-14 at N/A</div>
-                        <div class="detail-item"><strong>Return:</strong> 2025-10-17 at N/A</div>
-                        <div class="detail-item"><strong>Price:</strong> 0 INR (Estimated)</div>
-                    </div>
-                    
-                        <a href="N/A" target="_blank" class="button" aria-disabled="true" style="opacity: 0.6; cursor: not-allowed;">Booking Link Not Available</a>
-                    
-                </div>
-                <div class="card">
-                    <h3>Fastest Flight</h3>
-                    <div class="details-grid">
-                        <div class="detail-item"><strong>Airline:</strong> Not provided</div>
-                        <div class="detail-item"><strong>Flight No.:</strong> N/A</div>
-                        <div class="detail-item"><strong>From:</strong> Noida</div>
-                        <div class="detail-item"><strong>To:</strong> Jaipur</div>
-                        <div class="detail-item"><strong>Departure:</strong> 2025-10-14 at N/A</div>
-                        <div class="detail-item"><strong>Return:</strong> 2025-10-17 at N/A</div>
-                        <div class="detail-item"><strong>Price:</strong> 0 INR (Estimated)</div>
-                    </div>
-                    
-                        <a href="N/A" target="_blank" class="button" aria-disabled="true" style="opacity: 0.6; cursor: not-allowed;">Booking Link Not Available</a>
-                    
-                </div>
+        <!-- Flights Section -->
+        <section class="flights-section">
+            <h2>✈️ Flight Information</h2>
+            <div class="card">
+                <p class="no-flights-message">No flights applicable for this destination. Please arrange ground transportation.</p>
             </div>
         </section>
 
-        <section id="hotel">
-            <h2>Accommodation</h2>
+        <!-- Hotel Section -->
+        <section class="hotel-section">
+            <h2>🏨 Your Accommodation</h2>
             <div class="card">
-                <h3>Nahar Singh Haveli</h3>
-                <p><strong>Location:</strong> Jaipur, India</p>
-                <p><strong>Price:</strong> INR 1284 per night (3 nights)</p>
-                <p><strong>Total Cost:</strong> INR 3852 (for 1 room)</p>
-                <p><strong>Reason for Selection:</strong> Nahar Singh Haveli offers a blend of comfort and traditional charm, fitting perfectly within your budget. Its excellent rating and amenities like free breakfast and airport shuttle enhance the value for a historical exploration trip.</p>
-                
+                <h3>New siddharth hotel</h3>
+                <p class="detail-item"><strong>Location:</strong> Joshimath</p>
+                <p class="detail-item"><strong>Price:</strong> 735 INR / night (Total: 1470 INR for 2 nights)</p>
+                <p class="detail-item"><strong>Rooms:</strong> 1</p>
+                <p class="detail-item">
+                    <strong>Why we chose this hotel:</strong> The New siddharth hotel is selected for its excellent value, offering a comfortable stay within the specified budget. Its location is convenient for exploring Joshimath's main attractions, and it provides essential amenities like free breakfast and Wi-Fi, enhancing the overall travel experience for a solo adventurer.
+                </p>
+
                 <h4>Amenities</h4>
-                <ul class="amenities-list">
-                    <li>Kid-friendly</li><li>Restaurant</li><li>Room service</li><li>Airport shuttle</li><li>Free breakfast</li><li>Air conditioning</li><li>Free Wi-Fi</li><li>Parking</li>
-                </ul>
-
-                <h4>Hotel Gallery</h4>
-                <div class="gallery">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipOth7sB_DE2dwxNQGGfrILKDUD8BUYoNbgzCrxH=s10000" alt="Nahar Singh Haveli image 1">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipPnozHeroH45qxAFouSDSKQBI4vz7YZ2lnRW28p=s10000" alt="Nahar Singh Haveli image 2">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipM4FlRAFNciklNWBoHnEExVh9wR0RHwvpuKAF8W=s10000" alt="Nahar Singh Haveli image 3">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipNVxIZkO2Dsw8AOCD6AIujLEoOjbQOcf1g_HSpm=s10000" alt="Nahar Singh Haveli image 4">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipOA5EPsg1h0ZWvMFrNUmvhSR6UVUIdlxag_K42e=s10000" alt="Nahar Singh Haveli image 5">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipPFn0bLbt0pSBQp2xtXet60sxzynyHtWFgjLqzP=s10000" alt="Nahar Singh Haveli image 6">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipMGROKSTYES7zRN68Lt4rsBWL__6wuava25L9a-=s10000" alt="Nahar Singh Haveli image 7">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipNg8Rizav77fQWGVtTymW9ZHjYdilvb1vyz434d=s10000" alt="Nahar Singh Haveli image 8">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipO0o2LqvZLHZX2DgAxNgwQxDC3seU23_RrP8_ai=s10000" alt="Nahar Singh Haveli image 9">
+                <div class="hotel-amenities">
+                    <ul>
+                        <li>Free breakfast</li>
+                        <li>Wi-Fi</li>
+                        <li>Parking</li>
+                        <li>Room service</li>
+                        <li>Kitchen in some rooms</li>
+                        <li>Full-service laundry</li>
+                    </ul>
                 </div>
-                
-                <h4>Booking Links</h4>
-                <a href="https://www.google.com/aclk?sa=l&ai=DChsSEwiJ4pSA2KCQAxWDQEgAHRvhFJ0YACICCAEQCxoCY2U&co=1&ase=2&gclid=EAIaIQobChMIieKUgNigkAMVg0BIAB0b4RSdEA0YAiABEgIx4PD_BwE&cid=CAASN-RoBRmdFnFnG--qczacGq25GWGGXj66533ZtP_OCKuaj2kuvr8k5-m6Qm7FAVmtt9kGWTuO4Sk&category=acrcp_v1_48&sig=AOD64_0yb9e6042l6Xi3Uji9rLWmmD7j3w&adurl=" target="_blank" class="button primary">Book Now</a>
+
+                <h4>Gallery</h4>
+                <div class="hotel-gallery">
+                    <img src="https://lh4.googleusercontent.com/proxy/rD5rmywUaThxidgyduzZColSRPa1GWoC9Pn3LivWvbf8KOZKLbSUHUdxy0QnWoPxYgR5BHT2sy1-41kibWC2_yRuwMkW_UiUZazVOsXISvV7ZKxAzHtEZ3FAZm8svUnjt3kbVrpJuT-O7e-XFllIQQ95RfQXi3g=s287-w287-h192-n-k-no-v1" alt="New siddharth hotel image 1">
+                    <img src="https://lh4.googleusercontent.com/proxy/r8FX_J7isOsP-AmX3ekaaCen-gcKBIiP3eyJB-xW4SYLjzB3qlyuL2jbkocPfD157qH_7aqu7iB4dBvuun1CcGCNlNWJZpQikFG07hwpZqyzq5ZmzX5iEF4GjfeQ3d-qRL_gGr9vqmYXoX691c5hvaT3AMKiwA=s287-w287-h192-n-k-no-v1" alt="New siddharth hotel image 2">
+                    <img src="https://lh5.googleusercontent.com/proxy/zpPqt1n4WOSt6k4ayBgaMW9EbpOlRUiD3P6xv8L1ECxACpoRexRfdsUSH8Ou0AkuUfSnRY3CBjR2paXmQpwFnmx_BmatlBqcvkVdQUTnt3BLzmp2tucoJ3lSYGOB2sqhKJKd33VNJJ9e5nTCb-1it0pkuR02o_w=s287-w287-h192-n-k-no-v1" alt="New siddharth hotel image 3">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipPFaL4xKuko29DujnVcZ8rumLZ_gpfSug_JTWyL=s287-w287-h192-n-k-no-v1" alt="New siddharth hotel image 4">
+                    <img src="https://lh4.googleusercontent.com/proxy/qWlr-N4fiFFyL0PV-T98wucT4U5YjRuV5FBJdCAuRPX5T6oR8znsWOjLOEOwOsGV3BRuPsvOmeZt7T7xgK_I6UGXxTf4_RodbXVEpAkloFLzuc_M_HB4cyQH1OaMa2haSV-_BzFLCKlSBDmYYFltC-Jt1QtQmA=s287-w287-h192-n-k-no-v1" alt="New siddharth hotel image 5">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrO3w6v2L95BPs0u5YVEQsgU3OaYS9Pku9d4NAAraiyeks__mSnX4uVrRtU5GI8GHHUYZsbW2WImSmyXObJQ4Y82kcTcdUN51o_TXMCidAsHdlxplUEz0tk5wPb07diMoLv5sxp=s287-w287-h192-n-k-no-v1" alt="New siddharth hotel image 6">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nqS41Sem913ODsu4Tcft6SzSGMI8VnFowt_L49y8kulYEjyMvkUMbjBDsMkjoZZEhESaTnUyHy8hgqzzCgbRdBeXX9d4Ci4Z0Mdz5UPRwk0ifOtO6AUtHH1q_TF1TuIIiGoxkMi=s287-w287-h192-n-k-no-v1" alt="New siddharth hotel image 7">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nrNAmCviAwU9Stph7A_MRJeKQqEM3juq0uT9_C-DOxhboH2C9X9i4G25-l7dzT-7gFxpjlCBgON9x7lPMyGStpNz5ymGo38pijEj-PhqqKY-biVmegx8P4SVeGmWjDpYeXC8hA=s287-w287-h192-n-k-no-v1" alt="New siddharth hotel image 8">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4nqT9lPf99iUoW2hTOMQ8Hnz0AkqG2xfFOsbljVoDljwfwPm2SItUIm75vQ0wNCfGTqlcWkKXELXWi1ifb_a9xeQnVFQPu5KSFlGmNpdDPxk-CIUNcPwljwZgbsFUytJQ9NpT279=s287-w287-h192-n-k-no-v1" alt="New siddharth hotel image 9">
+                </div>
+
+                <div class="booking-options" style="margin-top: 20px;">
+                    <a href="https://serpapi.com/search.json?adults=1&check_in_date=2025-10-21&check_out_date=2025-10-23&children=0&currency=INR&engine=google_hotels&gl=in&hl=en&max_price=1500&property_token=ChkIrdDh8uzI0vYtGg0vZy8xMWNuOXM2NzRxEAE&q=Hotels+near+Joshimath" target="_blank" class="button">Book Hotel</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=30.5566694,79.564398" target="_blank" class="button secondary">View on Map</a>
+                </div>
             </div>
         </section>
 
-        <section id="daily-itinerary">
-            <h2>Daily Itinerary</h2>
-            
-            <div class="itinerary-day">
-                <h3>Day 1: 2025-10-14 - Arrival & Relaxation</h3>
-                <p><strong>Route:</strong> Hotel (Nahar Singh Haveli) → Hotel (Nahar Singh Haveli)</p>
-                <p><strong>Total Distance:</strong> 0 km | <strong>Total Travel Time:</strong> 0 hours 0 minutes</p>
-                
-                <div class="itinerary-place">
-                    <h4>Afternoon: Nahar Singh Haveli</h4>
-                    <p>Upon arrival in Jaipur, check into the comfortable Nahar Singh Haveli, your base for exploring the Pink City. Take this time to relax and settle into your accommodations, perhaps enjoying the hotel's amenities or a leisurely stroll in the immediate vicinity to soak in the local atmosphere.</p>
-                    <p><strong>Why Visit:</strong> Provides a comfortable and authentic stay within your budget, offering a perfect start to your historical exploration.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Check-in and unpack</li>
-                        <li>Relax at the hotel</li>
-                        <li>Explore hotel surroundings</li>
-                        <li>Enjoy a welcome drink</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> N/A</div>
-                        <div><strong>Estimated Cost:</strong> N/A</div>
-                        <div><strong>Best Time:</strong> Late afternoon</div>
-                        <div><strong>Duration:</strong> Flexible</div>
-                        <div><strong>Accessibility:</strong> Please inquire with the hotel directly regarding specific accessibility needs.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Travel documents</li>
-                            <li>Comfortable clothes</li>
-                            <li>Personal toiletries</li>
-                        </ul>
-                        <p>Safety Notes:</p>
-                        <ul>
-                            <li>Keep valuables secure</li>
-                        </ul>
-                        <p>Customs/Etiquette:</p>
-                        <ul>
-                            <li>Respect local customs</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.924649,75.79674399999999" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <h4>Day Summary</h4>
-                    <p><strong>Total Distance:</strong> 0 km</p>
-                    <p><strong>Spending:</strong> INR 500</p>
-                    <p><strong>Remaining Budget:</strong> INR 10648</p>
-                </div>
-            </div>
-            
-            <div class="itinerary-day">
-                <h3>Day 2: 2025-10-15 - Royal Palaces and Forts Galore!</h3>
-                <p><strong>Route:</strong> Hotel (Nahar Singh Haveli) → City Palace → Jantar Mantar → Amber Fort → Panna Meena ka Kund → Jaigarh Fort → Nahargarh Fort → Hotel (Nahar Singh Haveli)</p>
-                <p><strong>Total Distance:</strong> 27.34 km | <strong>Total Travel Time:</strong> 1 hour 45 minutes</p>
-                
-                <div class="itinerary-place">
-                    <h4>Morning: City Palace</h4>
-                    <p>The City Palace is a magnificent complex that served as the seat of the Maharaja of Jaipur. It houses several palaces, courtyards, gardens, and museums, showcasing a splendid blend of Rajasthani and Mughal architecture.</p>
-                    <p><strong>Why Visit:</strong> Explore the lavish lifestyle of Rajput royalty, marvel at intricate artwork, and discover a rich collection of artifacts.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Explore the Mubarak Mahal, Chandra Mahal, and Diwan-i-Khas</li>
-                        <li>Visit the museum displaying royal costumes and weapons</li>
-                        <li>Admire the Peacock Gate and other ornate doorways</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> INR 700 (for foreigners), INR 200 (for Indians)</div>
-                        <div><strong>Estimated Cost:</strong> INR 700</div>
-                        <div><strong>Best Time:</strong> 9:30 AM - 11:30 AM</div>
-                        <div><strong>Duration:</strong> 2-3 hours</div>
-                        <div><strong>Accessibility:</strong> Limited accessibility for wheelchairs in some areas.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Water bottle</li>
-                            <li>Sunscreen</li>
-                            <li>Hat</li>
-                            <li>Camera</li>
-                        </ul>
-                        <p>What to Buy:</p>
-                        <ul>
-                            <li>Souvenirs from palace shops</li>
-                        </ul>
-                        <p>Safety Notes:</p>
-                        <ul>
-                            <li>Watch your belongings in crowded areas</li>
-                        </ul>
-                        <p>Customs/Etiquette:</p>
-                        <ul>
-                            <li>Dress modestly, especially in religious areas</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.9255,75.8236" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                
-                <div class="itinerary-place">
-                    <h4>Late Morning: Jantar Mantar</h4>
-                    <p>Jantar Mantar is an astronomical observatory built by Maharaja Jai Singh II. It features a collection of nineteen architectural astronomical instruments, including the world's largest stone sundial, allowing the observation of astronomical positions with the naked eye.</p>
-                    <p><strong>Why Visit:</strong> Witness the scientific brilliance of ancient India and understand how celestial movements were tracked with remarkable accuracy.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Learn about the various astronomical instruments</li>
-                        <li>Observe the precise time shown by the Samrat Yantra (sundial)</li>
-                        <li>Understand the history and purpose of the observatory</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> INR 200 (for foreigners), INR 50 (for Indians)</div>
-                        <div><strong>Estimated Cost:</strong> INR 200</div>
-                        <div><strong>Best Time:</strong> 11:30 AM - 1:00 PM</div>
-                        <div><strong>Duration:</strong> 1-1.5 hours</div>
-                        <div><strong>Accessibility:</strong> Generally accessible, some uneven surfaces.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Guidebook for explanations</li>
-                            <li>Sunscreen</li>
-                            <li>Hat</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.9248,75.8226" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                
-                <div class="itinerary-place">
-                    <h4>Afternoon: Amber Fort</h4>
-                    <p>Amber Fort, a UNESCO World Heritage site, is a magnificent fort palace built with red sandstone and marble. It overlooks Maota Lake and is known for its artistic Hindu style elements, including ornate gates, cobbled paths, and grand halls like the Sheesh Mahal (Mirror Palace).</p>
-                    <p><strong>Why Visit:</strong> Experience the grandeur of Rajput architecture, enjoy elephant rides (optional), and explore the stunning interiors of the palaces.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Take a jeep ride or walk up to the fort entrance</li>
-                        <li>Explore Diwan-i-Aam, Diwan-i-Khas, and Sheesh Mahal</li>
-                        <li>Enjoy panoramic views from the fort ramparts</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> INR 500 (for foreigners), INR 100 (for Indians)</div>
-                        <div><strong>Estimated Cost:</strong> INR 500</div>
-                        <div><strong>Best Time:</strong> 2:00 PM - 5:00 PM</div>
-                        <div><strong>Duration:</strong> 2-3 hours</div>
-                        <div><strong>Accessibility:</strong> Steep inclines and stairs, limited wheelchair accessibility.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Comfortable walking shoes</li>
-                            <li>Water</li>
-                            <li>Camera</li>
-                        </ul>
-                        <p>What to Buy:</p>
-                        <ul>
-                            <li>Local crafts from vendors outside</li>
-                        </ul>
-                        <p>Safety Notes:</p>
-                        <ul>
-                            <li>Be aware of touts, especially for elephant rides</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.9856,75.8519" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                
-                <div class="itinerary-place">
-                    <h4>Late Afternoon: Panna Meena ka Kund</h4>
-                    <p>Panna Meena ka Kund is a historic stepwell near Amber Fort, known for its symmetrical and intricate staircase design. It's a beautiful example of ancient Indian architecture and served as a water source and gathering place.</p>
-                    <p><strong>Why Visit:</strong> Admire the unique architectural patterns and enjoy a peaceful, picturesque setting away from the main tourist crowds.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Descend the steps and explore the different levels</li>
-                        <li>Capture stunning photographs of the symmetrical design</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> Free</div>
-                        <div><strong>Estimated Cost:</strong> 0</div>
-                        <div><strong>Best Time:</strong> Late afternoon</div>
-                        <div><strong>Duration:</strong> 30 minutes - 1 hour</div>
-                        <div><strong>Accessibility:</strong> Involves stairs, limited accessibility.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Camera</li>
-                        </ul>
-                        <p>Safety Notes:</p>
-                        <ul>
-                            <li>Be careful on the steps, especially if wet</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.9897,75.8541" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                
-                <div class="itinerary-place">
-                    <h4>Late Afternoon: Jaigarh Fort</h4>
-                    <p>Jaigarh Fort, also known as the 'Fort of Victory,' is located on the Cheel ka Teela (Hill of Eagles) and offers commanding views of Amber Fort and the surrounding Aravalli hills. It houses the world's largest cannon on wheels, Jaivana.</p>
-                    <p><strong>Why Visit:</strong> Discover a well-preserved military fort, marvel at the colossal Jaivana cannon, and enjoy breathtaking panoramic vistas.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Visit the fort's armory and museums</li>
-                        <li>See the Jaivana cannon</li>
-                        <li>Enjoy the scenic views from the watchtowers</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> INR 200 (for foreigners), INR 70 (for Indians)</div>
-                        <div><strong>Estimated Cost:</strong> INR 200</div>
-                        <div><strong>Best Time:</strong> 4:00 PM - 5:30 PM</div>
-                        <div><strong>Duration:</strong> 1.5-2 hours</div>
-                        <div><strong>Accessibility:</strong> Uneven terrain and stairs.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Water</li>
-                            <li>Camera</li>
-                            <li>Sunscreen</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.9866,75.8497" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                
-                <div class="itinerary-place">
-                    <h4>Evening: Nahargarh Fort</h4>
-                    <p>Nahargarh Fort, meaning 'abode of tigers,' offers stunning sunset views over the Pink City. It was primarily built for defense and also served as a retreat for the royal family. The fort's Madhavendra Bhawan has a unique layout of twelve identical boudoirs for the queens.</p>
-                    <p><strong>Why Visit:</strong> Experience a spectacular sunset over Jaipur, enjoy the serene ambiance, and explore a fort with a rich history and unique architecture.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Witness the sunset views</li>
-                        <li>Explore the fort complex and its palaces</li>
-                        <li>Enjoy a drink or snack at the restaurant inside (optional)</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> INR 200 (for foreigners), INR 50 (for Indians)</div>
-                        <div><strong>Estimated Cost:</strong> INR 200</div>
-                        <div><strong>Best Time:</strong> 5:30 PM - 7:00 PM</div>
-                        <div><strong>Duration:</strong> 1.5 hours</div>
-                        <div><strong>Accessibility:</strong> Steep roads and some stairs.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Camera for sunset photos</li>
-                            <li>Light jacket for cooler evenings</li>
-                        </ul>
-                        <p>Safety Notes:</p>
-                        <ul>
-                            <li>Be cautious on slippery paths</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.9329,75.8174" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <h4>Day Summary</h4>
-                    <p><strong>Total Distance:</strong> 27.34 km</p>
-                    <p><strong>Spending:</strong> INR 3400</p>
-                    <p><strong>Remaining Budget:</strong> INR 7248</p>
-                </div>
-            </div>
-            
-            <div class="itinerary-day">
-                <h3>Day 3: 2025-10-16 - Iconic Landmarks & Cultural Immersion</h3>
-                <p><strong>Route:</strong> Hotel (Nahar Singh Haveli) → Hawa Mahal → Jal Mahal → Albert Hall Museum → Johari Bazaar → Bapu Bazaar → Hotel (Nahar Singh Haveli)</p>
-                <p><strong>Total Distance:</strong> 22.76 km | <strong>Total Travel Time:</strong> 1 hour 30 minutes</p>
-                
-                <div class="itinerary-place">
-                    <h4>Morning: Hawa Mahal (Palace of Winds)</h4>
-                    <p>The Hawa Mahal, or 'Palace of Winds,' is an iconic five-story palace built of pink and red sandstone. Its unique honeycomb-like facade features 953 small windows (jharokhas), designed to allow royal ladies to observe street festivals without being seen.</p>
-                    <p><strong>Why Visit:</strong> Admire the distinctive architecture and capture stunning photographs of this famous landmark, symbolizing Jaipur's regal past.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Take exterior photos of the palace</li>
-                        <li>Visit the small museum inside (optional)</li>
-                        <li>Enjoy the breeze from the windows if accessible</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> INR 200 (for foreigners), INR 50 (for Indians)</div>
-                        <div><strong>Estimated Cost:</strong> INR 200</div>
-                        <div><strong>Best Time:</strong> 8:00 AM - 9:00 AM (for photos)</div>
-                        <div><strong>Duration:</strong> 30 minutes - 1 hour</div>
-                        <div><strong>Accessibility:</strong> Mainly stairs, limited accessibility.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Camera</li>
-                            <li>Sunscreen</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.9239,75.8267" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                
-                <div class="itinerary-place">
-                    <h4>Late Morning: Jal Mahal (Water Palace)</h4>
-                    <p>Jal Mahal is a picturesque palace seemingly floating in the middle of Man Sagar Lake. While entry to the palace is restricted, its stunning architecture and serene setting make it a perfect spot for photography and enjoying the tranquil environment.</p>
-                    <p><strong>Why Visit:</strong> Witness a unique architectural marvel, enjoy a peaceful moment by the lake, and capture postcard-perfect photographs.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Enjoy the view of the palace from the lakeside promenade</li>
-                        <li>Take photographs with the palace as a backdrop</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> Free (for viewing from outside)</div>
-                        <div><strong>Estimated Cost:</strong> 0</div>
-                        <div><strong>Best Time:</strong> 10:00 AM - 11:00 AM</div>
-                        <div><strong>Duration:</strong> 30 minutes</div>
-                        <div><strong>Accessibility:</strong> Accessible from the roadside promenade.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Camera</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.9608,75.8471" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                
-                <div class="itinerary-place">
-                    <h4>Afternoon: Albert Hall Museum</h4>
-                    <p>The Albert Hall Museum, the oldest museum in Rajasthan, is housed in a magnificent Indo-Saracenic architectural masterpiece. It boasts an extensive collection of artifacts, including paintings, carpets, ivory, stone and metal sculptures, and a famous Egyptian mummy.</p>
-                    <p><strong>Why Visit:</strong> Delve into Rajasthan's rich cultural heritage, admire the stunning architecture of the building, and explore diverse exhibits.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Explore various galleries showcasing art and historical artifacts</li>
-                        <li>Admire the architecture of the museum building itself</li>
-                        <li>See the Egyptian mummy</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> INR 300 (for foreigners), INR 50 (for Indians)</div>
-                        <div><strong>Estimated Cost:</strong> INR 300</div>
-                        <div><strong>Best Time:</strong> 1:00 PM - 3:00 PM</div>
-                        <div><strong>Duration:</strong> 2-2.5 hours</div>
-                        <div><strong>Accessibility:</strong> Ramps and elevators available in some sections.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Comfortable shoes</li>
-                            <li>Camera (check photography rules)</li>
-                        </ul>
-                        <p>What to Buy:</p>
-                        <ul>
-                            <li>Books or replicas from the museum shop</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.9069,75.8175" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                
-                <div class="itinerary-place">
-                    <h4>Late Afternoon: Johari Bazaar</h4>
-                    <p>Johari Bazaar is one of Jaipur's most famous and oldest markets, renowned for its exquisite jewelry, especially traditional Rajasthani designs. You'll find a glittering array of precious and semi-precious stones, gold, and silver.</p>
-                    <p><strong>Why Visit:</strong> Immerse yourself in the bustling local market, witness skilled craftsmanship, and find beautiful souvenirs, especially jewelry.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Browse for traditional Rajasthani jewelry</li>
-                        <li>Observe local artisans at work</li>
-                        <li>Experience the vibrant market atmosphere</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> Free</div>
-                        <div><strong>Estimated Cost:</strong> Variable (shopping)</div>
-                        <div><strong>Best Time:</strong> 3:30 PM - 5:00 PM</div>
-                        <div><strong>Duration:</strong> 1.5 hours</div>
-                        <div><strong>Accessibility:</strong> Crowded and uneven paths.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Bargaining skills</li>
-                            <li>Cash (for smaller purchases)</li>
-                        </ul>
-                        <p>What to Buy:</p>
-                        <ul>
-                            <li>Gemstones</li>
-                            <li>Gold and silver jewelry</li>
-                            <li>Lac bangles</li>
-                        </ul>
-                        <p>Safety Notes:</p>
-                        <ul>
-                            <li>Be aware of pickpockets in crowded areas</li>
-                        </ul>
-                        <p>Customs/Etiquette:</p>
-                        <ul>
-                            <li>Bargaining is common</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.922,75.825" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                
-                <div class="itinerary-place">
-                    <h4>Evening: Bapu Bazaar</h4>
-                    <p>Bapu Bazaar is another bustling market in Jaipur, famous for its leather products (especially Mojari shoes), textiles, handicrafts, and block-printed fabrics. It's a great place to find authentic Rajasthani goods.</p>
-                    <p><strong>Why Visit:</strong> Discover a wide variety of local handicrafts, textiles, and traditional footwear, perfect for unique souvenirs and gifts.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Shop for Mojari shoes, textiles, and handicrafts</li>
-                        <li>Enjoy local street food</li>
-                        <li>Experience the lively evening market</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> Free</div>
-                        <div><strong>Estimated Cost:</strong> Variable (shopping and food)</div>
-                        <div><strong>Best Time:</strong> 5:00 PM - 7:00 PM</div>
-                        <div><strong>Duration:</strong> 1.5-2 hours</div>
-                        <div><strong>Accessibility:</strong> Crowded and uneven paths.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Bargaining skills</li>
-                            <li>Cash</li>
-                        </ul>
-                        <p>What to Buy:</p>
-                        <ul>
-                            <li>Mojari shoes</li>
-                            <li>Textiles</li>
-                            <li>Handicrafts</li>
-                        </ul>
-                        <p>Safety Notes:</p>
-                        <ul>
-                            <li>Be aware of your surroundings</li>
-                        </ul>
-                        <p>Customs/Etiquette:</p>
-                        <ul>
-                            <li>Bargaining is expected</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.9171,75.8193" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <h4>Day Summary</h4>
-                    <p><strong>Total Distance:</strong> 22.76 km</p>
-                    <p><strong>Spending:</strong> INR 3600</p>
-                    <p><strong>Remaining Budget:</strong> INR 3648</p>
-                </div>
-            </div>
-            
-            <div class="itinerary-day">
-                <h3>Day 4: 2025-10-17 - Spiritual Reflection & Departure</h3>
-                <p><strong>Route:</strong> Hotel (Nahar Singh Haveli) → Birla Mandir → Hotel (Nahar Singh Haveli)</p>
-                <p><strong>Total Distance:</strong> 11.54 km | <strong>Total Travel Time:</strong> 30 minutes</p>
-                
-                <div class="itinerary-place">
-                    <h4>Morning: Birla Mandir</h4>
-                    <p>Birla Mandir, a beautiful Hindu temple dedicated to Lakshmi Narayan, is constructed entirely of white marble. Its intricate carvings and serene ambiance offer a peaceful spiritual experience, and its elevated position provides panoramic views of Jaipur.</p>
-                    <p><strong>Why Visit:</strong> Experience spiritual tranquility, admire the exquisite white marble architecture, and enjoy a final scenic view of Jaipur.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Admire the architecture and intricate carvings</li>
-                        <li>Enjoy the peaceful atmosphere for spiritual reflection</li>
-                        <li>Take in the panoramic views of the city</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> Free</div>
-                        <div><strong>Estimated Cost:</strong> 0</div>
-                        <div><strong>Best Time:</strong> 9:00 AM - 10:30 AM</div>
-                        <div><strong>Duration:</strong> 1-1.5 hours</div>
-                        <div><strong>Accessibility:</strong> Ramp access available.</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>Camera (photography usually allowed outside)</li>
-                            <li>Respectful attire (cover shoulders and knees)</li>
-                        </ul>
-                        <p>Safety Notes:</p>
-                        <ul>
-                            <li>Remove shoes before entering the temple</li>
-                        </ul>
-                        <p>Customs/Etiquette:</p>
-                        <ul>
-                            <li>Maintain silence, respect worshippers</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.8996,75.8159" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                
-                <div class="itinerary-place">
-                    <h4>Late Morning: Hotel Check-out and Departure</h4>
-                    <p>After a fulfilling morning, return to your hotel for a leisurely breakfast, finalize any last-minute packing, and check out. Proceed to your onward journey back to Noida, carrying cherished memories of Jaipur's historical grandeur.</p>
-                    <p><strong>Why Visit:</strong> Ensures a smooth conclusion to your trip with ample time for breakfast and departure preparations.</p>
-                    <h5>Activities:</h5>
-                    <ul>
-                        <li>Enjoy breakfast at the hotel</li>
-                        <li>Complete packing and check out</li>
-                        <li>Arrange transport to your departure point</li>
-                    </ul>
-                    <div class="itinerary-info-grid">
-                        <div><strong>Entry Fee:</strong> N/A</div>
-                        <div><strong>Estimated Cost:</strong> N/A</div>
-                        <div><strong>Best Time:</strong> Flexible before check-out time</div>
-                        <div><strong>Duration:</strong> Flexible</div>
-                        <div><strong>Accessibility:</strong> N/A</div>
-                    </div>
-                    <div class="itinerary-tips">
-                        <p>What to Bring:</p>
-                        <ul>
-                            <li>All personal belongings</li>
-                            <li>Hotel receipts</li>
-                        </ul>
-                        <p>Safety Notes:</p>
-                        <ul>
-                            <li>Double-check all belongings</li>
-                        </ul>
-                        <a href="https://www.google.com/maps/search/?api=1&query=26.924649,75.79674399999999" target="_blank" class="button">View on Map</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <h4>Day Summary</h4>
-                    <p><strong>Total Distance:</strong> 11.54 km</p>
-                    <p><strong>Spending:</strong> INR 1200</p>
-                    <p><strong>Remaining Budget:</strong> INR 2448</p>
-                </div>
-            </div>
-            
-        </section>
+        <!-- Daily Itinerary -->
+        <section class="itinerary-section">
+            <h2>🗓️ Daily Itinerary</h2>
 
-        <section id="budget-dashboard">
-            <h2>Budget Dashboard</h2>
-            <div class="budget-summary">
-                <div class="budget-item total">
-                    Total Budget: INR 15000
+            <!-- Day 1 -->
+            <div class="day-card">
+                <h3>Day 1: 2025-10-21 - Arrival & Spiritual Exploration</h3>
+                <p><strong>Route:</strong> New siddharth hotel → Narsingh Temple → Kalpavriksha → Jyotirmath → Joshimath Market → New siddharth hotel</p>
+                <p><strong>Total Day's Travel:</strong> 1.48 km | 7 minutes</p>
+
+                <!-- Place 1 -->
+                <div class="place-card">
+                    <h4>Narsingh Temple</h4>
+                    <p class="time-distance">Morning/Afternoon | 0.04 km from previous | 1 minute travel</p>
+                    <p>The Narsingh Temple is a revered Hindu temple dedicated to Lord Narsingh, an incarnation of Vishnu. It holds immense spiritual significance, particularly as the winter seat of Badrinath. The temple's ancient architecture and serene ambiance offer a peaceful start to your Joshimath journey.</p>
+                    <p><strong>Why Visit:</strong> Experience spiritual tranquility and witness the unique idol of Lord Narsingh, believed to be shrinking over time.</p>
+                    <h5>Activities:</h5>
+                    <ul>
+                        <li>Participate in morning prayers</li>
+                        <li>Offer respects at the shrine</li>
+                        <li>Observe the temple's traditional architecture</li>
+                    </ul>
+                    <h5>Practical Info:</h5>
+                    <p><strong>Entry Fee:</strong> Free</p>
+                    <p><strong>Estimated Cost:</strong> Donations appreciated</p>
+                    <p><strong>Best Time:</strong> Morning or evening aarti (prayer) sessions</p>
+                    <p><strong>Duration:</strong> 1-2 hours</p>
+                    <p><strong>Accessibility:</strong> Easily accessible by foot, some steps within the temple.</p>
+                    <h5>Tips:</h5>
+                    <ul>
+                        <li><strong>What to Bring:</strong> Scarf or shawl (for modesty), Camera (discreet photography allowed)</li>
+                        <li><strong>What to Buy:</strong> Small religious offerings from nearby stalls</li>
+                        <li><strong>Safety Notes:</strong> Be mindful of personal belongings in crowded areas</li>
+                        <li><strong>Customs & Etiquette:</strong> Remove footwear before entering the temple, Dress modestly</li>
+                        <li><strong>Photo Spots:</strong> Temple facade, Views of the surrounding town from the temple complex</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=30.5570,79.5645" target="_blank" class="button secondary">View on Map</a>
                 </div>
-                <div class="budget-item spent">
-                    Total Spent: INR 12552
+
+                <!-- Place 2 -->
+                <div class="place-card">
+                    <h4>Kalpavriksha</h4>
+                    <p class="time-distance">Afternoon | 0.06 km from previous | 1 minute travel</p>
+                    <p>The Kalpavriksha is an ancient mulberry tree, believed to be over 1200 years old, holding immense mythological and spiritual importance. It is considered a wish-granting tree and is closely associated with Adi Shankaracharya. Its massive trunk and sprawling branches create a majestic presence.</p>
+                    <p><strong>Why Visit:</strong> Witness a living legend and connect with ancient spiritual beliefs under the shade of this revered tree.</p>
+                    <h5>Activities:</h5>
+                    <ul>
+                        <li>Meditate or sit peacefully under the tree</li>
+                        <li>Learn about its historical and mythological significance</li>
+                        <li>Take photographs of its impressive size</li>
+                    </ul>
+                    <h5>Practical Info:</h5>
+                    <p><strong>Entry Fee:</strong> Free</p>
+                    <p><strong>Estimated Cost:</strong> None</p>
+                    <p><strong>Best Time:</strong> Anytime during daylight hours</p>
+                    <p><strong>Duration:</strong> 30 minutes - 1 hour</p>
+                    <p><strong>Accessibility:</strong> Easy walk, located on level ground.</p>
+                    <h5>Tips:</h5>
+                    <ul>
+                        <li><strong>What to Bring:</strong> Water bottle, Light jacket (evenings can be cool)</li>
+                        <li><strong>What to Buy:</strong> Locally made handicrafts from nearby shops</li>
+                        <li><strong>Safety Notes:</strong> Be respectful of the sacred site</li>
+                        <li><strong>Customs & Etiquette:</strong> Avoid plucking leaves or damaging the tree</li>
+                        <li><strong>Photo Spots:</strong> The entire tree, showcasing its grandeur, Close-ups of its ancient bark</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=30.5575,79.5648" target="_blank" class="button secondary">View on Map</a>
                 </div>
-                <div class="budget-item remaining">
-                    Remaining Budget: INR 2448
+
+                <!-- Place 3 -->
+                <div class="place-card">
+                    <h4>Jyotirmath</h4>
+                    <p class="time-distance">Afternoon/Evening | 0.06 km from previous | 1 minute travel</p>
+                    <p>Jyotirmath, one of the four cardinal monasteries established by Adi Shankaracharya, is a significant spiritual and educational center. It played a crucial role in the revival of Hinduism and continues to be a seat of Vedic learning. The complex offers a glimpse into ancient Indian monastic traditions.</p>
+                    <p><strong>Why Visit:</strong> Explore a cornerstone of Hindu spirituality and immerse yourself in centuries of knowledge and tradition.</p>
+                    <h5>Activities:</h5>
+                    <ul>
+                        <li>Visit the temples within the math complex</li>
+                        <li>Learn about Adi Shankaracharya's teachings</li>
+                        <li>Enjoy the serene atmosphere</li>
+                    </ul>
+                    <h5>Practical Info:</h5>
+                    <p><strong>Entry Fee:</strong> Free</p>
+                    <p><strong>Estimated Cost:</strong> Donations appreciated</p>
+                    <p><strong>Best Time:</strong> Morning or late afternoon for a peaceful visit</p>
+                    <p><strong>Duration:</strong> 1-2 hours</p>
+                    <p><strong>Accessibility:</strong> Mainly level ground, some gentle slopes.</p>
+                    <h5>Tips:</h5>
+                    <ul>
+                        <li><strong>What to Bring:</strong> Notebook for reflections, Respectful attire</li>
+                        <li><strong>What to Buy:</strong> Books on philosophy or spirituality from the math's shop</li>
+                        <li><strong>Safety Notes:</strong> Be mindful of monastery rules and silence</li>
+                        <li><strong>Customs & Etiquette:</strong> Remove shoes before entering temples, Maintain quietude</li>
+                        <li><strong>Photo Spots:</strong> The main temple facade, Scenic views of the surrounding hills from the complex</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=30.5580,79.5650" target="_blank" class="button secondary">View on Map</a>
+                </div>
+
+                <!-- Place 4 -->
+                <div class="place-card">
+                    <h4>Joshimath Market</h4>
+                    <p class="time-distance">Evening | 0.15 km from previous | 2 minutes travel</p>
+                    <p>The bustling Joshimath market is the heart of local life, offering a vibrant array of goods, from local handicrafts and woolen garments to essential supplies. It's a perfect place to experience the local culture, interact with friendly shopkeepers, and sample authentic Garhwali street food.</p>
+                    <p><strong>Why Visit:</strong> Immerse yourself in local culture, find unique souvenirs, and savor delicious regional cuisine.</p>
+                    <h5>Activities:</h5>
+                    <ul>
+                        <li>Stroll through the market</li>
+                        <li>Shop for local products</li>
+                        <li>Try street food like Aloo Ke Gutke or Kafuli</li>
+                    </ul>
+                    <h5>Practical Info:</h5>
+                    <p><strong>Entry Fee:</strong> Free</p>
+                    <p><strong>Estimated Cost:</strong> Variable, depending on shopping and food choices</p>
+                    <p><strong>Best Time:</strong> Late afternoon to evening</p>
+                    <p><strong>Duration:</strong> 1-2 hours</p>
+                    <p><strong>Accessibility:</strong> Paved roads, some uneven surfaces.</p>
+                    <h5>Tips:</h5>
+                    <ul>
+                        <li><strong>What to Bring:</strong> Cash (local vendors may prefer cash), Reusable shopping bag</li>
+                        <li><strong>What to Buy:</strong> Woolen shawls, Local spices, Herbal products</li>
+                        <li><strong>Safety Notes:</strong> Keep an eye on personal belongings, Bargain respectfully</li>
+                        <li><strong>Customs & Etiquette:</strong> Be polite and friendly with vendors</li>
+                        <li><strong>Photo Spots:</strong> Colorful stalls and local produce, Candid shots of daily life</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=30.5568,79.5642" target="_blank" class="button secondary">View on Map</a>
+                </div>
+
+                <div class="day-summary">
+                    <p><strong>Day 1 Summary:</strong></p>
+                    <p>Total Distance Traveled: 1.48 km</p>
+                    <p>Estimated Spending: 1000 INR (Meals: 500, Shopping: 500)</p>
+                    <p>Remaining Budget: 7530 INR</p>
                 </div>
             </div>
 
-            <div class="budget-chart-container">
-                <h3>Budget Overview</h3>
-                <p><strong>Total Budget:</strong> INR 15000</p>
-                <p><strong>Total Spent:</strong> INR 12552</p>
-                <p><strong>Remaining:</strong> INR 2448</p>
-                <div class="budget-chart">
-                    <div class="chart-bar spent" style="width: calc((12552 / 15000) * 100%);" title="Spent: INR 12552"></div>
-                    <div class="chart-bar remaining" style="width: calc((2448 / 15000) * 100%);" title="Remaining: INR 2448"></div>
+            <!-- Day 2 -->
+            <div class="day-card">
+                <h3>Day 2: 2025-10-22 - Natural Beauty & Confluence</h3>
+                <p><strong>Route:</strong> New siddharth hotel → Tapovan → Vishnuprayag Confluence → New siddharth hotel</p>
+                <p><strong>Total Day's Travel:</strong> 30.1 km | 1 hour 30 minutes</p>
+
+                <!-- Place 1 -->
+                <div class="place-card">
+                    <h4>Tapovan</h4>
+                    <p class="time-distance">Morning | 15.0 km from previous | 45 minutes travel</p>
+                    <p>Tapovan, approximately 15 km from Joshimath, is a serene locale renowned for its natural hot springs and breathtaking panoramic views of the Himalayas. It is considered a sacred place for meditation and offers a tranquil escape into nature's embrace, surrounded by lush greenery and towering peaks.</p>
+                    <p><strong>Why Visit:</strong> Experience natural hot springs, enjoy panoramic Himalayan vistas, and find spiritual solace in a peaceful environment.</p>
+                    <h5>Activities:</h5>
+                    <ul>
+                        <li>Soak in the therapeutic hot springs</li>
+                        <li>Enjoy a short trek or nature walk</li>
+                        <li>Practice meditation amidst stunning scenery</li>
+                    </ul>
+                    <h5>Practical Info:</h5>
+                    <p><strong>Entry Fee:</strong> Free (some areas may have small local charges)</p>
+                    <p><strong>Estimated Cost:</strong> 100-200 INR (for local snacks/tea)</p>
+                    <p><strong>Best Time:</strong> Morning for fresh air and fewer crowds</p>
+                    <p><strong>Duration:</strong> 2-3 hours</p>
+                    <p><strong>Accessibility:</strong> Requires a short drive and some walking on uneven terrain.</p>
+                    <h5>Tips:</h5>
+                    <ul>
+                        <li><strong>What to Bring:</strong> Towel and change of clothes (for hot springs), Comfortable walking shoes, Sunscreen and hat</li>
+                        <li><strong>What to Buy:</strong> Local herbal products (if available)</li>
+                        <li><strong>Safety Notes:</strong> Be cautious around hot springs, Stay on marked trails during walks</li>
+                        <li><strong>Customs & Etiquette:</strong> Respect the sanctity of the area, Maintain cleanliness</li>
+                        <li><strong>Photo Spots:</strong> Himalayan peaks, Hot spring pools, Scenic landscapes</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=30.499,79.620" target="_blank" class="button secondary">View on Map</a>
+                </div>
+
+                <!-- Place 2 -->
+                <div class="place-card">
+                    <h4>Vishnuprayag Confluence</h4>
+                    <p class="time-distance">Afternoon | 15.1 km from previous | 45 minutes travel</p>
+                    <p>Vishnuprayag is a sacred confluence where the mighty Alaknanda and Dhauliganga rivers merge, forming a spectacular sight of gushing waters. It is one of the Panch Prayags (five holy confluences) of the Alaknanda River, surrounded by majestic mountains and small temples.</p>
+                    <p><strong>Why Visit:</strong> Witness the powerful meeting of two sacred rivers and experience the spiritual ambiance of this revered confluence.</p>
+                    <h5>Activities:</h5>
+                    <ul>
+                        <li>Observe the confluence of the rivers</li>
+                        <li>Visit the nearby Vishnu temple</li>
+                        <li>Enjoy the serene natural beauty</li>
+                    </ul>
+                    <h5>Practical Info:</h5>
+                    <p><strong>Entry Fee:</strong> Free</p>
+                    <p><strong>Estimated Cost:</strong> None</p>
+                    <p><strong>Best Time:</strong> Late morning or early afternoon</p>
+                    <p><strong>Duration:</strong> 1-2 hours</p>
+                    <p><strong>Accessibility:</strong> Accessible by road, some steps to reach the riverbanks.</p>
+                    <h5>Tips:</h5>
+                    <ul>
+                        <li><strong>What to Bring:</strong> Camera for scenic views, Light jacket (can be breezy by the river)</li>
+                        <li><strong>What to Buy:</strong> Small religious trinkets from local vendors</li>
+                        <li><strong>Safety Notes:</strong> Be cautious near the riverbanks, especially during monsoon, Do not venture too close to strong currents</li>
+                        <li><strong>Customs & Etiquette:</strong> Respect the religious significance of the site</li>
+                        <li><strong>Photo Spots:</strong> The distinct colors of the two rivers meeting, Panoramic views of the surrounding mountains and river</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=30.589,79.560" target="_blank" class="button secondary">View on Map</a>
+                </div>
+
+                <div class="day-summary">
+                    <p><strong>Day 2 Summary:</strong></p>
+                    <p>Total Distance Traveled: 30.1 km</p>
+                    <p>Estimated Spending: 1700 INR (Transport: 1000, Meals: 500, Shopping: 200)</p>
+                    <p>Remaining Budget: 5830 INR</p>
                 </div>
             </div>
 
-            <div class="budget-details">
-                <h3>Budget Breakdown by Category</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Cost (INR)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Flights</td><td>0</td></tr>
-                        <tr><td>Accommodation (Nahar Singh Haveli)</td><td>3852</td></tr>
-                        <tr><td>Day 1 Expenses (Meals)</td><td>500</td></tr>
-                        <tr><td>Day 2 Expenses (Entry Fees, Transport, Meals)</td><td>3400</td></tr>
-                        <tr><td>Day 3 Expenses (Entry Fees, Transport, Meals, Shopping)</td><td>3600</td></tr>
-                        <tr><td>Day 4 Expenses (Transport, Meals)</td><td>1200</td></tr>
-                        <tr style="font-weight: bold; background-color: #f0f0f0;"><td>Total Actual Expenses</td><td>12552</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="budget-tips">
-                <h3>Budget Tips</h3>
-                <ul>
-                    <li>Consider eating at local eateries for more affordable and authentic meals.</li>
-                    <li>Utilize public transport or ride-sharing apps for shorter distances to save on taxi fares.</li>
-                    <li>Bargain respectfully when shopping in local bazaars.</li>
-                    <li>Look for combo tickets or city passes if you plan to visit multiple historical sites.</li>
-                </ul>
+            <!-- Day 3 -->
+            <div class="day-card">
+                <h3>Day 3: 2025-10-23 - Departure</h3>
+                <p><strong>Route:</strong> Hotel → Departure Point</p>
+                <p><strong>Total Day's Travel:</strong> 0.0 km | 0 minutes</p>
+                <p>Today marks the end of your Joshimath adventure. Enjoy a final breakfast at your hotel before departing for your onward journey. Ensure all your belongings are packed, and check out according to the hotel's policy. Safe travels!</p>
+                <div class="day-summary">
+                    <p><strong>Day 3 Summary:</strong></p>
+                    <p>Total Distance Traveled: 0.0 km</p>
+                    <p>Estimated Spending: 0 INR</p>
+                    <p>Remaining Budget: 5830 INR</p>
+                </div>
             </div>
         </section>
 
-        <section id="packing-list">
-            <h2>Packing List</h2>
-            <h3>Clothing</h3>
+        <!-- Budget Dashboard -->
+        <section class="budget-section">
+            <h2>💰 Budget Dashboard</h2>
             <div class="card">
-                <div class="list-item"><input type="checkbox" id="clothing-0"><label for="clothing-0">Lightweight cotton clothes (t-shirts, blouses, kurtas)</label></div>
-                <div class="list-item"><input type="checkbox" id="clothing-1"><label for="clothing-1">Comfortable trousers or skirts</label></div>
-                <div class="list-item"><input type="checkbox" id="clothing-2"><label for="clothing-2">Light jacket or shawl for evenings</label></div>
-                <div class="list-item"><input type="checkbox" id="clothing-3"><label for="clothing-3">Modest attire for religious sites</label></div>
-            </div>
-
-            <h3>Footwear</h3>
-            <div class="card">
-                <div class="list-item"><input type="checkbox" id="footwear-0"><label for="footwear-0">Comfortable walking shoes or sandals</label></div>
-                <div class="list-item"><input type="checkbox" id="footwear-1"><label for="footwear-1">Flip-flops for hotel</label></div>
-            </div>
-
-            <h3>Essentials</h3>
-            <div class="card">
-                <div class="list-item"><input type="checkbox" id="essentials-0"><label for="essentials-0">Sunscreen</label></div>
-                <div class="list-item"><input type="checkbox" id="essentials-1"><label for="essentials-1">Hat or cap</label></div>
-                <div class="list-item"><input type="checkbox" id="essentials-2"><label for="essentials-2">Sunglasses</label></div>
-                <div class="list-item"><input type="checkbox" id="essentials-3"><label for="essentials-3">Reusable water bottle</label></div>
-                <div class="list-item"><input type="checkbox" id="essentials-4"><label for="essentials-4">Hand sanitizer</label></div>
-                <div class="list-item"><input type="checkbox" id="essentials-5"><label for="essentials-5">Basic first-aid kit</label></div>
-                <div class="list-item"><input type="checkbox" id="essentials-6"><label for="essentials-6">Insect repellent</label></div>
-            </div>
-
-            <h3>Medication</h3>
-            <div class="card">
-                <div class="list-item"><input type="checkbox" id="medication-0"><label for="medication-0">Any personal prescription medications</label></div>
-                <div class="list-item"><input type="checkbox" id="medication-1"><label for="medication-1">Pain relievers</label></div>
-                <div class="list-item"><input type="checkbox" id="medication-2"><label for="medication-2">Antacids</label></div>
-                <div class="list-item"><input type="checkbox" id="medication-3"><label for="medication-3">Motion sickness medication</label></div>
-            </div>
-
-            <h3>Electronics</h3>
-            <div class="card">
-                <div class="list-item"><input type="checkbox" id="electronics-0"><label for="electronics-0">Mobile phone and charger</label></div>
-                <div class="list-item"><input type="checkbox" id="electronics-1"><label for="electronics-1">Power bank</label></div>
-                <div class="list-item"><input type="checkbox" id="electronics-2"><label for="electronics-2">Camera and accessories</label></div>
-                <div class="list-item"><input type="checkbox" id="electronics-3"><label for="electronics-3">Universal travel adapter (if needed)</label></div>
-            </div>
-
-            <h3>Miscellaneous</h3>
-            <div class="card">
-                <div class="list-item"><input type="checkbox" id="miscellaneous-0"><label for="miscellaneous-0">Small backpack or day bag</label></div>
-                <div class="list-item"><input type="checkbox" id="miscellaneous-1"><label for="miscellaneous-1">Copy of important documents</label></div>
-                <div class="list-item"><input type="checkbox" id="miscellaneous-2"><label for="miscellaneous-2">Scarf or stole (for women, for modesty and sun protection)</label></div>
-                <div class="list-item"><input type="checkbox" id="miscellaneous-3"><label for="miscellaneous-3">Notebook and pen</label></div>
-            </div>
-
-            <h3>Documents</h3>
-            <div class="card">
-                <div class="list-item"><input type="checkbox" id="documents-0"><label for="documents-0">Passport/ID</label></div>
-                <div class="list-item"><input type="checkbox" id="documents-1"><label for="documents-1">Visa (if applicable)</label></div>
-                <div class="list-item"><input type="checkbox" id="documents-2"><label for="documents-2">Flight tickets</label></div>
-                <div class="list-item"><input type="checkbox" id="documents-3"><label for="documents-3">Hotel booking confirmation</label></div>
-                <div class="list-item"><input type="checkbox" id="documents-4"><label for="documents-4">Travel insurance details</label></div>
-                <div class="list-item"><input type="checkbox" id="documents-5"><label for="documents-5">Photocopies of all important documents</label></div>
-            </div>
-        </section>
-
-        <section id="pre-trip-checklist">
-            <h2>Pre-trip Checklist</h2>
-            <div class="card">
-                <div class="list-item">
-                    <input type="checkbox" id="pre-trip-0" >
-                    <label for="pre-trip-0">Confirm flight details and check-in online</label>
-                    <span class="priority-label high">High</span>
+                <div class="budget-summary">
+                    <div class="budget-item total">
+                        Total Budget<br><strong>10000 INR</strong>
+                    </div>
+                    <div class="budget-item spent">
+                        Total Spent<br><strong>4170 INR</strong>
+                    </div>
+                    <div class="budget-item remaining">
+                        Remaining Budget<br><strong>5830 INR</strong>
+                    </div>
                 </div>
-                <div class="list-item">
-                    <input type="checkbox" id="pre-trip-1" >
-                    <label for="pre-trip-1">Inform bank of travel plans to avoid card issues</label>
-                    <span class="priority-label medium">Medium</span>
+
+                <div class="budget-chart-container">
+                    <h3>Budget Overview</h3>
+                    <div class="budget-bar">
+                        <div class="budget-spent-bar"></div>
+                        <div class="budget-remaining-bar"></div>
+                    </div>
+                    <div class="budget-bar-labels">
+                        <span>Spent (41.7%)</span>
+                        <span>Remaining (58.3%)</span>
+                    </div>
                 </div>
-                <div class="list-item">
-                    <input type="checkbox" id="pre-trip-2" >
-                    <label for="pre-trip-2">Arrange airport transfers in Jaipur</label>
-                    <span class="priority-label high">High</span>
+
+                <h3>Detailed Expenses</h3>
+                <div class="budget-breakdown">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Amount (INR)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Flights</td>
+                                <td>0 (N/A)</td>
+                            </tr>
+                            <tr>
+                                <td>Accommodation (New siddharth hotel, 2 nights)</td>
+                                <td>1470</td>
+                            </tr>
+                            <tr>
+                                <td>Day 1 Expenses (Meals, Shopping)</td>
+                                <td>1000</td>
+                            </tr>
+                            <tr>
+                                <td>Day 2 Expenses (Transport, Meals, Shopping)</td>
+                                <td>1700</td>
+                            </tr>
+                            <tr>
+                                <td>Day 3 Expenses</td>
+                                <td>0</td>
+                            </tr>
+                            <tr style="font-weight: bold; background-color: #e6f7ff;">
+                                <td>Total Spent</td>
+                                <td>4170</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="list-item">
-                    <input type="checkbox" id="pre-trip-3" >
-                    <label for="pre-trip-3">Pack essential medications and toiletries</label>
-                    <span class="priority-label high">High</span>
-                </div>
-                <div class="list-item">
-                    <input type="checkbox" id="pre-trip-4" >
-                    <label for="pre-trip-4">Charge all electronic devices</label>
-                    <span class="priority-label medium">Medium</span>
-                </div>
-                <div class="list-item">
-                    <input type="checkbox" id="pre-trip-5" >
-                    <label for="pre-trip-5">Review daily itinerary and opening hours of attractions</label>
-                    <span class="priority-label medium">Medium</span>
-                </div>
-                <div class="list-item">
-                    <input type="checkbox" id="pre-trip-6" >
-                    <label for="pre-trip-6">Convert currency to INR or withdraw cash</label>
-                    <span class="priority-label high">High</span>
-                </div>
-                <div class="list-item">
-                    <input type="checkbox" id="pre-trip-7" >
-                    <label for="pre-trip-7">Notify friends/family of your travel plans</label>
-                    <span class="priority-label low">Low</span>
+
+                <h3>Budget Tips:</h3>
+                <div class="budget-tips">
+                    <ul>
+                        <li>Utilize hotel's complimentary breakfast to save on morning meals.</li>
+                        <li>Explore local eateries for authentic and affordable Garhwali cuisine.</li>
+                        <li>Consider shared taxis or local buses for transport to nearby attractions to save on costs.</li>
+                    </ul>
                 </div>
             </div>
         </section>
-    </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Your Travel Itinerary. All rights reserved.</p>
-            <button onclick="window.print()">Print Itinerary</button>
-        </div>
+        <!-- Packing List -->
+        <section class="packing-section">
+            <h2>🎒 Packing List</h2>
+            <div class="card">
+                <h3>Clothing</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="clothing-1">
+                    <label for="clothing-1">Warm jacket or fleece</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="clothing-2">
+                    <label for="clothing-2">Sweaters</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="clothing-3">
+                    <label for="clothing-3">Long-sleeved shirts</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="clothing-4">
+                    <label for="clothing-4">Thermal wear (for colder evenings)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="clothing-5">
+                    <label for="clothing-5">Comfortable trousers/jeans</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="clothing-6">
+                    <label for="clothing-6">Socks</label>
+                </div>
+
+                <h3>Footwear</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="footwear-1">
+                    <label for="footwear-1">Comfortable walking shoes or hiking boots</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="footwear-2">
+                    <label for="footwear-2">Sandals or flip-flops (for hotel)</label>
+                </div>
+
+                <h3>Essentials</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-1">
+                    <label for="essentials-1">Small backpack for day trips</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-2">
+                    <label for="essentials-2">Water bottle</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-3">
+                    <label for="essentials-3">Sunscreen</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-4">
+                    <label for="essentials-4">Lip balm</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-5">
+                    <label for="essentials-5">Basic toiletries</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-6">
+                    <label for="essentials-6">First-aid kit (band-aids, pain relievers)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="essentials-7">
+                    <label for="essentials-7">Hand sanitizer</label>
+                </div>
+
+                <h3>Medication</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="medication-1">
+                    <label for="medication-1">Any personal prescription medications</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="medication-2">
+                    <label for="medication-2">Motion sickness medication (if prone to it)</label>
+                </div>
+
+                <h3>Electronics</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="electronics-1">
+                    <label for="electronics-1">Mobile phone and charger</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="electronics-2">
+                    <label for="electronics-2">Power bank</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="electronics-3">
+                    <label for="electronics-3">Camera and extra batteries</label>
+                </div>
+
+                <h3>Miscellaneous</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="misc-1">
+                    <label for="misc-1">Umbrella or rain jacket (just in case)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="misc-2">
+                    <label for="misc-2">Torch/flashlight</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="misc-3">
+                    <label for="misc-3">Book or entertainment for downtime</label>
+                </div>
+
+                <h3>Documents</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="docs-1">
+                    <label for="docs-1">Photo ID (Aadhar/Passport)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="docs-2">
+                    <label for="docs-2">Hotel booking confirmation</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="docs-3">
+                    <label for="docs-3">Travel insurance details (if any)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="docs-4">
+                    <label for="docs-4">Copies of important documents</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pre-trip Checklist -->
+        <section class="pretrip-section">
+            <h2>✅ Pre-trip Checklist</h2>
+            <div class="card">
+                <div class="checklist-item">
+                    <input type="checkbox" id="pretrip-1" checked>
+                    <label for="pretrip-1" class="completed">Confirm hotel booking</label>
+                    <span class="priority high">High</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pretrip-2">
+                    <label for="pretrip-2">Pack essential clothing for varied temperatures</label>
+                    <span class="priority high">High</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pretrip-3">
+                    <label for="pretrip-3">Arrange transportation to/from Joshimath</label>
+                    <span class="priority high">High</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pretrip-4">
+                    <label for="pretrip-4">Inform family/friends of travel plans</label>
+                    <span class="priority medium">Medium</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pretrip-5">
+                    <label for="pretrip-5">Download offline maps of the area</label>
+                    <span class="priority medium">Medium</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="pretrip-6" checked>
+                    <label for="pretrip-6" class="completed">Check local weather forecast closer to travel date</label>
+                    <span class="priority medium">Medium</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>This Joshimath adventure trip is planned for 2 days, for a solo traveler, with a budget of 10000 INR.</p>
+        <button class="button" onclick="window.print()">🖨️ Print Itinerary</button>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Checkbox functionality for packing list and pre-trip checklist
-            const checkboxes = document.querySelectorAll('#packing-list input[type="checkbox"], #pre-trip-checklist input[type="checkbox"]');
-            checkboxes.forEach(checkbox => {
-                // Load state from localStorage
-                const storedState = localStorage.getItem(checkbox.id);
-                if (storedState === 'true') {
-                    checkbox.checked = true;
-                    checkbox.closest('.list-item').classList.add('completed');
-                }
-
-                checkbox.addEventListener('change', (event) => {
-                    if (event.target.checked) {
-                        event.target.closest('.list-item').classList.add('completed');
+            // Toggle checklist items functionality
+            document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const label = this.nextElementSibling;
+                    if (this.checked) {
+                        label.classList.add('completed');
                     } else {
-                        event.target.closest('.list-item').classList.remove('completed');
+                        label.classList.remove('completed');
                     }
-                    // Save state to localStorage
-                    localStorage.setItem(event.target.id, event.target.checked);
                 });
             });
 
-            // Set initial state for pre-trip checklist based on JSON 'completed' status
-            const preTripItems = document.querySelectorAll('#pre-trip-checklist .list-item');
-            const preTripData = [
-                {"task": "Confirm flight details and check-in online", "completed": false, "priority": "high"},
-                {"task": "Inform bank of travel plans to avoid card issues", "completed": false, "priority": "medium"},
-                {"task": "Arrange airport transfers in Jaipur", "completed": false, "priority": "high"},
-                {"task": "Pack essential medications and toiletries", "completed": false, "priority": "high"},
-                {"task": "Charge all electronic devices", "completed": false, "priority": "medium"},
-                {"task": "Review daily itinerary and opening hours of attractions", "completed": false, "priority": "medium"},
-                {"task": "Convert currency to INR or withdraw cash", "completed": false, "priority": "high"},
-                {"task": "Notify friends/family of your travel plans", "completed": false, "priority": "low"}
-            ];
-
-            preTripItems.forEach((item, index) => {
-                const checkbox = item.querySelector('input[type="checkbox"]');
-                // First, check if there's a localStorage override
-                const storedState = localStorage.getItem(checkbox.id);
-                if (storedState !== null) {
-                    checkbox.checked = (storedState === 'true');
-                } else {
-                    // Otherwise, use JSON default
-                    checkbox.checked = preTripData[index].completed;
-                }
+            // Set initial state for pre-trip checklist items based on 'checked' attribute
+            document.querySelectorAll('.pretrip-section .checklist-item input[type="checkbox"]').forEach(checkbox => {
                 if (checkbox.checked) {
-                    item.classList.add('completed');
+                    checkbox.nextElementSibling.classList.add('completed');
                 }
             });
+
+            // Budget chart calculation and display
+            const totalBudget = 10000;
+            const totalSpent = 4170;
+            const spentPercentage = (totalSpent / totalBudget) * 100;
+            const remainingPercentage = 100 - spentPercentage;
+
+            const spentBar = document.querySelector('.budget-spent-bar');
+            const remainingBar = document.querySelector('.budget-remaining-bar');
+
+            if (spentBar && remainingBar) {
+                spentBar.style.width = `${spentPercentage}%`;
+                remainingBar.style.width = `${remainingPercentage}%`;
+            }
         });
     </script>
 </body>
