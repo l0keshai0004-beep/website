@@ -1,3 +1,1020 @@
-I am sorry, but the input you provided is a message about a hotel search failure, not a JSON travel plan.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haldwani Adventure Itinerary</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-Please provide a complete JSON travel plan as described in the instructions so I can generate the HTML itinerary.
+        :root {
+            --primary-color: #4CAF50; /* Green */
+            --secondary-color: #FFC107; /* Amber */
+            --accent-color: #2196F3; /* Blue */
+            --text-color: #333;
+            --light-text-color: #777;
+            --background-color: #f4f7f6;
+            --card-background: #fff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #388E3C 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        .hero-details {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .hero-detail-item {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        section {
+            background-color: var(--card-background);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        h3 {
+            color: var(--accent-color);
+            font-size: 1.6em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: var(--text-color);
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eee;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background-color: #1976D2; /* Darker blue */
+        }
+
+        .hotel-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .hotel-gallery img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .amenities-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .amenities-list span {
+            background-color: #E8F5E9; /* Light green */
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .itinerary-day {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+
+        .itinerary-day:last-of-type {
+            border-bottom: none;
+        }
+
+        .itinerary-place {
+            background-color: #fdfdfd;
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .itinerary-place h4 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent-color);
+        }
+        .itinerary-place h4::before {
+            content: '📍';
+            font-size: 1.2em;
+        }
+
+        .itinerary-place ul {
+            padding-left: 20px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+
+        .itinerary-place li {
+            margin-bottom: 5px;
+        }
+
+        .itinerary-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .itinerary-details div strong {
+            color: var(--primary-color);
+        }
+        .itinerary-details div {
+             background-color: #f2fcf3;
+             padding: 10px;
+             border-radius: 8px;
+        }
+
+        .budget-summary {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .budget-item {
+            flex: 1;
+            min-width: 150px;
+            padding: 20px;
+            background-color: #E3F2FD; /* Light blue */
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .budget-item.spent {
+            background-color: #FFEBEE; /* Light red */
+        }
+
+        .budget-item.remaining {
+            background-color: #E8F5E9; /* Light green */
+        }
+
+        .budget-item h4 {
+            margin-top: 0;
+            color: var(--text-color);
+            font-size: 1.1em;
+        }
+        .budget-item p {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 0;
+        }
+        .budget-item.spent p { color: #E53935; } /* Red */
+        .budget-item.remaining p { color: var(--primary-color); }
+
+        .budget-chart-container {
+            width: 100%;
+            height: 30px;
+            background-color: #ddd;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .budget-spent-bar {
+            height: 100%;
+            background-color: #EF5350; /* Red */
+            width: 0%; /* Will be set by JS */
+            border-radius: 15px;
+            transition: width 1s ease-out;
+        }
+
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .budget-table th, .budget-table td {
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .budget-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .budget-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .budget-table tfoot td {
+            font-weight: 700;
+            background-color: #e0e0e0;
+        }
+
+        .packing-list ul, .checklist ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        .packing-list li, .checklist li {
+            background-color: #fdfdfd;
+            padding: 12px 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .packing-list li label, .checklist li label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .packing-list li input[type="checkbox"], .checklist li input[type="checkbox"] {
+            transform: scale(1.2);
+            accent-color: var(--primary-color);
+        }
+
+        .checklist .priority-high {
+            color: #D32F2F; /* Red */
+            font-weight: 600;
+        }
+        .checklist .priority-medium {
+            color: #FBC02D; /* Orange */
+        }
+        .checklist .priority-low {
+            color: #1976D2; /* Blue */
+        }
+
+        footer {
+            background-color: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 30px;
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        footer .button {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            margin-top: 15px;
+        }
+
+        footer .button:hover {
+            background-color: #FFA000; /* Darker amber */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            header p {
+                font-size: 1em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .hotel-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+            .itinerary-details {
+                grid-template-columns: 1fr;
+            }
+            .packing-list ul, .checklist ul {
+                grid-template-columns: 1fr;
+            }
+            .budget-item {
+                flex-basis: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 30px 0;
+            }
+            header h1 {
+                font-size: 2em;
+            }
+            .hero-detail-item {
+                font-size: 0.8em;
+            }
+            section {
+                padding: 20px;
+            }
+            .card {
+                padding: 15px;
+            }
+            .button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background-color: #fff;
+                color: #000;
+            }
+            .container {
+                margin: 0;
+                padding: 0;
+            }
+            header, footer, .button {
+                display: none;
+            }
+            section {
+                box-shadow: none;
+                border: 1px solid #eee;
+                margin-bottom: 15px;
+                page-break-inside: avoid;
+            }
+            .card, .itinerary-place, .packing-list li, .checklist li {
+                box-shadow: none;
+                border: 1px dashed #ddd;
+                background-color: #fff;
+            }
+            .itinerary-day {
+                border-bottom: 1px dashed #ddd;
+                margin-bottom: 15px;
+            }
+            .itinerary-place {
+                border-left: 3px solid var(--secondary-color);
+            }
+            h2, h3, h4 {
+                color: #000 !important;
+            }
+            h2::after {
+                background-color: #ccc !important;
+            }
+            .budget-table th {
+                background-color: #f0f0f0 !important;
+                color: #000 !important;
+            }
+            .budget-table tr:nth-child(even) {
+                background-color: #fafafa !important;
+            }
+            .budget-chart-container, .budget-item {
+                display: none; /* Hide interactive/visual elements not needed for print */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Haldwani, India</h1>
+            <p>Your Adventure Trip</p>
+            <div class="hero-details">
+                <div class="hero-detail-item">🗓️ Oct 21, 2025 - Oct 24, 2025</div>
+                <div class="hero-detail-item">⏳ 3 Days</div>
+                <div class="hero-detail-item">👤 Solo Traveler</div>
+                <div class="hero-detail-item">🗺️ Adventure</div>
+            </div>
+        </header>
+
+        <section id="flights">
+            <h2>✈️ Flight Details</h2>
+            <div class="card">
+                <p>Flight details not available.</p>
+            </div>
+        </section>
+
+        <section id="hotel">
+            <h2>🏨 Accommodation: Hotel Pearl Inn</h2>
+            <div class="card">
+                <p><strong>Location:</strong> Haldwani Droff</p>
+                <p><strong>Price per night:</strong> 1218 INR</p>
+                <p><strong>Nights:</strong> 3</p>
+                <p><strong>Total cost:</strong> 3654 INR</p>
+                <p><strong>Rooms:</strong> 1</p>
+                <p><strong>Why this hotel?</strong> Hotel Pearl Inn offers comfortable accommodation within your budget and is centrally located, making it a convenient base for exploring Haldwani. Its rooftop restaurant adds to the appeal for a relaxing stay after your adventures.</p>
+                
+                <h4>Amenities</h4>
+                <div class="amenities-list">
+                    <span>Breakfast ($)</span>
+                    <span>Free Wi-Fi</span>
+                    <span>Free parking</span>
+                    <span>Air conditioning</span>
+                    <span>Fitness center</span>
+                    <span>Restaurant</span>
+                    <span>Room service</span>
+                    <span>Kitchen in some rooms</span>
+                    <span>Airport shuttle</span>
+                    <span>Full-service laundry</span>
+                    <span>Accessible</span>
+                    <span>Business center</span>
+                    <span>Kid-friendly</span>
+                    <span>Smoke-free property</span>
+                </div>
+
+                <h4 style="margin-top: 30px;">Gallery</h4>
+                <div class="hotel-gallery">
+                    <img src="https://lh3.googleusercontent.com/proxy/bzEqTM1LbdVmpmE9iXD8itF1WPmEfjciPG-VV9JqAvH5mBfgNXslsozUEPKOxTKaaMjj-lCudBS2ETQD3VsQUzt4c-rURgBP351i4Vb7hUzNK927DcOKA695r3uwxH35Ha33cumKD3N08QHjmzVNC0CFAD0Q7Y=s287-w287-h192-n-k-no-v1" alt="Hotel Pearl Inn Image">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/c2/23/1a/facade.jpg?w=2100&h=1300&s=1" alt="Hotel Pearl Inn Image">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipPEMaUwFDjEBf9QtxsKacFkqNtX9CToWs2HfMZD=s287-w287-h192-n-k-no-v1" alt="Hotel Pearl Inn Image">
+                    <img src="https://lh5.googleusercontent.com/p/AF1QipPEMaUwFDjEBf9QtxsKacFkqNtX9CToWs2HfMZD=s10000" alt="Hotel Pearl Inn Image">
+                    <img src="https://lh3.googleusercontent.com/proxy/REq_xeIh2MBejyQd9jxAVTU3rgjpYSvkvVvaysuNyffD6r-8QkBDq5I3f_EhOacP6JgyjxZczjxDX4UsQznEicWryBJjpkUOoPKduTL7QemYn849Ra2xEIbmV8tVdcFfBcPDpuhTfTGCZCBT8ReM_ksE4Eqg3Kg=s287-w287-h192-n-k-no-v1" alt="Hotel Pearl Inn Image">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/c2/23/22/executive-front-view.jpg?w=1300&h=900&s=1" alt="Hotel Pearl Inn Image">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipOWxRlBSgyMOSnvEEwimkVKKMOxE1VoS98TbXK9=s287-w287-h192-n-k-no-v1" alt="Hotel Pearl Inn Image">
+                    <img src="https://lh5.googleusercontent.com/p/AF1QipOWxRlBSgyMOSnvEEwimkVKKMOxE1VoS98TbXK9=s10000" alt="Hotel Pearl Inn Image">
+                    <img src="https://lh3.googleusercontent.com/proxy/eV4AN_3FWj2EXR0azVRjrmWvgYjZ6VEVYZqlJAnRA6PnfCI9jJTR-zKflXJyCYQ7KMPpKMW84ir9gonvzFiylViqm0MxcFjKlTMgCL3Dx3NamU9zOQP75PjGDsj6kwyRm7CMHdigSAYgIK6b5L6v-IhJLGDyRg=s287-w287-h192-n-k-no-v1" alt="Hotel Pearl Inn Image">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/c2/23/21/delux-room.jpg?w=1300&h=900&s=1" alt="Hotel Pearl Inn Image">
+                    <img src="https://lh4.googleusercontent.com/proxy/it8cTfnZgfwRRyKHFK0D9eXoirjcPYXMSLhV_-mrsnfFbaE48HBKe3inu7CLwOoxoJ9HAafrdCrm2h6l-ltHWnfOo6i9fDaKf1G1OUZkM5YJ8GVMdpGL-Z2oacH6NIMcTKDg1IpjmVynmgoKzvsFRLAAJ3BW7A=s287-w287-h192-n-k-no-v1" alt="Hotel Pearl Inn Image">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/4b/f9/ad/caption.jpg?w=1000&h=700&s=1" alt="Hotel Pearl Inn Image">
+                    <img src="https://lh5.googleusercontent.com/proxy/IDqdibrDe6TsmViP5qR2rpJD4YrYqNIUvkeAD8uXcgUxTQ_KAYz57LZiTmgs7x9-R2h3u_Qxpip5QmqLGCZJA14no_iuWk84nFOzekzFXjwzivMicq8E3hv1uJYoUa3ORpQxogtBZqN7-t25s05TSm2_5qJShU=s287-w287-h192-n-k-no-v1" alt="Hotel Pearl Inn Image">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/4b/f9/b0/caption.jpg?w=1000&h=800&s=1" alt="Hotel Pearl Inn Image">
+                    <img src="https://lh6.googleusercontent.com/proxy/WTuZ1bVjzMECzsDIDkQ0mRRxrF274GHBaHq-gajLr9-GmmYgsG0Sw8979YjDfekKxRNaeMMo3STIJWr_z-TPOecu4nF5uwQ_gpF5n9iHswO8Wu3yg7iWm6qOWPctRuJvgeDNzue48Mn6TYK92n7120J537Gc8w=s287-w287-h192-n-k-no-v1" alt="Hotel Pearl Inn Image">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/c2/23/20/reception.jpg?w=1300&h=900&s=1" alt="Hotel Pearl Inn Image">
+                    <img src="https://lh4.googleusercontent.com/proxy/YWfylGZVuuHeRcAUc7BEKCHXq6uPuBMirZg25EfUSJDZU3ckdq08u8m-PdepFykA8t8Q97q-TodjzmU4Tvc0g_U2VzSlBF7DXhHVEhRMScNeB8X4eqar8m_yEo-Q1UW19TMf8EBk8rD8rlta3pSCLAz_AMcVWg=s287-w287-h192-n-k-no-v1" alt="Hotel Pearl Inn Image">
+                    <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/c2/23/1e/reception.jpg?w=1300&h=900&s=1" alt="Hotel Pearl Inn Image">
+                </div>
+                <h4 style="margin-top: 30px;">Booking Options</h4>
+                <a href="https://serpapi.com/search.json?adults=1&check_in_date=2025-10-21&check_out_date=2025-10-24&children=0&currency=INR&engine=google_hotels&gl=in&hl=en&max_price=1500&property_token=ChkI4vSdrYHOkKIDGg0vZy8xMWgwOXNxcXYwEAE&q=Hotels+near+Haldwani" target="_blank" class="button">Book Hotel Pearl Inn</a>
+            </div>
+        </section>
+
+        <section id="daily-itinerary">
+            <h2>🗓️ Daily Itinerary</h2>
+            <div class="itinerary-day">
+                <h3>Day 1: Arrival and Local Exploration (Oct 21, 2025)</h3>
+                <p><strong>Theme:</strong> Arrival and Local Exploration</p>
+                <p><strong>Optimized Route:</strong> Hotel Pearl Inn → Walk to Nainital Road Market → Walk to City Mall → Hotel Pearl Inn</p>
+                <p><strong>Total Day Distance:</strong> 0.94 km</p>
+                <p><strong>Total Day Travel Time:</strong> 15 minutes (walking)</p>
+
+                <div class="itinerary-place">
+                    <h4>Afternoon: Nainital Road Market</h4>
+                    <p>Nainital Road Market is a bustling hub in Haldwani, offering a vibrant display of local goods, handicrafts, clothing, and street food. It's an excellent place to experience the local culture and find unique souvenirs.</p>
+                    <p><strong>Why visit?</strong> Perfect for a solo traveler to immerse in local life, explore unique shops, and try regional delicacies.</p>
+                    <p><strong>Activities:</strong></p>
+                    <ul>
+                        <li>Shopping for local crafts and textiles</li>
+                        <li>Sampling street food</li>
+                        <li>Observing local daily life</li>
+                    </ul>
+                    <div class="itinerary-details">
+                        <div><strong>Distance from previous:</strong> 0.47 km</div>
+                        <div><strong>Travel time:</strong> 7 minutes (walking)</div>
+                        <div><strong>Entry Fee:</strong> Free</div>
+                        <div><strong>Estimated Cost:</strong> INR 200-500 (for shopping/food)</div>
+                        <div><strong>Best Time:</strong> Late afternoon to evening</div>
+                        <div><strong>Duration:</strong> 2-3 hours</div>
+                        <div><strong>Accessibility:</strong> Generally accessible, but can be crowded with uneven paths.</div>
+                    </div>
+                    <h4>Tips:</h4>
+                    <ul>
+                        <li><strong>What to bring:</strong> Comfortable walking shoes, Small bag for purchases, Water bottle</li>
+                        <li><strong>What to buy:</strong> Kumaoni handicrafts, Local spices, Warm shawls (if weather permits)</li>
+                        <li><strong>Safety notes:</strong> Be mindful of your belongings in crowded areas., Bargaining is common.</li>
+                        <li><strong>Customs/Etiquette:</strong> Dress modestly.</li>
+                        <li><strong>Photo spots:</strong> Colorful shop fronts, Bustling street scenes</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=29.2131,79.5252" target="_blank" class="button">View on Map</a>
+                </div>
+
+                <div class="itinerary-place">
+                    <h4>Evening: City Mall</h4>
+                    <p>City Mall provides a modern contrast to the traditional market. It offers a range of retail stores, a food court, and entertainment options, making it a good spot for relaxation and modern amenities.</p>
+                    <p><strong>Why visit?</strong> A good option for a solo traveler to relax, enjoy modern amenities, and grab a meal.</p>
+                    <p><strong>Activities:</strong></p>
+                    <ul>
+                        <li>Window shopping</li>
+                        <li>Catching a movie (if interested)</li>
+                        <li>Having dinner at the food court</li>
+                    </ul>
+                    <div class="itinerary-details">
+                        <div><strong>Distance from previous:</strong> 0.47 km</div>
+                        <div><strong>Travel time:</strong> 8 minutes (walking)</div>
+                        <div><strong>Entry Fee:</strong> Free</div>
+                        <div><strong>Estimated Cost:</strong> INR 300-800 (for food/entertainment)</div>
+                        <div><strong>Best Time:</strong> Evening</div>
+                        <div><strong>Duration:</strong> 2-3 hours</div>
+                        <div><strong>Accessibility:</strong> Fully accessible with elevators and escalators.</div>
+                    </div>
+                    <h4>Tips:</h4>
+                    <ul>
+                        <li><strong>What to bring:</strong> Wallet, Phone charger</li>
+                        <li><strong>What to buy:</strong> Branded clothing, Electronics, Snacks</li>
+                        <li><strong>Safety notes:</strong> Standard mall safety.</li>
+                        <li><strong>Customs/Etiquette:</strong> Casual dress is acceptable.</li>
+                        <li><strong>Photo spots:</strong> Modern architecture, Movie poster displays</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=29.2131,79.5252" target="_blank" class="button">View on Map</a>
+                </div>
+
+                <div class="card">
+                    <h4>Day 1 Summary</h4>
+                    <p>Total Distance: 0.94 km</p>
+                    <p>Estimated Spending: INR 800 (Entry: 0, Activities: 0, Transport: 0, Meals: 500, Shopping: 300)</p>
+                </div>
+            </div>
+
+            <div class="itinerary-day">
+                <h3>Day 2: Adventure and Nature (Oct 22, 2025)</h3>
+                <p><strong>Theme:</strong> Adventure and Nature</p>
+                <p><strong>Optimized Route:</strong> Hotel Pearl Inn → Gaula Barrage → Corbett Falls → Bhimtal Lake → Hotel Pearl Inn</p>
+                <p><strong>Total Day Distance:</strong> 11.2 km</p>
+                <p><strong>Total Day Travel Time:</strong> 45 minutes (driving)</p>
+
+                <div class="itinerary-place">
+                    <h4>Morning: Gaula Barrage</h4>
+                    <p>The Gaula Barrage is a significant engineering marvel on the Gaula River, offering scenic views and a tranquil environment. It's a great spot for nature lovers and those seeking peaceful surroundings.</p>
+                    <p><strong>Why visit?</strong> Provides an opportunity for a serene start to an adventure day, with picturesque views of the river and surrounding landscape.</p>
+                    <p><strong>Activities:</strong></p>
+                    <ul>
+                        <li>Photography</li>
+                        <li>Bird watching</li>
+                        <li>Relaxing by the riverside</li>
+                    </ul>
+                    <div class="itinerary-details">
+                        <div><strong>Distance from previous:</strong> 4.94 km</div>
+                        <div><strong>Travel time:</strong> 15 minutes (driving)</div>
+                        <div><strong>Entry Fee:</strong> Free</div>
+                        <div><strong>Estimated Cost:</strong> INR 0</div>
+                        <div><strong>Best Time:</strong> Morning for clear views and peaceful atmosphere</div>
+                        <div><strong>Duration:</strong> 1-2 hours</div>
+                        <div><strong>Accessibility:</strong> Accessible by road, some walking on uneven terrain.</div>
+                    </div>
+                    <h4>Tips:</h4>
+                    <ul>
+                        <li><strong>What to bring:</strong> Camera, Binoculars, Water bottle</li>
+                        <li><strong>What to buy:</strong> N/A</li>
+                        <li><strong>Safety notes:</strong> Be cautious near the water.</li>
+                        <li><strong>Customs/Etiquette:</strong> Maintain cleanliness.</li>
+                        <li><strong>Photo spots:</strong> Barrage structure, River views, Surrounding hills</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=29.2201,79.489" target="_blank" class="button">View on Map</a>
+                </div>
+
+                <div class="itinerary-place">
+                    <h4>Late Morning: Corbett Falls</h4>
+                    <p>Corbett Falls is a picturesque waterfall nestled amidst lush green forests, offering a refreshing escape and a chance to connect with nature. The sound of cascading water and the serene atmosphere make it a perfect spot for relaxation.</p>
+                    <p><strong>Why visit?</strong> A beautiful natural attraction, ideal for a solo adventurer to enjoy the tranquility and natural beauty.</p>
+                    <p><strong>Activities:</strong></p>
+                    <ul>
+                        <li>Enjoying the waterfall view</li>
+                        <li>Nature walk</li>
+                        <li>Photography</li>
+                    </ul>
+                    <div class="itinerary-details">
+                        <div><strong>Distance from previous:</strong> 2.3 km</div>
+                        <div><strong>Travel time:</strong> 10 minutes (driving)</div>
+                        <div><strong>Entry Fee:</strong> INR 50 (estimated)</div>
+                        <div><strong>Estimated Cost:</strong> INR 50</div>
+                        <div><strong>Best Time:</strong> Late morning for good light and fewer crowds</div>
+                        <div><strong>Duration:</strong> 1-2 hours</div>
+                        <div><strong>Accessibility:</strong> Requires a short walk from the parking area, paths can be uneven.</div>
+                    </div>
+                    <h4>Tips:</h4>
+                    <ul>
+                        <li><strong>What to bring:</strong> Comfortable shoes, Camera, Light snacks, Water bottle</li>
+                        <li><strong>What to buy:</strong> N/A</li>
+                        <li><strong>Safety notes:</strong> Be careful on wet and slippery paths.</li>
+                        <li><strong>Customs/Etiquette:</strong> Avoid littering.</li>
+                        <li><strong>Photo spots:</strong> The waterfall itself, Forest surroundings</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=29.227,79.5075" target="_blank" class="button">View on Map</a>
+                </div>
+
+                <div class="itinerary-place">
+                    <h4>Afternoon: Bhimtal Lake</h4>
+                    <p>Bhimtal Lake is a serene lake with an island in its center, home to an aquarium. It offers various water activities and stunning views of the surrounding hills, perfect for a relaxing afternoon.</p>
+                    <p><strong>Why visit?</strong> A popular spot for both adventure and relaxation, offering boating and beautiful scenery.</p>
+                    <p><strong>Activities:</strong></p>
+                    <ul>
+                        <li>Boating on the lake</li>
+                        <li>Visiting the island aquarium</li>
+                        <li>Relaxing by the lake</li>
+                    </ul>
+                    <div class="itinerary-details">
+                        <div><strong>Distance from previous:</strong> 2.48 km</div>
+                        <div><strong>Travel time:</strong> 10 minutes (driving)</div>
+                        <div><strong>Entry Fee:</strong> Free (boating and aquarium have separate fees)</div>
+                        <div><strong>Estimated Cost:</strong> INR 300-500 (for boating/aquarium)</div>
+                        <div><strong>Best Time:</strong> Afternoon to enjoy the lake activities and sunset</div>
+                        <div><strong>Duration:</strong> 2-3 hours</div>
+                        <div><strong>Accessibility:</strong> Easily accessible, some areas around the lake might have uneven paths.</div>
+                    </div>
+                    <h4>Tips:</h4>
+                    <ul>
+                        <li><strong>What to bring:</strong> Sunglasses, Hat, Sunscreen, Camera</li>
+                        <li><strong>What to buy:</strong> Souvenirs from lakeside shops</li>
+                        <li><strong>Safety notes:</strong> Follow safety instructions for boating.</li>
+                        <li><strong>Customs/Etiquette:</strong> N/A</li>
+                        <li><strong>Photo spots:</strong> Lake views with the island, Boats on the water</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=29.2222,79.5165" target="_blank" class="button">View on Map</a>
+                </div>
+
+                <div class="card">
+                    <h4>Day 2 Summary</h4>
+                    <p>Total Distance: 11.2 km</p>
+                    <p>Estimated Spending: INR 1250 (Entry: 50, Activities: 300, Transport: 500, Meals: 400, Shopping: 0)</p>
+                </div>
+            </div>
+
+            <div class="itinerary-day">
+                <h3>Day 3: Cultural Immersion and Local Delights (Oct 23, 2025)</h3>
+                <p><strong>Theme:</strong> Cultural Immersion and Local Delights</p>
+                <p><strong>Optimized Route:</strong> Hotel Pearl Inn → Haldwani Zoo and Botanical Garden → Fun City Amusement Park → Hotel Pearl Inn</p>
+                <p><strong>Total Day Distance:</strong> 10.51 km</p>
+                <p><strong>Total Day Travel Time:</strong> 30 minutes (driving)</p>
+
+                <div class="itinerary-place">
+                    <h4>Morning: Haldwani Zoo and Botanical Garden</h4>
+                    <p>The Haldwani Zoo and Botanical Garden offers a chance to observe various animal species and explore diverse flora. It's a peaceful environment, perfect for a leisurely morning walk and appreciating nature.</p>
+                    <p><strong>Why visit?</strong> A good place for a solo traveler to enjoy nature and see local wildlife.</p>
+                    <p><strong>Activities:</strong></p>
+                    <ul>
+                        <li>Walking through the botanical garden</li>
+                        <li>Observing animals</li>
+                        <li>Photography</li>
+                    </ul>
+                    <div class="itinerary-details">
+                        <div><strong>Distance from previous:</strong> 2.58 km</div>
+                        <div><strong>Travel time:</strong> 10 minutes (driving)</div>
+                        <div><strong>Entry Fee:</strong> INR 100 (estimated)</div>
+                        <div><strong>Estimated Cost:</strong> INR 100</div>
+                        <div><strong>Best Time:</strong> Morning for pleasant weather and active animals</div>
+                        <div><strong>Duration:</strong> 2-3 hours</div>
+                        <div><strong>Accessibility:</strong> Mostly accessible with paved paths, some inclines.</div>
+                    </div>
+                    <h4>Tips:</h4>
+                    <ul>
+                        <li><strong>What to bring:</strong> Comfortable walking shoes, Camera, Water bottle</li>
+                        <li><strong>What to buy:</strong> N/A</li>
+                        <li><strong>Safety notes:</strong> Follow zoo rules and avoid disturbing animals.</li>
+                        <li><strong>Customs/Etiquette:</strong> Respect the animals and their habitats.</li>
+                        <li><strong>Photo spots:</strong> Animal enclosures, Variety of plants and flowers</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=29.2178,79.5103" target="_blank" class="button">View on Map</a>
+                </div>
+
+                <div class="itinerary-place">
+                    <h4>Afternoon: Fun City Amusement Park</h4>
+                    <p>Fun City Amusement Park offers a range of thrilling rides and entertainment options, providing a lively and enjoyable experience. It's a great place to unwind and indulge in some lighthearted fun.</p>
+                    <p><strong>Why visit?</strong> An exciting option for a solo traveler looking for some fun and adventure with rides and games.</p>
+                    <p><strong>Activities:</strong></p>
+                    <ul>
+                        <li>Enjoying various amusement rides</li>
+                        <li>Playing games</li>
+                        <li>Having snacks</li>
+                    </ul>
+                    <div class="itinerary-details">
+                        <div><strong>Distance from previous:</strong> 6.77 km</div>
+                        <div><strong>Travel time:</strong> 20 minutes (driving)</div>
+                        <div><strong>Entry Fee:</strong> INR 500-800 (estimated, for rides and entry)</div>
+                        <div><strong>Estimated Cost:</strong> INR 800</div>
+                        <div><strong>Best Time:</strong> Afternoon</div>
+                        <div><strong>Duration:</strong> 3-4 hours</div>
+                        <div><strong>Accessibility:</strong> Generally accessible, some rides may have restrictions.</div>
+                    </div>
+                    <h4>Tips:</h4>
+                    <ul>
+                        <li><strong>What to bring:</strong> Comfortable clothing, Sunscreen, Water bottle</li>
+                        <li><strong>What to buy:</strong> Souvenirs, Snacks</li>
+                        <li><strong>Safety notes:</strong> Follow ride safety instructions., Stay hydrated.</li>
+                        <li><strong>Customs/Etiquette:</strong> N/A</li>
+                        <li><strong>Photo spots:</strong> Amusement rides, Colorful park scenery</li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=29.2618,79.5447" target="_blank" class="button">View on Map</a>
+                </div>
+
+                <div class="card">
+                    <h4>Day 3 Summary</h4>
+                    <p>Total Distance: 10.51 km</p>
+                    <p>Estimated Spending: INR 1800 (Entry: 100, Activities: 800, Transport: 500, Meals: 400, Shopping: 0)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="budget">
+            <h2>💰 Budget Dashboard</h2>
+            <div class="budget-summary">
+                <div class="budget-item">
+                    <h4>Total Budget</h4>
+                    <p>9000 INR</p>
+                </div>
+                <div class="budget-item spent">
+                    <h4>Total Spent</h4>
+                    <p>7504 INR</p>
+                </div>
+                <div class="budget-item remaining">
+                    <h4>Remaining Budget</h4>
+                    <p>1496 INR</p>
+                </div>
+            </div>
+
+            <div class="budget-chart-container">
+                <div class="budget-spent-bar" style="width: 83.37777777777778%;"></div>
+            </div>
+
+            <h3>Detailed Expenses</h3>
+            <div class="card">
+                <h4>Flights</h4>
+                <p>Not specified</p>
+                <p><strong>Cost:</strong> 0 INR</p>
+            </div>
+
+            <div class="card">
+                <h4>Accommodation</h4>
+                <p><strong>Hotel:</strong> Hotel Pearl Inn</p>
+                <p><strong>Price per night:</strong> 1218 INR</p>
+                <p><strong>Nights:</strong> 3</p>
+                <p><strong>Total:</strong> 3654 INR</p>
+            </div>
+
+            <h3>Daily Spending Breakdown</h3>
+            <table class="budget-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Entry Fees</th>
+                        <th>Activities</th>
+                        <th>Transport</th>
+                        <th>Meals</th>
+                        <th>Shopping</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Day 1</td>
+                        <td>0 INR</td>
+                        <td>0 INR</td>
+                        <td>0 INR</td>
+                        <td>500 INR</td>
+                        <td>300 INR</td>
+                        <td>800 INR</td>
+                    </tr>
+                    <tr>
+                        <td>Day 2</td>
+                        <td>50 INR</td>
+                        <td>300 INR</td>
+                        <td>500 INR</td>
+                        <td>400 INR</td>
+                        <td>0 INR</td>
+                        <td>1250 INR</td>
+                    </tr>
+                    <tr>
+                        <td>Day 3</td>
+                        <td>100 INR</td>
+                        <td>800 INR</td>
+                        <td>500 INR</td>
+                        <td>400 INR</td>
+                        <td>0 INR</td>
+                        <td>1800 INR</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">Total Daily Expenses</td>
+                        <td>3850 INR</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <h3 style="margin-top: 30px;">Budget Tips</h3>
+            <ul>
+                <li>Consider eating at local eateries for more authentic and budget-friendly meals.</li>
+                <li>Utilize public transport or shared taxis for commuting to save on travel costs.</li>
+                <li>Look for package deals or discounts on amusement park tickets.</li>
+            </ul>
+        </section>
+
+        <section id="packing-list">
+            <h2>🎒 Packing List</h2>
+            <div>
+                <h3>Clothing</h3>
+                <ul>
+                    <li><label><input type="checkbox"> Lightweight adventure clothing</label></li>
+                    <li><label><input type="checkbox"> Comfortable walking shoes</label></li>
+                    <li><label><input type="checkbox"> Swimwear (if planning water activities)</label></li>
+                    <li><label><input type="checkbox"> Light jacket or shawl for evenings</label></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Footwear</h3>
+                <ul>
+                    <li><label><input type="checkbox"> Comfortable walking shoes</label></li>
+                    <li><label><input type="checkbox"> Sandals or flip-flops</label></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Essentials</h3>
+                <ul>
+                    <li><label><input type="checkbox"> Sunscreen</label></li>
+                    <li><label><input type="checkbox"> Insect repellent</label></li>
+                    <li><label><input type="checkbox"> First-aid kit</label></li>
+                    <li><label><input type="checkbox"> Hand sanitizer</label></li>
+                    <li><label><input type="checkbox"> Water bottle</label></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Medication</h3>
+                <ul>
+                    <li><label><input type="checkbox"> Personal medications</label></li>
+                    <li><label><input type="checkbox"> Pain relievers</label></li>
+                    <li><label><input type="checkbox"> Antacids</label></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Electronics</h3>
+                <ul>
+                    <li><label><input type="checkbox"> Power bank</label></li>
+                    <li><label><input type="checkbox"> Chargers</label></li>
+                    <li><label><input type="checkbox"> Camera</label></li>
+                    <li><label><input type="checkbox"> Headphones</label></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Miscellaneous</h3>
+                <ul>
+                    <li><label><input type="checkbox"> Small backpack</label></li>
+                    <li><label><input type="checkbox"> Travel pillow</label></li>
+                    <li><label><input type="checkbox"> Book or entertainment for downtime</label></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Documents</h3>
+                <ul>
+                    <li><label><input type="checkbox"> ID proof</label></li>
+                    <li><label><input type="checkbox"> Hotel booking confirmation</label></li>
+                    <li><label><input type="checkbox"> Any necessary permits (if applicable)</label></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="pre-trip-checklist">
+            <h2>✔️ Pre-trip Checklist</h2>
+            <ul>
+                <li><label><input type="checkbox"> Confirm hotel booking. <span class="priority-high">(High Priority)</span></label></li>
+                <li><label><input type="checkbox"> Check weather forecast closer to the travel date. <span class="priority-medium">(Medium Priority)</span></label></li>
+                <li><label><input type="checkbox"> Inform family/friends of your itinerary. <span class="priority-medium">(Medium Priority)</span></label></li>
+                <li><label><input type="checkbox"> Pack essential medications and first-aid supplies. <span class="priority-high">(High Priority)</span></label></li>
+                <li><label><input type="checkbox"> Download offline maps of Haldwani and surrounding areas. <span class="priority-medium">(Medium Priority)</span></label></li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>Haldwani Adventure Trip</p>
+        <p>Oct 21, 2025 - Oct 24, 2025</p>
+        <button onclick="window.print()" class="button">🖨️ Print Itinerary</button>
+    </footer>
+
+    <script>
+        // Budget chart animation (simple CSS width update)
+        document.addEventListener('DOMContentLoaded', () => {
+            const totalBudget = 9000;
+            const totalSpent = 7504;
+            const spentPercentage = (totalSpent / totalBudget) * 100;
+            document.querySelector('.budget-spent-bar').style.width = spentPercentage + '%';
+
+            // Make checkboxes interactive
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', (event) => {
+                    const label = event.target.closest('label');
+                    if (label) {
+                        if (event.target.checked) {
+                            label.style.textDecoration = 'line-through';
+                            label.style.opacity = '0.7';
+                        } else {
+                            label.style.textDecoration = 'none';
+                            label.style.opacity = '1';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
