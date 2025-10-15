@@ -1,298 +1,1024 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>🌍 Dynamic Itinerary — Enhanced Experience</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Itinerary</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #080c17;
-  --card: rgba(17, 24, 39, 0.65);
-  --accent: #06b6d4;
-  --accent-dark: #0ea5e9;
-  --text: #f3f4f6;
-  --muted: #9ca3af;
-  --border: rgba(255,255,255,0.08);
-  --blur: blur(12px);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --secondary: #10b981;
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-light: #334155;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border: #334155;
+  --accent: #06b6d4;
+}
+
 body {
-  font-family: 'Inter', sans-serif;
-  background: radial-gradient(circle at top left, #0f172a 0%, #0a0e1a 100%);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   color: var(--text);
+  line-height: 1.6;
   min-height: 100vh;
-  overflow-x: hidden;
-  background-attachment: fixed;
 }
 
 .container {
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 2rem;
 }
 
-/* HEADER */
-header {
+/* Header */
+.hero {
   text-align: center;
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(15px);
-  padding: 50px 20px;
-  border-radius: 24px;
-  border: 1px solid var(--border);
-  box-shadow: 0 0 50px rgba(6,182,212,0.1);
-  margin-bottom: 40px;
-  transition: all 0.3s ease;
+  padding: 3rem 1rem;
+  margin-bottom: 2rem;
 }
-header:hover { transform: translateY(-3px); box-shadow: 0 0 60px rgba(6,182,212,0.2); }
 
-h1 {
-  font-size: 2.8rem;
-  background: linear-gradient(135deg, #06b6d4, #3b82f6);
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-.subtitle {
-  color: var(--muted);
-  margin-top: 10px;
-  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
 }
 
-/* STICKY TABS */
-.tabs {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(17,24,39,0.85);
-  backdrop-filter: var(--blur);
+.hero-subtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+/* Navigation Tabs */
+.nav-tabs {
   display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
-  padding: 12px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
+  gap: 0.5rem;
+  background: var(--surface);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
   overflow-x: auto;
-  scroll-behavior: smooth;
-}
-
-.tab {
-  padding: 12px 24px;
-  border: none;
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-  border-radius: 10px;
-  font-size: 1rem;
-  position: relative;
-  transition: all 0.3s ease;
-}
-.tab:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-.tab.active {
-  color: white;
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-  box-shadow: 0 3px 12px rgba(6,182,212,0.3);
-}
-
-/* CARD STYLING */
-.card {
-  background: var(--card);
-  backdrop-filter: var(--blur);
+  position: sticky;
+  top: 1rem;
+  z-index: 100;
+  backdrop-filter: blur(10px);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 28px;
-  margin-bottom: 24px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.nav-tab {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+.nav-tab:hover {
+  background: var(--surface-light);
+  color: var(--text);
+}
+
+.nav-tab.active {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Content Sections */
+.section {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
   transition: all 0.3s ease;
 }
-.card:hover { transform: translateY(-4px); border-color: rgba(6,182,212,0.4); }
 
-/* TITLES */
-.card-title {
-  font-size: 1.3rem;
-  color: var(--accent);
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.15);
+}
+
+.card-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
 }
-.icon { font-size: 1.4rem; }
 
-/* INFO GRID */
+.card-icon {
+  font-size: 1.75rem;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Info Grid */
+.info-grid {
+  display: grid;
+  gap: 1rem;
+}
+
 .info-item {
   display: flex;
   justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
-.info-item:last-child { border-bottom: none; }
-.info-label { color: var(--muted); }
-.info-value { font-weight: 600; color: var(--text); }
 
-/* DAY CARDS */
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.info-value {
+  color: var(--text);
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Day Cards */
 .day-card {
-  background: rgba(17,24,39,0.8);
+  background: rgba(30, 41, 59, 0.6);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 16px;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
 }
-.day-card:hover { border-color: var(--accent); background: rgba(17,24,39,0.9); }
-.day-number { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
-.day-theme { color: var(--text); font-style: italic; margin-top: 4px; margin-bottom: 12px; }
 
-/* PLACES */
-.places-list { display: none; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); }
-.places-list.show { display: block; animation: fadeIn 0.4s ease; }
-.place-item {
-  background: rgba(255,255,255,0.04);
-  padding: 14px;
-  border-left: 3px solid var(--accent);
-  border-radius: 12px;
-  margin-bottom: 12px;
+.day-card:hover {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: var(--accent);
 }
-.place-time { color: var(--accent); font-size: 0.85rem; font-weight: 600; }
-.place-name { font-weight: 600; margin: 4px 0; }
 
-/* BUDGET */
-.budget-item {
-  background: rgba(255,255,255,0.04);
-  padding: 16px;
-  border-radius: 12px;
-  text-align: center;
-  border: 1px solid var(--border);
-  transition: transform 0.3s ease;
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
 }
-.budget-item:hover { transform: translateY(-4px); border-color: var(--accent); }
 
-/* PACKING */
-.pill {
-  background: rgba(6,182,212,0.15);
+.day-number {
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--accent);
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: 1px solid rgba(6,182,212,0.25);
+}
+
+.day-date {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.day-theme {
+  color: var(--text);
+  font-style: italic;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.day-stats {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
   font-size: 0.85rem;
+}
+
+.expand-icon {
+  transition: transform 0.3s ease;
+  color: var(--accent);
+}
+
+.expand-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* Places List */
+.places-list {
+  display: none;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.places-list.show {
+  display: block;
+}
+
+.place-item {
+  background: rgba(6, 182, 212, 0.05);
+  padding: 1rem;
+  border-left: 3px solid var(--accent);
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.place-time {
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.place-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.place-desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.place-why {
+  background: rgba(139, 92, 246, 0.1);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin: 0.75rem 0;
+  border-left: 3px solid #8b5cf6;
+}
+
+.place-why strong {
+  color: #a78bfa;
+}
+
+.place-practical {
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.place-practical-title {
+  color: var(--secondary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.practical-grid {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.practical-item {
+  color: var(--text-muted);
+}
+
+.place-tips {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(251, 191, 36, 0.1);
+  border-radius: 0.5rem;
+}
+
+.tips-title {
+  color: #fbbf24;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.tips-section {
+  margin-bottom: 0.5rem;
+}
+
+.tips-section:last-child {
+  margin-bottom: 0;
+}
+
+.tips-label {
+  color: var(--text);
+  font-weight: 500;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.tips-content {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}
+
+.place-activities {
+  margin-top: 0.75rem;
+}
+
+.activity-tag {
+  display: inline-block;
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--accent);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  margin: 0.25rem 0.25rem 0.25rem 0;
+}
+
+/* Budget Section */
+.budget-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.budget-box {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1));
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+.budget-label {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.budget-amount {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Packing List */
+.packing-category {
+  margin-bottom: 1.5rem;
+}
+
+.category-title {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.item-tag {
+  background: rgba(6, 182, 212, 0.1);
+  color: var(--text);
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  font-size: 0.9rem;
   transition: all 0.3s ease;
 }
-.pill:hover { background: rgba(6,182,212,0.25); }
 
-/* ANIMATIONS */
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.expand-icon { transition: transform 0.3s ease; }
-.expand-icon.rotated { transform: rotate(180deg); }
+.item-tag:hover {
+  background: rgba(6, 182, 212, 0.2);
+  transform: translateY(-2px);
+}
 
-/* SCROLLBAR */
-::-webkit-scrollbar { height: 6px; }
-::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+/* Hotel Gallery */
+.hotel-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
 
-/* RESPONSIVE */
+.gallery-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.gallery-img:hover {
+  transform: scale(1.05);
+}
+
+/* Checklist */
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(6, 182, 212, 0.05);
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.checklist-item:hover {
+  background: rgba(6, 182, 212, 0.1);
+}
+
+.priority-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Budget Tips */
+.budget-tips {
+  background: rgba(139, 92, 246, 0.1);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  margin-top: 1.5rem;
+}
+
+.budget-tips-title {
+  color: #a78bfa;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.budget-tip-item {
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.budget-tip-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Booking Button */
+.booking-links {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.booking-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  text-decoration: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.booking-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.priority-high {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.priority-medium {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fcd34d;
+}
+
+.priority-low {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.spinner {
+  border: 3px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  h1 { font-size: 2rem; }
-  .card { padding: 20px; }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .nav-tabs {
+    top: 0;
+  }
+  
+  .container {
+    padding: 1rem;
+  }
 }
 </style>
 </head>
 <body>
 <div class="container">
-  <header>
-    <h1>✈️ Your Travel Itinerary</h1>
-    <div class="subtitle">Plan • Explore • Experience</div>
-  </header>
+  <div class="hero">
+    <h1>✈️ Your Travel Adventure</h1>
+    <div class="hero-subtitle">Explore • Experience • Remember</div>
+  </div>
 
-  <div class="tabs" id="tabs">
-    <button class="tab active" data-section="overview">📋 Overview</button>
-    <button class="tab" data-section="hotel">🏨 Stay</button>
-    <button class="tab" data-section="itinerary">🗓️ Daily Plan</button>
-    <button class="tab" data-section="budget">💰 Budget</button>
-    <button class="tab" data-section="packing">🎒 Packing</button>
+  <div class="nav-tabs" id="tabs">
+    <button class="nav-tab active" data-section="overview">📋 Overview</button>
+    <button class="nav-tab" data-section="hotel">🏨 Hotel</button>
+    <button class="nav-tab" data-section="itinerary">🗓️ Itinerary</button>
+    <button class="nav-tab" data-section="budget">💰 Budget</button>
+    <button class="nav-tab" data-section="packing">🎒 Packing</button>
+    <button class="nav-tab" data-section="checklist">✓ Checklist</button>
   </div>
 
   <div id="content">
-    <div class="loading" style="text-align:center;padding:80px 20px;">
-      <div class="spinner" style="border:3px solid var(--border);border-top:3px solid var(--accent);border-radius:50%;width:50px;height:50px;animation:spin 1s linear infinite;margin:0 auto 20px;"></div>
-      <p>Loading your adventure...</p>
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Loading your itinerary...</p>
     </div>
   </div>
 </div>
 
 <script>
-let currentData = null;
+async function loadPortfolio() {
+    const userId = new URLSearchParams(window.location.search).get('user') || 'default';
+    const jsonUrl = `https://raw.githubusercontent.com/l0keshai0004-beep/jsons/refs/heads/main/${userId}.json`;
 
+    try {
+      const res = await fetch(jsonUrl);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      
+      const text = await res.text();
+      console.log('Raw JSON (first 500 chars):', text.substring(0, 500));
+      console.log('JSON around error position:', text.substring(8600, 8650));
+      
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (parseErr) {
+        throw new Error(`JSON parsing failed: ${parseErr.message}. Check console for details.`);
+      }
+      
+      // if (!data  typeof data !== 'object') {
+      //   throw new Error('Invalid data format');
+      // }
+      
+      renderContent(data);
+      // showContent();
+    } catch (err) {
+      console.error('Error loading portfolio:', err);
+      // showError(Could not load portfolio for user "${userId}". ${err.message});
+    }
+  }
+
+
+function renderContent(data) {
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+
+  // Overview Section
+  const overviewSection = createSection('overview', `
+    <div class="card">
+      <div class="card-header">
+        <span class="card-icon">🌍</span>
+        <h2 class="card-title">Trip Overview</h2>
+      </div>
+      <div class="info-grid">
+        ${Object.entries(data.tripOverview).map(([key, value]) => `
+          <div class="info-item">
+            <span class="info-label">${formatLabel(key)}</span>
+            <span class="info-value">${value}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `);
+
+  // Hotel Section
+  const hotelSection = createSection('hotel', `
+    <div class="card">
+      <div class="card-header">
+        <span class="card-icon">🏨</span>
+        <h2 class="card-title">${data.hotel.name}</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">Location</span>
+          <span class="info-value">${data.hotel.location}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Price per Night</span>
+          <span class="info-value">₹${data.hotel.pricePerNight}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Nights</span>
+          <span class="info-value">${data.hotel.nights}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Rooms</span>
+          <span class="info-value">${data.hotel.rooms}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Total Cost</span>
+          <span class="info-value">₹${data.hotel.totalCost}</span>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem; color: var(--text-muted); line-height: 1.6;">
+        ${data.hotel.reasonForSelection}
+      </p>
+      <div style="margin-top: 1.5rem;">
+        <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Amenities</h3>
+        <div class="item-tags">
+          ${data.hotel.amenities.map(a => `<span class="item-tag">${a}</span>`).join('')}
+        </div>
+      </div>
+      ${data.hotel.bookingLinks && data.hotel.bookingLinks.length > 0 ? `
+        <div class="booking-links">
+          ${data.hotel.bookingLinks.filter(link => link.startsWith('http://') || link.startsWith('https://')).map(link => `
+            <a href="${link}" target="_blank" class="booking-btn">
+              🔗 Book Hotel
+            </a>
+          `).join('')}
+        </div>
+      ` : ''}
+      ${data.hotel.imageLinks && data.hotel.imageLinks.length > 0 ? `
+        <div class="hotel-gallery">
+          ${data.hotel.imageLinks.slice(0, 6).map(img => `
+            <img src="${img}" alt="Hotel" class="gallery-img" onerror="this.style.display='none'">
+          `).join('')}
+        </div>
+      ` : ''}
+    </div>
+  `);
+
+  // Itinerary Section
+  const itinerarySection = createSection('itinerary', 
+    data.dailyItinerary.map(day => `
+      <div class="day-card" onclick="toggleDay(this)">
+        <div class="day-header">
+          <div>
+            <div class="day-number">Day ${day.day}</div>
+            <div class="day-date">${day.date}</div>
+          </div>
+          <span class="expand-icon">▼</span>
+        </div>
+        <div class="day-theme">${day.theme}</div>
+        <div class="day-stats">
+          <span class="stat">📍 ${day.totalDistance} km</span>
+          <span class="stat">💰 ₹${day.daySummary.spending.total}</span>
+          <span class="stat">📌 ${day.places.length} places</span>
+        </div>
+        <div class="places-list">
+          ${day.places.map(place => `
+            <div class="place-item">
+              <div class="place-time">${place.timeOfDay}</div>
+              <div class="place-name">${place.name}</div>
+              <div class="place-desc">${place.description}</div>
+              
+              ${place.whyVisit ? `
+                <div class="place-why">
+                  <strong>Why Visit:</strong> ${place.whyVisit}
+                </div>
+              ` : ''}
+              
+              ${place.activities && place.activities.length > 0 ? `
+                <div class="place-activities">
+                  <strong style="color: var(--accent); display: block; margin-bottom: 0.5rem;">Activities:</strong>
+                  ${place.activities.map(act => `
+                    <span class="activity-tag">${act}</span>
+                  `).join('')}
+                </div>
+              ` : ''}
+              
+              ${place.practicalInfo ? `
+                <div class="place-practical">
+                  <div class="place-practical-title">📋 Practical Information</div>
+                  <div class="practical-grid">
+                    ${place.practicalInfo.entryFee ? `<div class="practical-item"><strong>Entry Fee:</strong> ${place.practicalInfo.entryFee}</div>` : ''}
+                    ${place.practicalInfo.estimatedCost ? `<div class="practical-item"><strong>Estimated Cost:</strong> ${place.practicalInfo.estimatedCost}</div>` : ''}
+                    ${place.practicalInfo.bestTime ? `<div class="practical-item"><strong>Best Time:</strong> ${place.practicalInfo.bestTime}</div>` : ''}
+                    ${place.practicalInfo.duration ? `<div class="practical-item"><strong>Duration:</strong> ${place.practicalInfo.duration}</div>` : ''}
+                    ${place.practicalInfo.accessibility ? `<div class="practical-item"><strong>Accessibility:</strong> ${place.practicalInfo.accessibility}</div>` : ''}
+                  </div>
+                </div>
+              ` : ''}
+              
+              ${place.tips ? `
+                <div class="place-tips">
+                  <div class="tips-title">💡 Tips & Recommendations</div>
+                  
+                  ${place.tips.whatToBring && place.tips.whatToBring.length > 0 ? `
+                    <div class="tips-section">
+                      <div class="tips-label">🎒 What to Bring:</div>
+                      <div class="tips-content">${place.tips.whatToBring.join(', ')}</div>
+                    </div>
+                  ` : ''}
+                  
+                  ${place.tips.whatToBuy && place.tips.whatToBuy.length > 0 ? `
+                    <div class="tips-section">
+                      <div class="tips-label">🛍️ What to Buy:</div>
+                      <div class="tips-content">${place.tips.whatToBuy.join(', ')}</div>
+                    </div>
+                  ` : ''}
+                  
+                  ${place.tips.safetyNotes && place.tips.safetyNotes.length > 0 ? `
+                    <div class="tips-section">
+                      <div class="tips-label">⚠️ Safety Notes:</div>
+                      <div class="tips-content">${place.tips.safetyNotes.join(', ')}</div>
+                    </div>
+                  ` : ''}
+                  
+                  ${place.tips.customsEtiquette && place.tips.customsEtiquette.length > 0 ? `
+                    <div class="tips-section">
+                      <div class="tips-label">🙏 Customs & Etiquette:</div>
+                      <div class="tips-content">${place.tips.customsEtiquette.join(', ')}</div>
+                    </div>
+                  ` : ''}
+                  
+                  ${place.tips.photoSpots && place.tips.photoSpots.length > 0 ? `
+                    <div class="tips-section">
+                      <div class="tips-label">📸 Photo Spots:</div>
+                      <div class="tips-content">${place.tips.photoSpots.join(', ')}</div>
+                    </div>
+                  ` : ''}
+                  
+                  ${place.tips.bookingRequired ? `
+                    <div class="tips-section">
+                      <div class="tips-label">📞 Booking Required:</div>
+                      <div class="tips-content">Yes - Pre-booking recommended</div>
+                    </div>
+                  ` : ''}
+                </div>
+              ` : ''}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('')
+  );
+
+  // Budget Section
+  const budgetSection = createSection('budget', `
+    <div class="budget-summary">
+      <div class="budget-box">
+        <div class="budget-label">Total Budget</div>
+        <div class="budget-amount">₹${data.budgetBreakdown.totalBudget.toLocaleString()}</div>
+      </div>
+      <div class="budget-box">
+        <div class="budget-label">Total Spent</div>
+        <div class="budget-amount">₹${data.budgetBreakdown.totalSpent.toLocaleString()}</div>
+      </div>
+      <div class="budget-box">
+        <div class="budget-label">Remaining</div>
+        <div class="budget-amount">₹${data.budgetBreakdown.remainingBudget.toLocaleString()}</div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-icon">🏨</span>
+        <h2 class="card-title">Accommodation</h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">Hotel</span>
+          <span class="info-value">${data.budgetBreakdown.expenses.accommodation.hotelName}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Price per Night</span>
+          <span class="info-value">₹${data.budgetBreakdown.expenses.accommodation.pricePerNight}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Nights</span>
+          <span class="info-value">${data.budgetBreakdown.expenses.accommodation.nights}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Total</span>
+          <span class="info-value">₹${data.budgetBreakdown.expenses.accommodation.total}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-icon">💳</span>
+        <h2 class="card-title">Daily Expense Breakdown</h2>
+      </div>
+      ${data.budgetBreakdown.expenses.dailyExpenses.map(day => `
+        <div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+            <span style="font-weight: 600; font-size: 1.1rem;">Day ${day.day}</span>
+            <span style="color: var(--accent); font-weight: 700; font-size: 1.1rem;">₹${day.subtotal}</span>
+          </div>
+          <div style="display: grid; gap: 0.5rem; font-size: 0.9rem;">
+            <div style="display: flex; justify-content: space-between; color: var(--text-muted);">
+              <span>Entry Fees:</span>
+              <span>₹${day.entryFees}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; color: var(--text-muted);">
+              <span>Activities:</span>
+              <span>₹${day.activities}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; color: var(--text-muted);">
+              <span>Transport:</span>
+              <span>₹${day.transport}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; color: var(--text-muted);">
+              <span>Meals:</span>
+              <span>₹${day.meals}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; color: var(--text-muted);">
+              <span>Shopping:</span>
+              <span>₹${day.shopping}</span>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    
+    ${data.budgetBreakdown.budgetTips && data.budgetBreakdown.budgetTips.length > 0 ? `
+      <div class="budget-tips">
+        <div class="budget-tips-title">
+          💡 Budget Tips & Recommendations
+        </div>
+        ${data.budgetBreakdown.budgetTips.map(tip => `
+          <div class="budget-tip-item">${tip}</div>
+        `).join('')}
+      </div>
+    ` : ''}
+  `);
+
+  // Packing Section
+  const packingSection = createSection('packing', `
+    <div class="card">
+      <div class="card-header">
+        <span class="card-icon">🎒</span>
+        <h2 class="card-title">Packing List</h2>
+      </div>
+      ${Object.entries(data.packingList).map(([category, items]) => `
+        <div class="packing-category">
+          <h3 class="category-title">
+            ${getCategoryIcon(category)} ${formatLabel(category)}
+          </h3>
+          <div class="item-tags">
+            ${items.map(item => `<span class="item-tag">${item}</span>`).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `);
+
+  // Checklist Section
+  const checklistSection = createSection('checklist', `
+    <div class="card">
+      <div class="card-header">
+        <span class="card-icon">✓</span>
+        <h2 class="card-title">Pre-Trip Checklist</h2>
+      </div>
+      ${data.preTripChecklist.map(item => `
+        <div class="checklist-item">
+          <div style="flex: 1;">
+            <div style="margin-bottom: 0.5rem;">${item.task}</div>
+            <span class="priority-badge priority-${item.priority}">${item.priority.toUpperCase()}</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `);
+
+  content.append(overviewSection, hotelSection, itinerarySection, budgetSection, packingSection, checklistSection);
+}
+
+function createSection(id, html) {
+  const section = document.createElement('div');
+  section.id = id;
+  section.className = `section ${id === 'overview' ? 'active' : ''}`;
+  section.innerHTML = html;
+  return section;
+}
+
+function formatLabel(str) {
+  return str.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+}
+
+function getCategoryIcon(category) {
+  const icons = {
+    clothing: '👕',
+    footwear: '👟',
+    essentials: '🎯',
+    documents: '📄',
+    electronics: '🔌',
+    medication: '💊',
+    miscellaneous: '🔧'
+  };
+  return icons[category.toLowerCase()] || '📦';
+}
+
+function toggleDay(card) {
+  const list = card.querySelector('.places-list');
+  const icon = card.querySelector('.expand-icon');
+  list.classList.toggle('show');
+  icon.classList.toggle('rotated');
+}
+
+// Tab Navigation
 document.getElementById('tabs').addEventListener('click', (e) => {
-  if (e.target.classList.contains('tab')) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  if (e.target.classList.contains('nav-tab')) {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
     e.target.classList.add('active');
+    
     const section = e.target.dataset.section;
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById(section)?.classList.add('active');
   }
 });
 
-async function loadPortfolio(userId = '123') {
-  const jsonUrl = `https://raw.githubusercontent.com/l0keshai0004-beep/jsons/main/${userId}.json`;
-  try {
-    const res = await fetch(jsonUrl);
-    if (!res.ok) throw new Error(`HTTP error! ${res.status}`);
-    currentData = await res.json();
-    renderPortfolio(currentData);
-  } catch (err) {
-    document.getElementById('content').innerHTML =
-      `<div class="card" style="text-align:center;padding:40px;">
-         <h2 style="color:#ef4444;">⚠️ Unable to Load Itinerary</h2>
-         <p style="color:var(--muted);">${err.message}</p>
-       </div>`;
-  }
-}
-
-function renderPortfolio(data) {
-  const content = document.getElementById('content');
-  content.innerHTML = '';
-
-  const overview = createSection('overview', `<div class="card"><div class="card-title"><span class="icon">📋</span>Trip Overview</div>
-    ${Object.entries(data.tripOverview || {}).map(([k,v])=>`<div class='info-item'><span class='info-label'>${k}</span><span class='info-value'>${v}</span></div>`).join('')}</div>`);
-
-  const hotel = createSection('hotel', `<div class="card"><div class="card-title"><span class="icon">🏨</span>${data.hotel?.name || 'Hotel'}</div>
-    <div class='info-item'><span class='info-label'>Location</span><span class='info-value'>${data.hotel?.location || 'N/A'}</span></div></div>`);
-
-  const itinerary = createSection('itinerary', data.dailyItinerary?.map(d=>`
-    <div class="day-card"><div class="day-header"><div><div class="day-number">Day ${d.day}</div></div><span class="expand-icon">▼</span></div>
-    <div class="day-theme">${d.theme||''}</div>
-    <div class="places-list">${d.places?.map(p=>`<div class='place-item'><div class='place-time'>${p.timeOfDay}</div><div class='place-name'>${p.name}</div><div class='place-desc'>${p.description||''}</div></div>`).join('')}</div></div>`).join(''));
-
-  const budget = createSection('budget', `<div class="card"><div class="card-title"><span class="icon">💰</span>Budget</div>
-    ${Object.entries(data.budgetBreakdown || {}).map(([k,v])=>`<div class='budget-item'><div class='budget-label'>${k}</div><div class='budget-amount'>${v}</div></div>`).join('')}</div>`);
-
-  const packing = createSection('packing', `<div class="card"><div class="card-title"><span class="icon">🎒</span>Packing</div>
-    ${(Object.entries(data.packingList||{}).map(([k,v])=>`<div style='margin-bottom:12px;'><h3 style='color:var(--accent);'>${k}</h3>${v.map(i=>`<span class='pill'>${i}</span>`).join('')}</div>`)).join('')}</div>`);
-
-  content.append(overview, hotel, itinerary, budget, packing);
-
-  document.querySelectorAll('.day-card').forEach(card=>{
-    card.addEventListener('click',()=>{
-      const list=card.querySelector('.places-list');
-      const icon=card.querySelector('.expand-icon');
-      list.classList.toggle('show');
-      icon.classList.toggle('rotated');
-    });
-  });
-}
-
-function createSection(id, html) {
-  const section=document.createElement('div');
-  section.id=id;
-  section.className=`section ${id==='overview'?'active':''}`;
-  section.innerHTML=html;
-  return section;
-}
-
-const userId = new URLSearchParams(window.location.search).get('user') || 'default';
-loadPortfolio(userId);
+// Initialize
+loadPortfolio()
+// renderContent(itineraryData);
 </script>
 </body>
 </html>
