@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Travel Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
 * {
   margin: 0;
@@ -261,27 +261,7 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* Budget Chart */
-.chart-container {
-  background: var(--surface);
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: var(--shadow);
-}
-
-.chart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.chart-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-}
-
-/* Bar Chart - FIXED */
+/* Bar Chart */
 .bar-chart {
   display: flex;
   align-items: flex-end;
@@ -336,7 +316,7 @@ body {
   font-weight: 600;
 }
 
-/* Pie Chart - FIXED */
+/* Pie Chart */
 .pie-chart-container {
   display: flex;
   flex-direction: column;
@@ -752,14 +732,6 @@ body {
   transform: translateX(4px);
 }
 
-.packing-checkbox {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--border);
-  border-radius: 0.25rem;
-  flex-shrink: 0;
-}
-
 /* Hotel Gallery */
 .gallery {
   display: grid;
@@ -905,370 +877,9 @@ body {
 </div>
 
 <script>
-async function loadItinerary() {
-  const userId = new URLSearchParams(window.location.search).get('user') || 'default';
-  const jsonUrl = `https://raw.githubusercontent.com/l0keshai0004-beep/jsons/refs/heads/main/${userId}.json`;
-
-  try {
-    const res = await fetch(jsonUrl);
-    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-    const data = await res.json();
-    renderContent(data);
-  } catch (err) {
-    console.error('Error:', err);
-  }
-}
-
-function renderContent(data) {
-  const content = document.getElementById('content');
-  content.innerHTML = '';
-
-  // Calculate stats
-  const totalDays = data.dailyItinerary.length;
-  const totalPlaces = data.dailyItinerary.reduce((sum, day) => sum + day.places.length, 0);
-  const budgetUsedPercent = ((data.budgetBreakdown.totalSpent / data.budgetBreakdown.totalBudget) * 100).toFixed(0);
-
-  // Overview Section
-  const overview = createSection('overview', `
-    <div class="header">
-      <h1>Welcome to ${data.tripOverview.destination}! 🎉</h1>
-      <p>${data.tripOverview.startDate} to ${data.tripOverview.endDate}</p>
-    </div>
-
-    <!-- Stats Cards -->
-    <div class="stats-grid">
-      <div class="stat-card primary">
-        <div class="stat-header">
-          <div>
-            <div class="stat-label">Total Days</div>
-            <div class="stat-value">${totalDays}</div>
-            <div class="stat-change positive">📅 ${data.tripOverview.tripType}</div>
-          </div>
-          <div class="stat-icon">🗓️</div>
-        </div>
-      </div>
-
-      <div class="stat-card secondary">
-        <div class="stat-header">
-          <div>
-            <div class="stat-label">Places to Visit</div>
-            <div class="stat-value">${totalPlaces}</div>
-            <div class="stat-change positive">📍 Across ${totalDays} days</div>
-          </div>
-          <div class="stat-icon">📌</div>
-        </div>
-      </div>
-
-      <div class="stat-card success">
-        <div class="stat-header">
-          <div>
-            <div class="stat-label">Budget Status</div>
-            <div class="stat-value">${budgetUsedPercent}%</div>
-            <div class="stat-change ${budgetUsedPercent > 80 ? 'negative' : 'positive'}">
-              ${budgetUsedPercent > 80 ? '⚠️' : '✓'} Used of ₹${data.budgetBreakdown.totalBudget.toLocaleString()}
-            </div>
-          </div>
-          <div class="stat-icon">💰</div>
-        </div>
-      </div>
-
-      <div class="stat-card warning">
-        <div class="stat-header">
-          <div>
-            <div class="stat-label">Companions</div>
-            <div class="stat-value">${data.tripOverview.companions}</div>
-            <div class="stat-change positive">❤️ ${data.tripOverview.duration} days trip</div>
-          </div>
-          <div class="stat-icon">👥</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Trip Details Card -->
-    <div class="card">
-      <div class="card-header">
-        <h2 class="card-title">Trip Details</h2>
-        <span class="card-badge">${data.tripOverview.tripType}</span>
-      </div>
-      <div class="info-grid">
-        ${Object.entries(data.tripOverview).map(([key, value]) => `
-          <div class="info-item">
-            <div class="info-label">${formatLabel(key)}</div>
-            <div class="info-value">${value}</div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `);
-
-  // Itinerary Section with Timeline
-  const itinerary = createSection('itinerary', `
-    <div class="header">
-      <h1>Your Journey Timeline</h1>
-      <p>Day-by-day itinerary for your ${totalDays}-day adventure</p>
-    </div>
-
-    <div class="timeline">
-      ${data.dailyItinerary.map(day => `
-        <div class="timeline-item">
-          <div class="timeline-card">
-            <div class="timeline-header">
-              <div>
-                <div class="timeline-date">${day.date}</div>
-                <h3 class="timeline-day">Day ${day.day}</h3>
-                <div class="timeline-theme">${day.theme}</div>
-              </div>
-            </div>
-            
-            <div class="timeline-stats">
-              <div class="timeline-stat">
-                <span>📍</span>
-                <span>${day.totalDistance} km</span>
-              </div>
-              <div class="timeline-stat">
-                <span>💰</span>
-                <span>₹${day.daySummary.spending.total.toLocaleString()}</span>
-              </div>
-              <div class="timeline-stat">
-                <span>📌</span>
-                <span>${day.places.length} places</span>
-              </div>
-              <div class="timeline-stat">
-                <span>⏱️</span>
-                <span>${day.totalTravelTime}</span>
-              </div>
-            </div>
-
-            <button class="expand-btn" onclick="togglePlaces(this)">
-              <span>View Places</span>
-              <span class="expand-icon">▼</span>
-            </button>
-
-            <div class="places-expanded">
-              ${day.places.map(place => `
-                <div class="place-card">
-                  <div class="place-time">${place.timeOfDay}</div>
-                  <div class="place-name">${place.name}</div>
-                  <div class="place-desc">${place.description}</div>
-                  ${place.activities && place.activities.length > 0 ? `
-                    <div class="tags">
-                      ${place.activities.map(act => `<span class="tag">${act}</span>`).join('')}
-                    </div>
-                  ` : ''}
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `);
-
-  // Budget Section with FIXED Charts
-  const budget = createSection('budget', `
-    <div class="header">
-      <h1>Budget Overview</h1>
-      <p>Detailed expense breakdown with visualizations</p>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stat-card primary">
-        <div class="stat-label">Total Budget</div>
-        <div class="stat-value">₹${data.budgetBreakdown.totalBudget.toLocaleString()}</div>
-      </div>
-      <div class="stat-card warning">
-        <div class="stat-label">Total Spent</div>
-        <div class="stat-value">₹${data.budgetBreakdown.totalSpent.toLocaleString()}</div>
-      </div>
-      <div class="stat-card success">
-        <div class="stat-label">Remaining</div>
-        <div class="stat-value">₹${data.budgetBreakdown.remainingBudget.toLocaleString()}</div>
-      </div>
-    </div>
-
-    <div class="two-col">
-      <!-- Bar Chart for Daily Expenses -->
-      <div class="chart-container">
-        <div class="chart-header">
-          <h3 class="chart-title">Daily Expenses</h3>
-        </div>
-        <div class="bar-chart">
-          ${createBarChart(data.budgetBreakdown.expenses.dailyExpenses)}
-        </div>
-      </div>
-
-      <!-- Pie Chart for Budget Split -->
-      <div class="chart-container">
-        <div class="chart-header">
-          <h3 class="chart-title">Budget Split</h3>
-        </div>
-        <div class="pie-chart-container">
-          <svg class="pie-chart" viewBox="0 0 100 100">
-            ${createPieChart(data.budgetBreakdown)}
-          </svg>
-          <div class="chart-legend">
-            ${createLegend(data.budgetBreakdown)}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Detailed Breakdown -->
-    <div class="card">
-      <div class="card-header">
-        <h2 class="card-title">Detailed Breakdown</h2>
-      </div>
-      ${data.budgetBreakdown.expenses.dailyExpenses.map(day => `
-        <div style="margin-bottom: 1.5rem;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-            <span style="font-weight: 700; font-size: 1.1rem;">Day ${day.day}</span>
-            <span style="font-weight: 800; color: var(--primary); font-size: 1.1rem;">₹${day.subtotal.toLocaleString()}</span>
-          </div>
-          <div class="info-grid">
-            ${day.entryFees > 0 ? `<div class="info-item"><div class="info-label">Entry Fees</div><div class="info-value">₹${day.entryFees}</div></div>` : ''}
-            ${day.activities > 0 ? `<div class="info-item"><div class="info-label">Activities</div><div class="info-value">₹${day.activities}</div></div>` : ''}
-            ${day.transport > 0 ? `<div class="info-item"><div class="info-label">Transport</div><div class="info-value">₹${day.transport}</div></div>` : ''}
-            ${day.meals > 0 ? `<div class="info-item"><div class="info-label">Meals</div><div class="info-value">₹${day.meals}</div></div>` : ''}
-            ${day.shopping > 0 ? `<div class="info-item"><div class="info-label">Shopping</div><div class="info-value">₹${day.shopping}</div></div>` : ''}
-          </div>
-        </div>
-      `).join('')}
-    </div>
-
-    ${data.budgetBreakdown.budgetTips && data.budgetBreakdown.budgetTips.length > 0 ? `
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title">💡 Budget Tips</h2>
-        </div>
-        <div style="display: grid; gap: 1rem;">
-          ${data.budgetBreakdown.budgetTips.map(tip => `
-            <div style="padding: 1rem; background: #f8fafc; border-radius: 0.75rem; border-left: 4px solid #f59e0b; color: var(--text-light); line-height: 1.7;">
-              ${tip}
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    ` : ''}
-  `);
-
-  // Hotel Section
-  const hotel = createSection('hotel', `
-    <div class="header">
-      <h1>${data.hotel.name}</h1>
-      <p>${data.hotel.location}</p>
-    </div>
-
-    <div class="card">
-      <div class="info-grid">
-        <div class="info-item">
-          <div class="info-label">Price per Night</div>
-          <div class="info-value">₹${data.hotel.pricePerNight.toLocaleString()}</div>
-        </div>
-        <div class="info-item">
-          <div class="info-label">Nights</div>
-          <div class="info-value">${data.hotel.nights}</div>
-        </div>
-        <div class="info-item">
-          <div class="info-label">Rooms</div>
-          <div class="info-value">${data.hotel.rooms}</div>
-        </div>
-        <div class="info-item">
-          <div class="info-label">Total Cost</div>
-          <div class="info-value">₹${data.hotel.totalCost.toLocaleString()}</div>
-        </div>
-      </div>
-      <p style="margin-top: 1.5rem; color: var(--text-light); line-height: 1.8;">
-        ${data.hotel.reasonForSelection}
-      </p>
-    </div>
-
-    ${data.hotel.amenities && data.hotel.amenities.length > 0 ? `
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title">✨ Amenities</h2>
-        </div>
-        <div class="info-grid">
-          ${data.hotel.amenities.map(a => `
-            <div class="info-item">
-              <div class="info-value">• ${a}</div>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    ` : ''}
-
-    ${data.hotel.imageLinks && data.hotel.imageLinks.length > 0 ? `
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title">📷 Gallery</h2>
-        </div>
-        <div class="gallery">
-          ${data.hotel.imageLinks.slice(0, 6).map(img => `
-            <div class="gallery-item">
-              <img src="${img}" alt="Hotel" class="gallery-img" onerror="this.style.display='none'">
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    ` : ''}
-  `);
-
-  // Packing Section
-  const packing = createSection('packing', `
-    <div class="header">
-      <h1>Packing List</h1>
-      <p>Everything you need for your trip</p>
-    </div>
-
-    <div class="packing-grid">
-      ${Object.entries(data.packingList).map(([category, items]) => `
-        <div class="packing-category">
-          <div class="category-header">
-            <div class="category-icon">${getCategoryIcon(category)}</div>
-            <h3 class="category-title">${formatLabel(category)}</h3>
-          </div>
-          <div class="packing-items">
-            ${items.map(item => `
-              <div class="packing-item">
-                <div class="packing-checkbox"></div>
-                <span>${item}</span>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `);
-
-  // Checklist Section
-  const checklist = createSection('checklist', `
-    <div class="header">
-      <h1>Pre-Trip Checklist</h1>
-      <p>Important tasks to complete before departure</p>
-    </div>
-
-    <div class="card">
-      <div class="checklist-grid">
-        ${data.preTripChecklist.map(item => `
-          <div class="checklist-item ${item.priority}">
-            <div class="checkbox"></div>
-            <div class="checklist-content">
-              <div class="checklist-task">${item.task}</div>
-              <span class="priority-tag ${item.priority}">${item.priority}</span>
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `);
-
-  content.append(overview, itinerary, budget, hotel, packing, checklist);
-}
-
-// FIXED: Bar Chart Creation
+// Utility functions from your original code:
 function createBarChart(dailyExpenses) {
   const maxExpense = Math.max(...dailyExpenses.map(d => d.subtotal));
-  
   return dailyExpenses.map(day => {
     const heightPercent = (day.subtotal / maxExpense) * 100;
     return `
@@ -1281,7 +892,6 @@ function createBarChart(dailyExpenses) {
   }).join('');
 }
 
-// FIXED: Pie Chart Creation
 function createPieChart(budget) {
   const accommodation = budget.expenses.accommodation.total;
   const activities = budget.expenses.dailyExpenses.reduce((sum, d) => sum + d.activities, 0);
@@ -1320,7 +930,6 @@ function getCoordinatesForPercent(percent) {
   return [x, y];
 }
 
-// Legend Creation
 function createLegend(budget) {
   const accommodation = budget.expenses.accommodation.total;
   const activities = budget.expenses.dailyExpenses.reduce((sum, d) => sum + d.activities, 0);
@@ -1352,7 +961,9 @@ function createSection(id, html) {
 }
 
 function formatLabel(str) {
-  return str.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase()).trim();
+  return str.replace(/([A-Z])/g, ' $1')
+            .replace(/^./, s => s.toUpperCase())
+            .trim();
 }
 
 function getCategoryIcon(category) {
@@ -1371,16 +982,323 @@ function togglePlaces(btn) {
   icon.classList.toggle('rotated');
 }
 
-// Sidebar Navigation
+async function loadItinerary() {
+  const userId = new URLSearchParams(window.location.search).get('user') || 'default';
+  const jsonUrl = `https://raw.githubusercontent.com/l0keshai0004-beep/jsons/refs/heads/main/${userId}.json`;
+  try {
+    const res = await fetch(jsonUrl);
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    const data = await res.json();
+    renderContent(data);
+  } catch (err) {
+    console.error('Error:', err);
+    const content = document.getElementById('content');
+    content.innerHTML = `<p style="color: var(--danger);">Failed to load itinerary data.</p>`;
+  }
+}
+
+function renderContent(data) {
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+
+  const totalDays = data.dailyItinerary.length;
+  const totalPlaces = data.dailyItinerary.reduce((sum, day) => sum + day.places.length, 0);
+  const budgetUsedPercent = ((data.budgetBreakdown.totalSpent / data.budgetBreakdown.totalBudget) * 100).toFixed(0);
+
+  // Overview Section
+  const overview = createSection('overview', `
+    <div class="header">
+      <h1>Welcome to ${data.tripOverview.destination}! 🎉</h1>
+      <p>${data.tripOverview.startDate} to ${data.tripOverview.endDate}</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card primary">
+        <div class="stat-header">
+          <div>
+            <div class="stat-label">Total Days</div>
+            <div class="stat-value">${totalDays}</div>
+            <div class="stat-change positive">📅 ${data.tripOverview.tripType}</div>
+          </div>
+          <div class="stat-icon">🗓️</div>
+        </div>
+      </div>
+      <div class="stat-card secondary">
+        <div class="stat-header">
+          <div>
+            <div class="stat-label">Places to Visit</div>
+            <div class="stat-value">${totalPlaces}</div>
+            <div class="stat-change positive">📍 Across ${totalDays} days</div>
+          </div>
+          <div class="stat-icon">📌</div>
+        </div>
+      </div>
+      <div class="stat-card success">
+        <div class="stat-header">
+          <div>
+            <div class="stat-label">Budget Status</div>
+            <div class="stat-value">${budgetUsedPercent}%</div>
+            <div class="stat-change ${budgetUsedPercent > 80 ? 'negative' : 'positive'}">
+              ${budgetUsedPercent > 80 ? '⚠️' : '✓'} Used of ₹${data.budgetBreakdown.totalBudget.toLocaleString()}
+            </div>
+          </div>
+          <div class="stat-icon">💰</div>
+        </div>
+      </div>
+      <div class="stat-card warning">
+        <div class="stat-header">
+          <div>
+            <div class="stat-label">Companions</div>
+            <div class="stat-value">${data.tripOverview.companions}</div>
+            <div class="stat-change positive">❤️ ${data.tripOverview.duration} days trip</div>
+          </div>
+          <div class="stat-icon">👥</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Trip Details</h2>
+        <span class="card-badge">${data.tripOverview.tripType}</span>
+      </div>
+      <div class="info-grid">
+        ${Object.entries(data.tripOverview).map(([key, value]) => `
+          <div class="info-item">
+            <div class="info-label">${formatLabel(key)}</div>
+            <div class="info-value">${value}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `);
+
+  // Itinerary Section
+  const itinerary = createSection('itinerary', `
+    <div class="header">
+      <h1>Your Journey Timeline</h1>
+      <p>Day-by-day itinerary for your ${totalDays}-day adventure</p>
+    </div>
+    <div class="timeline">
+      ${data.dailyItinerary.map(day => `
+        <div class="timeline-item">
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-date">${day.date}</div>
+                <h3 class="timeline-day">Day ${day.day}</h3>
+                <div class="timeline-theme">${day.theme}</div>
+              </div>
+            </div>
+            <div class="timeline-stats">
+              <div class="timeline-stat"><span>📍</span><span>${day.totalDistance} km</span></div>
+              <div class="timeline-stat"><span>💰</span><span>₹${day.daySummary.spending.total.toLocaleString()}</span></div>
+              <div class="timeline-stat"><span>📌</span><span>${day.places.length} places</span></div>
+              <div class="timeline-stat"><span>⏱️</span><span>${day.totalTravelTime}</span></div>
+            </div>
+            <button class="expand-btn" onclick="togglePlaces(this)">
+              <span>View Places</span><span class="expand-icon">▼</span>
+            </button>
+            <div class="places-expanded">
+              ${day.places.map(place => `
+                <div class="place-card">
+                  <div class="place-time">${place.timeOfDay}</div>
+                  <div class="place-name">${place.name}</div>
+                  <div class="place-desc">${place.description}</div>
+                  ${place.activities && place.activities.length > 0 ? `
+                    <div class="tags">
+                      ${place.activities.map(act => `<span class="tag">${act}</span>`).join('')}
+                    </div>
+                  ` : ''}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `);
+
+  // Budget Section
+  const budget = createSection('budget', `
+    <div class="header">
+      <h1>Budget Overview</h1>
+      <p>Detailed expense breakdown with visualizations</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card primary">
+        <div class="stat-label">Total Budget</div>
+        <div class="stat-value">₹${data.budgetBreakdown.totalBudget.toLocaleString()}</div>
+      </div>
+      <div class="stat-card warning">
+        <div class="stat-label">Total Spent</div>
+        <div class="stat-value">₹${data.budgetBreakdown.totalSpent.toLocaleString()}</div>
+      </div>
+      <div class="stat-card success">
+        <div class="stat-label">Remaining</div>
+        <div class="stat-value">₹${data.budgetBreakdown.remainingBudget.toLocaleString()}</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="chart-container">
+        <div class="chart-header"><h3 class="chart-title">Daily Expenses</h3></div>
+        <div class="bar-chart">${createBarChart(data.budgetBreakdown.expenses.dailyExpenses)}</div>
+      </div>
+      <div class="chart-container">
+        <div class="chart-header"><h3 class="chart-title">Budget Split</h3></div>
+        <div class="pie-chart-container">
+          <svg class="pie-chart" viewBox="0 0 100 100">${createPieChart(data.budgetBreakdown)}</svg>
+          <div class="chart-legend">${createLegend(data.budgetBreakdown)}</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">Detailed Breakdown</h2></div>
+      ${data.budgetBreakdown.expenses.dailyExpenses.map(day => `
+        <div style="margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+            <span style="font-weight: 700; font-size: 1.1rem;">Day ${day.day}</span>
+            <span style="font-weight: 800; color: var(--primary); font-size: 1.1rem;">₹${day.subtotal.toLocaleString()}</span>
+          </div>
+          <div class="info-grid">
+            ${day.entryFees > 0 ? `<div class="info-item"><div class="info-label">Entry Fees</div><div class="info-value">₹${day.entryFees}</div></div>` : ''}
+            ${day.activities > 0 ? `<div class="info-item"><div class="info-label">Activities</div><div class="info-value">₹${day.activities}</div></div>` : ''}
+            ${day.transport > 0 ? `<div class="info-item"><div class="info-label">Transport</div><div class="info-value">₹${day.transport}</div></div>` : ''}
+            ${day.meals > 0 ? `<div class="info-item"><div class="info-label">Meals</div><div class="info-value">₹${day.meals}</div></div>` : ''}
+            ${day.shopping > 0 ? `<div class="info-item"><div class="info-label">Shopping</div><div class="info-value">₹${day.shopping}</div></div>` : ''}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    ${data.budgetBreakdown.budgetTips && data.budgetBreakdown.budgetTips.length > 0 ? `
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">💡 Budget Tips</h2></div>
+        <div style="display: grid; gap: 1rem;">
+          ${data.budgetBreakdown.budgetTips.map(tip => `
+            <div style="padding: 1rem; background: #f8fafc; border-radius: 0.75rem; border-left: 4px solid #f59e0b; color: var(--text-light); line-height: 1.7;">
+              ${tip}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    ` : ''}
+  `);
+
+  // Hotel Section
+  const hotel = createSection('hotel', `
+    <div class="header">
+      <h1>${data.hotel.name}</h1>
+      <p>${data.hotel.location}</p>
+    </div>
+    <div class="card">
+      <div class="info-grid">
+        <div class="info-item"><div class="info-label">Price per Night</div><div class="info-value">₹${data.hotel.pricePerNight.toLocaleString()}</div></div>
+        <div class="info-item"><div class="info-label">Nights</div><div class="info-value">${data.hotel.nights}</div></div>
+        <div class="info-item"><div class="info-label">Rooms</div><div class="info-value">${data.hotel.rooms}</div></div>
+        <div class="info-item"><div class="info-label">Total Cost</div><div class="info-value">₹${data.hotel.totalCost.toLocaleString()}</div></div>
+      </div>
+      <p style="margin-top: 1.5rem; color: var(--text-light); line-height: 1.8;">${data.hotel.reasonForSelection}</p>
+    </div>
+    ${data.hotel.amenities && data.hotel.amenities.length > 0 ? `
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">✨ Amenities</h2></div>
+        <div class="info-grid">${data.hotel.amenities.map(a => `<div class="info-item"><div class="info-value">• ${a}</div></div>`).join('')}</div>
+      </div>
+    ` : ''}
+    ${data.hotel.imageLinks && data.hotel.imageLinks.length > 0 ? `
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">📷 Gallery</h2></div>
+        <div class="gallery">${data.hotel.imageLinks.slice(0, 6).map(img => `
+          <div class="gallery-item"><img src="${img}" alt="Hotel" class="gallery-img" onerror="this.style.display='none'"></div>`).join('')}
+        </div>
+      </div>
+    ` : ''}
+  `);
+
+  // Packing Section
+  const packing = createSection('packing', `
+    <div class="header"><h1>Packing List</h1><p>Everything you need for your trip</p></div>
+    <div class="packing-grid">${Object.entries(data.packingList).map(([category, items]) => `
+      <div class="packing-category">
+        <div class="category-header">
+          <div class="category-icon">${getCategoryIcon(category)}</div>
+          <h3 class="category-title">${formatLabel(category)}</h3>
+        </div>
+        <div class="packing-items">${items.map(item => `
+          <div class="packing-item">
+            <div class="packing-checkbox"></div>
+            <span>${item}</span>
+          </div>`).join('')}
+        </div>
+      </div>`).join('')}
+    </div>
+  `);
+
+  // Checklist Section
+  const checklist = createSection('checklist', `
+    <div class="header"><h1>Pre-Trip Checklist</h1><p>Important tasks to complete before departure</p></div>
+    <div class="card">
+      <div class="checklist-grid">${data.preTripChecklist.map(item => `
+        <div class="checklist-item ${item.priority}">
+          <div class="checkbox"></div>
+          <div class="checklist-content">
+            <div class="checklist-task">${item.task}</div>
+            <span class="priority-tag ${item.priority}">${item.priority}</span>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>
+  `);
+
+  // Transport Section for flight or road only
+  let transportHtml = '';
+  if (data.mode_of_transport.flight) {
+    const f = data.mode_of_transport.flight;
+    transportHtml = `
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">Flight Details</h2></div>
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Destination</div><div class="info-value">${f.destination}</div></div>
+          <div class="info-item"><div class="info-label">Approximate Cost</div><div class="info-value">${f.Approx_cost}</div></div>
+          <div class="info-item"><div class="info-label">Duration</div><div class="info-value">${f["Approx_time_of_flight(duration)"]}</div></div>
+          <div class="info-item"><div class="info-label">Nearest Airport (Current Dest.)</div><div class="info-value">${f.Nearest_airport_from_current_destination}</div></div>
+          <div class="info-item"><div class="info-label">Nearest Airport (Visiting Dest.)</div><div class="info-value">${f.Nearest_airport_from_visiting_destination}</div></div>
+        </div>
+      </div>
+    `;
+  } else if (data.mode_of_transport.road) {
+    const r = data.mode_of_transport.road;
+    transportHtml = `
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">Road Transport Details</h2></div>
+        <div class="info-grid">
+          <div class="info-item"><div class="info-label">Bus Stations</div><div class="info-value">${r.stations.bus_stations}</div></div>
+          <div class="info-item"><div class="info-label">Train Stations</div><div class="info-value">${r.stations.train_stations}</div></div>
+          <div class="info-item"><div class="info-label">Train Cost</div><div class="info-value">${r.cost.train}</div></div>
+          <div class="info-item"><div class="info-label">Bus Cost</div><div class="info-value">${r.cost.bus}</div></div>
+          <div class="info-item"><div class="info-label">Cab Cost</div><div class="info-value">${r.cost.cab}</div></div>
+          <div class="info-item"><div class="info-label">Train Time</div><div class="info-value">${r.approx_time.train}</div></div>
+          <div class="info-item"><div class="info-label">Bus Time</div><div class="info-value">${r.approx_time.bus}</div></div>
+          <div class="info-item"><div class="info-label">Cab Time</div><div class="info-value">${r.approx_time.cab}</div></div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Append all sections
+  content.append(overview, itinerary, budget, hotel, packing, checklist);
+  if (transportHtml) {
+    const transportSection = document.createElement('div');
+    transportSection.innerHTML = transportHtml;
+    content.appendChild(transportSection);
+  }
+}
+
 document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('click', () => {
     document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
     item.classList.add('active');
-    
     const section = item.dataset.section;
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById(section)?.classList.add('active');
-    
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
