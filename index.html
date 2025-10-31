@@ -483,7 +483,7 @@
         }
 
         .place-details-content.open {
-            max-height: 2000px;
+            max-height: 3000px;
             padding: 20px;
             transition: max-height 0.6s ease-in;
         }
@@ -517,6 +517,85 @@
         .place-info-item span {
             color: #495057;
             font-size: 13px;
+        }
+
+        /* Accordion for tips */
+        .tips-accordion {
+            margin-top: 15px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+
+        .accordion-header {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: #e9ecef;
+        }
+
+        .accordion-header strong {
+            color: #667eea;
+            font-size: 13px;
+        }
+
+        .accordion-icon {
+            color: #667eea;
+            transition: transform 0.3s;
+        }
+
+        .accordion-icon.open {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 15px;
+            background: white;
+        }
+
+        .accordion-content.open {
+            max-height: 500px;
+            padding: 15px;
+            transition: max-height 0.4s ease-in;
+        }
+
+        .accordion-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .accordion-content li {
+            padding: 5px 0 5px 20px;
+            position: relative;
+            color: #495057;
+            font-size: 13px;
+        }
+
+        .accordion-content li:before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #667eea;
+            font-weight: bold;
         }
 
         /* Map container for day */
@@ -890,20 +969,11 @@
         let dayMarkers = {};
         let currency = '$';
 
-        // Currency symbols mapping
         const currencySymbols = {
-            'USD': '$',
-            'INR': '₹',
-            'EUR': '€',
-            'GBP': '£',
-            'JPY': '¥',
-            'AUD': 'A$',
-            'CAD': 'C$',
-            'CNY': '¥',
-            'AED': 'د.إ'
+            'USD': '$', 'INR': '₹', 'EUR': '€', 'GBP': '£', 'JPY': '¥',
+            'AUD': 'A$', 'CAD': 'C$', 'CNY': '¥', 'AED': 'د.إ'
         };
 
-        // Load itinerary data
         async function loadItinerary() {
             const userId = new URLSearchParams(window.location.search).get('user') || 'default';
             const jsonUrl = `https://raw.githubusercontent.com/l0keshai0004-beep/jsons/refs/heads/main/${userId}.json`;
@@ -914,7 +984,6 @@
                 const data = await res.json();
                 tripData = data;
                 
-                // Set currency from tripOverview
                 const currencyCode = safeGet(data, 'tripOverview.currency', 'USD');
                 currency = currencySymbols[currencyCode] || currencyCode;
                 
@@ -924,14 +993,12 @@
                 document.getElementById('loading').innerHTML = `
                     <div class="error">
                         <h2>⚠️ Failed to load itinerary data</h2>
-                        <p>Please check your connection and try again.</p>
-                        <p style="font-size: 14px; margin-top: 10px; color: #6c757d;">Error: ${err.message}</p>
+                        <p>Error: ${err.message}</p>
                     </div>
                 `;
             }
         }
 
-        // Safe value getter with fallback
         function safeGet(obj, path, defaultValue = null) {
             try {
                 const keys = path.split('.');
@@ -949,54 +1016,21 @@
             }
         }
 
-        // Safe number formatter
-        function formatCurrency(value, showCurrency = true) {
+        function formatCurrency(value) {
             try {
                 const num = parseFloat(value);
-                if (isNaN(num)) return showCurrency ? `${currency}0` : '0';
-                return showCurrency ? `${currency}${num.toLocaleString()}` : num.toLocaleString();
+                if (isNaN(num)) return `${currency}0`;
+                return `${currency}${num.toLocaleString()}`;
             } catch (e) {
-                return showCurrency ? `${currency}0` : '0';
+                return `${currency}0`;
             }
         }
 
-        // Get daily total spending
         function getDailyTotal(spending) {
             if (!spending) return 0;
-            return safeGet(spending, 'dailySubtotal', safeGet(spending, 'Total', 0)) || 0;
+            return safeGet(spending, 'Daily subtotal', safeGet(spending, 'dailySubtotal', safeGet(spending, 'Total', 0))) || 0;
         }
 
-        // Calculate total spent
-        function calculateTotalSpent(data) {
-            try {
-                let total = 0;
-                
-                // Add hotel cost from budgetBreakdown
-                const hotelCost = safeGet(data, 'budgetBreakdown.expenses.accommodation.total', 0);
-                if (hotelCost) total += parseFloat(hotelCost);
-                
-                // Add transport cost
-                const transportCost = safeGet(data, 'budgetBreakdown.expenses.Transport.0.total_cost', 0);
-                if (transportCost) total += parseFloat(transportCost);
-                
-                // Add daily expenses
-                const dailyItinerary = safeGet(data, 'dailyItinerary', []);
-                if (Array.isArray(dailyItinerary)) {
-                    dailyItinerary.forEach(day => {
-                        const spending = safeGet(day, 'daySummary.spending', {});
-                        const dayTotal = getDailyTotal(spending);
-                        if (dayTotal) total += parseFloat(dayTotal);
-                    });
-                }
-                
-                return total;
-            } catch (e) {
-                console.error('Error calculating total spent:', e);
-                return 0;
-            }
-        }
-
-        // Render all content
         function renderContent(data) {
             document.getElementById('loading').style.display = 'none';
             document.getElementById('content').style.display = 'block';
@@ -1017,35 +1051,21 @@
             setTimeout(() => initializeMaps(data), 500);
         }
 
-        // Render header
         function renderHeader(data) {
             const overview = safeGet(data, 'tripOverview', {});
             return `
                 <div class="header">
                     <h1>🌏 Travel Companion Dashboard</h1>
                     <div class="trip-info">
-                        <div class="trip-info-item">
-                            <span>📍</span>
-                            <span>${overview.destination || 'Unknown Destination'}</span>
-                        </div>
-                        <div class="trip-info-item">
-                            <span>📅</span>
-                            <span>${formatDateRange(overview.startDate, overview.endDate)}</span>
-                        </div>
-                        <div class="trip-info-item">
-                            <span>👥</span>
-                            <span>${overview.companions || 'N/A'}</span>
-                        </div>
-                        <div class="trip-info-item">
-                            <span>⏱️</span>
-                            <span>${overview.duration || 'N/A'}</span>
-                        </div>
+                        <div class="trip-info-item"><span>📍</span><span>${overview.destination || 'N/A'}</span></div>
+                        <div class="trip-info-item"><span>📅</span><span>${formatDateRange(overview.startDate, overview.endDate)}</span></div>
+                        <div class="trip-info-item"><span>👥</span><span>${overview.companions || 'N/A'}</span></div>
+                        <div class="trip-info-item"><span>⏱️</span><span>${overview.duration || 'N/A'}</span></div>
                     </div>
                 </div>
             `;
         }
 
-        // Render navigation tabs
         function renderNavTabs() {
             return `
                 <div class="nav-tabs">
@@ -1060,13 +1080,12 @@
             `;
         }
 
-        // Render Overview Tab
         function renderOverviewTab(data) {
             try {
                 const budget = safeGet(data, 'budgetBreakdown', {});
                 const totalBudget = parseFloat(safeGet(budget, 'totalBudget', 0)) || 0;
-                const totalSpent = calculateTotalSpent(data);
-                const remainingBudget = totalBudget - totalSpent;
+                const totalSpent = parseFloat(safeGet(budget, 'totalSpent', 0)) || 0;
+                const remainingBudget = parseFloat(safeGet(budget, 'remainingBudget', totalBudget - totalSpent)) || 0;
                 const budgetPercent = totalBudget > 0 ? ((totalSpent / totalBudget) * 100).toFixed(2) : 0;
                 
                 const dailyItinerary = safeGet(data, 'dailyItinerary', []);
@@ -1075,526 +1094,282 @@
                 const totalDistance = Array.isArray(dailyItinerary) ? 
                     dailyItinerary.reduce((sum, day) => sum + (parseFloat(safeGet(day, 'totalDistance', 0)) || 0), 0) : 0;
 
-                const hotelCost = parseFloat(safeGet(data, 'budgetBreakdown.expenses.accommodation.total', 0)) || 0;
-                const nights = calculateNights(data);
+                const hotelTotal = parseFloat(safeGet(data, 'hotel.totalCost', safeGet(budget, 'expenses.accommodation.total', 0))) || 0;
+                const nights = safeGet(budget, 'expenses.accommodation.nights', dailyItinerary.length - 1);
 
                 return `
                     <div id="overview" class="tab-content active">
                         <h2 style="color: #667eea; margin-bottom: 25px;">Trip Statistics</h2>
-                        
                         <div class="stats-grid">
-                            <div class="stat-card">
-                                <h3>Total Budget</h3>
-                                <div class="value">${formatCurrency(totalBudget)}</div>
-                                <div class="label">Allocated for trip</div>
-                            </div>
-                            <div class="stat-card">
-                                <h3>Estimated Spending</h3>
-                                <div class="value">${formatCurrency(totalSpent)}</div>
-                                <div class="label">${budgetPercent}% of budget</div>
-                            </div>
-                            <div class="stat-card">
-                                <h3>Remaining Budget</h3>
-                                <div class="value">${formatCurrency(remainingBudget)}</div>
-                                <div class="label">${(100 - budgetPercent).toFixed(2)}% remaining</div>
-                            </div>
-                            <div class="stat-card">
-                                <h3>Total Attractions</h3>
-                                <div class="value">${totalAttractions}</div>
-                                <div class="label">Places to visit</div>
-                            </div>
-                            <div class="stat-card">
-                                <h3>Total Distance</h3>
-                                <div class="value">${totalDistance.toFixed(2)} km</div>
-                                <div class="label">During itinerary</div>
-                            </div>
-                            <div class="stat-card">
-                                <h3>Accommodation</h3>
-                                <div class="value">${formatCurrency(hotelCost)}</div>
-                                <div class="label">${nights} nights</div>
-                            </div>
+                            <div class="stat-card"><h3>Total Budget</h3><div class="value">${formatCurrency(totalBudget)}</div><div class="label">Allocated for trip</div></div>
+                            <div class="stat-card"><h3>Estimated Spending</h3><div class="value">${formatCurrency(totalSpent)}</div><div class="label">${budgetPercent}% of budget</div></div>
+                            <div class="stat-card"><h3>Remaining Budget</h3><div class="value">${formatCurrency(remainingBudget)}</div><div class="label">${(100 - budgetPercent).toFixed(2)}% remaining</div></div>
+                            <div class="stat-card"><h3>Total Attractions</h3><div class="value">${totalAttractions}</div><div class="label">Places to visit</div></div>
+                            <div class="stat-card"><h3>Total Distance</h3><div class="value">${totalDistance.toFixed(2)} km</div><div class="label">During itinerary</div></div>
+                            <div class="stat-card"><h3>Accommodation</h3><div class="value">${formatCurrency(hotelTotal)}</div><div class="label">${nights} nights</div></div>
                         </div>
-
                         <div class="hotel-card">
                             <h2 style="color: #667eea; margin-bottom: 20px;">Trip Type</h2>
-                            <p style="font-size: 18px; color: #495057; line-height: 1.8;">
-                                ${safeGet(data, 'tripOverview.tripType', 'Adventure and Exploration')}
-                            </p>
+                            <p style="font-size: 18px; color: #495057; line-height: 1.8;">${safeGet(data, 'tripOverview.tripType', 'Adventure')}</p>
                         </div>
                     </div>
                 `;
             } catch (e) {
-                console.error('Error rendering overview:', e);
-                return `<div id="overview" class="tab-content active"><p class="error">Error loading overview data</p></div>`;
+                return `<div id="overview" class="tab-content active"><p class="error">Error loading overview</p></div>`;
             }
         }
 
-        // Render Transport Tab
         function renderTransportTab(data) {
             const transport = safeGet(data, 'mode_of_transport', {});
-            let html = `
-                <div id="transport" class="tab-content">
-                    <h2 style="color: #667eea; margin-bottom: 25px;">Transportation Options</h2>
-            `;
+            let html = `<div id="transport" class="tab-content"><h2 style="color: #667eea; margin-bottom: 25px;">Transportation Options</h2>`;
 
             if (transport.road) {
-                html += `
-                    <div class="transport-section">
-                        <h3 style="color: #495057; margin-bottom: 15px;">🚂 Road Transport</h3>
-                        <div class="transport-modes">
-                `;
-
+                html += `<div class="transport-section"><h3 style="color: #495057; margin-bottom: 15px;">🚂 Road Transport</h3><div class="transport-modes">`;
                 const roadModes = [
-                    { key: 'train', icon: '🚆', title: 'Train (Recommended)' },
+                    { key: 'train', icon: '🚆', title: 'Train' },
                     { key: 'bus', icon: '🚌', title: 'Bus' },
-                    { key: 'cab', icon: '🚕', title: 'Private Cab' }
+                    { key: 'cab', icon: '🚕', title: 'Cab' }
                 ];
-
                 roadModes.forEach(mode => {
                     if (transport.road.cost && transport.road.cost[mode.key]) {
-                        html += `
-                            <div class="transport-card">
-                                <h3>${mode.icon} ${mode.title}</h3>
-                                <div class="transport-detail">
-                                    <label>Cost (Round Trip):</label>
-                                    <span>${transport.road.cost[mode.key]}</span>
-                                </div>
-                                <div class="transport-detail">
-                                    <label>Travel Time:</label>
-                                    <span>${safeGet(transport.road.approx_time, mode.key, 'N/A')}</span>
-                                </div>
-                        `;
-
-                        if (mode.key === 'train' && transport.road.stations && transport.road.stations.train_stations) {
-                            html += `
-                                <div class="transport-detail">
-                                    <label>Stations:</label>
-                                    <span>${transport.road.stations.train_stations}</span>
-                                </div>
-                            `;
-                        } else if (mode.key === 'bus' && transport.road.stations && transport.road.stations.bus_stations) {
-                            html += `
-                                <div class="transport-detail">
-                                    <label>Stations:</label>
-                                    <span>${transport.road.stations.bus_stations}</span>
-                                </div>
-                            `;
+                        html += `<div class="transport-card"><h3>${mode.icon} ${mode.title}</h3>`;
+                        html += `<div class="transport-detail"><label>Cost:</label><span>${transport.road.cost[mode.key]}</span></div>`;
+                        html += `<div class="transport-detail"><label>Time:</label><span>${safeGet(transport.road.approx_time, mode.key, 'N/A')}</span></div>`;
+                        if (mode.key === 'train' && transport.road.stations?.train_stations) {
+                            html += `<div class="transport-detail"><label>Stations:</label><span>${transport.road.stations.train_stations}</span></div>`;
                         }
-
                         html += `</div>`;
                     }
                 });
-
-                html += `
-                        </div>
-                    </div>
-                `;
+                html += `</div></div>`;
             }
 
             if (transport.flight) {
-                html += `
-                    <div class="transport-section" style="margin-top: 40px;">
-                        <h3 style="color: #495057; margin-bottom: 15px;">✈️ Flight Options</h3>
-                        <div class="transport-modes">
-                            <div class="transport-card">
-                                <h3>✈️ Flight</h3>
-                                <div class="transport-detail">
-                                    <label>Destination:</label>
-                                    <span>${transport.flight.destination}</span>
-                                </div>
-                                <div class="transport-detail">
-                                    <label>Approx Cost:</label>
-                                    <span>${transport.flight.Approx_cost}</span>
-                                </div>
-                                <div class="transport-detail">
-                                    <label>Flight Duration:</label>
-                                    <span>${transport.flight['Approx_time_of_flight(duration)']}</span>
-                                </div>
-                                <div class="transport-detail">
-                                    <label>From Airport:</label>
-                                    <span>${transport.flight.Nearest_airport_from_current_destination}</span>
-                                </div>
-                                <div class="transport-detail">
-                                    <label>To Airport:</label>
-                                    <span>${transport.flight.Nearest_airport_from_visiting_destination}</span>
-                                </div>
-                                ${transport.flight.Stops ? `
-                                <div class="transport-detail">
-                                    <label>Stops:</label>
-                                    <span>${transport.flight.Stops}</span>
-                                </div>
-                                ` : ''}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            if (!transport.road && !transport.flight) {
-                html += `<p style="color: #6c757d;">No transportation information available.</p>`;
+                html += `<div class="transport-section" style="margin-top: 40px;"><h3 style="color: #495057; margin-bottom: 15px;">✈️ Flight</h3><div class="transport-modes"><div class="transport-card"><h3>✈️ Flight</h3>`;
+                html += `<div class="transport-detail"><label>Destination:</label><span>${transport.flight.destination}</span></div>`;
+                html += `<div class="transport-detail"><label>Cost:</label><span>${transport.flight.Approx_cost}</span></div>`;
+                html += `<div class="transport-detail"><label>Duration:</label><span>${transport.flight['Approx_time_of_flight(duration)']}</span></div>`;
+                html += `<div class="transport-detail"><label>From:</label><span>${transport.flight.Nearest_airport_from_current_destination}</span></div>`;
+                html += `<div class="transport-detail"><label>To:</label><span>${transport.flight.Nearest_airport_from_visiting_destination}</span></div>`;
+                if (transport.flight.Stops) html += `<div class="transport-detail"><label>Stops:</label><span>${transport.flight.Stops}</span></div>`;
+                html += `</div></div></div>`;
             }
 
             html += `</div>`;
             return html;
         }
 
-        // Render Hotel Tab - FIXED
         function renderHotelTab(data) {
             const hotel = safeGet(data, 'hotel', {});
-            if (!hotel.name) {
-                return `<div id="hotel" class="tab-content"><p class="error">No hotel information available</p></div>`;
-            }
+            if (!hotel.name) return `<div id="hotel" class="tab-content"><p class="error">No hotel information</p></div>`;
 
             const stars = '⭐'.repeat(Math.floor(parseFloat(safeGet(hotel, 'reviewScore', 0))));
-            const totalCost = safeGet(data, 'budgetBreakdown.expenses.accommodation.total', safeGet(hotel, 'totalCost', 0));
+            const totalCost = parseFloat(safeGet(hotel, 'totalCost', 0)) || 0;
+            const pricePerNight = parseFloat(safeGet(hotel, 'pricePerNight', 0)) || 0;
             
-            let html = `
-                <div id="hotel" class="tab-content">
-                    <h2 style="color: #667eea; margin-bottom: 25px;">Accommodation Details</h2>
-                    
-                    <div class="hotel-card">
-            `;
+            let html = `<div id="hotel" class="tab-content"><h2 style="color: #667eea; margin-bottom: 25px;">Accommodation Details</h2><div class="hotel-card">`;
 
-            // Hotel images - FIXED: using imageUrls
-            const images = safeGet(hotel, 'imageUrls', safeGet(hotel, 'images', []));
+            const images = safeGet(hotel, 'images', safeGet(hotel, 'imageUrls', []));
             if (Array.isArray(images) && images.length > 0) {
-                html += `
-                    <div class="hotel-images">
-                        ${images.map(img => `
-                            <img src="${img}" alt="${hotel.name}" class="hotel-image" onclick="window.open('${img}', '_blank')">
-                        `).join('')}
-                    </div>
-                `;
+                html += `<div class="hotel-images">${images.map(img => `<img src="${img}" alt="${hotel.name}" class="hotel-image" onclick="window.open('${img}', '_blank')">`).join('')}</div>`;
             }
 
-            // Hotel coordinates for Google Maps link
             const coords = safeGet(hotel, 'coordinates', {});
-            const mapsLink = coords.latitude && coords.longitude ? 
-                `https://maps.google.com/?q=${coords.latitude},${coords.longitude}` : null;
+            const mapsLink = coords.latitude && coords.longitude ? `https://maps.google.com/?q=${coords.latitude},${coords.longitude}` : null;
 
-            html += `
-                        <div class="hotel-header">
-                            <div class="hotel-info">
-                                <h2>${hotel.name}</h2>
-                                <div class="hotel-rating">${stars} (${parseFloat(safeGet(hotel, 'reviewScore', 0)).toFixed(1)})</div>
-                                <p style="color: #6c757d; margin-top: 10px;">
-                                    📍 ${safeGet(hotel, 'address', 'Address not available')}
-                                </p>
-                                ${mapsLink ? `
-                                <a href="${mapsLink}" target="_blank" class="booking-button" style="margin-top: 10px;">
-                                    📍 View on Google Maps
-                                </a>
-                                ` : ''}
-                            </div>
-                            <div class="hotel-price">
-                                <div class="price">${formatCurrency(safeGet(hotel, 'pricePerNight', 0))}</div>
-                                <div class="per-night">per night</div>
-                                <div style="margin-top: 10px; font-size: 18px; color: #667eea; font-weight: bold;">
-                                    Total: ${formatCurrency(totalCost)} (${calculateNights(data)} nights)
-                                </div>
-                            </div>
-                        </div>
+            html += `<div class="hotel-header"><div class="hotel-info"><h2>${hotel.name}</h2><div class="hotel-rating">${stars} (${parseFloat(safeGet(hotel, 'reviewScore', 0)).toFixed(1)})</div>`;
+            html += `<p style="color: #6c757d; margin-top: 10px;">📍 ${safeGet(hotel, 'address', 'N/A')}</p>`;
+            if (mapsLink) html += `<a href="${mapsLink}" target="_blank" class="booking-button" style="margin-top: 10px;">📍 View on Google Maps</a>`;
+            html += `</div><div class="hotel-price"><div class="price">${formatCurrency(pricePerNight)}</div><div class="per-night">per night</div>`;
+            html += `<div style="margin-top: 10px; font-size: 18px; color: #667eea; font-weight: bold;">Total: ${formatCurrency(totalCost)}</div></div></div>`;
 
-                        <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px;">
-                            <h3 style="color: #667eea; margin-bottom: 15px;">Amenities</h3>
-                            <div class="hotel-amenities">
-                                ${(safeGet(hotel, 'amenities', []) || []).map(amenity => `<span class="amenity">${amenity}</span>`).join('')}
-                            </div>
-                        </div>
-            `;
+            html += `<div style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px;"><h3 style="color: #667eea; margin-bottom: 15px;">Amenities</h3><div class="hotel-amenities">`;
+            html += `${(safeGet(hotel, 'amenities', []) || []).map(amenity => `<span class="amenity">${amenity}</span>`).join('')}</div></div>`;
 
-            // Booking links - FIXED
             const bookingLinks = safeGet(hotel, 'bookingLinks', []);
             if (Array.isArray(bookingLinks) && bookingLinks.length > 0) {
-                html += `
-                    <div style="margin-top: 20px;">
-                        ${bookingLinks.map(link => `
-                            <a href="${link}" target="_blank" class="booking-button">
-                                🏨 Book Hotel
-                            </a>
-                        `).join('')}
-                    </div>
-                `;
+                html += `<div style="margin-top: 20px;">${bookingLinks.map(link => `<a href="${link}" target="_blank" class="booking-button">🏨 Book Hotel</a>`).join('')}</div>`;
             }
 
-            html += `
-                        <div style="margin-top: 20px;">
-                            <h3 style="color: #667eea; margin-bottom: 15px;">Location on Map</h3>
-                            <div id="hotelMap" style="width: 100%; height: 400px; border-radius: 10px; overflow: hidden;"></div>
-                        </div>
-                    </div>
-                </div>
-            `;
-
+            html += `<div style="margin-top: 20px;"><h3 style="color: #667eea; margin-bottom: 15px;">Location on Map</h3><div id="hotelMap" style="width: 100%; height: 400px; border-radius: 10px; overflow: hidden;"></div></div></div></div>`;
             return html;
         }
 
-        // Render Itinerary Tab - FIXED
         function renderItineraryTab(data) {
             const dailyItinerary = safeGet(data, 'dailyItinerary', []);
             if (!Array.isArray(dailyItinerary) || dailyItinerary.length === 0) {
-                return `<div id="itinerary" class="tab-content"><p class="error">No itinerary data available</p></div>`;
+                return `<div id="itinerary" class="tab-content"><p class="error">No itinerary data</p></div>`;
             }
 
-            let html = `
-                <div id="itinerary" class="tab-content">
-                    <h2 style="color: #667eea; margin-bottom: 25px;">Daily Itinerary</h2>
-            `;
+            let html = `<div id="itinerary" class="tab-content"><h2 style="color: #667eea; margin-bottom: 25px;">Daily Itinerary</h2>`;
 
             dailyItinerary.forEach((day, dayIndex) => {
                 const spending = safeGet(day, 'daySummary.spending', {});
                 const dailyTotal = getDailyTotal(spending);
                 const places = safeGet(day, 'places', []);
                 
-                html += `
-                    <div class="day-card">
-                        <div class="day-header" onclick="toggleDay(${dayIndex})">
-                            <div class="day-title">
-                                <h2>Day ${day.day} - ${formatDate(day.date)}</h2>
-                                <span class="theme">${day.theme || 'Daily Activities'}</span>
-                            </div>
-                            <div class="day-stats">
-                                <div class="day-stat">
-                                    <span class="label">Places</span>
-                                    <span class="value">${places.length}</span>
-                                </div>
-                                ${parseFloat(safeGet(day, 'totalDistance', 0)) > 0 ? `
-                                <div class="day-stat">
-                                    <span class="label">Distance</span>
-                                    <span class="value">${parseFloat(safeGet(day, 'totalDistance', 0)).toFixed(2)} km</span>
-                                </div>
-                                ` : ''}
-                                <div class="day-stat">
-                                    <span class="label">Spending</span>
-                                    <span class="value">${formatCurrency(dailyTotal)}</span>
-                                </div>
-                                <span class="dropdown-icon" id="dayIcon${dayIndex}">▼</span>
-                            </div>
-                        </div>
+                html += `<div class="day-card"><div class="day-header" onclick="toggleDay(${dayIndex})"><div class="day-title"><h2>Day ${day.day} - ${formatDate(day.date)}</h2><span class="theme">${day.theme || 'Activities'}</span></div><div class="day-stats">`;
+                html += `<div class="day-stat"><span class="label">Places</span><span class="value">${places.length}</span></div>`;
+                if (parseFloat(safeGet(day, 'totalDistance', 0)) > 0) {
+                    html += `<div class="day-stat"><span class="label">Distance</span><span class="value">${parseFloat(safeGet(day, 'totalDistance', 0)).toFixed(2)} km</span></div>`;
+                }
+                html += `<div class="day-stat"><span class="label">Spending</span><span class="value">${formatCurrency(dailyTotal)}</span></div>`;
+                html += `<span class="dropdown-icon" id="dayIcon${dayIndex}">▼</span></div></div>`;
 
-                        <div class="day-content" id="dayContent${dayIndex}">
-                            <div class="weather-info">
-                                <strong>Weather:</strong> ${safeGet(day, 'daySummary.weather', 'Weather information not available')}
-                            </div>
+                html += `<div class="day-content" id="dayContent${dayIndex}">`;
+                const weather = safeGet(day, 'daySummary.weather', safeGet(day, 'daySummary.spending.budgetWarning', 'N/A'));
+                if (weather !== 'N/A') html += `<div class="weather-info"><strong>Weather:</strong> ${weather}</div>`;
 
-                            <div class="day-layout">
-                                <div class="places-list">
-                `;
+                html += `<div class="day-layout"><div class="places-list">`;
 
-                // Render places list with detailed dropdown - FIXED
                 places.forEach((place, placeIndex) => {
-                    html += `
-                        <div class="place-card" id="place_${dayIndex}_${placeIndex}">
-                            <div class="place-card-header" 
-                                 onmouseenter="zoomToPlace(${dayIndex}, ${placeIndex})"
-                                 onmouseleave="resetDayView(${dayIndex})"
-                                 onclick="togglePlaceDetails(${dayIndex}, ${placeIndex})">
-                                <div class="place-header-left">
-                                    <h3>${place.name || 'Place ' + (placeIndex + 1)}</h3>
-                                    <div class="place-quick-info">
-                                        ${safeGet(place, 'practicalInfo.entryFee', 'N/A')} • ${safeGet(place, 'practicalInfo.duration', 'N/A')}
-                                    </div>
-                                </div>
-                                <div class="place-header-right">
-                                    <span class="time-badge">${safeGet(place, 'timeOfDay', 'N/A')}</span>
-                                    <span class="place-dropdown-icon" id="placeDropIcon${dayIndex}_${placeIndex}">▼</span>
-                                </div>
-                            </div>
+                    html += `<div class="place-card" id="place_${dayIndex}_${placeIndex}">`;
+                    html += `<div class="place-card-header" onmouseenter="zoomToPlace(${dayIndex}, ${placeIndex})" onmouseleave="resetDayView(${dayIndex})" onclick="togglePlaceDetails(${dayIndex}, ${placeIndex})">`;
+                    html += `<div class="place-header-left"><h3>${place.name || 'Place ' + (placeIndex + 1)}</h3>`;
+                    html += `<div class="place-quick-info">${safeGet(place, 'practicalInfo.entryFee', 'N/A')} • ${safeGet(place, 'practicalInfo.duration', 'N/A')}</div></div>`;
+                    html += `<div class="place-header-right"><span class="time-badge">${safeGet(place, 'timeOfDay', 'N/A')}</span>`;
+                    html += `<span class="place-dropdown-icon" id="placeDropIcon${dayIndex}_${placeIndex}">▼</span></div></div>`;
 
-                            <div class="place-details-content" id="placeDetails${dayIndex}_${placeIndex}">
-                                <p class="place-description">${place.description || 'No description available'}</p>
+                    html += `<div class="place-details-content" id="placeDetails${dayIndex}_${placeIndex}">`;
+                    html += `<p class="place-description">${place.description || 'No description'}</p>`;
 
-                                <div class="place-info-grid">
-                                    <div class="place-info-item">
-                                        <strong>Entry Fee</strong>
-                                        <span>${safeGet(place, 'practicalInfo.entryFee', 'N/A')}</span>
-                                    </div>
-                                    <div class="place-info-item">
-                                        <strong>Duration</strong>
-                                        <span>${safeGet(place, 'practicalInfo.duration', 'N/A')}</span>
-                                    </div>
-                                    <div class="place-info-item">
-                                        <strong>Best Time</strong>
-                                        <span>${safeGet(place, 'practicalInfo.bestTime', 'N/A')}</span>
-                                    </div>
-                                    ${place.distanceFromPrevious ? `
-                                    <div class="place-info-item">
-                                        <strong>Distance</strong>
-                                        <span>${place.distanceFromPrevious} km (${safeGet(place, 'travelTimeFromPrevious', 'N/A')})</span>
-                                    </div>
-                                    ` : ''}
-                                </div>
+                    html += `<div class="place-info-grid">`;
+                    html += `<div class="place-info-item"><strong>Entry Fee</strong><span>${safeGet(place, 'practicalInfo.entryFee', 'N/A')}</span></div>`;
+                    html += `<div class="place-info-item"><strong>Duration</strong><span>${safeGet(place, 'practicalInfo.duration', 'N/A')}</span></div>`;
+                    html += `<div class="place-info-item"><strong>Best Time</strong><span>${safeGet(place, 'practicalInfo.bestTime', 'N/A')}</span></div>`;
+                    if (place.distanceFromPrevious) {
+                        html += `<div class="place-info-item"><strong>Distance</strong><span>${place.distanceFromPrevious} km (${safeGet(place, 'travelTimeFromPrevious', 'N/A')})</span></div>`;
+                    }
+                    html += `</div>`;
 
-                                ${place.activities && Array.isArray(place.activities) && place.activities.length > 0 ? `
-                                <div class="activities-list">
-                                    <h4>Things to Do:</h4>
-                                    <ul>
-                                        ${place.activities.map(activity => `<li>${activity}</li>`).join('')}
-                                    </ul>
-                                </div>
-                                ` : ''}
+                    if (place.activities && Array.isArray(place.activities) && place.activities.length > 0) {
+                        html += `<div class="activities-list"><h4>Things to Do:</h4><ul>${place.activities.map(activity => `<li>${activity}</li>`).join('')}</ul></div>`;
+                    }
 
-                                <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
-                                    ${place.googlemapintegrationlink ? `
-                                    <a href="${place.googlemapintegrationlink}" target="_blank" class="booking-button" style="margin: 0; padding: 8px 15px; font-size: 13px;">
-                                        📍 View on Google Maps
-                                    </a>
-                                    ` : ''}
-                                    ${place.addtocalendar ? `
-                                    <a href="${place.addtocalendar}" target="_blank" class="booking-button" style="margin: 0; padding: 8px 15px; font-size: 13px; background: #28a745;">
-                                        📅 Add to Calendar
-                                    </a>
-                                    ` : ''}
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                    // Accordion for tips
+                    const tips = safeGet(place, 'tips', {});
+                    if (Object.keys(tips).length > 0) {
+                        html += `<div class="tips-accordion">`;
+                        if (tips.whatToBring && tips.whatToBring.length > 0) {
+                            html += renderAccordionItem('whatToBring', dayIndex, placeIndex, '🎒 What to Bring', tips.whatToBring);
+                        }
+                        if (tips.whatToBuy && tips.whatToBuy.length > 0) {
+                            html += renderAccordionItem('whatToBuy', dayIndex, placeIndex, '🛍️ What to Buy', tips.whatToBuy);
+                        }
+                        if (tips.safetyNotes && tips.safetyNotes.length > 0) {
+                            html += renderAccordionItem('safetyNotes', dayIndex, placeIndex, '⚠️ Safety Notes', tips.safetyNotes);
+                        }
+                        if (tips.customsEtiquette && tips.customsEtiquette.length > 0) {
+                            html += renderAccordionItem('customsEtiquette', dayIndex, placeIndex, '🙏 Customs & Etiquette', tips.customsEtiquette);
+                        }
+                        if (tips.photoSpots && tips.photoSpots.length > 0) {
+                            html += renderAccordionItem('photoSpots', dayIndex, placeIndex, '📸 Photo Spots', tips.photoSpots);
+                        }
+                        html += `</div>`;
+                    }
+
+                    html += `<div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">`;
+                    if (place.googlemapintegrationlink) {
+                        html += `<a href="${place.googlemapintegrationlink}" target="_blank" class="booking-button" style="margin: 0; padding: 8px 15px; font-size: 13px;">📍 View on Google Maps</a>`;
+                    }
+                    if (place.addtocalendar) {
+                        html += `<a href="${place.addtocalendar}" target="_blank" class="booking-button" style="margin: 0; padding: 8px 15px; font-size: 13px; background: #28a745;">📅 Add to Calendar</a>`;
+                    }
+                    html += `</div></div></div>`;
                 });
 
-                html += `
-                                </div>
-                                <div class="day-map-container" id="dayMap${dayIndex}"></div>
-                            </div>
-                `;
+                html += `</div><div class="day-map-container" id="dayMap${dayIndex}"></div></div>`;
 
                 // Day summary
-                html += `
-                            <div class="day-summary">
-                                <h4>Day ${day.day} Spending Summary</h4>
-                                <div class="spending-grid">
-                                    ${Object.entries(spending).filter(([key]) => key !== 'Total' && key !== 'dailySubtotal' && key !== 'budgetWarning').map(([category, amount]) => `
-                                        <div class="spending-item">
-                                            <span class="category">${category}</span>
-                                            <span class="amount">${formatCurrency(amount || 0)}</span>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                                <div class="total-spending">
-                                    <span class="amount">${formatCurrency(dailyTotal)}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                html += `<div class="day-summary"><h4>Day ${day.day} Spending Summary</h4><div class="spending-grid">`;
+                Object.entries(spending).filter(([key]) => !['Total', 'dailySubtotal', 'Daily subtotal', 'budgetWarning'].includes(key)).forEach(([category, amount]) => {
+                    html += `<div class="spending-item"><span class="category">${category}</span><span class="amount">${formatCurrency(amount || 0)}</span></div>`;
+                });
+                html += `</div><div class="total-spending"><span class="amount">${formatCurrency(dailyTotal)}</span></div></div></div></div>`;
             });
 
             html += `</div>`;
             return html;
         }
 
-        // Render Budget Tab
+        function renderAccordionItem(id, dayIndex, placeIndex, title, items) {
+            const uniqueId = `accordion_${id}_${dayIndex}_${placeIndex}`;
+            return `
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion('${uniqueId}')">
+                        <strong>${title}</strong>
+                        <span class="accordion-icon" id="${uniqueId}_icon">▼</span>
+                    </div>
+                    <div class="accordion-content" id="${uniqueId}">
+                        <ul>${items.map(item => `<li>${item}</li>`).join('')}</ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(`${id}_icon`);
+            if (content && icon) {
+                content.classList.toggle('open');
+                icon.classList.toggle('open');
+            }
+        }
+
         function renderBudgetTab(data) {
             try {
                 const budget = safeGet(data, 'budgetBreakdown', {});
                 const totalBudget = parseFloat(safeGet(budget, 'totalBudget', 0)) || 0;
-                const totalSpent = calculateTotalSpent(data);
-                const remainingBudget = totalBudget - totalSpent;
+                const totalSpent = parseFloat(safeGet(budget, 'totalSpent', 0)) || 0;
+                const remainingBudget = parseFloat(safeGet(budget, 'remainingBudget', 0)) || 0;
                 const budgetPercent = totalBudget > 0 ? ((totalSpent / totalBudget) * 100).toFixed(2) : 0;
 
-                const categoryTotals = {
-                    'Hotel': parseFloat(safeGet(data, 'budgetBreakdown.expenses.accommodation.total', 0)) || 0,
-                    'Transport': parseFloat(safeGet(budget, 'expenses.Transport.0.total_cost', 0)) || 0,
-                    'Meals': 0,
-                    'Shopping': 0,
-                    'Activities': 0,
-                    'Entry Fees': 0
-                };
+                let html = `<div id="budget" class="tab-content"><h2 style="color: #667eea; margin-bottom: 25px;">Budget Overview</h2>`;
+                html += `<div class="budget-overview">`;
+                html += `<div class="budget-card"><h3>Total Budget</h3><div class="amount">${formatCurrency(totalBudget)}</div></div>`;
+                html += `<div class="budget-card"><h3>Total Spent</h3><div class="amount">${formatCurrency(totalSpent)}</div></div>`;
+                html += `<div class="budget-card"><h3>Remaining</h3><div class="amount">${formatCurrency(remainingBudget)}</div></div>`;
+                html += `</div>`;
 
-                const dailyItinerary = safeGet(data, 'dailyItinerary', []);
-                if (Array.isArray(dailyItinerary)) {
-                    dailyItinerary.forEach(day => {
-                        const spending = safeGet(day, 'daySummary.spending', {});
-                        categoryTotals['Meals'] += parseFloat(safeGet(spending, 'Meals', 0)) || 0;
-                        categoryTotals['Shopping'] += parseFloat(safeGet(spending, 'Shopping', 0)) || 0;
-                        categoryTotals['Activities'] += parseFloat(safeGet(spending, 'Activities', 0)) || 0;
-                        categoryTotals['Entry Fees'] += parseFloat(safeGet(spending, 'Entry Fees', 0)) || 0;
+                html += `<div class="progress-bar"><div class="progress-fill" style="width: ${budgetPercent}%;">${budgetPercent}% Used</div></div>`;
+
+                const dailyExpenses = safeGet(budget, 'expenses.dailyExpenses', []);
+                if (Array.isArray(dailyExpenses) && dailyExpenses.length > 0) {
+                    html += `<div class="budget-breakdown"><h3>Daily Expenses</h3>`;
+                    dailyExpenses.forEach(expense => {
+                        const dayNum = safeGet(expense, 'day', 'Day');
+                        const cost = parseFloat(safeGet(expense, 'cost', 0)) || 0;
+                        html += `<div class="budget-item"><span class="category">Day ${dayNum}</span><span class="amount">${formatCurrency(cost)}</span></div>`;
                     });
+                    html += `</div>`;
                 }
 
-                return `
-                    <div id="budget" class="tab-content">
-                        <h2 style="color: #667eea; margin-bottom: 25px;">Budget Overview</h2>
-                        
-                        <div class="budget-overview">
-                            <div class="budget-card">
-                                <h3>Total Budget</h3>
-                                <div class="amount">${formatCurrency(totalBudget)}</div>
-                            </div>
-                            <div class="budget-card">
-                                <h3>Total Spent</h3>
-                                <div class="amount">${formatCurrency(totalSpent)}</div>
-                            </div>
-                            <div class="budget-card">
-                                <h3>Remaining</h3>
-                                <div class="amount">${formatCurrency(remainingBudget)}</div>
-                            </div>
-                        </div>
+                const budgetTips = safeGet(budget, 'budgetTips', []);
+                if (Array.isArray(budgetTips) && budgetTips.length > 0) {
+                    html += `<div class="budget-tips"><h4>💡 Budget Tips</h4><ul>${budgetTips.map(tip => `<li>${tip}</li>`).join('')}</ul></div>`;
+                }
 
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${budgetPercent}%;">${budgetPercent}% Used</div>
-                        </div>
-
-                        <div class="budget-breakdown">
-                            <h3>Budget Breakdown by Category</h3>
-                            ${Object.entries(categoryTotals).map(([category, amount]) => `
-                                <div class="budget-item">
-                                    <span class="category">${category}</span>
-                                    <span class="amount">${formatCurrency(amount)}</span>
-                                </div>
-                            `).join('')}
-                            <div class="budget-item" style="border-top: 2px solid #667eea; margin-top: 10px; padding-top: 15px;">
-                                <span class="category" style="font-size: 18px;">Total Estimated Spending</span>
-                                <span class="amount" style="font-size: 24px;">${formatCurrency(totalSpent)}</span>
-                            </div>
-                        </div>
-
-                        <div class="budget-breakdown">
-                            <h3>Daily Expenses Breakdown</h3>
-                            ${Array.isArray(dailyItinerary) ? dailyItinerary.map(day => {
-                                const dailyTotal = getDailyTotal(safeGet(day, 'daySummary.spending', {}));
-                                return `
-                                    <div class="budget-item">
-                                        <span class="category">Day ${day.day} - ${day.theme || 'Activities'}</span>
-                                        <span class="amount">${formatCurrency(dailyTotal)}</span>
-                                    </div>
-                                `;
-                            }).join('') : '<p>No daily expenses data</p>'}
-                        </div>
-
-                        ${budget.budgetTips && Array.isArray(budget.budgetTips) && budget.budgetTips.length > 0 ? `
-                        <div class="budget-tips">
-                            <h4>💡 Budget Tips</h4>
-                            <ul>
-                                ${budget.budgetTips.map(tip => `<li>${tip}</li>`).join('')}
-                            </ul>
-                        </div>
-                        ` : ''}
-                    </div>
-                `;
+                html += `</div>`;
+                return html;
             } catch (e) {
-                console.error('Error rendering budget:', e);
-                return `<div id="budget" class="tab-content"><p class="error">Error loading budget data</p></div>`;
+                return `<div id="budget" class="tab-content"><p class="error">Error loading budget</p></div>`;
             }
         }
 
-        // Render Packing Tab
         function renderPackingTab(data) {
             const packing = safeGet(data, 'packingList', {});
             if (!packing || Object.keys(packing).length === 0) {
-                return `<div id="packing" class="tab-content"><p class="error">No packing list available</p></div>`;
+                return `<div id="packing" class="tab-content"><p class="error">No packing list</p></div>`;
             }
 
             return `
                 <div id="packing" class="tab-content">
                     <h2 style="color: #667eea; margin-bottom: 25px;">Packing List</h2>
-                    
                     <div class="packing-grid">
                         ${Object.entries(packing).map(([category, items]) => `
                             <div class="packing-category">
                                 <h3>${getCategoryIcon(category)} ${category}</h3>
-                                <ul>
-                                    ${(Array.isArray(items) ? items : []).map(item => `<li>${item}</li>`).join('')}
-                                </ul>
+                                <ul>${(Array.isArray(items) ? items : []).map(item => `<li>${item}</li>`).join('')}</ul>
                             </div>
                         `).join('')}
                     </div>
@@ -1602,84 +1377,87 @@
             `;
         }
 
-        // Render Checklist Tab
         function renderChecklistTab(data) {
             const checklist = safeGet(data, 'preTripChecklist', []);
-            if (!Array.isArray(checklist) || checklist.length === 0) {
-                return `<div id="checklist" class="tab-content"><p class="error">No checklist available</p></div>`;
+            
+            let items = [];
+            if (Array.isArray(checklist)) {
+                items = checklist;
+            } else if (typeof checklist === 'object') {
+                // Handle object format with High/Medium/Low priority
+                Object.entries(checklist).forEach(([priority, tasks]) => {
+                    if (Array.isArray(tasks)) {
+                        tasks.forEach(task => {
+                            items.push({ task, priority });
+                        });
+                    }
+                });
+            }
+
+            if (items.length === 0) {
+                return `<div id="checklist" class="tab-content"><p class="error">No checklist</p></div>`;
             }
 
             return `
                 <div id="checklist" class="tab-content">
                     <h2 style="color: #667eea; margin-bottom: 25px;">Pre-Trip Checklist</h2>
-                    
-                    ${checklist.map((item, index) => `
-                        <div class="checklist-item ${(item.priority || 'low').toLowerCase()}">
-                            <div class="checkbox" onclick="toggleCheckbox(${index})"></div>
-                            <div style="flex: 1;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; flex-wrap: wrap; gap: 10px;">
-                                    <strong>${item.task || 'Task'}</strong>
-                                    <span class="priority-badge priority-${(item.priority || 'low').toLowerCase()}">${item.priority || 'Low'}</span>
+                    ${items.map((item, index) => {
+                        const priority = (item.priority || 'Low').toLowerCase().replace(' priority', '');
+                        const task = item.task || item;
+                        return `
+                            <div class="checklist-item ${priority}">
+                                <div class="checkbox" onclick="toggleCheckbox(${index})"></div>
+                                <div style="flex: 1;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; flex-wrap: wrap; gap: 10px;">
+                                        <strong>${task}</strong>
+                                        <span class="priority-badge priority-${priority}">${priority}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    `).join('')}
+                        `;
+                    }).join('')}
                 </div>
             `;
         }
 
-        // Initialize all maps
         function initializeMaps(data) {
             const hotelCoords = safeGet(data, 'hotel.coordinates', null);
             if (document.getElementById('hotelMap') && hotelCoords && hotelCoords.latitude && hotelCoords.longitude) {
                 try {
                     const hotelMap = L.map('hotelMap').setView([hotelCoords.latitude, hotelCoords.longitude], 15);
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '© OpenStreetMap contributors'
-                    }).addTo(hotelMap);
-
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(hotelMap);
                     const hotelIcon = L.divIcon({ html: '🏨', className: 'emoji-marker', iconSize: [30, 30] });
                     L.marker([hotelCoords.latitude, hotelCoords.longitude], { icon: hotelIcon })
                         .addTo(hotelMap)
-                        .bindPopup(`<b>🏨 ${safeGet(data, 'hotel.name', 'Hotel')}</b><br>Your accommodation`);
-                } catch (e) {
-                    console.error('Error initializing hotel map:', e);
-                }
+                        .bindPopup(`<b>🏨 ${safeGet(data, 'hotel.name', 'Hotel')}</b>`);
+                } catch (e) {}
             }
 
             const dailyItinerary = safeGet(data, 'dailyItinerary', []);
             if (Array.isArray(dailyItinerary)) {
-                dailyItinerary.forEach((day, dayIndex) => {
-                    initDayMap(data, dayIndex);
-                });
+                dailyItinerary.forEach((day, dayIndex) => initDayMap(data, dayIndex));
             }
         }
 
-        // Initialize map for a specific day
         function initDayMap(data, dayIndex) {
             try {
                 const mapId = `dayMap${dayIndex}`;
                 const mapElement = document.getElementById(mapId);
-                
                 if (!mapElement) return;
 
                 const day = safeGet(data, `dailyItinerary.${dayIndex}`, {});
                 const hotel = safeGet(data, 'hotel', {});
                 const hotelCoords = safeGet(hotel, 'coordinates', null);
-
                 if (!hotelCoords || !hotelCoords.latitude || !hotelCoords.longitude) return;
 
                 const map = L.map(mapId).setView([hotelCoords.latitude, hotelCoords.longitude], 13);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap contributors'
-                }).addTo(map);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
 
                 const markers = {};
-
                 const hotelIcon = L.divIcon({ html: '🏨', className: 'emoji-marker', iconSize: [30, 30] });
                 markers.hotel = L.marker([hotelCoords.latitude, hotelCoords.longitude], { icon: hotelIcon })
                     .addTo(map)
-                    .bindPopup(`<b>🏨 ${hotel.name || 'Hotel'}</b><br>Your accommodation`);
+                    .bindPopup(`<b>🏨 ${hotel.name || 'Hotel'}</b>`);
 
                 const allLatLngs = [[hotelCoords.latitude, hotelCoords.longitude]];
                 const places = safeGet(day, 'places', []);
@@ -1693,11 +1471,9 @@
                                 className: '', 
                                 iconSize: [30, 30] 
                             });
-                            
                             markers[`place_${placeIndex}`] = L.marker([placeCoords.latitude, placeCoords.longitude], { icon: placeIcon })
                                 .addTo(map)
                                 .bindPopup(`<b>${place.name || 'Place ' + (placeIndex + 1)}</b>`);
-                            
                             allLatLngs.push([placeCoords.latitude, placeCoords.longitude]);
                         }
                     });
@@ -1712,29 +1488,21 @@
 
                 dayMaps[dayIndex] = map;
                 dayMarkers[dayIndex] = markers;
-            } catch (e) {
-                console.error('Error initializing day map:', e);
-            }
+            } catch (e) {}
         }
 
-        // Toggle place details dropdown
         function togglePlaceDetails(dayIndex, placeIndex) {
             try {
                 event.stopPropagation();
-                
                 const content = document.getElementById(`placeDetails${dayIndex}_${placeIndex}`);
                 const icon = document.getElementById(`placeDropIcon${dayIndex}_${placeIndex}`);
-                
                 if (content && icon) {
                     content.classList.toggle('open');
                     icon.classList.toggle('open');
                 }
-            } catch (e) {
-                console.error('Error toggling place details:', e);
-            }
+            } catch (e) {}
         }
 
-        // Zoom to specific place on hover
         function zoomToPlace(dayIndex, placeIndex) {
             try {
                 const map = dayMaps[dayIndex];
@@ -1743,28 +1511,18 @@
                 const placeCoords = safeGet(place, 'coordinates', null);
 
                 if (map && placeCoords && placeCoords.latitude && placeCoords.longitude) {
-                    document.querySelectorAll(`#dayContent${dayIndex} .place-card`).forEach(card => {
-                        card.classList.remove('active');
-                    });
+                    document.querySelectorAll(`#dayContent${dayIndex} .place-card`).forEach(card => card.classList.remove('active'));
                     const placeCard = document.getElementById(`place_${dayIndex}_${placeIndex}`);
                     if (placeCard) placeCard.classList.add('active');
 
-                    map.setView([placeCoords.latitude, placeCoords.longitude], 15, {
-                        animate: true,
-                        duration: 0.5
-                    });
+                    map.setView([placeCoords.latitude, placeCoords.longitude], 15, { animate: true, duration: 0.5 });
 
                     const marker = dayMarkers[dayIndex][`place_${placeIndex}`];
-                    if (marker) {
-                        marker.openPopup();
-                    }
+                    if (marker) marker.openPopup();
                 }
-            } catch (e) {
-                console.error('Error zooming to place:', e);
-            }
+            } catch (e) {}
         }
 
-        // Reset day view to show all places
         function resetDayView(dayIndex) {
             try {
                 const map = dayMaps[dayIndex];
@@ -1773,9 +1531,7 @@
                 const hotelCoords = safeGet(hotel, 'coordinates', null);
 
                 if (map && hotelCoords) {
-                    document.querySelectorAll(`#dayContent${dayIndex} .place-card`).forEach(card => {
-                        card.classList.remove('active');
-                    });
+                    document.querySelectorAll(`#dayContent${dayIndex} .place-card`).forEach(card => card.classList.remove('active'));
 
                     const allLatLngs = [[hotelCoords.latitude, hotelCoords.longitude]];
                     const places = safeGet(day, 'places', []);
@@ -1791,21 +1547,16 @@
                     const bounds = L.latLngBounds(allLatLngs);
                     map.fitBounds(bounds, { padding: [50, 50], animate: true, duration: 0.5 });
                 }
-            } catch (e) {
-                console.error('Error resetting day view:', e);
-            }
+            } catch (e) {}
         }
 
-        // Toggle day dropdown
         function toggleDay(dayIndex) {
             try {
                 const content = document.getElementById(`dayContent${dayIndex}`);
                 const icon = document.getElementById(`dayIcon${dayIndex}`);
-                
                 if (content && icon) {
                     content.classList.toggle('open');
                     icon.classList.toggle('open');
-
                     if (content.classList.contains('open')) {
                         setTimeout(() => {
                             if (dayMaps[dayIndex]) {
@@ -1815,46 +1566,28 @@
                         }, 300);
                     }
                 }
-            } catch (e) {
-                console.error('Error toggling day:', e);
-            }
+            } catch (e) {}
         }
 
-        // Show tab
         function showTab(tabName) {
             try {
-                const tabs = document.querySelectorAll('.tab-content');
-                const navTabs = document.querySelectorAll('.nav-tab');
-                
-                tabs.forEach(tab => tab.classList.remove('active'));
-                navTabs.forEach(tab => tab.classList.remove('active'));
-                
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
                 const targetTab = document.getElementById(tabName);
                 if (targetTab) targetTab.classList.add('active');
                 if (event && event.target) event.target.classList.add('active');
-
-                setTimeout(() => {
-                    Object.values(dayMaps).forEach(map => {
-                        if (map) map.invalidateSize();
-                    });
-                }, 100);
-            } catch (e) {
-                console.error('Error showing tab:', e);
-            }
+                setTimeout(() => Object.values(dayMaps).forEach(map => { if (map) map.invalidateSize(); }), 100);
+            } catch (e) {}
         }
 
-        // Toggle checkbox
         function toggleCheckbox(index) {
             try {
                 if (event && event.target) {
                     event.target.style.background = event.target.style.background === 'rgb(102, 126, 234)' ? 'transparent' : '#667eea';
                 }
-            } catch (e) {
-                console.error('Error toggling checkbox:', e);
-            }
+            } catch (e) {}
         }
 
-        // Helper functions
         function formatDate(dateString) {
             try {
                 if (!dateString) return 'N/A';
@@ -1876,32 +1609,18 @@
             }
         }
 
-        function calculateNights(data) {
-            try {
-                const dailyItinerary = safeGet(data, 'dailyItinerary', []);
-                return Array.isArray(dailyItinerary) ? Math.max(0, dailyItinerary.length - 1) : 0;
-            } catch (e) {
-                return 0;
-            }
-        }
-
         function getCategoryIcon(category) {
             const icons = {
-                'clothing': '👕',
-                'Clothing': '👕',
-                'footwear': '👟',
-                'Footwear': '👟',
-                'essentials': '🎒',
-                'Essentials': '🎒',
-                'electronics': '📱',
-                'Electronics': '📱',
-                'documents': '📄',
-                'Documents': '📄'
+                'clothing': '👕', 'Clothing': '👕',
+                'footwear': '👟', 'Footwear': '👟',
+                'essentials': '🎒', 'Essentials': '🎒',
+                'electronics': '📱', 'Electronics': '📱',
+                'documents': '📄', 'Documents': '📄',
+                'children-specific items': '👶', 'Children-specific items': '👶'
             };
             return icons[category] || '📦';
         }
 
-        // Load data on page load
         window.onload = loadItinerary;
     </script>
 </body>
