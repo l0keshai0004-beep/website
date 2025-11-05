@@ -547,7 +547,7 @@
         }
 
         .day-content.active {
-            max-height: 7000px;
+            max-height: 10000px;
         }
 
         .day-body {
@@ -973,6 +973,47 @@
             font-weight: 600;
         }
 
+        /* Daily Summary */
+        .day-summary {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 25px;
+        }
+
+        .summary-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .summary-item {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .summary-label {
+            font-size: 0.8em;
+            color: #64748b;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .summary-value {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #667eea;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .content-grid {
@@ -1291,6 +1332,7 @@
         function renderBudgetPanel(data) {
             const budget = safeGet(data, 'budgetBreakdown', {});
             const expenses = safeGet(budget, 'expenses', {});
+            const transport = safeGet(expenses, 'Transport', [{}]);
             
             document.getElementById('budgetPanel').innerHTML = `
                 <div class="panel-header">
@@ -1306,7 +1348,7 @@
                             <div class="budget-color" style="background: #667eea;"></div>
                             <div class="budget-category">Flights</div>
                         </div>
-                        <div class="budget-amount">${safeGet(expenses, 'Transport[0].total_cost', 'N/A')}</div>
+                        <div class="budget-amount">${safeGet(transport[0], 'total_cost', 'N/A')}</div>
                     </div>
                     <div class="budget-row">
                         <div class="budget-row-left">
@@ -1318,6 +1360,13 @@
                     <div class="budget-row">
                         <div class="budget-row-left">
                             <div class="budget-color" style="background: #10b981;"></div>
+                            <div class="budget-category">Total Spent</div>
+                        </div>
+                        <div class="budget-amount">${safeGet(budget, 'totalSpent', 'N/A')}</div>
+                    </div>
+                    <div class="budget-row">
+                        <div class="budget-row-left">
+                            <div class="budget-color" style="background: #f59e0b;"></div>
                             <div class="budget-category">Remaining</div>
                         </div>
                         <div class="budget-amount">${safeGet(budget, 'remainingBudget', 'N/A')}</div>
@@ -1332,6 +1381,8 @@
             
             itinerary.forEach((day, dayIdx) => {
                 const places = safeGet(day, 'places', []);
+                const daySummary = safeGet(day, 'daySummary', {});
+                const spending = safeGet(daySummary, 'spending', {});
                 
                 const dayEl = document.createElement('div');
                 dayEl.className = 'day-accordion';
@@ -1364,10 +1415,28 @@
                             
                             <div class="map-container" id="map-${dayIdx}"></div>
                             
-                            <h4 style="margin: 25px 0 15px; color: #1e293b; font-size: 1.3em;">📍 Places to Visit</h4>
+                            <h4 style="margin: 25px 0 15px; color: #1e293b; font-size: 1.3em;">📍 Places to Visit (${places.length} locations)</h4>
                             <div class="places-list">
                                 ${renderPlaces(places, dayIdx)}
                             </div>
+
+                            ${Object.keys(spending).length > 0 ? `
+                                <div class="day-summary">
+                                    <div class="summary-title">Day ${safeGet(day, 'day', dayIdx + 1)} Summary</div>
+                                    <div class="summary-grid">
+                                        <div class="summary-item">
+                                            <div class="summary-label">Total Distance</div>
+                                            <div class="summary-value">${safeGet(daySummary, 'totalDistance', 'N/A')}</div>
+                                        </div>
+                                        ${Object.entries(spending).map(([key, value]) => `
+                                            <div class="summary-item">
+                                                <div class="summary-label">${key}</div>
+                                                <div class="summary-value">${value}</div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
                         </div>
                     </div>
                 `;
@@ -1406,6 +1475,8 @@
                 const activities = safeGet(place, 'activities', []);
                 const practicalInfo = safeGet(place, 'practicalInfo', {});
                 const tips = safeGet(place, 'tips', {});
+                const whatToBring = safeGet(tips, 'whatToBring', []);
+                const safetyNotes = safeGet(tips, 'safetyNotes', []);
                 
                 return `
                     <div class="place-item">
@@ -1445,7 +1516,7 @@
                                         <div class="stat-box-value">${safeGet(practicalInfo, 'duration', 'N/A')}</div>
                                     </div>
                                     <div class="stat-box">
-                                        <div class="stat-box-label">Cost</div>
+                                        <div class="stat-box-label">Est. Cost</div>
                                         <div class="stat-box-value">${safeGet(practicalInfo, 'estimatedCost', 'N/A')}</div>
                                     </div>
                                     <div class="stat-box">
@@ -1454,11 +1525,11 @@
                                     </div>
                                 </div>
                                 
-                                ${(tips.whatToBring && tips.whatToBring.length > 0) || (tips.safetyNotes && tips.safetyNotes.length > 0) ? `
+                                ${whatToBring.length > 0 || safetyNotes.length > 0 ? `
                                     <div class="tips-card">
                                         <h5>💡 Helpful Tips</h5>
-                                        ${tips.whatToBring && tips.whatToBring.length > 0 ? `<p><strong>What to Bring:</strong> ${tips.whatToBring.join(', ')}</p>` : ''}
-                                        ${tips.safetyNotes && tips.safetyNotes.length > 0 ? `<p><strong>Safety Notes:</strong> ${tips.safetyNotes.join('; ')}</p>` : ''}
+                                        ${whatToBring.length > 0 ? `<p><strong>What to Bring:</strong> ${whatToBring.join(', ')}</p>` : ''}
+                                        ${safetyNotes.length > 0 ? `<p><strong>Safety Notes:</strong> ${safetyNotes.join('; ')}</p>` : ''}
                                     </div>
                                 ` : ''}
                                 
@@ -1502,7 +1573,7 @@
                             <h4 class="packing-title">${category.charAt(0).toUpperCase() + category.slice(1).replace(/([A-Z])/g, ' $1')}</h4>
                         </div>
                         <div class="packing-items">
-                            ${items.slice(0, 8).map(item => `
+                            ${items.map(item => `
                                 <div class="packing-item">
                                     <div class="checkbox"></div>
                                     ${item}
@@ -1531,7 +1602,7 @@
                             <h4 class="packing-title">${config.name}</h4>
                         </div>
                         <div class="packing-items">
-                            ${items.slice(0, 6).map(item => `
+                            ${items.map(item => `
                                 <div class="packing-item">
                                     <div class="checkbox"></div>
                                     ${item}
