@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Companion Dashboard</title>
+    <title>Travel Companion Dashboard - Dynamic</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <style>
@@ -114,346 +115,70 @@
             color: white;
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-card h3 {
+        .stat-label {
             font-size: 14px;
             opacity: 0.9;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
 
-        .stat-card .value {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .stat-card .label {
-            font-size: 12px;
-            opacity: 0.8;
-        }
-
-        /* Transport Section */
-        .transport-section {
-            margin-bottom: 30px;
-        }
-
-        .transport-modes {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .transport-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            border: 2px solid #e9ecef;
-            transition: all 0.3s;
-        }
-
-        .transport-card:hover {
-            border-color: #667eea;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
-        }
-
-        .transport-card h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
-
-        .transport-detail {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .transport-detail:last-child {
-            border-bottom: none;
-        }
-
-        .transport-detail label {
-            font-weight: 600;
-            color: #495057;
-        }
-
-        .transport-detail span {
-            color: #6c757d;
-            text-align: right;
-        }
-
-        /* Hotel Section */
-        .hotel-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-
-        .hotel-images {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .hotel-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .hotel-image:hover {
-            transform: scale(1.05);
-        }
-
-        .hotel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .hotel-info h2 {
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .hotel-rating {
-            color: #ffc107;
-            font-size: 20px;
-        }
-
-        .hotel-price {
-            text-align: right;
-        }
-
-        .hotel-price .price {
+        .stat-value {
             font-size: 28px;
             font-weight: bold;
-            color: #667eea;
-        }
-
-        .hotel-price .per-night {
-            font-size: 14px;
-            color: #6c757d;
-        }
-
-        .hotel-amenities {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .amenity {
-            background: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            color: #495057;
-        }
-
-        .booking-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
-            margin-right: 10px;
-            transition: transform 0.3s;
-        }
-
-        .booking-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
         /* Itinerary Section */
-        .day-card {
+        .itinerary-day {
             background: #f8f9fa;
             border-radius: 15px;
-            padding: 0;
-            margin-bottom: 25px;
+            padding: 25px;
+            margin-bottom: 20px;
             border-left: 5px solid #667eea;
-            overflow: hidden;
         }
 
         .day-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 25px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .day-header:hover {
-            background: #e9ecef;
-        }
-
-        .day-title {
-            flex: 1;
-        }
-
-        .day-title h2 {
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .day-title .theme {
-            color: #6c757d;
-            font-size: 16px;
-            font-style: italic;
-        }
-
-        .day-stats {
-            display: flex;
-            gap: 20px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            align-items: center;
+            gap: 10px;
         }
 
-        .day-stat {
-            text-align: center;
-            background: white;
-            padding: 10px 15px;
-            border-radius: 10px;
-        }
-
-        .day-stat .label {
-            font-size: 12px;
-            color: #6c757d;
-            display: block;
-        }
-
-        .day-stat .value {
-            font-size: 18px;
+        .day-number {
+            font-size: 24px;
             font-weight: bold;
             color: #667eea;
         }
 
-        .dropdown-icon {
-            font-size: 24px;
-            color: #667eea;
-            transition: transform 0.3s;
-            margin-left: 20px;
+        .day-theme {
+            color: #6c757d;
+            font-style: italic;
         }
 
-        .dropdown-icon.open {
-            transform: rotate(180deg);
-        }
-
-        .day-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-            padding: 0 25px;
-        }
-
-        .day-content.open {
-            max-height: 10000px;
-            padding: 25px;
-            transition: max-height 0.8s ease-in;
-        }
-
-        .weather-info {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .weather-info strong {
-            color: #667eea;
-        }
-
-        /* Day layout with places list and map side-by-side */
-        .day-layout {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .places-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        /* Place Cards with dropdown */
         .place-card {
             background: white;
             border-radius: 10px;
-            padding: 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-            overflow: hidden;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .place-card:hover {
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .place-card.active {
-            border: 2px solid #667eea;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .place-card-header {
+        .place-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            background: #f8f9fa;
-            cursor: pointer;
-        }
-
-        .place-card-header:hover {
-            background: #e9ecef;
-        }
-
-        .place-header-left {
-            flex: 1;
-        }
-
-        .place-header-left h3 {
-            color: #495057;
-            font-size: 18px;
-            margin: 0 0 5px 0;
-        }
-
-        .place-quick-info {
-            color: #6c757d;
-            font-size: 13px;
-        }
-
-        .place-header-right {
-            display: flex;
-            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
             gap: 10px;
+        }
+
+        .place-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
         }
 
         .time-badge {
@@ -461,31 +186,7 @@
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 12px;
-            white-space: nowrap;
-        }
-
-        .place-dropdown-icon {
-            font-size: 20px;
-            color: #667eea;
-            transition: transform 0.3s;
-        }
-
-        .place-dropdown-icon.open {
-            transform: rotate(180deg);
-        }
-
-        .place-details-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-            padding: 0 20px;
-        }
-
-        .place-details-content.open {
-            max-height: 3000px;
-            padding: 20px;
-            transition: max-height 0.6s ease-in;
+            font-size: 14px;
         }
 
         .place-description {
@@ -494,1134 +195,840 @@
             margin-bottom: 15px;
         }
 
-        .place-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .place-info-item {
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .place-info-item strong {
-            color: #667eea;
-            display: block;
-            margin-bottom: 5px;
-            font-size: 12px;
-        }
-
-        .place-info-item span {
-            color: #495057;
-            font-size: 13px;
-        }
-
-        /* Accordion for tips */
-        .tips-accordion {
-            margin-top: 15px;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .accordion-item {
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .accordion-item:last-child {
-            border-bottom: none;
-        }
-
-        .accordion-header {
-            background: #f8f9fa;
-            padding: 12px 15px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s;
-        }
-
-        .accordion-header:hover {
-            background: #e9ecef;
-        }
-
-        .accordion-header strong {
-            color: #667eea;
-            font-size: 13px;
-        }
-
-        .accordion-icon {
-            color: #667eea;
-            transition: transform 0.3s;
-        }
-
-        .accordion-icon.open {
-            transform: rotate(180deg);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            padding: 0 15px;
-            background: white;
-        }
-
-        .accordion-content.open {
-            max-height: 500px;
-            padding: 15px;
-            transition: max-height 0.4s ease-in;
-        }
-
-        .accordion-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .accordion-content li {
-            padding: 5px 0 5px 20px;
-            position: relative;
-            color: #495057;
-            font-size: 13px;
-        }
-
-        .accordion-content li:before {
-            content: "•";
-            position: absolute;
-            left: 5px;
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        /* Map container for day */
-        .day-map-container {
-            width: 100%;
-            height: 600px;
-            border-radius: 10px;
-            overflow: hidden;
-            position: sticky;
-            top: 20px;
-        }
-
         .activities-list {
-            margin-top: 15px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
         .activities-list h4 {
             color: #667eea;
             margin-bottom: 10px;
-            font-size: 14px;
         }
 
         .activities-list ul {
-            list-style: none;
-            padding-left: 0;
+            list-style-position: inside;
+            color: #495057;
         }
 
         .activities-list li {
-            padding: 6px 0 6px 20px;
-            position: relative;
-            color: #495057;
-            font-size: 13px;
+            margin-bottom: 5px;
         }
 
-        .activities-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #667eea;
+        .practical-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            background: #e7f3ff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .info-label {
             font-weight: bold;
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
         }
 
         .day-summary {
             background: white;
-            padding: 20px;
             border-radius: 10px;
+            padding: 20px;
             margin-top: 20px;
         }
 
-        .day-summary h4 {
-            color: #667eea;
-            margin-bottom: 15px;
-        }
-
-        .spending-grid {
+        .summary-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
         }
 
-        .spending-item {
+        .summary-item {
             text-align: center;
             padding: 10px;
             background: #f8f9fa;
             border-radius: 8px;
         }
 
-        .spending-item .category {
+        .summary-label {
             font-size: 12px;
             color: #6c757d;
-            display: block;
             margin-bottom: 5px;
         }
 
-        .spending-item .amount {
-            font-size: 20px;
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .total-spending {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid #667eea;
-            text-align: center;
-        }
-
-        .total-spending .amount {
-            font-size: 32px;
+        .summary-value {
+            font-size: 18px;
             font-weight: bold;
             color: #667eea;
         }
 
         /* Budget Section */
         .budget-overview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .budget-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .budget-card h3 {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .budget-card .amount {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .budget-breakdown {
             background: #f8f9fa;
             padding: 25px;
             border-radius: 15px;
             margin-bottom: 20px;
         }
 
-        .budget-breakdown h3 {
-            color: #667eea;
-            margin-bottom: 20px;
-        }
-
-        .budget-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-
-        .budget-item .category {
-            font-weight: 600;
-            color: #495057;
-        }
-
-        .budget-item .amount {
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .progress-bar {
+        .budget-bar {
+            width: 100%;
+            height: 40px;
             background: #e9ecef;
-            height: 30px;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            margin-top: 30px;
+            margin: 20px 0;
         }
 
-        .progress-fill {
+        .budget-fill {
             height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
-            transition: width 1s ease;
         }
 
-        .budget-tips {
-            background: #fff3cd;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #ffc107;
+        .expense-table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
         }
 
-        .budget-tips h4 {
-            color: #856404;
+        .expense-table th,
+        .expense-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .expense-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .expense-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Hotel Section */
+        .hotel-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hotel-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .hotel-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .hotel-details {
+            padding: 25px;
+        }
+
+        .hotel-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .hotel-rating {
+            color: #ffc107;
             margin-bottom: 15px;
         }
 
-        .budget-tips ul {
-            list-style: none;
-            padding: 0;
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
         }
 
-        .budget-tips li {
-            padding: 8px 0;
-            color: #856404;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .budget-tips li:before {
-            content: "💡";
-            position: absolute;
-            left: 0;
+        .amenity-tag {
+            background: #e7f3ff;
+            color: #667eea;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            text-align: center;
         }
 
         /* Packing List */
-        .packing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+        .packing-section {
+            margin-bottom: 25px;
         }
 
-        .packing-category {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 15px;
-        }
-
-        .packing-category h3 {
+        .packing-section h3 {
             color: #667eea;
             margin-bottom: 15px;
-            font-size: 18px;
         }
 
-        .packing-category ul {
-            list-style: none;
-            padding: 0;
+        .packing-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
         }
 
-        .packing-category li {
-            padding: 10px;
-            background: white;
+        .packing-item {
+            background: #f8f9fa;
+            padding: 10px 15px;
             border-radius: 8px;
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 35px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .packing-category li:before {
-            content: "☐";
-            position: absolute;
-            left: 10px;
-            font-size: 18px;
-            color: #667eea;
+        .packing-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
         }
 
         /* Checklist */
+        .checklist-section {
+            margin-bottom: 25px;
+        }
+
         .checklist-item {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
             border-left: 4px solid #667eea;
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        .checklist-item.high {
+        .priority-high {
             border-left-color: #dc3545;
         }
 
-        .checklist-item.medium {
+        .priority-medium {
             border-left-color: #ffc107;
         }
 
-        .checklist-item.low {
+        .priority-low {
             border-left-color: #28a745;
         }
 
-        .checkbox {
-            width: 24px;
-            height: 24px;
-            border: 2px solid #667eea;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .priority-badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .priority-high {
-            background: #dc3545;
-            color: white;
-        }
-
-        .priority-medium {
-            background: #ffc107;
-            color: #000;
-        }
-
-        .priority-low {
-            background: #28a745;
-            color: white;
-        }
-
-        /* Loading and Error States */
-        .loading {
-            text-align: center;
-            padding: 50px;
-            font-size: 18px;
-            color: #667eea;
-        }
-
-        .error {
-            text-align: center;
-            padding: 50px;
-            color: #dc3545;
+        /* Map */
+        #map {
+            height: 500px;
+            border-radius: 15px;
+            margin-top: 20px;
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .day-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .day-map-container {
-                height: 400px;
-                position: relative;
-            }
-        }
-
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8em;
+            }
+
+            .trip-info {
+                flex-direction: column;
+                gap: 10px;
             }
 
             .stats-grid {
                 grid-template-columns: 1fr;
             }
 
-            .nav-tabs {
-                overflow-x: auto;
-            }
-
-            .tab-content {
-                padding: 15px;
-            }
-
-            .day-stats {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .dropdown-icon {
-                margin-left: 10px;
+            .practical-info {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* Leaflet Custom Marker */
-        .emoji-marker {
-            background: transparent;
+        .btn {
+            background: #667eea;
+            color: white;
             border: none;
-            text-align: center;
-            font-size: 24px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .tips-section {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .tips-section h4 {
+            color: #856404;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="dashboard">
-        <div class="loading" id="loading">Loading your trip itinerary...</div>
-        <div id="content" style="display: none;"></div>
+        <!-- Header -->
+        <div class="header">
+            <h1 id="destination">Trip Planner</h1>
+            <div class="trip-info">
+                <div class="trip-info-item">
+                    <span>📅</span>
+                    <span id="dates">Dates</span>
+                </div>
+                <div class="trip-info-item">
+                    <span>⏱️</span>
+                    <span id="duration">Duration</span>
+                </div>
+                <div class="trip-info-item">
+                    <span>👥</span>
+                    <span id="companions">Travelers</span>
+                </div>
+                <div class="trip-info-item">
+                    <span>🎯</span>
+                    <span id="tripType">Trip Type</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('overview')">Overview</button>
+            <button class="nav-tab" onclick="showTab('itinerary')">Itinerary</button>
+            <button class="nav-tab" onclick="showTab('hotel')">Hotel</button>
+            <button class="nav-tab" onclick="showTab('budget')">Budget</button>
+            <button class="nav-tab" onclick="showTab('transport')">Transport</button>
+            <button class="nav-tab" onclick="showTab('packing')">Packing List</button>
+            <button class="nav-tab" onclick="showTab('checklist')">Checklist</button>
+            <button class="nav-tab" onclick="showTab('map')">Map</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <h2>Trip Overview</h2>
+            <div class="stats-grid" id="statsGrid"></div>
+        </div>
+
+        <!-- Itinerary Tab -->
+        <div id="itinerary" class="tab-content">
+            <h2>Daily Itinerary</h2>
+            <div id="itineraryContainer"></div>
+        </div>
+
+        <!-- Hotel Tab -->
+        <div id="hotel" class="tab-content">
+            <h2>Accommodation</h2>
+            <div id="hotelContainer"></div>
+        </div>
+
+        <!-- Budget Tab -->
+        <div id="budget" class="tab-content">
+            <h2>Budget Breakdown</h2>
+            <div id="budgetContainer"></div>
+        </div>
+
+        <!-- Transport Tab -->
+        <div id="transport" class="tab-content">
+            <h2>Mode of Transport</h2>
+            <div id="transportContainer"></div>
+        </div>
+
+        <!-- Packing List Tab -->
+        <div id="packing" class="tab-content">
+            <h2>Packing List</h2>
+            <div id="packingContainer"></div>
+        </div>
+
+        <!-- Checklist Tab -->
+        <div id="checklist" class="tab-content">
+            <h2>Pre-Trip Checklist</h2>
+            <div id="checklistContainer"></div>
+        </div>
+
+        <!-- Map Tab -->
+        <div id="map-tab" class="tab-content">
+            <h2>Trip Map</h2>
+            <div id="map"></div>
+        </div>
     </div>
 
     <script>
+        // Trip data - This will be dynamically loaded
         let tripData = null;
-        let dayMaps = {};
-        let dayMarkers = {};
-        let currency = '$';
 
-        const currencySymbols = {
-            'USD': '$', 'INR': '₹', 'EUR': '€', 'GBP': '£', 'JPY': '¥',
-            'AUD': 'A$', 'CAD': 'C$', 'CNY': '¥', 'AED': 'د.إ'
-        };
+        // Load trip data
+        async function loadTripData() {
+            // In a real application, this would fetch from an API
+            // For now, we'll embed the data directly
+            tripData = TRIP_DATA_PLACEHOLDER;
 
-        async function loadItinerary() {
-            const userId = new URLSearchParams(window.location.search).get('user') || 'default';
-            const jsonUrl = `https://raw.githubusercontent.com/l0keshai0004-beep/jsons/refs/heads/main/${userId}.json`;
-            
-            try {
-                const res = await fetch(jsonUrl);
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-                const data = await res.json();
-                tripData = data;
-                
-                const currencyCode = safeGet(data, 'tripOverview.currency', 'USD');
-                currency = currencySymbols[currencyCode] || currencyCode;
-                
-                renderContent(data);
-            } catch (err) {
-                console.error('Error:', err);
-                document.getElementById('loading').innerHTML = `
-                    <div class="error">
-                        <h2>⚠️ Failed to load itinerary data</h2>
-                        <p>Error: ${err.message}</p>
-                    </div>
-                `;
-            }
+            initializeDashboard();
         }
 
-        function safeGet(obj, path, defaultValue = null) {
-            try {
-                const keys = path.split('.');
-                let result = obj;
-                for (const key of keys) {
-                    if (result && typeof result === 'object' && key in result) {
-                        result = result[key];
-                    } else {
-                        return defaultValue;
-                    }
-                }
-                return result !== undefined && result !== null ? result : defaultValue;
-            } catch (e) {
-                return defaultValue;
-            }
+        function initializeDashboard() {
+            if (!tripData) return;
+
+            // Update header
+            document.getElementById('destination').textContent = tripData.tripOverview.destination;
+            document.getElementById('dates').textContent = `${tripData.tripOverview.startDate} to ${tripData.tripOverview.endDate}`;
+            document.getElementById('duration').textContent = tripData.tripOverview.duration;
+            document.getElementById('companions').textContent = tripData.tripOverview.companions;
+            document.getElementById('tripType').textContent = tripData.tripOverview.tripType;
+
+            // Render sections
+            renderOverview();
+            renderItinerary();
+            renderHotel();
+            renderBudget();
+            renderTransport();
+            renderPackingList();
+            renderChecklist();
         }
 
-        function formatCurrency(value) {
-            try {
-                const num = parseFloat(value);
-                if (isNaN(num)) return `${currency}0`;
-                return `${currency}${num.toLocaleString()}`;
-            } catch (e) {
-                return `${currency}0`;
-            }
-        }
-
-        function getDailyTotal(spending) {
-            if (!spending) return 0;
-            return safeGet(spending, 'Daily subtotal', safeGet(spending, 'dailySubtotal', safeGet(spending, 'Total', 0))) || 0;
-        }
-
-        function renderContent(data) {
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
-
-            const content = document.getElementById('content');
-            content.innerHTML = `
-                ${renderHeader(data)}
-                ${renderNavTabs()}
-                ${renderOverviewTab(data)}
-                ${renderTransportTab(data)}
-                ${renderHotelTab(data)}
-                ${renderItineraryTab(data)}
-                ${renderBudgetTab(data)}
-                ${renderPackingTab(data)}
-                ${renderChecklistTab(data)}
-            `;
-
-            setTimeout(() => initializeMaps(data), 500);
-        }
-
-        function renderHeader(data) {
-            const overview = safeGet(data, 'tripOverview', {});
-            return `
-                <div class="header">
-                    <h1>🌏 Travel Companion Dashboard</h1>
-                    <div class="trip-info">
-                        <div class="trip-info-item"><span>📍</span><span>${overview.destination || 'N/A'}</span></div>
-                        <div class="trip-info-item"><span>📅</span><span>${formatDateRange(overview.startDate, overview.endDate)}</span></div>
-                        <div class="trip-info-item"><span>👥</span><span>${overview.companions || 'N/A'}</span></div>
-                        <div class="trip-info-item"><span>⏱️</span><span>${overview.duration || 'N/A'}</span></div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderNavTabs() {
-            return `
-                <div class="nav-tabs">
-                    <button class="nav-tab active" onclick="showTab('overview')">Overview</button>
-                    <button class="nav-tab" onclick="showTab('transport')">Transport</button>
-                    <button class="nav-tab" onclick="showTab('hotel')">Hotel</button>
-                    <button class="nav-tab" onclick="showTab('itinerary')">Itinerary</button>
-                    <button class="nav-tab" onclick="showTab('budget')">Budget</button>
-                    <button class="nav-tab" onclick="showTab('packing')">Packing List</button>
-                    <button class="nav-tab" onclick="showTab('checklist')">Checklist</button>
-                </div>
-            `;
-        }
-
-        function renderOverviewTab(data) {
-            try {
-                const budget = safeGet(data, 'budgetBreakdown', {});
-                const totalBudget = parseFloat(safeGet(budget, 'totalBudget', 0)) || 0;
-                const totalSpent = parseFloat(safeGet(budget, 'totalSpent', 0)) || 0;
-                const remainingBudget = parseFloat(safeGet(budget, 'remainingBudget', totalBudget - totalSpent)) || 0;
-                const budgetPercent = totalBudget > 0 ? ((totalSpent / totalBudget) * 100).toFixed(2) : 0;
-                
-                const dailyItinerary = safeGet(data, 'dailyItinerary', []);
-                const totalAttractions = Array.isArray(dailyItinerary) ? 
-                    dailyItinerary.reduce((sum, day) => sum + (safeGet(day, 'places', []).length || 0), 0) : 0;
-                const totalDistance = Array.isArray(dailyItinerary) ? 
-                    dailyItinerary.reduce((sum, day) => sum + (parseFloat(safeGet(day, 'totalDistance', 0)) || 0), 0) : 0;
-
-                const hotelTotal = parseFloat(safeGet(data, 'hotel.totalCost', safeGet(budget, 'expenses.accommodation.total', 0))) || 0;
-                const nights = safeGet(budget, 'expenses.accommodation.nights', dailyItinerary.length - 1);
-
-                return `
-                    <div id="overview" class="tab-content active">
-                        <h2 style="color: #667eea; margin-bottom: 25px;">Trip Statistics</h2>
-                        <div class="stats-grid">
-                            <div class="stat-card"><h3>Total Budget</h3><div class="value">${formatCurrency(totalBudget)}</div><div class="label">Allocated for trip</div></div>
-                            <div class="stat-card"><h3>Estimated Spending</h3><div class="value">${formatCurrency(totalSpent)}</div><div class="label">${budgetPercent}% of budget</div></div>
-                            <div class="stat-card"><h3>Remaining Budget</h3><div class="value">${formatCurrency(remainingBudget)}</div><div class="label">${(100 - budgetPercent).toFixed(2)}% remaining</div></div>
-                            <div class="stat-card"><h3>Total Attractions</h3><div class="value">${totalAttractions}</div><div class="label">Places to visit</div></div>
-                            <div class="stat-card"><h3>Total Distance</h3><div class="value">${totalDistance.toFixed(2)} km</div><div class="label">During itinerary</div></div>
-                            <div class="stat-card"><h3>Accommodation</h3><div class="value">${formatCurrency(hotelTotal)}</div><div class="label">${nights} nights</div></div>
-                        </div>
-                        <div class="hotel-card">
-                            <h2 style="color: #667eea; margin-bottom: 20px;">Trip Type</h2>
-                            <p style="font-size: 18px; color: #495057; line-height: 1.8;">${safeGet(data, 'tripOverview.tripType', 'Adventure')}</p>
-                        </div>
-                    </div>
-                `;
-            } catch (e) {
-                return `<div id="overview" class="tab-content active"><p class="error">Error loading overview</p></div>`;
-            }
-        }
-
-        function renderTransportTab(data) {
-            const transport = safeGet(data, 'mode_of_transport', {});
-            let html = `<div id="transport" class="tab-content"><h2 style="color: #667eea; margin-bottom: 25px;">Transportation Options</h2>`;
-
-            if (transport.road) {
-                html += `<div class="transport-section"><h3 style="color: #495057; margin-bottom: 15px;">🚂 Road Transport</h3><div class="transport-modes">`;
-                const roadModes = [
-                    { key: 'train', icon: '🚆', title: 'Train' },
-                    { key: 'bus', icon: '🚌', title: 'Bus' },
-                    { key: 'cab', icon: '🚕', title: 'Cab' }
-                ];
-                roadModes.forEach(mode => {
-                    if (transport.road.cost && transport.road.cost[mode.key]) {
-                        html += `<div class="transport-card"><h3>${mode.icon} ${mode.title}</h3>`;
-                        html += `<div class="transport-detail"><label>Cost:</label><span>${transport.road.cost[mode.key]}</span></div>`;
-                        html += `<div class="transport-detail"><label>Time:</label><span>${safeGet(transport.road.approx_time, mode.key, 'N/A')}</span></div>`;
-                        if (mode.key === 'train' && transport.road.stations?.train_stations) {
-                            html += `<div class="transport-detail"><label>Stations:</label><span>${transport.road.stations.train_stations}</span></div>`;
-                        }
-                        html += `</div>`;
-                    }
-                });
-                html += `</div></div>`;
-            }
-
-            if (transport.flight) {
-                html += `<div class="transport-section" style="margin-top: 40px;"><h3 style="color: #495057; margin-bottom: 15px;">✈️ Flight</h3><div class="transport-modes"><div class="transport-card"><h3>✈️ Flight</h3>`;
-                html += `<div class="transport-detail"><label>Destination:</label><span>${transport.flight.destination}</span></div>`;
-                html += `<div class="transport-detail"><label>Cost:</label><span>${transport.flight.Approx_cost}</span></div>`;
-                html += `<div class="transport-detail"><label>Duration:</label><span>${transport.flight['Approx_time_of_flight(duration)']}</span></div>`;
-                html += `<div class="transport-detail"><label>From:</label><span>${transport.flight.Nearest_airport_from_current_destination}</span></div>`;
-                html += `<div class="transport-detail"><label>To:</label><span>${transport.flight.Nearest_airport_from_visiting_destination}</span></div>`;
-                if (transport.flight.Stops) html += `<div class="transport-detail"><label>Stops:</label><span>${transport.flight.Stops}</span></div>`;
-                html += `</div></div></div>`;
-            }
-
-            html += `</div>`;
-            return html;
-        }
-
-        function renderHotelTab(data) {
-            const hotel = safeGet(data, 'hotel', {});
-            if (!hotel.name) return `<div id="hotel" class="tab-content"><p class="error">No hotel information</p></div>`;
-
-            const stars = '⭐'.repeat(Math.floor(parseFloat(safeGet(hotel, 'reviewScore', 0))));
-            const totalCost = parseFloat(safeGet(hotel, 'totalCost', 0)) || 0;
-            const pricePerNight = parseFloat(safeGet(hotel, 'pricePerNight', 0)) || 0;
-            
-            let html = `<div id="hotel" class="tab-content"><h2 style="color: #667eea; margin-bottom: 25px;">Accommodation Details</h2><div class="hotel-card">`;
-
-            const images = safeGet(hotel, 'images', safeGet(hotel, 'imageUrls', []));
-            if (Array.isArray(images) && images.length > 0) {
-                html += `<div class="hotel-images">${images.map(img => `<img src="${img}" alt="${hotel.name}" class="hotel-image" onclick="window.open('${img}', '_blank')">`).join('')}</div>`;
-            }
-
-            const coords = safeGet(hotel, 'coordinates', {});
-            const mapsLink = coords.latitude && coords.longitude ? `https://maps.google.com/?q=${coords.latitude},${coords.longitude}` : null;
-
-            html += `<div class="hotel-header"><div class="hotel-info"><h2>${hotel.name}</h2><div class="hotel-rating">${stars} (${parseFloat(safeGet(hotel, 'reviewScore', 0)).toFixed(1)})</div>`;
-            html += `<p style="color: #6c757d; margin-top: 10px;">📍 ${safeGet(hotel, 'address', 'N/A')}</p>`;
-            if (mapsLink) html += `<a href="${mapsLink}" target="_blank" class="booking-button" style="margin-top: 10px;">📍 View on Google Maps</a>`;
-            html += `</div><div class="hotel-price"><div class="price">${formatCurrency(pricePerNight)}</div><div class="per-night">per night</div>`;
-            html += `<div style="margin-top: 10px; font-size: 18px; color: #667eea; font-weight: bold;">Total: ${formatCurrency(totalCost)}</div></div></div>`;
-
-            html += `<div style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px;"><h3 style="color: #667eea; margin-bottom: 15px;">Amenities</h3><div class="hotel-amenities">`;
-            html += `${(safeGet(hotel, 'amenities', []) || []).map(amenity => `<span class="amenity">${amenity}</span>`).join('')}</div></div>`;
-
-            const bookingLinks = safeGet(hotel, 'bookingLinks', []);
-            if (Array.isArray(bookingLinks) && bookingLinks.length > 0) {
-                html += `<div style="margin-top: 20px;">${bookingLinks.map(link => `<a href="${link}" target="_blank" class="booking-button">🏨 Book Hotel</a>`).join('')}</div>`;
-            }
-
-            html += `<div style="margin-top: 20px;"><h3 style="color: #667eea; margin-bottom: 15px;">Location on Map</h3><div id="hotelMap" style="width: 100%; height: 400px; border-radius: 10px; overflow: hidden;"></div></div></div></div>`;
-            return html;
-        }
-
-        function renderItineraryTab(data) {
-            const dailyItinerary = safeGet(data, 'dailyItinerary', []);
-            if (!Array.isArray(dailyItinerary) || dailyItinerary.length === 0) {
-                return `<div id="itinerary" class="tab-content"><p class="error">No itinerary data</p></div>`;
-            }
-
-            let html = `<div id="itinerary" class="tab-content"><h2 style="color: #667eea; margin-bottom: 25px;">Daily Itinerary</h2>`;
-
-            dailyItinerary.forEach((day, dayIndex) => {
-                const spending = safeGet(day, 'daySummary.spending', {});
-                const dailyTotal = getDailyTotal(spending);
-                const places = safeGet(day, 'places', []);
-                
-                html += `<div class="day-card"><div class="day-header" onclick="toggleDay(${dayIndex})"><div class="day-title"><h2>Day ${day.day} - ${formatDate(day.date)}</h2><span class="theme">${day.theme || 'Activities'}</span></div><div class="day-stats">`;
-                html += `<div class="day-stat"><span class="label">Places</span><span class="value">${places.length}</span></div>`;
-                if (parseFloat(safeGet(day, 'totalDistance', 0)) > 0) {
-                    html += `<div class="day-stat"><span class="label">Distance</span><span class="value">${parseFloat(safeGet(day, 'totalDistance', 0)).toFixed(2)} km</span></div>`;
-                }
-                html += `<div class="day-stat"><span class="label">Spending</span><span class="value">${formatCurrency(dailyTotal)}</span></div>`;
-                html += `<span class="dropdown-icon" id="dayIcon${dayIndex}">▼</span></div></div>`;
-
-                html += `<div class="day-content" id="dayContent${dayIndex}">`;
-                const weather = safeGet(day, 'daySummary.weather', safeGet(day, 'daySummary.spending.budgetWarning', 'N/A'));
-                if (weather !== 'N/A') html += `<div class="weather-info"><strong>Weather:</strong> ${weather}</div>`;
-
-                html += `<div class="day-layout"><div class="places-list">`;
-
-                places.forEach((place, placeIndex) => {
-                    html += `<div class="place-card" id="place_${dayIndex}_${placeIndex}">`;
-                    html += `<div class="place-card-header" onmouseenter="zoomToPlace(${dayIndex}, ${placeIndex})" onmouseleave="resetDayView(${dayIndex})" onclick="togglePlaceDetails(${dayIndex}, ${placeIndex})">`;
-                    html += `<div class="place-header-left"><h3>${place.name || 'Place ' + (placeIndex + 1)}</h3>`;
-                    html += `<div class="place-quick-info">${safeGet(place, 'practicalInfo.entryFee', 'N/A')} • ${safeGet(place, 'practicalInfo.duration', 'N/A')}</div></div>`;
-                    html += `<div class="place-header-right"><span class="time-badge">${safeGet(place, 'timeOfDay', 'N/A')}</span>`;
-                    html += `<span class="place-dropdown-icon" id="placeDropIcon${dayIndex}_${placeIndex}">▼</span></div></div>`;
-
-                    html += `<div class="place-details-content" id="placeDetails${dayIndex}_${placeIndex}">`;
-                    html += `<p class="place-description">${place.description || 'No description'}</p>`;
-
-                    html += `<div class="place-info-grid">`;
-                    html += `<div class="place-info-item"><strong>Entry Fee</strong><span>${safeGet(place, 'practicalInfo.entryFee', 'N/A')}</span></div>`;
-                    html += `<div class="place-info-item"><strong>Duration</strong><span>${safeGet(place, 'practicalInfo.duration', 'N/A')}</span></div>`;
-                    html += `<div class="place-info-item"><strong>Best Time</strong><span>${safeGet(place, 'practicalInfo.bestTime', 'N/A')}</span></div>`;
-                    if (place.distanceFromPrevious) {
-                        html += `<div class="place-info-item"><strong>Distance</strong><span>${place.distanceFromPrevious} km (${safeGet(place, 'travelTimeFromPrevious', 'N/A')})</span></div>`;
-                    }
-                    html += `</div>`;
-
-                    if (place.activities && Array.isArray(place.activities) && place.activities.length > 0) {
-                        html += `<div class="activities-list"><h4>Things to Do:</h4><ul>${place.activities.map(activity => `<li>${activity}</li>`).join('')}</ul></div>`;
-                    }
-
-                    // Accordion for tips
-                    const tips = safeGet(place, 'tips', {});
-                    if (Object.keys(tips).length > 0) {
-                        html += `<div class="tips-accordion">`;
-                        if (tips.whatToBring && tips.whatToBring.length > 0) {
-                            html += renderAccordionItem('whatToBring', dayIndex, placeIndex, '🎒 What to Bring', tips.whatToBring);
-                        }
-                        if (tips.whatToBuy && tips.whatToBuy.length > 0) {
-                            html += renderAccordionItem('whatToBuy', dayIndex, placeIndex, '🛍️ What to Buy', tips.whatToBuy);
-                        }
-                        if (tips.safetyNotes && tips.safetyNotes.length > 0) {
-                            html += renderAccordionItem('safetyNotes', dayIndex, placeIndex, '⚠️ Safety Notes', tips.safetyNotes);
-                        }
-                        if (tips.customsEtiquette && tips.customsEtiquette.length > 0) {
-                            html += renderAccordionItem('customsEtiquette', dayIndex, placeIndex, '🙏 Customs & Etiquette', tips.customsEtiquette);
-                        }
-                        if (tips.photoSpots && tips.photoSpots.length > 0) {
-                            html += renderAccordionItem('photoSpots', dayIndex, placeIndex, '📸 Photo Spots', tips.photoSpots);
-                        }
-                        html += `</div>`;
-                    }
-
-                    html += `<div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">`;
-                    if (place.googlemapintegrationlink) {
-                        html += `<a href="${place.googlemapintegrationlink}" target="_blank" class="booking-button" style="margin: 0; padding: 8px 15px; font-size: 13px;">📍 View on Google Maps</a>`;
-                    }
-                    if (place.addtocalendar) {
-                        html += `<a href="${place.addtocalendar}" target="_blank" class="booking-button" style="margin: 0; padding: 8px 15px; font-size: 13px; background: #28a745;">📅 Add to Calendar</a>`;
-                    }
-                    html += `</div></div></div>`;
-                });
-
-                html += `</div><div class="day-map-container" id="dayMap${dayIndex}"></div></div>`;
-
-                // Day summary
-                html += `<div class="day-summary"><h4>Day ${day.day} Spending Summary</h4><div class="spending-grid">`;
-                Object.entries(spending).filter(([key]) => !['Total', 'dailySubtotal', 'Daily subtotal', 'budgetWarning'].includes(key)).forEach(([category, amount]) => {
-                    html += `<div class="spending-item"><span class="category">${category}</span><span class="amount">${formatCurrency(amount || 0)}</span></div>`;
-                });
-                html += `</div><div class="total-spending"><span class="amount">${formatCurrency(dailyTotal)}</span></div></div></div></div>`;
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
             });
 
-            html += `</div>`;
-            return html;
+            // Remove active class from all nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            const selectedTab = tabName === 'map' ? 'map-tab' : tabName;
+            document.getElementById(selectedTab).classList.add('active');
+
+            // Add active class to clicked nav tab
+            event.target.classList.add('active');
+
+            // Initialize map if map tab is selected
+            if (tabName === 'map') {
+                setTimeout(initializeMap, 100);
+            }
         }
 
-        function renderAccordionItem(id, dayIndex, placeIndex, title, items) {
-            const uniqueId = `accordion_${id}_${dayIndex}_${placeIndex}`;
-            return `
-                <div class="accordion-item">
-                    <div class="accordion-header" onclick="toggleAccordion('${uniqueId}')">
-                        <strong>${title}</strong>
-                        <span class="accordion-icon" id="${uniqueId}_icon">▼</span>
+        function renderOverview() {
+            const statsGrid = document.getElementById('statsGrid');
+            const totalDays = tripData.dailyItinerary.length;
+            const totalPlaces = tripData.dailyItinerary.reduce((sum, day) => sum + day.places.length, 0);
+            const totalDistance = tripData.dailyItinerary.reduce((sum, day) => sum + day.totalDistance, 0);
+
+            statsGrid.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-label">Total Days</div>
+                    <div class="stat-value">${totalDays}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Places to Visit</div>
+                    <div class="stat-value">${totalPlaces}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Distance</div>
+                    <div class="stat-value">${totalDistance.toFixed(2)} km</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Budget</div>
+                    <div class="stat-value">${tripData.budgetBreakdown.currency} ${tripData.budgetBreakdown.totalBudget.toLocaleString()}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Estimated Spent</div>
+                    <div class="stat-value">${tripData.budgetBreakdown.currency} ${tripData.budgetBreakdown.totalSpent.toLocaleString()}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Remaining Budget</div>
+                    <div class="stat-value">${tripData.budgetBreakdown.currency} ${tripData.budgetBreakdown.remainingBudget.toLocaleString()}</div>
+                </div>
+            `;
+        }
+
+        function renderItinerary() {
+            const container = document.getElementById('itineraryContainer');
+
+            container.innerHTML = tripData.dailyItinerary.map(day => `
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <div>
+                            <div class="day-number">Day ${day.day} - ${day.date}</div>
+                            <div class="day-theme">${day.theme}</div>
+                        </div>
+                        <div>
+                            <small>🚗 ${day.totalTravelTime} | 📍 ${day.totalDistance} km</small>
+                        </div>
                     </div>
-                    <div class="accordion-content" id="${uniqueId}">
-                        <ul>${items.map(item => `<li>${item}</li>`).join('')}</ul>
+
+                    ${day.places.map(place => `
+                        <div class="place-card">
+                            <div class="place-header">
+                                <div class="place-name">${place.name}</div>
+                                <div class="time-badge">${place.timeOfDay}</div>
+                            </div>
+
+                            <div class="place-description">${place.description}</div>
+
+                            <div class="activities-list">
+                                <h4>🎯 Activities</h4>
+                                <ul>
+                                    ${place.activities.map(activity => `<li>${activity}</li>`).join('')}
+                                </ul>
+                            </div>
+
+                            <div class="activities-list">
+                                <h4>ℹ️ Why Visit</h4>
+                                <p>${place.whyVisit}</p>
+                            </div>
+
+                            <div class="practical-info">
+                                <div class="info-item">
+                                    <span class="info-label">Entry Fee</span>
+                                    ${place.practicalInfo.entryFee}
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Estimated Cost</span>
+                                    ${place.practicalInfo.estimatedCost}
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Duration</span>
+                                    ${place.practicalInfo.duration}
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Best Time</span>
+                                    ${place.practicalInfo.bestTime}
+                                </div>
+                            </div>
+
+                            ${place.tips.whatToBring && place.tips.whatToBring.length > 0 ? `
+                                <div class="tips-section">
+                                    <h4>💼 What to Bring</h4>
+                                    <ul>
+                                        ${place.tips.whatToBring.map(item => `<li>${item}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            ` : ''}
+
+                            <div style="margin-top: 15px;">
+                                <a href="${place.googlemapintegrationlink}" target="_blank" class="btn">📍 View on Map</a>
+                                <a href="${place.addtocalendar}" target="_blank" class="btn">📅 Add to Calendar</a>
+                            </div>
+                        </div>
+                    `).join('')}
+
+                    <div class="day-summary">
+                        <h3>Day Summary</h3>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-label">Hotel</div>
+                                <div class="summary-value">${day.daySummary.spending.Hotel} ${tripData.budgetBreakdown.currency}</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Entry Fees</div>
+                                <div class="summary-value">${day.daySummary.spending['Entry Fees']}</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Transport</div>
+                                <div class="summary-value">${day.daySummary.spending.Transport}</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Meals</div>
+                                <div class="summary-value">${day.daySummary.spending.Meals} ${tripData.budgetBreakdown.currency}</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Shopping</div>
+                                <div class="summary-value">${day.daySummary.spending.Shopping} ${tripData.budgetBreakdown.currency}</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Daily Total</div>
+                                <div class="summary-value">${day.daySummary.spending['Daily subtotal']} ${tripData.budgetBreakdown.currency}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderHotel() {
+            const container = document.getElementById('hotelContainer');
+            const hotel = tripData.hotel;
+
+            container.innerHTML = `
+                <div class="hotel-card">
+                    <div class="hotel-images">
+                        ${hotel.thumbnails.map(img => `
+                            <img src="${img}" alt="${hotel.name}" class="hotel-image">
+                        `).join('')}
+                    </div>
+
+                    <div class="hotel-details">
+                        <div class="hotel-name">${hotel.name}</div>
+                        <div class="hotel-rating">
+                            ${'⭐'.repeat(Math.floor(hotel.rating))} ${hotel.rating} (${hotel.reviews} reviews)
+                        </div>
+                        <p style="color: #6c757d; margin-bottom: 15px;">${hotel.description}</p>
+
+                        <div class="practical-info">
+                            <div class="info-item">
+                                <span class="info-label">Class</span>
+                                ${hotel.hotel_class}
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Price per Night</span>
+                                ${hotel.price}
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Total Rate</span>
+                                ${hotel.total_rate}
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Check-in</span>
+                                ${hotel.check_in_time}
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Check-out</span>
+                                ${hotel.check_out_time}
+                            </div>
+                        </div>
+
+                        <h3 style="margin-top: 25px; color: #667eea;">Amenities</h3>
+                        <div class="amenities-grid">
+                            ${hotel.amenities.map(amenity => `
+                                <div class="amenity-tag">${amenity}</div>
+                            `).join('')}
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <a href="${hotel.link}" target="_blank" class="btn">🏨 Visit Hotel Website</a>
+                            <a href="https://maps.google.com/?q=${hotel.latitude},${hotel.longitude}" target="_blank" class="btn">📍 View Location</a>
+                        </div>
                     </div>
                 </div>
             `;
         }
 
-        function toggleAccordion(id) {
-            const content = document.getElementById(id);
-            const icon = document.getElementById(`${id}_icon`);
-            if (content && icon) {
-                content.classList.toggle('open');
-                icon.classList.toggle('open');
-            }
+        function renderBudget() {
+            const container = document.getElementById('budgetContainer');
+            const budget = tripData.budgetBreakdown;
+            const percentSpent = (budget.totalSpent / budget.totalBudget * 100).toFixed(1);
+
+            container.innerHTML = `
+                <div class="budget-overview">
+                    <h3>Budget Overview</h3>
+                    <div class="budget-bar">
+                        <div class="budget-fill" style="width: ${percentSpent}%">
+                            ${percentSpent}% Used
+                        </div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Budget</div>
+                            <div class="stat-value">${budget.currency} ${budget.totalBudget.toLocaleString()}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Total Spent</div>
+                            <div class="stat-value">${budget.currency} ${budget.totalSpent.toLocaleString()}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Remaining</div>
+                            <div class="stat-value">${budget.currency} ${budget.remainingBudget.toLocaleString()}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 25px;">Expense Breakdown</h3>
+                <table class="expense-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Amount (${budget.currency})</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${budget.expenses.Transport.map(t => `
+                            <tr>
+                                <td>${t.transport_name}</td>
+                                <td>${t.total_cost.toLocaleString()}</td>
+                            </tr>
+                        `).join('')}
+                        <tr>
+                            <td>Accommodation (${budget.expenses.accommodation.hotelName})</td>
+                            <td>${budget.expenses.accommodation.total.toLocaleString()}</td>
+                        </tr>
+                        ${budget.expenses.dailyExpenses.map(d => `
+                            <tr>
+                                <td>Day ${d.day} Expenses</td>
+                                <td>${d.cost.toLocaleString()}</td>
+                            </tr>
+                        `).join('')}
+                        <tr style="background: #667eea; color: white; font-weight: bold;">
+                            <td>TOTAL</td>
+                            <td>${budget.totalSpent.toLocaleString()}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tips-section" style="margin-top: 25px;">
+                    <h4>💡 Budget Tips</h4>
+                    <ul>
+                        ${budget.budgetTips.map(tip => `<li>${tip}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
         }
 
-        function renderBudgetTab(data) {
-            try {
-                const budget = safeGet(data, 'budgetBreakdown', {});
-                const totalBudget = parseFloat(safeGet(budget, 'totalBudget', 0)) || 0;
-                const totalSpent = parseFloat(safeGet(budget, 'totalSpent', 0)) || 0;
-                const remainingBudget = parseFloat(safeGet(budget, 'remainingBudget', 0)) || 0;
-                const budgetPercent = totalBudget > 0 ? ((totalSpent / totalBudget) * 100).toFixed(2) : 0;
+        function renderTransport() {
+            const container = document.getElementById('transportContainer');
+            const transport = tripData.mode_of_transport.flight;
 
-                let html = `<div id="budget" class="tab-content"><h2 style="color: #667eea; margin-bottom: 25px;">Budget Overview</h2>`;
-                html += `<div class="budget-overview">`;
-                html += `<div class="budget-card"><h3>Total Budget</h3><div class="amount">${formatCurrency(totalBudget)}</div></div>`;
-                html += `<div class="budget-card"><h3>Total Spent</h3><div class="amount">${formatCurrency(totalSpent)}</div></div>`;
-                html += `<div class="budget-card"><h3>Remaining</h3><div class="amount">${formatCurrency(remainingBudget)}</div></div>`;
-                html += `</div>`;
+            container.innerHTML = `
+                <div class="hotel-card">
+                    <div class="hotel-details">
+                        <h3 style="color: #667eea; margin-bottom: 20px;">✈️ Flight Details</h3>
 
-                html += `<div class="progress-bar"><div class="progress-fill" style="width: ${budgetPercent}%;">${budgetPercent}% Used</div></div>`;
-
-                const dailyExpenses = safeGet(budget, 'expenses.dailyExpenses', []);
-                if (Array.isArray(dailyExpenses) && dailyExpenses.length > 0) {
-                    html += `<div class="budget-breakdown"><h3>Daily Expenses</h3>`;
-                    dailyExpenses.forEach(expense => {
-                        const dayNum = safeGet(expense, 'day', 'Day');
-                        const cost = parseFloat(safeGet(expense, 'cost', 0)) || 0;
-                        html += `<div class="budget-item"><span class="category">Day ${dayNum}</span><span class="amount">${formatCurrency(cost)}</span></div>`;
-                    });
-                    html += `</div>`;
-                }
-
-                const budgetTips = safeGet(budget, 'budgetTips', []);
-                if (Array.isArray(budgetTips) && budgetTips.length > 0) {
-                    html += `<div class="budget-tips"><h4>💡 Budget Tips</h4><ul>${budgetTips.map(tip => `<li>${tip}</li>`).join('')}</ul></div>`;
-                }
-
-                html += `</div>`;
-                return html;
-            } catch (e) {
-                return `<div id="budget" class="tab-content"><p class="error">Error loading budget</p></div>`;
-            }
+                        <div class="practical-info">
+                            <div class="info-item">
+                                <span class="info-label">Destination</span>
+                                ${transport.destination}
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Approx. Cost</span>
+                                ${transport.Approx_cost}
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Flight Duration</span>
+                                ${transport['Approx_time_of_flight(duration)']}
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">From Airport</span>
+                                ${transport.Nearest_airport_from_current_destination}
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">To Airport</span>
+                                ${transport.Nearest_airport_from_visiting_destination}
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Stops</span>
+                                ${transport.Stops}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
-        function renderPackingTab(data) {
-            const packing = safeGet(data, 'packingList', {});
-            if (!packing || Object.keys(packing).length === 0) {
-                return `<div id="packing" class="tab-content"><p class="error">No packing list</p></div>`;
-            }
+        function renderPackingList() {
+            const container = document.getElementById('packingContainer');
+            const packing = tripData.packingList;
 
-            return `
-                <div id="packing" class="tab-content">
-                    <h2 style="color: #667eea; margin-bottom: 25px;">Packing List</h2>
-                    <div class="packing-grid">
-                        ${Object.entries(packing).map(([category, items]) => `
-                            <div class="packing-category">
-                                <h3>${getCategoryIcon(category)} ${category}</h3>
-                                <ul>${(Array.isArray(items) ? items : []).map(item => `<li>${item}</li>`).join('')}</ul>
+            container.innerHTML = Object.entries(packing).filter(([key, items]) => items.length > 0).map(([category, items]) => `
+                <div class="packing-section">
+                    <h3>${category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')}</h3>
+                    <div class="packing-items">
+                        ${items.map(item => `
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>${item}</span>
                             </div>
                         `).join('')}
                     </div>
                 </div>
-            `;
+            `).join('');
         }
 
-        function renderChecklistTab(data) {
-            const checklist = safeGet(data, 'preTripChecklist', []);
-            
-            let items = [];
-            if (Array.isArray(checklist)) {
-                items = checklist;
-            } else if (typeof checklist === 'object') {
-                // Handle object format with High/Medium/Low priority
-                Object.entries(checklist).forEach(([priority, tasks]) => {
-                    if (Array.isArray(tasks)) {
-                        tasks.forEach(task => {
-                            items.push({ task, priority });
-                        });
-                    }
-                });
-            }
+        function renderChecklist() {
+            const container = document.getElementById('checklistContainer');
+            const checklist = tripData.preTripChecklist;
 
-            if (items.length === 0) {
-                return `<div id="checklist" class="tab-content"><p class="error">No checklist</p></div>`;
-            }
+            container.innerHTML = `
+                <div class="checklist-section">
+                    <h3 style="color: #dc3545;">🔴 High Priority</h3>
+                    ${checklist.highPriority.map(item => `
+                        <div class="checklist-item priority-high">
+                            <input type="checkbox" class="packing-checkbox">
+                            <span>${item}</span>
+                        </div>
+                    `).join('')}
+                </div>
 
-            return `
-                <div id="checklist" class="tab-content">
-                    <h2 style="color: #667eea; margin-bottom: 25px;">Pre-Trip Checklist</h2>
-                    ${items.map((item, index) => {
-                        const priority = (item.priority || 'Low').toLowerCase().replace(' priority', '');
-                        const task = item.task || item;
-                        return `
-                            <div class="checklist-item ${priority}">
-                                <div class="checkbox" onclick="toggleCheckbox(${index})"></div>
-                                <div style="flex: 1;">
-                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; flex-wrap: wrap; gap: 10px;">
-                                        <strong>${task}</strong>
-                                        <span class="priority-badge priority-${priority}">${priority}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
+                <div class="checklist-section">
+                    <h3 style="color: #ffc107;">🟡 Medium Priority</h3>
+                    ${checklist.mediumPriority.map(item => `
+                        <div class="checklist-item priority-medium">
+                            <input type="checkbox" class="packing-checkbox">
+                            <span>${item}</span>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="checklist-section">
+                    <h3 style="color: #28a745;">🟢 Low Priority</h3>
+                    ${checklist.lowPriority.map(item => `
+                        <div class="checklist-item priority-low">
+                            <input type="checkbox" class="packing-checkbox">
+                            <span>${item}</span>
+                        </div>
+                    `).join('')}
                 </div>
             `;
         }
 
-        function initializeMaps(data) {
-            const hotelCoords = safeGet(data, 'hotel.coordinates', null);
-            if (document.getElementById('hotelMap') && hotelCoords && hotelCoords.latitude && hotelCoords.longitude) {
-                try {
-                    const hotelMap = L.map('hotelMap').setView([hotelCoords.latitude, hotelCoords.longitude], 15);
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(hotelMap);
-                    const hotelIcon = L.divIcon({ html: '🏨', className: 'emoji-marker', iconSize: [30, 30] });
-                    L.marker([hotelCoords.latitude, hotelCoords.longitude], { icon: hotelIcon })
-                        .addTo(hotelMap)
-                        .bindPopup(`<b>🏨 ${safeGet(data, 'hotel.name', 'Hotel')}</b>`);
-                } catch (e) {}
-            }
+        let map = null;
+        function initializeMap() {
+            if (map) return; // Map already initialized
 
-            const dailyItinerary = safeGet(data, 'dailyItinerary', []);
-            if (Array.isArray(dailyItinerary)) {
-                dailyItinerary.forEach((day, dayIndex) => initDayMap(data, dayIndex));
-            }
-        }
+            // Initialize map centered on hotel
+            map = L.map('map').setView([tripData.hotel.latitude, tripData.hotel.longitude], 12);
 
-        function initDayMap(data, dayIndex) {
-            try {
-                const mapId = `dayMap${dayIndex}`;
-                const mapElement = document.getElementById(mapId);
-                if (!mapElement) return;
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
 
-                const day = safeGet(data, `dailyItinerary.${dayIndex}`, {});
-                const hotel = safeGet(data, 'hotel', {});
-                const hotelCoords = safeGet(hotel, 'coordinates', null);
-                if (!hotelCoords || !hotelCoords.latitude || !hotelCoords.longitude) return;
+            // Add hotel marker
+            L.marker([tripData.hotel.latitude, tripData.hotel.longitude])
+                .bindPopup(`<b>🏨 ${tripData.hotel.name}</b>`)
+                .addTo(map);
 
-                const map = L.map(mapId).setView([hotelCoords.latitude, hotelCoords.longitude], 13);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
-
-                const markers = {};
-                const hotelIcon = L.divIcon({ html: '🏨', className: 'emoji-marker', iconSize: [30, 30] });
-                markers.hotel = L.marker([hotelCoords.latitude, hotelCoords.longitude], { icon: hotelIcon })
-                    .addTo(map)
-                    .bindPopup(`<b>🏨 ${hotel.name || 'Hotel'}</b>`);
-
-                const allLatLngs = [[hotelCoords.latitude, hotelCoords.longitude]];
-                const places = safeGet(day, 'places', []);
-                
-                if (Array.isArray(places)) {
-                    places.forEach((place, placeIndex) => {
-                        const placeCoords = safeGet(place, 'coordinates', null);
-                        if (placeCoords && placeCoords.latitude && placeCoords.longitude) {
-                            const placeIcon = L.divIcon({ 
-                                html: `<div style="background: #667eea; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">${placeIndex + 1}</div>`, 
-                                className: '', 
-                                iconSize: [30, 30] 
-                            });
-                            markers[`place_${placeIndex}`] = L.marker([placeCoords.latitude, placeCoords.longitude], { icon: placeIcon })
-                                .addTo(map)
-                                .bindPopup(`<b>${place.name || 'Place ' + (placeIndex + 1)}</b>`);
-                            allLatLngs.push([placeCoords.latitude, placeCoords.longitude]);
-                        }
-                    });
-                }
-
-                if (allLatLngs.length > 1) {
-                    L.polyline(allLatLngs, { color: '#667eea', weight: 3 }).addTo(map);
-                }
-
-                const bounds = L.latLngBounds(allLatLngs);
-                map.fitBounds(bounds, { padding: [50, 50] });
-
-                dayMaps[dayIndex] = map;
-                dayMarkers[dayIndex] = markers;
-            } catch (e) {}
-        }
-
-        function togglePlaceDetails(dayIndex, placeIndex) {
-            try {
-                event.stopPropagation();
-                const content = document.getElementById(`placeDetails${dayIndex}_${placeIndex}`);
-                const icon = document.getElementById(`placeDropIcon${dayIndex}_${placeIndex}`);
-                if (content && icon) {
-                    content.classList.toggle('open');
-                    icon.classList.toggle('open');
-                }
-            } catch (e) {}
-        }
-
-        function zoomToPlace(dayIndex, placeIndex) {
-            try {
-                const map = dayMaps[dayIndex];
-                const day = safeGet(tripData, `dailyItinerary.${dayIndex}`, {});
-                const place = safeGet(day, `places.${placeIndex}`, {});
-                const placeCoords = safeGet(place, 'coordinates', null);
-
-                if (map && placeCoords && placeCoords.latitude && placeCoords.longitude) {
-                    document.querySelectorAll(`#dayContent${dayIndex} .place-card`).forEach(card => card.classList.remove('active'));
-                    const placeCard = document.getElementById(`place_${dayIndex}_${placeIndex}`);
-                    if (placeCard) placeCard.classList.add('active');
-
-                    map.setView([placeCoords.latitude, placeCoords.longitude], 15, { animate: true, duration: 0.5 });
-
-                    const marker = dayMarkers[dayIndex][`place_${placeIndex}`];
-                    if (marker) marker.openPopup();
-                }
-            } catch (e) {}
-        }
-
-        function resetDayView(dayIndex) {
-            try {
-                const map = dayMaps[dayIndex];
-                const day = safeGet(tripData, `dailyItinerary.${dayIndex}`, {});
-                const hotel = safeGet(tripData, 'hotel', {});
-                const hotelCoords = safeGet(hotel, 'coordinates', null);
-
-                if (map && hotelCoords) {
-                    document.querySelectorAll(`#dayContent${dayIndex} .place-card`).forEach(card => card.classList.remove('active'));
-
-                    const allLatLngs = [[hotelCoords.latitude, hotelCoords.longitude]];
-                    const places = safeGet(day, 'places', []);
-                    if (Array.isArray(places)) {
-                        places.forEach(place => {
-                            const placeCoords = safeGet(place, 'coordinates', null);
-                            if (placeCoords && placeCoords.latitude && placeCoords.longitude) {
-                                allLatLngs.push([placeCoords.latitude, placeCoords.longitude]);
-                            }
-                        });
+            // Add markers for all places
+            tripData.dailyItinerary.forEach(day => {
+                day.places.forEach(place => {
+                    if (place.coordinates && place.coordinates.latitude && place.coordinates.longitude) {
+                        L.marker([place.coordinates.latitude, place.coordinates.longitude])
+                            .bindPopup(`<b>Day ${day.day}: ${place.name}</b><br>${place.timeOfDay}`)
+                            .addTo(map);
                     }
-
-                    const bounds = L.latLngBounds(allLatLngs);
-                    map.fitBounds(bounds, { padding: [50, 50], animate: true, duration: 0.5 });
-                }
-            } catch (e) {}
+                });
+            });
         }
 
-        function toggleDay(dayIndex) {
-            try {
-                const content = document.getElementById(`dayContent${dayIndex}`);
-                const icon = document.getElementById(`dayIcon${dayIndex}`);
-                if (content && icon) {
-                    content.classList.toggle('open');
-                    icon.classList.toggle('open');
-                    if (content.classList.contains('open')) {
-                        setTimeout(() => {
-                            if (dayMaps[dayIndex]) {
-                                dayMaps[dayIndex].invalidateSize();
-                                resetDayView(dayIndex);
-                            }
-                        }, 300);
-                    }
-                }
-            } catch (e) {}
-        }
-
-        function showTab(tabName) {
-            try {
-                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-                document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
-                const targetTab = document.getElementById(tabName);
-                if (targetTab) targetTab.classList.add('active');
-                if (event && event.target) event.target.classList.add('active');
-                setTimeout(() => Object.values(dayMaps).forEach(map => { if (map) map.invalidateSize(); }), 100);
-            } catch (e) {}
-        }
-
-        function toggleCheckbox(index) {
-            try {
-                if (event && event.target) {
-                    event.target.style.background = event.target.style.background === 'rgb(102, 126, 234)' ? 'transparent' : '#667eea';
-                }
-            } catch (e) {}
-        }
-
-        function formatDate(dateString) {
-            try {
-                if (!dateString) return 'N/A';
-                const date = new Date(dateString);
-                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-            } catch (e) {
-                return dateString || 'N/A';
-            }
-        }
-
-        function formatDateRange(start, end) {
-            try {
-                if (!start || !end) return 'N/A';
-                const startDate = new Date(start);
-                const endDate = new Date(end);
-                return `${startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
-            } catch (e) {
-                return 'N/A';
-            }
-        }
-
-        function getCategoryIcon(category) {
-            const icons = {
-                'clothing': '👕', 'Clothing': '👕',
-                'footwear': '👟', 'Footwear': '👟',
-                'essentials': '🎒', 'Essentials': '🎒',
-                'electronics': '📱', 'Electronics': '📱',
-                'documents': '📄', 'Documents': '📄',
-                'children-specific items': '👶', 'Children-specific items': '👶'
-            };
-            return icons[category] || '📦';
-        }
-
-        window.onload = loadItinerary;
+        // Initialize dashboard on page load
+        window.addEventListener('DOMContentLoaded', loadTripData);
     </script>
 </body>
 </html>
