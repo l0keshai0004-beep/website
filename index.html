@@ -26,7 +26,7 @@
             padding: 20px;
         }
 
-        /* Top Navigation Bar */
+        /* Top Navigation */
         .top-nav {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border-radius: 16px;
@@ -78,7 +78,7 @@
             color: #f1f5f9;
         }
 
-        /* Hero Stats Section */
+        /* Hero Stats */
         .hero-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -94,10 +94,11 @@
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .stat-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
             box-shadow: 0 10px 30px rgba(96,165,250,0.3);
             border-color: rgba(96,165,250,0.5);
         }
@@ -118,6 +119,11 @@
             font-size: 2.5em;
             margin-bottom: 15px;
             display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover .stat-icon {
+            transform: scale(1.2) rotate(5deg);
         }
 
         .stat-value {
@@ -134,7 +140,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* Main Grid Layout */
+        /* Dashboard Grid */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -142,7 +148,6 @@
             margin-bottom: 30px;
         }
 
-        /* Sidebar Panels */
         .sidebar-panel {
             display: flex;
             flex-direction: column;
@@ -155,6 +160,11 @@
             border-radius: 16px;
             padding: 25px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .panel:hover {
+            box-shadow: 0 8px 30px rgba(96,165,250,0.2);
         }
 
         .panel-header {
@@ -185,19 +195,20 @@
         }
 
         /* Flight Card */
-        .flight-info {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
         .flight-route {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: rgba(96,165,250,0.1);
-            padding: 15px;
+            padding: 20px;
             border-radius: 12px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .flight-route:hover {
+            background: rgba(96,165,250,0.15);
+            transform: scale(1.02);
         }
 
         .airport {
@@ -205,9 +216,14 @@
         }
 
         .airport-code {
-            font-size: 1.5em;
+            font-size: 1.8em;
             font-weight: 700;
             color: #60a5fa;
+            transition: all 0.3s ease;
+        }
+
+        .flight-route:hover .airport-code {
+            transform: scale(1.1);
         }
 
         .airport-name {
@@ -219,6 +235,12 @@
         .flight-arrow {
             font-size: 2em;
             color: #60a5fa;
+            animation: moveArrow 2s ease-in-out infinite;
+        }
+
+        @keyframes moveArrow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
         }
 
         .flight-details {
@@ -231,6 +253,12 @@
             background: rgba(255,255,255,0.05);
             padding: 12px;
             border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .detail-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
         }
 
         .detail-label {
@@ -245,18 +273,57 @@
             color: #f1f5f9;
         }
 
-        /* Hotel Card */
+        /* Hotel Card with Image Zoom */
         .hotel-preview {
             display: flex;
             gap: 15px;
             margin-bottom: 15px;
         }
 
-        .hotel-image {
+        .hotel-image-container {
+            position: relative;
             width: 120px;
             height: 120px;
             border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .hotel-image {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .hotel-image-container:hover .hotel-image {
+            transform: scale(1.3);
+        }
+
+        .zoom-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        .zoom-overlay.active {
+            display: flex;
+        }
+
+        .zoom-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
         }
 
         .hotel-info {
@@ -293,25 +360,6 @@
             color: #60a5fa;
         }
 
-        .amenities-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin-top: 15px;
-        }
-
-        .amenity-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85em;
-            color: #cbd5e1;
-        }
-
-        .amenity-icon {
-            color: #60a5fa;
-        }
-
         /* Budget Panel */
         .budget-overview {
             display: flex;
@@ -319,30 +367,23 @@
             gap: 15px;
         }
 
-        .budget-circle {
-            position: relative;
-            width: 180px;
-            height: 180px;
-            margin: 0 auto;
-        }
-
         .budget-amount {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             text-align: center;
+            padding: 20px;
+            background: rgba(96,165,250,0.1);
+            border-radius: 12px;
         }
 
         .total-budget {
-            font-size: 2em;
+            font-size: 2.5em;
             font-weight: 700;
             color: #60a5fa;
         }
 
         .budget-label {
-            font-size: 0.8em;
+            font-size: 0.9em;
             color: #94a3b8;
+            margin-top: 5px;
         }
 
         .budget-breakdown {
@@ -358,6 +399,12 @@
             padding: 12px;
             background: rgba(255,255,255,0.05);
             border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .budget-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
         }
 
         .budget-item-label {
@@ -369,8 +416,8 @@
         }
 
         .budget-dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
         }
 
@@ -379,7 +426,7 @@
             color: #f1f5f9;
         }
 
-        /* Itinerary Timeline */
+        /* DAY ACCORDION */
         .timeline {
             display: flex;
             flex-direction: column;
@@ -420,19 +467,24 @@
         }
 
         .day-number {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 12px;
             background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3em;
+            font-size: 1.4em;
             font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .day-header:hover .day-number {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .day-info h3 {
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: #f1f5f9;
             margin-bottom: 5px;
         }
@@ -444,14 +496,8 @@
             color: #94a3b8;
         }
 
-        .day-meta span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
         .expand-icon {
-            font-size: 1.5em;
+            font-size: 1.8em;
             color: #60a5fa;
             transition: transform 0.3s ease;
         }
@@ -467,7 +513,7 @@
         }
 
         .day-content.active {
-            max-height: 5000px;
+            max-height: 6000px;
         }
 
         .day-body {
@@ -488,59 +534,90 @@
             font-size: 2em;
         }
 
-        .weather-text {
-            flex: 1;
-            color: white;
-        }
-
         .map-embed {
             width: 100%;
-            height: 350px;
+            height: 400px;
             border-radius: 12px;
             margin: 20px 0;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
         }
 
-        .places-grid {
+        /* PLACE DROPDOWN ACCORDION */
+        .places-accordion {
             display: flex;
             flex-direction: column;
             gap: 15px;
             margin-top: 20px;
         }
 
-        .place-card {
+        .place-accordion-item {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 12px;
-            padding: 20px;
+            overflow: hidden;
             transition: all 0.3s ease;
         }
 
-        .place-card:hover {
-            background: rgba(255,255,255,0.08);
+        .place-accordion-item:hover {
             border-color: rgba(96,165,250,0.5);
-            transform: translateX(5px);
         }
 
-        .place-header {
+        .place-accordion-header {
+            padding: 18px 20px;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
-            align-items: start;
-            margin-bottom: 15px;
+            align-items: center;
+            background: rgba(255,255,255,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .place-accordion-header:hover {
+            background: rgba(96,165,250,0.1);
+        }
+
+        .place-header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .place-number {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .place-header-info {
+            flex: 1;
         }
 
         .place-title {
             font-size: 1.2em;
             font-weight: 600;
             color: #f1f5f9;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .place-subtitle {
             font-size: 0.85em;
             color: #60a5fa;
             font-style: italic;
+        }
+
+        .place-header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .time-badge {
@@ -552,12 +629,38 @@
             font-weight: 600;
         }
 
-        .place-description {
-            color: #cbd5e1;
-            line-height: 1.6;
-            margin-bottom: 15px;
+        .place-expand-icon {
+            font-size: 1.5em;
+            color: #60a5fa;
+            transition: transform 0.3s ease;
         }
 
+        .place-expand-icon.active {
+            transform: rotate(180deg);
+        }
+
+        .place-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .place-accordion-content.active {
+            max-height: 2000px;
+        }
+
+        .place-body {
+            padding: 20px;
+        }
+
+        .place-description {
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        /* Activities Section */
         .activities-section {
             background: rgba(96,165,250,0.1);
             padding: 15px;
@@ -567,8 +670,8 @@
 
         .activities-section h5 {
             color: #60a5fa;
-            margin-bottom: 10px;
-            font-size: 0.9em;
+            margin-bottom: 12px;
+            font-size: 0.95em;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -586,49 +689,96 @@
             gap: 10px;
             color: #cbd5e1;
             font-size: 0.9em;
+            padding: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .activities-section li:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
         }
 
         .activities-section li::before {
             content: "→";
             color: #60a5fa;
             font-weight: bold;
+            font-size: 1.2em;
         }
 
+        /* Place Stats Grid */
         .place-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin: 15px 0;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
         }
 
         .place-stat {
             background: rgba(255,255,255,0.05);
-            padding: 10px;
-            border-radius: 8px;
+            padding: 15px;
+            border-radius: 10px;
             text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .place-stat:hover {
+            background: rgba(96,165,250,0.1);
+            border-color: rgba(96,165,250,0.5);
+            transform: translateY(-3px);
         }
 
         .place-stat-label {
             font-size: 0.75em;
             color: #94a3b8;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .place-stat-value {
-            font-size: 0.95em;
+            font-size: 1em;
             font-weight: 600;
             color: #f1f5f9;
         }
 
+        /* Tips Box */
+        .tips-box {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .tips-box h5 {
+            color: #fbbf24;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tips-box p {
+            color: #cbd5e1;
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        /* Place Actions */
         .place-actions {
             display: flex;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .btn {
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px 24px;
+            border-radius: 10px;
             font-size: 0.9em;
             font-weight: 600;
             cursor: pointer;
@@ -646,8 +796,8 @@
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(96,165,250,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(96,165,250,0.4);
         }
 
         .btn-secondary {
@@ -658,6 +808,7 @@
 
         .btn-secondary:hover {
             background: rgba(255,255,255,0.15);
+            transform: translateY(-3px);
         }
 
         /* Packing & Checklist */
@@ -672,6 +823,12 @@
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 12px;
             padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .checklist-card:hover {
+            border-color: rgba(96,165,250,0.5);
+            transform: translateY(-5px);
         }
 
         .checklist-header {
@@ -721,8 +878,14 @@
             border: 2px solid #60a5fa;
             border-radius: 4px;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
 
+        .checkbox:hover {
+            background: rgba(96,165,250,0.3);
+        }
+
+        /* Loading Screen */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -762,6 +925,7 @@
             color: #f87171;
         }
 
+        /* Responsive Design */
         @media (max-width: 1024px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
@@ -798,6 +962,17 @@
                 align-items: flex-start;
                 gap: 10px;
             }
+
+            .place-header-left {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .place-header-right {
+                flex-direction: column;
+                align-items: flex-end;
+            }
         }
     </style>
 </head>
@@ -805,6 +980,11 @@
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-spinner"></div>
         <div class="loading-text">Loading your travel dashboard...</div>
+    </div>
+
+    <!-- Zoom Overlay for Images -->
+    <div class="zoom-overlay" id="zoomOverlay">
+        <img id="zoomedImage" src="" alt="Zoomed">
     </div>
 
     <div class="dashboard-container" id="dashboardContainer" style="display: none;">
@@ -839,9 +1019,7 @@
                 <!-- Daily Itinerary -->
                 <div class="panel">
                     <div class="panel-header">
-                        <h2 class="panel-title">
-                            📅 Daily Itinerary
-                        </h2>
+                        <h2 class="panel-title">📅 Daily Itinerary</h2>
                     </div>
                     <div class="timeline" id="itineraryTimeline"></div>
                 </div>
@@ -874,6 +1052,22 @@
                 return defaultValue;
             }
         }
+
+        // Image Zoom Functionality
+        function setupImageZoom(imgElement, fullSrc) {
+            imgElement.style.cursor = 'zoom-in';
+            imgElement.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const overlay = document.getElementById('zoomOverlay');
+                const zoomedImg = document.getElementById('zoomedImage');
+                zoomedImg.src = fullSrc;
+                overlay.classList.add('active');
+            });
+        }
+
+        document.getElementById('zoomOverlay').addEventListener('click', function() {
+            this.classList.remove('active');
+        });
 
         async function loadItinerary() {
             const userId = new URLSearchParams(window.location.search).get('user') || 'default';
@@ -969,35 +1163,33 @@
                     <h2 class="panel-title">✈️ Flight</h2>
                     <span class="panel-badge">Upcoming</span>
                 </div>
-                <div class="flight-info">
-                    <div class="flight-route">
-                        <div class="airport">
-                            <div class="airport-code">DEL</div>
-                            <div class="airport-name">Delhi</div>
-                        </div>
-                        <div class="flight-arrow">→</div>
-                        <div class="airport">
-                            <div class="airport-code">LHR</div>
-                            <div class="airport-name">London</div>
-                        </div>
+                <div class="flight-route">
+                    <div class="airport">
+                        <div class="airport-code">DEL</div>
+                        <div class="airport-name">Delhi</div>
                     </div>
-                    <div class="flight-details">
-                        <div class="detail-item">
-                            <div class="detail-label">Cost</div>
-                            <div class="detail-value">${safeGet(flight, 'Approx_cost', 'N/A')}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Duration</div>
-                            <div class="detail-value">${safeGet(flight, 'Approx_time_of_flight(duration)', 'N/A')}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Stops</div>
-                            <div class="detail-value">${safeGet(flight, 'Stops', 'N/A').includes('Direct') ? 'Direct' : '1+ Stop'}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Class</div>
-                            <div class="detail-value">Economy</div>
-                        </div>
+                    <div class="flight-arrow">→</div>
+                    <div class="airport">
+                        <div class="airport-code">LHR</div>
+                        <div class="airport-name">London</div>
+                    </div>
+                </div>
+                <div class="flight-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Cost</div>
+                        <div class="detail-value">${safeGet(flight, 'Approx_cost', 'N/A')}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Duration</div>
+                        <div class="detail-value">${safeGet(flight, 'Approx_time_of_flight(duration)', 'N/A')}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Stops</div>
+                        <div class="detail-value">${safeGet(flight, 'Stops', 'N/A').includes('Direct') ? 'Direct' : '1+ Stop'}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Class</div>
+                        <div class="detail-value">Economy</div>
                     </div>
                 </div>
             `;
@@ -1008,13 +1200,19 @@
             const thumbnails = safeGet(hotel, 'thumbnails', []);
             const amenities = safeGet(hotel, 'amenities', []).slice(0, 6);
             
+            const hotelImageHTML = thumbnails[0] ? `
+                <div class="hotel-image-container" onclick="zoomImage('${thumbnails[0]}')">
+                    <img src="${thumbnails[0]}" class="hotel-image" alt="${safeGet(hotel, 'name', 'Hotel')}">
+                </div>
+            ` : '';
+            
             document.getElementById('hotelPanel').innerHTML = `
                 <div class="panel-header">
                     <h2 class="panel-title">🏨 Hotel</h2>
                     <span class="panel-badge">${safeGet(hotel, 'rating', 'N/A')}⭐</span>
                 </div>
                 <div class="hotel-preview">
-                    ${thumbnails[0] ? `<img src="${thumbnails[0]}" class="hotel-image" alt="${safeGet(hotel, 'name', 'Hotel')}">` : ''}
+                    ${hotelImageHTML}
                     <div class="hotel-info">
                         <div class="hotel-name">${safeGet(hotel, 'name', 'Hotel')}</div>
                         <div class="hotel-rating">
@@ -1027,10 +1225,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="amenities-grid">
-                    ${amenities.map(a => `<div class="amenity-item"><span class="amenity-icon">✓</span> ${a}</div>`).join('')}
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 15px;">
+                    ${amenities.map(a => `<div style="display: flex; align-items: center; gap: 8px; font-size: 0.85em; color: #cbd5e1;"><span style="color: #60a5fa;">✓</span> ${a}</div>`).join('')}
                 </div>
             `;
+        }
+
+        function zoomImage(imgSrc) {
+            const overlay = document.getElementById('zoomOverlay');
+            const zoomedImg = document.getElementById('zoomedImage');
+            zoomedImg.src = imgSrc;
+            overlay.classList.add('active');
         }
 
         function renderBudgetPanel(data) {
@@ -1077,15 +1282,15 @@
             const itinerary = safeGet(data, 'dailyItinerary', []);
             const container = document.getElementById('itineraryTimeline');
             
-            itinerary.forEach((day, index) => {
+            itinerary.forEach((day, dayIndex) => {
                 const places = safeGet(day, 'places', []);
                 
                 const dayCard = document.createElement('div');
                 dayCard.className = 'day-card';
                 dayCard.innerHTML = `
-                    <div class="day-header" onclick="toggleDay(${index})">
+                    <div class="day-header" onclick="toggleDay(${dayIndex})">
                         <div class="day-header-left">
-                            <div class="day-number">${safeGet(day, 'day', index + 1)}</div>
+                            <div class="day-number">${safeGet(day, 'day', dayIndex + 1)}</div>
                             <div class="day-info">
                                 <h3>${safeGet(day, 'theme', 'Exploration')}</h3>
                                 <div class="day-meta">
@@ -1095,9 +1300,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="expand-icon" id="expand-${index}">▼</div>
+                        <div class="expand-icon" id="expand-day-${dayIndex}">▼</div>
                     </div>
-                    <div class="day-content" id="day-content-${index}">
+                    <div class="day-content" id="day-content-${dayIndex}">
                         <div class="day-body">
                             ${day.weather ? `
                                 <div class="weather-banner">
@@ -1109,10 +1314,11 @@
                                 </div>
                             ` : ''}
                             
-                            <div class="map-embed" id="map-${index}"></div>
+                            <div class="map-embed" id="map-${dayIndex}"></div>
                             
-                            <div class="places-grid">
-                                ${renderPlaces(places)}
+                            <h4 style="margin: 20px 0; color: #f1f5f9; font-size: 1.2em;">📍 Places to Visit</h4>
+                            <div class="places-accordion" id="places-${dayIndex}">
+                                ${renderPlacesAccordion(places, dayIndex)}
                             </div>
                         </div>
                     </div>
@@ -1128,7 +1334,7 @@
                         const lng = safeGet(coords, 'longitude', -0.1278);
                         
                         if (lat && lng) {
-                            const map = L.map(`map-${index}`).setView([lat, lng], 13);
+                            const map = L.map(`map-${dayIndex}`).setView([lat, lng], 13);
                             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                                 attribution: '© OpenStreetMap'
                             }).addTo(map);
@@ -1146,62 +1352,96 @@
                             });
                         }
                     }
-                }, 200 + (index * 100));
+                }, 200 + (dayIndex * 100));
             });
         }
 
-        function renderPlaces(places) {
-            return places.map(place => {
+        function renderPlacesAccordion(places, dayIndex) {
+            return places.map((place, placeIndex) => {
                 const activities = safeGet(place, 'activities', []);
                 const practicalInfo = safeGet(place, 'practicalInfo', {});
+                const tips = safeGet(place, 'tips', {});
                 
                 return `
-                    <div class="place-card">
-                        <div class="place-header">
-                            <div>
-                                <div class="place-title">${safeGet(place, 'name', 'Location')}</div>
-                                ${place.whyVisit ? `<div class="place-subtitle">${place.whyVisit}</div>` : ''}
+                    <div class="place-accordion-item">
+                        <div class="place-accordion-header" onclick="togglePlace(${dayIndex}, ${placeIndex})">
+                            <div class="place-header-left">
+                                <div class="place-number">${placeIndex + 1}</div>
+                                <div class="place-header-info">
+                                    <div class="place-title">${safeGet(place, 'name', 'Location')}</div>
+                                    ${place.whyVisit ? `<div class="place-subtitle">${place.whyVisit}</div>` : ''}
+                                </div>
                             </div>
-                            <div class="time-badge">${safeGet(place, 'timeOfDay', 'N/A')}</div>
-                        </div>
-                        
-                        <p class="place-description">${safeGet(place, 'description', '')}</p>
-                        
-                        ${activities.length > 0 ? `
-                            <div class="activities-section">
-                                <h5>Activities</h5>
-                                <ul>
-                                    ${activities.map(a => `<li>${a}</li>`).join('')}
-                                </ul>
-                            </div>
-                        ` : ''}
-                        
-                        <div class="place-stats">
-                            <div class="place-stat">
-                                <div class="place-stat-label">Entry Fee</div>
-                                <div class="place-stat-value">${safeGet(practicalInfo, 'entryFee', 'N/A')}</div>
-                            </div>
-                            <div class="place-stat">
-                                <div class="place-stat-label">Duration</div>
-                                <div class="place-stat-value">${safeGet(practicalInfo, 'duration', 'N/A')}</div>
-                            </div>
-                            <div class="place-stat">
-                                <div class="place-stat-label">Cost</div>
-                                <div class="place-stat-value">${safeGet(practicalInfo, 'estimatedCost', 'N/A')}</div>
-                            </div>
-                            <div class="place-stat">
-                                <div class="place-stat-label">Travel Time</div>
-                                <div class="place-stat-value">${safeGet(place, 'travelTimeFromPrevious', 'N/A')}</div>
+                            <div class="place-header-right">
+                                <div class="time-badge">${safeGet(place, 'timeOfDay', 'N/A')}</div>
+                                <div class="place-expand-icon" id="expand-place-${dayIndex}-${placeIndex}">▼</div>
                             </div>
                         </div>
-                        
-                        <div class="place-actions">
-                            ${place.googlemapintegrationlink ? `<a href="${place.googlemapintegrationlink}" target="_blank" class="btn btn-primary">📍 View Map</a>` : ''}
-                            ${place.addtocalendar ? `<a href="${place.addtocalendar}" target="_blank" class="btn btn-secondary">📅 Calendar</a>` : ''}
+                        <div class="place-accordion-content" id="place-content-${dayIndex}-${placeIndex}">
+                            <div class="place-body">
+                                <p class="place-description">${safeGet(place, 'description', '')}</p>
+                                
+                                ${activities.length > 0 ? `
+                                    <div class="activities-section">
+                                        <h5>✨ Activities</h5>
+                                        <ul>
+                                            ${activities.map(a => `<li>${a}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                ` : ''}
+                                
+                                <div class="place-stats">
+                                    <div class="place-stat">
+                                        <div class="place-stat-label">Entry Fee</div>
+                                        <div class="place-stat-value">${safeGet(practicalInfo, 'entryFee', 'N/A')}</div>
+                                    </div>
+                                    <div class="place-stat">
+                                        <div class="place-stat-label">Duration</div>
+                                        <div class="place-stat-value">${safeGet(practicalInfo, 'duration', 'N/A')}</div>
+                                    </div>
+                                    <div class="place-stat">
+                                        <div class="place-stat-label">Cost</div>
+                                        <div class="place-stat-value">${safeGet(practicalInfo, 'estimatedCost', 'N/A')}</div>
+                                    </div>
+                                    <div class="place-stat">
+                                        <div class="place-stat-label">Travel Time</div>
+                                        <div class="place-stat-value">${safeGet(place, 'travelTimeFromPrevious', 'N/A')}</div>
+                                    </div>
+                                </div>
+                                
+                                ${(tips.whatToBring && tips.whatToBring.length > 0) || (tips.safetyNotes && tips.safetyNotes.length > 0) ? `
+                                    <div class="tips-box">
+                                        <h5>💡 Tips</h5>
+                                        ${tips.whatToBring && tips.whatToBring.length > 0 ? `<p><strong>Bring:</strong> ${tips.whatToBring.join(', ')}</p>` : ''}
+                                        ${tips.safetyNotes && tips.safetyNotes.length > 0 ? `<p><strong>Safety:</strong> ${tips.safetyNotes.join('; ')}</p>` : ''}
+                                    </div>
+                                ` : ''}
+                                
+                                <div class="place-actions">
+                                    ${place.googlemapintegrationlink ? `<a href="${place.googlemapintegrationlink}" target="_blank" class="btn btn-primary">📍 View on Map</a>` : ''}
+                                    ${place.addtocalendar ? `<a href="${place.addtocalendar}" target="_blank" class="btn btn-secondary">📅 Add to Calendar</a>` : ''}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 `;
             }).join('');
+        }
+
+        function toggleDay(dayIndex) {
+            const content = document.getElementById(`day-content-${dayIndex}`);
+            const icon = document.getElementById(`expand-day-${dayIndex}`);
+            
+            content.classList.toggle('active');
+            icon.classList.toggle('active');
+        }
+
+        function togglePlace(dayIndex, placeIndex) {
+            const content = document.getElementById(`place-content-${dayIndex}-${placeIndex}`);
+            const icon = document.getElementById(`expand-place-${dayIndex}-${placeIndex}`);
+            
+            content.classList.toggle('active');
+            icon.classList.toggle('active');
         }
 
         function renderPackingChecklist(data) {
@@ -1209,7 +1449,6 @@
             const checklist = safeGet(data, 'preTripChecklist', {});
             const container = document.getElementById('packingChecklist');
             
-            // Render packing categories
             Object.entries(packing).forEach(([category, items]) => {
                 if (Array.isArray(items) && items.length > 0) {
                     const categoryCard = document.createElement('div');
@@ -1232,7 +1471,6 @@
                 }
             });
 
-            // Render priority checklist
             const priorities = {
                 highPriority: { icon: '🔴', name: 'High Priority' },
                 mediumPriority: { icon: '🟡', name: 'Medium Priority' },
@@ -1261,14 +1499,6 @@
                     container.appendChild(card);
                 }
             });
-        }
-
-        function toggleDay(index) {
-            const content = document.getElementById(`day-content-${index}`);
-            const icon = document.getElementById(`expand-${index}`);
-            
-            content.classList.toggle('active');
-            icon.classList.toggle('active');
         }
 
         document.addEventListener('DOMContentLoaded', loadItinerary);
